@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="360" height="640" viewBox="0 0 360 640">
+<rect width="360" height="640" fill="#faf9f6"/>
+<rect x="138" y="10" width="84" height="18" rx="9" fill="#19191b"/>
+<g font-family="Arial,Helvetica,sans-serif" fill="#19191b">
+<text x="24" y="65" font-size="22" font-weight="700" letter-spacing="-1">fitcheck</text>
+<text x="309" y="63" font-size="20">✦</text>
+<text x="24" y="112" font-size="11" fill="#66616d" letter-spacing="1">YOUR DIGITAL CLOSET</text>
+<text x="24" y="151" font-size="28" font-weight="700" letter-spacing="-1">Keep the good ones.</text>
+<text x="24" y="183" font-size="12" fill="#66616d">Good outfits deserve a repeat.</text><rect x="24" y="211" width="148" height="155" rx="12" fill="#e5ddf3"/><g transform="translate(24,211)"><path d="m47 23-24 20 17 22 12-10v53h46V55l12 10 17-22-24-20-15-5c0 16-23 16-23 0Z" fill="#faf9f6" stroke="#716879" stroke-width="1.5"/></g><text x="36" y="350" font-size="11">Everyday energy</text><rect x="188" y="211" width="148" height="155" rx="12" fill="#e4edce"/><g transform="translate(188,211)"><path d="M49 20h51l10 91-34 2-4-57-7 57-30-2Z" fill="#63606b" stroke="#38353e" stroke-width="1.5"/></g><text x="200" y="350" font-size="11">Weekend ready</text><rect x="24" y="387" width="148" height="155" rx="12" fill="#f2e1d6"/><g transform="translate(24,387)"><path d="m47 23-24 20 17 22 12-10v53h46V55l12 10 17-22-24-20-15-5c0 16-23 16-23 0Z" fill="#faf9f6" stroke="#716879" stroke-width="1.5"/></g><text x="36" y="526" font-size="11">A little color</text><rect x="188" y="387" width="148" height="155" rx="12" fill="#dce8ed"/><g transform="translate(188,387)"><path d="m47 23-24 20 17 22 12-10v53h46V55l12 10 17-22-24-20-15-5c0 16-23 16-23 0Z" fill="#faf9f6" stroke="#716879" stroke-width="1.5"/></g><text x="200" y="526" font-size="11">The go-to</text>
+<path d="M0 581h360" stroke="#deddd8"/>
+<text x="35" y="610" font-size="12">Fit check</text><text x="151" y="610" font-size="12" fill="#66616d">Explore</text><text x="263" y="610" font-size="12" fill="#66616d">Closet</text>
+<rect x="52" y="622" width="256" height="17" rx="4" fill="#19191b"/>
+<text x="180" y="634" fill="#fff" font-size="9" text-anchor="middle" letter-spacing="1">SCREENSHOT PLACEHOLDER</text>
+</g></svg>

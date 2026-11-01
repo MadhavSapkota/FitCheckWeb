@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="360" height="640" viewBox="0 0 360 640">
+<rect width="360" height="640" fill="#faf9f6"/>
+<rect x="138" y="10" width="84" height="18" rx="9" fill="#19191b"/>
+<g font-family="Arial,Helvetica,sans-serif" fill="#19191b">
+<text x="24" y="65" font-size="22" font-weight="700" letter-spacing="-1">fitcheck</text>
+<text x="309" y="63" font-size="20">✦</text>
+<text x="24" y="112" font-size="11" fill="#66616d" letter-spacing="1">YOUR FIT CHECK</text>
+<text x="24" y="151" font-size="28" font-weight="700" letter-spacing="-1">The fit is fitting.</text>
+<rect x="24" y="178" width="312" height="183" rx="17" fill="#e3edce"/>
+<text x="180" y="217" font-size="10" text-anchor="middle" letter-spacing="1">EXAMPLE STYLE SCORE</text>
+<text x="172" y="291" font-size="68" font-weight="700" text-anchor="middle" letter-spacing="-4">8.8</text>
+<text x="248" y="291" font-size="17">/10</text>
+<text x="180" y="330" font-size="12" text-anchor="middle">A fresh take on your everyday fit.</text>
+<text x="24" y="403" font-size="18" font-weight="700">The little details</text>
+<rect x="24" y="423" width="312" height="111" rx="12" fill="#eee9f6"/>
+<text x="42" y="454" font-size="13" font-weight="700">✦  Try a little color</text>
+<text x="42" y="482" font-size="12" fill="#66616d">An accent accessory can bring</text>
+<text x="42" y="502" font-size="12" fill="#66616d">your whole outfit together.</text>
+<path d="M0 581h360" stroke="#deddd8"/>
+<text x="35" y="610" font-size="12">Fit check</text><text x="151" y="610" font-size="12" fill="#66616d">Explore</text><text x="263" y="610" font-size="12" fill="#66616d">Closet</text>
+<rect x="52" y="622" width="256" height="17" rx="4" fill="#19191b"/>
+<text x="180" y="634" fill="#fff" font-size="9" text-anchor="middle" letter-spacing="1">SCREENSHOT PLACEHOLDER</text>
+</g></svg>

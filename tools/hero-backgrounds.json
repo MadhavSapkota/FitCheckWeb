@@ -1,0 +1,20 @@
+[
+  {
+    "name": "woman",
+    "url": "assets/hero-background-woman.webp",
+    "width": 941,
+    "height": 1672,
+    "alt": "A woman wearing a black top and skirt with a tan shoulder bag on a city street",
+    "source": "User-supplied background photo",
+    "originalFilename": "codex-clipboard-vL7GaK.png"
+  },
+  {
+    "name": "man",
+    "url": "assets/hero-background-man.webp",
+    "width": 939,
+    "height": 1674,
+    "alt": "A man wearing a white T-shirt and beige trousers outdoors",
+    "source": "User-supplied background photo",
+    "originalFilename": "codex-clipboard-vHSehl.png"
+  }
+]

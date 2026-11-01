@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="420" height="500" viewBox="0 0 420 500" fill="none">
+<rect width="420" height="500" fill="#f7f5f0"/>
+<ellipse cx="210" cy="457" rx="155" ry="15" fill="#e9e5dd"/>
+<g stroke="#292c29" stroke-width="2" stroke-linejoin="round">
+<path d="m158 29 29-12h45l28 12 41 20 38 121-38 15-28-71-7 114H143l-7-114-26 72-39-15 39-121Z" fill="#c5db81"/>
+<path d="m185 22 25 33 23-33 16 16-29 39-14-13-16 14-21-40Z" fill="#b2c66c"/>
+<path d="m187 21 22 34 23-34-5 133h-35Z" fill="#fffdf7"/>
+<path d="m192 152 35 1 5 62h-46Z" fill="#fffdf7"/>
+<path d="m169 37 21 41-5 126-14 24M250 37l-30 40 12 138 19 13M144 140l30-4-2 27-28 3ZM241 136l27 4-1 27-26-4Z"/>
+<path d="m145 215 52-4 15 11 14-11 40 4 9 102 19 116-67 8-21-143-12 142-68-7 11-109Z" fill="#454650"/>
+<path d="m209 229-3 69M148 220l-3 32 29-5 4-32M244 215l1 33 25 4M161 270l-8 147M250 277l20 142" stroke="#72717a"/>
+<path d="m128 425 66 5-2 12-63-3ZM227 428l66-7 3 14-67 7Z" fill="#666772"/>
+<path d="m133 438 55 2 3 23-12 6-76-3-2-10 24-9ZM234 440l54-5 18 14 23 5 4 12-23 7-76-6-5-11Z" fill="#c1afd8"/>
+<path d="m104 461 75 2 11-5v13l-14 5-76-3 1-12ZM232 458l77 9 22-7 3 13-23 7-78-7Z" fill="#fffef9"/>
+<path d="m140 444 16 10m-5-12 16 10m-5-11 16 10M251 443l-7 10m18-11-7 12m18-13-7 13" stroke="#fffef9" stroke-width="3"/>
+</g>
+<g transform="translate(319 242) rotate(18)"><rect width="60" height="75" rx="8" fill="#e0c9af" stroke="#292c29" stroke-width="2"/><path d="M13 0v-16c0-24 34-24 34 0V0" stroke="#292c29" stroke-width="3"/><path d="M0 22h60" stroke="#292c29"/><rect x="26" y="16" width="8" height="12" rx="2" fill="#f8edce" stroke="#292c29"/></g>
+<g transform="translate(43 279) rotate(-18)"><rect width="66" height="25" rx="12" stroke="#292c29" stroke-width="4"/><path d="M30 10h7M3 2l-6-7m63 7 7-7" stroke="#292c29" stroke-width="4"/><rect x="5" y="5" width="22" height="15" rx="7" fill="#a494b4"/><rect x="38" y="5" width="22" height="15" rx="7" fill="#a494b4"/></g>
+<path d="m336 373 5 12 12 5-12 5-5 12-5-12-12-5 12-5ZM74 211l3 8 8 3-8 3-3 8-3-8-8-3 8-3Z" fill="#a28ac7"/>
+</svg>
