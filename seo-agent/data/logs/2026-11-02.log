@@ -1,0 +1,6 @@
+2026-11-02 04:54:35,104 INFO seo_agent: Added canonical, og:url to index.html
+2026-11-02 04:54:35,116 INFO seo_agent: Added canonical, og:url to how-it-works.html
+2026-11-02 04:54:35,124 INFO seo_agent: Added canonical, og:url to privacy.html
+2026-11-02 04:54:35,133 INFO seo_agent: Added canonical, og:url to terms.html
+2026-11-02 04:54:36,106 INFO seo_agent: Search Console: 28d clicks=0 impressions=0
+2026-11-02 04:54:36,187 WARNING seo_agent: Google Ads credentials not configured

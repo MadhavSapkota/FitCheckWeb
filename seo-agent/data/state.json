@@ -1,0 +1,56 @@
+{
+  "articles": {},
+  "keywords": {},
+  "page_updates": [
+    {
+      "change": [
+        "canonical",
+        "og:url"
+      ],
+      "date": "2026-11-02",
+      "page": "index.html"
+    },
+    {
+      "change": [
+        "canonical",
+        "og:url"
+      ],
+      "date": "2026-11-02",
+      "page": "how-it-works.html"
+    },
+    {
+      "change": [
+        "canonical",
+        "og:url"
+      ],
+      "date": "2026-11-02",
+      "page": "privacy.html"
+    },
+    {
+      "change": [
+        "canonical",
+        "og:url"
+      ],
+      "date": "2026-11-02",
+      "page": "terms.html"
+    }
+  ],
+  "runs": [
+    {
+      "at": "2026-11-02T04:54:36+00:00",
+      "changes": 5,
+      "claude_calls": 0,
+      "decision": "skip: No keyword volume provider available; metrics are never fabricated, so nothing is published",
+      "errors": 0
+    }
+  ],
+  "usage": {
+    "2026-11": {
+      "claude_calls": 0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "usd_estimate": 0.0
+    }
+  },
+  "version": 1
+}
