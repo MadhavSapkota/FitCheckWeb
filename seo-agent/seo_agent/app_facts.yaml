@@ -15,6 +15,11 @@ features:
   - "Keep track of highest-rated outfits and daily style evolution."
   - "AI beauty feedback on makeup looks, from an everyday glow to full glam."
   - "Explore hairstyle, curl, and hair color inspiration and check how a look comes together."
+  # Owner-confirmed features (2026-11-02):
+  - "Try different hairstyles on your own face: the app generates AI images of you with a new hairstyle from your photo."
+  - "Virtual outfit try-on: see AI-generated images of yourself in different outfits from your photo."
+  - "Makeup assist with live camera guidance."
+  - "Browse trending fashion styles and looks."
 privacy:
   - "Photos are processed on the device; the developer does not collect photos or reuse them."
   - "Saved looks stay on the device."
@@ -25,7 +30,6 @@ not_offered_do_not_claim:
   - "An iOS / iPhone app (it is only 'coming soon')"
   - "A web app or browser version"
   - "Shopping, buying clothes, or price comparison inside the app"
-  - "Augmented-reality / live camera virtual try-on of clothes"
   - "Human stylists, consultations, or professional color analysis services"
   - "Body measurement, size recommendations, or weight analysis"
   - "Medical, dermatology, or skincare diagnosis"
