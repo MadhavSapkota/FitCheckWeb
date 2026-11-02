@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&display=swap');
 /* Blog styles - matches the main site palette (bg #f1efea, ink #30232b, accent #762f4a) and Inter font. */
 @font-face{font-family:Inter;src:url('/assets/fonts/inter-regular.woff') format('woff');font-weight:400;font-display:swap}
 @font-face{font-family:Inter;src:url('/assets/fonts/inter-semibold.woff') format('woff');font-weight:600;font-display:swap}
@@ -37,3 +38,27 @@ th{background:var(--soft)}
 .bf{border-top:1px solid var(--line);padding:24px 0;font-size:14px}.bf a{color:var(--body)}
 .inline-cta{margin:32px 0;padding:18px 20px;border-left:3px solid var(--primary);background:var(--soft);border-radius:0 14px 14px 0}
 .inline-cta p{margin:0 0 6px;font-size:16px}.inline-cta .cta{margin-top:4px;padding:10px 18px;font-size:15px}
+
+/* Editorial black & white theme */
+:root{--bg:#fff;--card:#fff;--ink:#000;--body:#333;--primary:#000;--soft:#f4f4f4;--line:#e5e5e5}
+*{border-radius:0!important;box-shadow:none!important}
+.wrap{width:auto;max-width:1440px;padding-inline:clamp(20px,4vw,56px)}
+.bh-in{min-height:76px}
+.brand{font-family:'Archivo',Inter,sans-serif;font-stretch:75%;font-weight:900;font-size:26px;text-transform:uppercase;letter-spacing:.02em}
+.bh nav a{font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#000}
+.bh nav a.cta-sm,.cta{background:#000;color:#fff;border:1.5px solid #000;padding:14px 26px;font-size:12px;letter-spacing:.12em;text-transform:uppercase}
+.bh nav a.cta-sm:hover,.cta:hover{background:#fff;color:#000}
+.bh nav a.cta-sm{padding:10px 16px}
+.article{padding-block:clamp(48px,7vw,96px) clamp(64px,8vw,120px)}
+h1,h2{font-family:'Archivo',Inter,sans-serif;font-stretch:75%;font-weight:800;text-transform:uppercase;letter-spacing:-.01em;line-height:1}
+h1{font-size:clamp(44px,6vw,80px);margin-bottom:20px}
+h2{font-size:clamp(28px,3vw,40px);margin-top:56px}
+.cards{gap:0;border-top:1.5px solid #000}
+.cards li{border:0;border-bottom:1px solid var(--line);padding:28px 0}
+.cards a{font-family:'Archivo',Inter,sans-serif;font-stretch:75%;font-weight:800;font-size:28px;text-transform:uppercase}
+.faq details{border:0;border-bottom:1px solid var(--line);padding:20px 0}
+.app-cta{background:#000;color:#fff;border:0;padding:clamp(28px,4vw,48px)}
+.app-cta p,.app-cta-title{color:#fff}
+.app-cta .cta{background:#fff;color:#000;border-color:#fff}
+.inline-cta{border-left:3px solid #000;padding:24px 28px}
+.bf{background:#000;padding:48px 0}.bf,.bf a,.bf p{color:#fff}
