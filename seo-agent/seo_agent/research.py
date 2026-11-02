@@ -19,10 +19,11 @@ def discover(cfg: Config, seeds: list[str] | None = None) -> list[dict[str, Any]
     if cfg.get("keyword_research.source") == "google_ads_keyword_planner" and keyword_planner.available():
         try:
             return keyword_planner.keyword_ideas(cfg, seeds)
-        except Exception as e:  # noqa: BLE001 - fall back only when configured
-            log.error("Google Ads Keyword Planner failed: %s", e)
+        except Exception as e:  # noqa: BLE001 - e.g. developer token still on Test access
+            log.error("Google Ads Keyword Planner failed: %s", str(e)[:300])
             if not cfg.get("keyword_research.fallback_source"):
-                raise
+                raise NoProvider(f"Google Ads Keyword Planner unavailable ({type(e).__name__}); "
+                                 "check developer token access level") from e
     elif cfg.get("keyword_research.source") == "google_ads_keyword_planner":
         log.warning("Google Ads credentials not configured")
     if "dataforseo_labs" in (cfg.get("keyword_research.fallback_source"), cfg.get("keyword_research.source")):

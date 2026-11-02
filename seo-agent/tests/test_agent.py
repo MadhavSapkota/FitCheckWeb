@@ -243,3 +243,15 @@ def test_makeup_topic_gets_makeup_cta():
     from seo_agent.agents import conversion_agent
     assert conversion_agent.choose({"keyword": "soft glam makeup tips", "h1": ""})["button"] == "Get AI Makeup Feedback"
     assert conversion_agent.choose({"keyword": "layered haircut ideas", "h1": ""})["button"] == "Explore Hairstyles With AI"
+
+
+def test_google_ads_error_does_not_crash_run(site, monkeypatch):
+    mock_apis(monkeypatch)
+    import importlib
+    importlib.reload(research)
+    from seo_agent import keyword_planner
+    monkeypatch.setattr(keyword_planner, "available", lambda: True)
+    monkeypatch.setattr(keyword_planner, "keyword_ideas", lambda *a: (_ for _ in ()).throw(RuntimeError("DEVELOPER_TOKEN_NOT_APPROVED")))
+    assert main.main(["run"]) == 0
+    rep = (site / "seo-agent" / "data" / "reports" / "2026-11-01.md").read_text()
+    assert "Keyword Planner unavailable" in rep
