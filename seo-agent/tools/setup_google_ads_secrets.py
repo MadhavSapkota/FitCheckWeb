@@ -6,6 +6,9 @@ Usage (from the repo root):
   .venv-seo/bin/python seo-agent/tools/setup_google_ads_secrets.py
 """
 import getpass
+import glob
+import json
+import os
 import subprocess
 import sys
 
@@ -21,9 +24,22 @@ def set_secret(name: str, value: str) -> None:
 
 
 def main() -> int:
-    print("Paste values when asked (input is hidden).")
-    client_id = getpass.getpass("OAuth Client ID: ").strip()
-    client_secret = getpass.getpass("OAuth Client secret: ").strip()
+    # Preferred: read the OAuth client JSON downloaded from Google Cloud (no hidden pasting).
+    files = sorted(glob.glob(os.path.expanduser("~/Downloads/client_secret_*.json")), key=os.path.getmtime)
+    if files:
+        data = json.load(open(files[-1]))
+        c = data.get("installed") or data.get("web") or {}
+        client_id, client_secret = c.get("client_id", ""), c.get("client_secret", "")
+        print(f"Using OAuth client from {os.path.basename(files[-1])} (ID ends with ...{client_id[-30:]})")
+        if "installed" not in data:
+            print("Warning: this is not a Desktop app client. Create a 'Desktop app' client.")
+    else:
+        print("No client_secret_*.json in Downloads; paste values instead (input is hidden).")
+        client_id = getpass.getpass("OAuth Client ID (ends with .apps.googleusercontent.com): ").strip()
+        client_secret = getpass.getpass("OAuth Client secret: ").strip()
+    if not client_id.endswith(".apps.googleusercontent.com"):
+        print("That Client ID looks incomplete - it must end with .apps.googleusercontent.com")
+        return 1
     dev_token = getpass.getpass("Developer token (press Enter if you don't have one - no longer required): ").strip()
     customer_id = input("Google Ads customer ID (e.g. 123-456-7890): ").strip().replace("-", "")
     login_id = input("Manager (MCC) account ID if you use one, else press Enter: ").strip().replace("-", "")
@@ -49,6 +65,9 @@ def main() -> int:
     if login_id:
         set_secret("GOOGLE_ADS_LOGIN_CUSTOMER_ID", login_id)
     print("Done. All Google Ads secrets are stored in GitHub.")
+    for f in files:
+        os.remove(f)
+        print(f"  deleted {os.path.basename(f)} from Downloads")
     return 0
 
 
