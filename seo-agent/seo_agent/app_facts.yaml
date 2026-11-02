@@ -21,8 +21,9 @@ features:
   - "Makeup assist with live camera guidance."
   - "Browse trending fashion styles and looks."
 privacy:
-  - "Photos are processed on the device; the developer does not collect photos or reuse them."
+  - "Outfit scoring runs on the device; the developer does not store photos or reuse them."
   - "Saved looks stay on the device."
+  # Never claim photos never leave the phone / are never uploaded (AI image features use online APIs).
 photo_tips:
   - "Use a clear, well-lit, head-to-toe photo including shoes for outfits."
   - "For makeup and hair, face natural light, hold the camera at eye level, avoid filters."
