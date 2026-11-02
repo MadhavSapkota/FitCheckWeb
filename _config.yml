@@ -1,0 +1,4 @@
+# Jekyll is used only by the GitHub Pages workflow to copy the static site.
+# Keep the SEO automation (code, data, logs) out of the published website.
+exclude:
+  - seo-agent

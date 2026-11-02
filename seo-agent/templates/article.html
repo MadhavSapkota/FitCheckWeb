@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="{{lang}}">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#F1EFEA">
+<title>{{title}}</title>
+<meta name="description" content="{{description}}">
+<link rel="canonical" href="{{canonical}}">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="{{brand}}">
+<meta property="og:title" content="{{title}}">
+<meta property="og:description" content="{{description}}">
+<meta property="og:url" content="{{canonical}}">
+<meta property="article:published_time" content="{{published}}">
+<meta property="article:modified_time" content="{{modified}}">
+<meta name="twitter:card" content="summary">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+<link rel="stylesheet" href="/blog/blog.css">
+{{analytics}}
+<script type="application/ld+json">{{jsonld}}</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="bh"><div class="wrap bh-in"><a class="brand" href="/">{{brand}}</a><nav aria-label="Main"><a href="/#how-it-works">How it works</a><a href="/blog/">Style guides</a><a class="cta-sm" href="{{app_url}}" target="_blank" rel="noopener" data-cta="play-store" data-placement="header">Get the app</a></nav></div></header>
+<main id="main" class="wrap article">
+<nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a> › <a href="/blog/">Style guides</a> › <span>{{h1}}</span></nav>
+<article>
+<h1>{{h1}}</h1>
+<p class="meta">Updated <time datetime="{{modified}}">{{modified_human}}</time> · {{reading_minutes}} min read</p>
+<div class="body">
+{{body}}
+</div>
+{{faq_html}}
+<aside class="app-cta" aria-label="Get the app">
+<p class="app-cta-title">Want a second opinion on your look?</p>
+<p>{{cta_text}}</p>
+{{cta_button}}
+<p class="small">Free on Android · iOS coming soon</p>
+</aside>
+<!-- seo:related:start -->
+{{related_html}}
+<!-- seo:related:end -->
+</article>
+</main>
+<footer class="bf"><div class="wrap"><p><a href="/">{{brand}}</a> · <a href="/blog/">Style guides</a> · <a href="/privacy.html">Privacy Policy</a> · <a href="/terms.html">Terms of Service</a></p></div></footer>
+</body>
+</html>

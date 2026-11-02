@@ -1,0 +1,12 @@
+# Python dependencies for the SEO agent (seo_agent/). Python 3.11+.
+PyYAML>=6.0
+requests>=2.31
+tenacity>=8.2
+beautifulsoup4>=4.12
+nh3>=0.2.17
+anthropic>=0.40
+google-ads>=25.0
+google-api-python-client>=2.120
+google-auth>=2.28
+google-analytics-data>=0.18
+pytest>=8.0

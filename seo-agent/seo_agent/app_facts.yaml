@@ -1,0 +1,28 @@
+# Ground truth about the app. The content generator may ONLY describe these features.
+# Edit when the app changes. Derived from the live homepage copy.
+app_name_on_play: "Style AI – Fashion & Beauty (AI Fit Check)"
+brand: "FitCheck AI"
+platforms: "Android (free on Google Play). iOS is coming soon - not available yet."
+features:
+  - "Take or upload a photo of an outfit and get an AI style score."
+  - "Feedback and simple tips on fit, color coordination, and overall balance of an outfit."
+  - "AI beauty feedback on makeup looks, from an everyday glow to full glam."
+  - "Explore hairstyle, curl, and hair color inspiration and check how a look comes together."
+  - "Save favorite looks in a digital closet stored on the phone."
+privacy:
+  - "Photos are processed on the device; the developer does not collect photos or reuse them."
+  - "Saved looks stay on the device."
+photo_tips:
+  - "Use a clear, well-lit, head-to-toe photo including shoes for outfits."
+  - "For makeup and hair, face natural light, hold the camera at eye level, avoid filters."
+not_offered_do_not_claim:
+  - "An iOS / iPhone app (it is only 'coming soon')"
+  - "A web app or browser version"
+  - "Shopping, buying clothes, or price comparison inside the app"
+  - "Augmented-reality / live camera virtual try-on of clothes"
+  - "Human stylists, consultations, or professional color analysis services"
+  - "Body measurement, size recommendations, or weight analysis"
+  - "Medical, dermatology, or skincare diagnosis"
+  - "Social feed, sharing community, or followers"
+  - "Any ratings count, download count, awards, or press coverage"
+  - "Any user statistics, testimonials, or study results"
