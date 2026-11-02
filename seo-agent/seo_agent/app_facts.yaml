@@ -1,14 +1,20 @@
 # Ground truth about the app. The content generator may ONLY describe these features.
 # Edit when the app changes. Derived from the live homepage copy.
-app_name_on_play: "Style AI – Fashion & Beauty (AI Fit Check)"
+app_name_on_play: "FitCheck: AI Outfit Planner"
 brand: "FitCheck AI"
 platforms: "Android (free on Google Play). iOS is coming soon - not available yet."
 features:
-  - "Take or upload a photo of an outfit and get an AI style score."
-  - "Feedback and simple tips on fit, color coordination, and overall balance of an outfit."
+  # Source: Google Play listing (owner-provided, 2026-11-02) + live homepage copy.
+  - "Take or upload a full-body outfit photo for an instant fit check and AI outfit score."
+  - "Style breakdown of color match, proportion, and overall balance, with what works and easy ways to improve (e.g. switching shoes, adjusting color contrast, fit balance)."
+  - "Tips for color match, fit balance, and accessory pairing."
+  - "Color coordination guidance: which pieces, patterns, and color combinations go together."
+  - "Explore aesthetics such as Old Money, Y2K, Streetwear, Vintage, Minimalist, and Quiet Luxury."
+  - "Digital closet / wardrobe organizer: save favorite and top-scoring looks, organize clothes by season or occasion, build a capsule wardrobe."
+  - "Plan daily outfits ahead for work, parties, workouts, casual weekends, and events like date nights."
+  - "Keep track of highest-rated outfits and daily style evolution."
   - "AI beauty feedback on makeup looks, from an everyday glow to full glam."
   - "Explore hairstyle, curl, and hair color inspiration and check how a look comes together."
-  - "Save favorite looks in a digital closet stored on the phone."
 privacy:
   - "Photos are processed on the device; the developer does not collect photos or reuse them."
   - "Saved looks stay on the device."
@@ -26,3 +32,4 @@ not_offered_do_not_claim:
   - "Social feed, sharing community, or followers"
   - "Any ratings count, download count, awards, or press coverage"
   - "Any user statistics, testimonials, or study results"
+  - "Scientific or 'data-backed' accuracy of scores (scores are AI opinion, a second opinion)"
