@@ -42,6 +42,13 @@
       "claude_calls": 0,
       "decision": "skip: No keyword volume provider available; metrics are never fabricated, so nothing is published",
       "errors": 0
+    },
+    {
+      "at": "2026-11-02T15:52:26+00:00",
+      "changes": 0,
+      "claude_calls": 0,
+      "decision": "skip: Google Ads Keyword Planner unavailable (GoogleAdsException); check developer token access level",
+      "errors": 0
     }
   ],
   "usage": {

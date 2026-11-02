@@ -4,3 +4,10 @@
 2026-11-02 04:54:35,133 INFO seo_agent: Added canonical, og:url to terms.html
 2026-11-02 04:54:36,106 INFO seo_agent: Search Console: 28d clicks=0 impressions=0
 2026-11-02 04:54:36,187 WARNING seo_agent: Google Ads credentials not configured
+2026-11-02 15:52:25,746 INFO seo_agent: Search Console: 28d clicks=0 impressions=0
+2026-11-02 15:52:26,720 ERROR seo_agent: Google Ads Keyword Planner failed: (<_InactiveRpcError of RPC that terminated with:
+	status = StatusCode.PERMISSION_DENIED
+	details = "The caller does not have permission"
+	debug_error_string = "PERMISSION_DENIED:The caller does not have permission"
+>, <_InactiveRpcError of RPC that terminated with:
+	status = StatusCode.PERMISSION_DE
