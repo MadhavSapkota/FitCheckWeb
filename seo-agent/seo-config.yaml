@@ -28,6 +28,12 @@ keyword_research:
   min_opportunity_estimate: 50
   # Search Console queries with no verified volume are allowed only with this much real demand evidence:
   min_gsc_impressions_if_volume_unverified: 30
+  # When NO volume source works (no Google Ads, no Search Console data yet), Claude proposes long-tail
+  # question topics from the seeds. They are labeled "volume unverified"; no metrics are invented.
+  # All relevance, duplicate and quality-gate checks still apply. Set enabled: false to require verified data.
+  unverified_topics:
+    enabled: false                 # OFF: verified data sources only (owner's choice)
+    min_opportunity_estimate: 40   # needs 5+ words, question format, and app relevance
   max_candidates_per_run: 3          # each candidate costs ~3 Claude calls
   # Google Trends: no official API exists, so it is intentionally not used (unofficial scrapers break ToS/reliability).
   minimum_monthly_searches: 100

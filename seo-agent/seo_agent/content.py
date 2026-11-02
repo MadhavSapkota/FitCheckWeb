@@ -132,3 +132,16 @@ Improve it genuinely for those queries. Do NOT change content just to look fresh
 "new_section_html": "one new <h2> section (<h2>,<h3>,<p>,<ul>,<li> only) answering an unanswered query, or empty string",
 "new_faqs": [{{"question": str, "answer": str}}], "change_summary": str, "substantive": bool}}"""
     return _json_call(cfg.get("content.model"), _sys(cfg), user)
+
+
+def suggest_topics(cfg: Config, seeds: list[str], existing_titles: list[str], facts: dict) -> list[str]:
+    """Editorial topic ideas when no keyword-volume source is available. Returns search-style
+    long-tail queries only; NO metrics are produced or implied."""
+    user = f"""Suggest 15 specific long-tail Google search queries (5-9 words, how/what/which questions)
+that real people type, closely related to these themes: {json.dumps(seeds)}.
+Each must be answerable with a genuinely helpful styling/beauty guide, relevant to an app that gives
+AI feedback on outfits (fit, color, balance), makeup, and hairstyles: {json.dumps(facts.get('features', []))}.
+Avoid topics already covered by: {json.dumps(existing_titles)}. No brand names. Do not estimate search volume.
+Return JSON: {{"queries": [str]}}"""
+    data = _json_call(cfg.get("content.model"), _sys(cfg), user, max_tokens=2000)
+    return [q.strip().lower() for q in data.get("queries", []) if isinstance(q, str) and q.strip()][:15]

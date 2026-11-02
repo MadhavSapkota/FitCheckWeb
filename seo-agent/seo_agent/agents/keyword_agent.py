@@ -5,7 +5,7 @@ from typing import Any
 
 from .. import research
 from ..audit import Page, tokens
-from ..config import Config
+from ..config import Config, load_app_facts
 from ..log import log
 from ..state import State
 
@@ -65,9 +65,22 @@ def run(cfg: Config, state: State, pages: list[Page], perf: dict[str, Any] | Non
         for i in research.discover(cfg, seeds):
             ideas[i["keyword"]] = i
     except research.NoProvider as e:
-        if not gsc:
+        editorial = cfg.get("keyword_research.unverified_topics.enabled", False)
+        if not gsc and not editorial:
             raise
-        report["notes"].append(f"{e}. Using Search Console queries only (volume unverified).")
+        report["notes"].append(f"{e}. Using {'Search Console queries' if gsc else 'editorial topics'} (volume unverified).")
+        if not gsc and editorial:
+            from .. import content
+            titles = [p.title for p in pages]
+            try:
+                topics = content.suggest_topics(cfg, seeds, titles, load_app_facts())
+            except Exception as err:  # noqa: BLE001 - never crash the daily run
+                report["notes"].append(f"editorial topic suggestion failed: {str(err)[:200]}")
+                topics = []
+            if not topics:
+                raise research.NoProvider("no verified keyword data and no editorial topics available")
+            for q in topics:
+                ideas.setdefault(q, {"keyword": q, "volume": None, "source": "editorial (volume unverified)"})
     for q, m in gsc.items():
         ideas.setdefault(q, {"keyword": q, "volume": None, "source": "search_console (volume unverified)"}).update(m)
     found = [i for i in ideas.values() if research.relevant(cfg, i["keyword"])]

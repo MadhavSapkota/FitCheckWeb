@@ -255,3 +255,27 @@ def test_google_ads_error_does_not_crash_run(site, monkeypatch):
     assert main.main(["run"]) == 0
     rep = (site / "seo-agent" / "data" / "reports" / "2026-11-01.md").read_text()
     assert "Keyword Planner unavailable" in rep
+
+
+def test_default_verified_only_publishes_nothing_without_data(site, monkeypatch):
+    _free_mode(site)
+    mock_apis(monkeypatch)
+    monkeypatch.setattr(research, "discover", lambda cfg, seeds=None: (_ for _ in ()).throw(research.NoProvider("no Ads API")))
+    called = []
+    monkeypatch.setattr(content, "suggest_topics", lambda *a, **k: called.append(1) or ["how to choose colors that match your outfit"])
+    assert main.main(["run"]) == 0
+    assert not called and not any((site / "blog").glob("*/index.html"))
+
+
+def test_editorial_topics_when_enabled(site, monkeypatch):
+    _free_mode(site)
+    cfg_p = site / "seo-agent" / "seo-config.yaml"
+    cfg_p.write_text(cfg_p.read_text().replace("enabled: false", "enabled: true"))
+    mock_apis(monkeypatch)
+    monkeypatch.setattr(research, "discover", lambda cfg, seeds=None: (_ for _ in ()).throw(research.NoProvider("no Ads API")))
+    monkeypatch.setattr(content, "suggest_topics", lambda *a, **k: ["how to choose colors that match your outfit", "pizza"])
+    assert main.main(["run"]) == 0
+    st = json.loads((site / "seo-agent" / "data" / "state.json").read_text())
+    kw = st["keywords"]["how to choose colors that match your outfit"]
+    assert kw["decision"].startswith("published") and kw["latest"]["volume"] is None
+    assert kw["latest"]["source"] == "editorial (volume unverified)"

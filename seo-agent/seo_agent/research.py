@@ -95,10 +95,15 @@ def enrich(cfg: Config, ideas: list[dict[str, Any]]) -> list[dict[str, Any]]:
     return ideas
 
 
+def is_editorial(cfg: Config, i: dict[str, Any]) -> bool:
+    return bool(cfg.get("keyword_research.unverified_topics.enabled")) and str(i.get("source", "")).startswith("editorial")
+
+
 def shortlist(cfg: Config, ideas: list[dict[str, Any]], pages: list[Page], state: State) -> list[dict[str, Any]]:
     min_vol = cfg.get("keyword_research.minimum_monthly_searches", 100)
     min_gsc = cfg.get("keyword_research.min_gsc_impressions_if_volume_unverified", 30)
     min_opp = cfg.get("keyword_research.min_opportunity_estimate", 50)
+    min_opp_editorial = cfg.get("keyword_research.unverified_topics.min_opportunity_estimate", 40)
     max_kd = cfg.get("keyword_research.maximum_organic_difficulty", 25)
     intents = set(cfg.get("keyword_research.allowed_intents", ["informational", "commercial"]))
     cov_thr = cfg.get("content.coverage_threshold", 0.6)
@@ -112,7 +117,7 @@ def shortlist(cfg: Config, ideas: list[dict[str, Any]], pages: list[Page], state
             reason = "rejected_irrelevant"
         elif vol is not None and vol < min_vol:
             reason = "rejected_low_volume"
-        elif vol is None and i.get("gsc_impressions_28d", 0) < min_gsc:
+        elif vol is None and i.get("gsc_impressions_28d", 0) < min_gsc and not is_editorial(cfg, i):
             reason = "rejected_volume_unverified_and_little_search_console_evidence"
         elif measured_difficulty(cfg) and i.get("difficulty") is None:
             reason = "rejected_no_organic_difficulty_data"
@@ -120,7 +125,7 @@ def shortlist(cfg: Config, ideas: list[dict[str, Any]], pages: list[Page], state
             reason = "rejected_difficulty"
         elif i.get("intent") not in intents:
             reason = "rejected_intent"
-        elif i.get("opportunity_estimate", 0) < min_opp:
+        elif i.get("opportunity_estimate", 0) < (min_opp_editorial if is_editorial(cfg, i) else min_opp):
             reason = "rejected_low_opportunity_estimate"
         elif kw in used:
             reason = "rejected_already_targeted"

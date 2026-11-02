@@ -75,12 +75,14 @@ def check(cfg: Config, *, kw: dict[str, Any], intent: str, article: dict[str, An
     vol = kw.get("volume")
     if vol is not None and vol < cfg.get("keyword_research.minimum_monthly_searches"):
         fails.append("volume_below_threshold")
-    if vol is None and kw.get("gsc_impressions_28d", 0) < cfg.get("keyword_research.min_gsc_impressions_if_volume_unverified", 30):
+    editorial = bool(cfg.get("keyword_research.unverified_topics.enabled")) and str(kw.get("source", "")).startswith("editorial")
+    if vol is None and not editorial and kw.get("gsc_impressions_28d", 0) < cfg.get("keyword_research.min_gsc_impressions_if_volume_unverified", 30):
         fails.append("volume_unverified_without_search_console_evidence")
     if cfg.get("keyword_research.organic_difficulty_source") == "dataforseo":
         if kw.get("difficulty") is None or kw["difficulty"] > cfg.get("keyword_research.maximum_organic_difficulty"):
             fails.append("organic_difficulty_above_threshold_or_missing")
-    elif kw.get("opportunity_estimate", 0) < cfg.get("keyword_research.min_opportunity_estimate", 50):
+    elif kw.get("opportunity_estimate", 0) < (cfg.get("keyword_research.unverified_topics.min_opportunity_estimate", 40)
+                                             if editorial else cfg.get("keyword_research.min_opportunity_estimate", 50)):
         fails.append("opportunity_estimate_below_threshold")
     if intent not in cfg.get("keyword_research.allowed_intents"):
         fails.append(f"intent_not_allowed:{intent}")
