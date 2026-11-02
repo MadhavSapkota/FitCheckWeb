@@ -10,8 +10,9 @@ from typing import Any
 from .config import Config, env
 from .log import log
 
-REQUIRED = ["GOOGLE_ADS_DEVELOPER_TOKEN", "GOOGLE_ADS_CLIENT_ID", "GOOGLE_ADS_CLIENT_SECRET",
-            "GOOGLE_ADS_REFRESH_TOKEN", "GOOGLE_ADS_CUSTOMER_ID"]
+# Google no longer requires a developer token (access is managed per Google Cloud project);
+# GOOGLE_ADS_DEVELOPER_TOKEN is still passed when set, for older setups.
+REQUIRED = ["GOOGLE_ADS_CLIENT_ID", "GOOGLE_ADS_CLIENT_SECRET", "GOOGLE_ADS_REFRESH_TOKEN", "GOOGLE_ADS_CUSTOMER_ID"]
 
 
 def available() -> bool:
@@ -22,12 +23,13 @@ def keyword_ideas(cfg: Config, seeds: list[str]) -> list[dict[str, Any]]:
     from google.ads.googleads.client import GoogleAdsClient  # imported lazily
 
     conf = {
-        "developer_token": env("GOOGLE_ADS_DEVELOPER_TOKEN"),
         "client_id": env("GOOGLE_ADS_CLIENT_ID"),
         "client_secret": env("GOOGLE_ADS_CLIENT_SECRET"),
         "refresh_token": env("GOOGLE_ADS_REFRESH_TOKEN"),
         "use_proto_plus": True,
     }
+    if env("GOOGLE_ADS_DEVELOPER_TOKEN"):
+        conf["developer_token"] = env("GOOGLE_ADS_DEVELOPER_TOKEN")
     if env("GOOGLE_ADS_LOGIN_CUSTOMER_ID"):
         conf["login_customer_id"] = env("GOOGLE_ADS_LOGIN_CUSTOMER_ID").replace("-", "")
     client = GoogleAdsClient.load_from_dict(conf)

@@ -63,7 +63,7 @@ Add each one in **GitHub → repository → Settings → Secrets and variables �
 | Secret | Required? | Where to get it |
 |---|---|---|
 | `ANTHROPIC_API_KEY` | **Yes** | console.anthropic.com → API Keys (add credit, set a spend limit) |
-| `GOOGLE_ADS_DEVELOPER_TOKEN` | Recommended | ads.google.com → Tools → API Center (apply; Explorer/Basic access) |
+| `GOOGLE_ADS_DEVELOPER_TOKEN` | Optional (no longer required by Google) | Access level is managed in Google Cloud Console → Google Ads API |
 | `GOOGLE_ADS_CLIENT_ID`, `GOOGLE_ADS_CLIENT_SECRET` | with Ads | Google Cloud Console → APIs & Services → Credentials → OAuth client (Desktop). Enable "Google Ads API" |
 | `GOOGLE_ADS_REFRESH_TOKEN` | with Ads | run Google's `generate_user_credentials.py` example from the google-ads-python repo once, locally |
 | `GOOGLE_ADS_CUSTOMER_ID` | with Ads | 10-digit account ID at the top of Google Ads (digits only) |

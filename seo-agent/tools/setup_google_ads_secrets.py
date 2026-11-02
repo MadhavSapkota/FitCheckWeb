@@ -24,10 +24,10 @@ def main() -> int:
     print("Paste values when asked (input is hidden).")
     client_id = getpass.getpass("OAuth Client ID: ").strip()
     client_secret = getpass.getpass("OAuth Client secret: ").strip()
-    dev_token = getpass.getpass("Google Ads developer token: ").strip()
+    dev_token = getpass.getpass("Developer token (press Enter if you don't have one - no longer required): ").strip()
     customer_id = input("Google Ads customer ID (e.g. 123-456-7890): ").strip().replace("-", "")
     login_id = input("Manager (MCC) account ID if you use one, else press Enter: ").strip().replace("-", "")
-    if not (client_id and client_secret and dev_token and customer_id.isdigit()):
+    if not (client_id and client_secret and customer_id.isdigit()):
         print("Missing or invalid values.")
         return 1
     flow = InstalledAppFlow.from_client_config(
@@ -42,7 +42,8 @@ def main() -> int:
         return 1
     set_secret("GOOGLE_ADS_CLIENT_ID", client_id)
     set_secret("GOOGLE_ADS_CLIENT_SECRET", client_secret)
-    set_secret("GOOGLE_ADS_DEVELOPER_TOKEN", dev_token)
+    if dev_token:
+        set_secret("GOOGLE_ADS_DEVELOPER_TOKEN", dev_token)
     set_secret("GOOGLE_ADS_REFRESH_TOKEN", creds.refresh_token)
     set_secret("GOOGLE_ADS_CUSTOMER_ID", customer_id)
     if login_id:
