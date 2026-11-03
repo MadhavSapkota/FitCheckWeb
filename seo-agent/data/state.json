@@ -1,6 +1,5735 @@
 {
   "articles": {},
-  "keywords": {},
+  "keywords": {
+    "21st birthday outfit ideas": {
+      "decision": "rejected_low_opportunity_estimate",
+      "history": [
+        {
+          "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 44,
+          "source": "google_ads_keyword_planner",
+          "volume": 590
+        }
+      ],
+      "latest": {
+        "ads_competition": "HIGH",
+        "difficulty": null,
+        "difficulty_note": "not measured (free mode: long-tail rule applied instead)",
+        "intent": "informational",
+        "keyword": "21st birthday outfit ideas",
+        "opportunity_estimate": 44,
+        "opportunity_evidence": [
+          "4-word long-tail",
+          "verified volume 100-1,000 (modest competition likely)"
+        ],
+        "relevance": 0.25,
+        "source": "google_ads_keyword_planner",
+        "volume": 590
+      }
+    },
+    "30th birthday outfit ideas": {
+      "decision": "rejected_low_opportunity_estimate",
+      "history": [
+        {
+          "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 44,
+          "source": "google_ads_keyword_planner",
+          "volume": 480
+        }
+      ],
+      "latest": {
+        "ads_competition": "HIGH",
+        "difficulty": null,
+        "difficulty_note": "not measured (free mode: long-tail rule applied instead)",
+        "intent": "informational",
+        "keyword": "30th birthday outfit ideas",
+        "opportunity_estimate": 44,
+        "opportunity_evidence": [
+          "4-word long-tail",
+          "verified volume 100-1,000 (modest competition likely)"
+        ],
+        "relevance": 0.25,
+        "source": "google_ads_keyword_planner",
+        "volume": 480
+      }
+    },
+    "70s outfit ideas": {
+      "decision": "rejected_low_opportunity_estimate",
+      "history": [
+        {
+          "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 23,
+          "source": "google_ads_keyword_planner",
+          "volume": 2400
+        }
+      ],
+      "latest": {
+        "ads_competition": "HIGH",
+        "difficulty": null,
+        "difficulty_note": "not measured (free mode: long-tail rule applied instead)",
+        "intent": "informational",
+        "keyword": "70s outfit ideas",
+        "opportunity_estimate": 23,
+        "opportunity_evidence": [
+          "3-word phrase",
+          "verified volume 1k-5k"
+        ],
+        "relevance": 0.33,
+        "source": "google_ads_keyword_planner",
+        "volume": 2400
+      }
+    },
+    "70s theme outfit": {
+      "decision": "rejected_low_opportunity_estimate",
+      "history": [
+        {
+          "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 23,
+          "source": "google_ads_keyword_planner",
+          "volume": 4400
+        }
+      ],
+      "latest": {
+        "ads_competition": "HIGH",
+        "difficulty": null,
+        "difficulty_note": "not measured (free mode: long-tail rule applied instead)",
+        "intent": "informational",
+        "keyword": "70s theme outfit",
+        "opportunity_estimate": 23,
+        "opportunity_evidence": [
+          "3-word phrase",
+          "verified volume 1k-5k"
+        ],
+        "relevance": 0.33,
+        "source": "google_ads_keyword_planner",
+        "volume": 4400
+      }
+    },
+    "70s theme party outfits": {
+      "decision": "rejected_low_opportunity_estimate",
+      "history": [
+        {
+          "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 34,
+          "source": "google_ads_keyword_planner",
+          "volume": 1300
+        }
+      ],
+      "latest": {
+        "ads_competition": "HIGH",
+        "difficulty": null,
+        "difficulty_note": "not measured (free mode: long-tail rule applied instead)",
+        "intent": "informational",
+        "keyword": "70s theme party outfits",
+        "opportunity_estimate": 34,
+        "opportunity_evidence": [
+          "4-word long-tail",
+          "verified volume 1k-5k"
+        ],
+        "relevance": 0.25,
+        "source": "google_ads_keyword_planner",
+        "volume": 1300
+      }
+    },
+    "80s dress up ideas": {
+      "decision": "rejected_low_opportunity_estimate",
+      "history": [
+        {
+          "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 30,
+          "source": "google_ads_keyword_planner",
+          "volume": 2400
+        }
+      ],
+      "latest": {
+        "ads_competition": "HIGH",
+        "difficulty": null,
+        "difficulty_note": "not measured (free mode: long-tail rule applied instead)",
+        "intent": "informational",
+        "keyword": "80s dress up ideas",
+        "opportunity_estimate": 30,
+        "opportunity_evidence": [
+          "4-word long-tail",
+          "verified volume 1k-5k"
+        ],
+        "relevance": 0.0,
+        "source": "google_ads_keyword_planner",
+        "volume": 2400
+      }
+    },
+    "80s outfit ideas": {
+      "decision": "rejected_low_opportunity_estimate",
+      "history": [
+        {
+          "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 13,
+          "source": "google_ads_keyword_planner",
+          "volume": 8100
+        }
+      ],
+      "latest": {
+        "ads_competition": "HIGH",
+        "difficulty": null,
+        "difficulty_note": "not measured (free mode: long-tail rule applied instead)",
+        "intent": "informational",
+        "keyword": "80s outfit ideas",
+        "opportunity_estimate": 13,
+        "opportunity_evidence": [
+          "3-word phrase"
+        ],
+        "relevance": 0.33,
+        "source": "google_ads_keyword_planner",
+        "volume": 8100
+      }
+    },
+    "80s theme outfit": {
+      "decision": "rejected_low_opportunity_estimate",
+      "history": [
+        {
+          "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 13,
+          "source": "google_ads_keyword_planner",
+          "volume": 9900
+        }
+      ],
+      "latest": {
+        "ads_competition": "HIGH",
+        "difficulty": null,
+        "difficulty_note": "not measured (free mode: long-tail rule applied instead)",
+        "intent": "informational",
+        "keyword": "80s theme outfit",
+        "opportunity_estimate": 13,
+        "opportunity_evidence": [
+          "3-word phrase"
+        ],
+        "relevance": 0.33,
+        "source": "google_ads_keyword_planner",
+        "volume": 9900
+      }
+    },
+    "80s theme party outfits": {
+      "decision": "rejected_low_opportunity_estimate",
+      "history": [
+        {
+          "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 34,
+          "source": "google_ads_keyword_planner",
+          "volume": 2900
+        }
+      ],
+      "latest": {
+        "ads_competition": "HIGH",
+        "difficulty": null,
+        "difficulty_note": "not measured (free mode: long-tail rule applied instead)",
+        "intent": "informational",
+        "keyword": "80s theme party outfits",
+        "opportunity_estimate": 34,
+        "opportunity_evidence": [
+          "4-word long-tail",
+          "verified volume 1k-5k"
+        ],
+        "relevance": 0.25,
+        "source": "google_ads_keyword_planner",
+        "volume": 2900
+      }
+    },
+    "90's theme outfit": {
+      "decision": "rejected_low_opportunity_estimate",
+      "history": [
+        {
+          "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 13,
+          "source": "google_ads_keyword_planner",
+          "volume": 9900
+        }
+      ],
+      "latest": {
+        "ads_competition": "HIGH",
+        "difficulty": null,
+        "difficulty_note": "not measured (free mode: long-tail rule applied instead)",
+        "intent": "informational",
+        "keyword": "90's theme outfit",
+        "opportunity_estimate": 13,
+        "opportunity_evidence": [
+          "3-word phrase"
+        ],
+        "relevance": 0.33,
+        "source": "google_ads_keyword_planner",
+        "volume": 9900
+      }
+    },
+    "90s inspired outfits": {
+      "decision": "rejected_low_opportunity_estimate",
+      "history": [
+        {
+          "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 23,
+          "source": "google_ads_keyword_planner",
+          "volume": 2400
+        }
+      ],
+      "latest": {
+        "ads_competition": "HIGH",
+        "difficulty": null,
+        "difficulty_note": "not measured (free mode: long-tail rule applied instead)",
+        "intent": "informational",
+        "keyword": "90s inspired outfits",
+        "opportunity_estimate": 23,
+        "opportunity_evidence": [
+          "3-word phrase",
+          "verified volume 1k-5k"
+        ],
+        "relevance": 0.33,
+        "source": "google_ads_keyword_planner",
+        "volume": 2400
+      }
+    },
+    "90s outfit ideas": {
+      "decision": "rejected_low_opportunity_estimate",
+      "history": [
+        {
+          "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 23,
+          "source": "google_ads_keyword_planner",
+          "volume": 4400
+        }
+      ],
+      "latest": {
+        "ads_competition": "HIGH",
+        "difficulty": null,
+        "difficulty_note": "not measured (free mode: long-tail rule applied instead)",
+        "intent": "informational",
+        "keyword": "90s outfit ideas",
+        "opportunity_estimate": 23,
+        "opportunity_evidence": [
+          "3-word phrase",
+          "verified volume 1k-5k"
+        ],
+        "relevance": 0.33,
+        "source": "google_ads_keyword_planner",
+        "volume": 4400
+      }
+    },
+    "90s party outfit ideas": {
+      "decision": "rejected_low_opportunity_estimate",
+      "history": [
+        {
+          "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 34,
+          "source": "google_ads_keyword_planner",
+          "volume": 2400
+        }
+      ],
+      "latest": {
+        "ads_competition": "HIGH",
+        "difficulty": null,
+        "difficulty_note": "not measured (free mode: long-tail rule applied instead)",
+        "intent": "informational",
+        "keyword": "90s party outfit ideas",
+        "opportunity_estimate": 34,
+        "opportunity_evidence": [
+          "4-word long-tail",
+          "verified volume 1k-5k"
+        ],
+        "relevance": 0.25,
+        "source": "google_ads_keyword_planner",
+        "volume": 2400
+      }
+    },
+    "90s theme party outfits": {
+      "decision": "rejected_low_opportunity_estimate",
+      "history": [
+        {
+          "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 24,
+          "source": "google_ads_keyword_planner",
+          "volume": 6600
+        }
+      ],
+      "latest": {
+        "ads_competition": "HIGH",
+        "difficulty": null,
+        "difficulty_note": "not measured (free mode: long-tail rule applied instead)",
+        "intent": "informational",
+        "keyword": "90s theme party outfits",
+        "opportunity_estimate": 24,
+        "opportunity_evidence": [
+          "4-word long-tail"
+        ],
+        "relevance": 0.25,
+        "source": "google_ads_keyword_planner",
+        "volume": 6600
+      }
+    },
+    "90s theme party outfits females": {
+      "decision": "rejected_low_opportunity_estimate",
+      "history": [
+        {
+          "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 38,
+          "source": "google_ads_keyword_planner",
+          "volume": 2900
+        }
+      ],
+      "latest": {
+        "ads_competition": "HIGH",
+        "difficulty": null,
+        "difficulty_note": "not measured (free mode: long-tail rule applied instead)",
+        "intent": "informational",
+        "keyword": "90s theme party outfits females",
+        "opportunity_estimate": 38,
+        "opportunity_evidence": [
+          "5+ word long-tail",
+          "verified volume 1k-5k"
+        ],
+        "relevance": 0.2,
+        "source": "google_ads_keyword_planner",
+        "volume": 2900
+      }
+    },
+    "abba outfit ideas": {
+      "decision": "rejected_low_opportunity_estimate",
+      "history": [
+        {
+          "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 33,
+          "source": "google_ads_keyword_planner",
+          "volume": 390
+        }
+      ],
+      "latest": {
+        "ads_competition": "HIGH",
+        "difficulty": null,
+        "difficulty_note": "not measured (free mode: long-tail rule applied instead)",
+        "intent": "informational",
+        "keyword": "abba outfit ideas",
+        "opportunity_estimate": 33,
+        "opportunity_evidence": [
+          "3-word phrase",
+          "verified volume 100-1,000 (modest competition likely)"
+        ],
+        "relevance": 0.33,
+        "source": "google_ads_keyword_planner",
+        "volume": 390
+      }
+    },
+    "ai fashion": {
+      "decision": "rejected_low_opportunity_estimate",
+      "history": [
+        {
+          "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 35,
+          "source": "google_ads_keyword_planner",
+          "volume": 720
+        }
+      ],
+      "latest": {
+        "ads_competition": "LOW",
+        "difficulty": null,
+        "difficulty_note": "not measured (free mode: long-tail rule applied instead)",
+        "intent": "informational",
+        "keyword": "ai fashion",
+        "opportunity_estimate": 35,
+        "opportunity_evidence": [
+          "verified volume 100-1,000 (modest competition likely)"
+        ],
+        "relevance": 1.0,
+        "source": "google_ads_keyword_planner",
+        "volume": 720
+      }
+    },
+    "ai fashion design": {
+      "decision": "rejected_low_opportunity_estimate",
+      "history": [
+        {
+          "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 38,
+          "source": "google_ads_keyword_planner",
+          "volume": 260
+        }
+      ],
+      "latest": {
+        "ads_competition": "MEDIUM",
+        "difficulty": null,
+        "difficulty_note": "not measured (free mode: long-tail rule applied instead)",
+        "intent": "informational",
+        "keyword": "ai fashion design",
+        "opportunity_estimate": 38,
+        "opportunity_evidence": [
+          "3-word phrase",
+          "verified volume 100-1,000 (modest competition likely)"
+        ],
+        "relevance": 0.67,
+        "source": "google_ads_keyword_planner",
+        "volume": 260
+      }
+    },
+    "ai fashion stylist": {
+      "decision": "rejected_low_opportunity_estimate",
+      "history": [
+        {
+          "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 43,
+          "source": "google_ads_keyword_planner",
+          "volume": 260
+        }
+      ],
+      "latest": {
+        "ads_competition": "MEDIUM",
+        "difficulty": null,
+        "difficulty_note": "not measured (free mode: long-tail rule applied instead)",
+        "intent": "informational",
+        "keyword": "ai fashion stylist",
+        "opportunity_estimate": 43,
+        "opportunity_evidence": [
+          "3-word phrase",
+          "verified volume 100-1,000 (modest competition likely)"
+        ],
+        "relevance": 1.0,
+        "source": "google_ads_keyword_planner",
+        "volume": 260
+      }
+    },
+    "airport outfit ideas": {
+      "decision": "rejected_low_opportunity_estimate",
+      "history": [
+        {
+          "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 33,
+          "source": "google_ads_keyword_planner",
+          "volume": 390
+        }
+      ],
+      "latest": {
+        "ads_competition": "HIGH",
+        "difficulty": null,
+        "difficulty_note": "not measured (free mode: long-tail rule applied instead)",
+        "intent": "informational",
+        "keyword": "airport outfit ideas",
+        "opportunity_estimate": 33,
+        "opportunity_evidence": [
+          "3-word phrase",
+          "verified volume 100-1,000 (modest competition likely)"
+        ],
+        "relevance": 0.33,
+        "source": "google_ads_keyword_planner",
+        "volume": 390
+      }
+    },
+    "all black outfit ideas": {
+      "decision": "rejected_low_opportunity_estimate",
+      "history": [
+        {
+          "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 44,
+          "source": "google_ads_keyword_planner",
+          "volume": 320
+        }
+      ],
+      "latest": {
+        "ads_competition": "HIGH",
+        "difficulty": null,
+        "difficulty_note": "not measured (free mode: long-tail rule applied instead)",
+        "intent": "informational",
+        "keyword": "all black outfit ideas",
+        "opportunity_estimate": 44,
+        "opportunity_evidence": [
+          "4-word long-tail",
+          "verified volume 100-1,000 (modest competition likely)"
+        ],
+        "relevance": 0.25,
+        "source": "google_ads_keyword_planner",
+        "volume": 320
+      }
+    },
+    "all white party outfit ideas": {
+      "decision": "rejected_low_opportunity_estimate",
+      "history": [
+        {
+          "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 48,
+          "source": "google_ads_keyword_planner",
+          "volume": 590
+        }
+      ],
+      "latest": {
+        "ads_competition": "HIGH",
+        "difficulty": null,
+        "difficulty_note": "not measured (free mode: long-tail rule applied instead)",
+        "intent": "informational",
+        "keyword": "all white party outfit ideas",
+        "opportunity_estimate": 48,
+        "opportunity_evidence": [
+          "5+ word long-tail",
+          "verified volume 100-1,000 (modest competition likely)"
+        ],
+        "relevance": 0.2,
+        "source": "google_ads_keyword_planner",
+        "volume": 590
+      }
+    },
+    "autumn outfit ideas": {
+      "decision": "rejected_low_opportunity_estimate",
+      "history": [
+        {
+          "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 23,
+          "source": "google_ads_keyword_planner",
+          "volume": 3600
+        }
+      ],
+      "latest": {
+        "ads_competition": "HIGH",
+        "difficulty": null,
+        "difficulty_note": "not measured (free mode: long-tail rule applied instead)",
+        "intent": "informational",
+        "keyword": "autumn outfit ideas",
+        "opportunity_estimate": 23,
+        "opportunity_evidence": [
+          "3-word phrase",
+          "verified volume 1k-5k"
+        ],
+        "relevance": 0.33,
+        "source": "google_ads_keyword_planner",
+        "volume": 3600
+      }
+    },
+    "barbie outfit ideas": {
+      "decision": "rejected_low_opportunity_estimate",
+      "history": [
+        {
+          "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 33,
+          "source": "google_ads_keyword_planner",
+          "volume": 480
+        }
+      ],
+      "latest": {
+        "ads_competition": "HIGH",
+        "difficulty": null,
+        "difficulty_note": "not measured (free mode: long-tail rule applied instead)",
+        "intent": "informational",
+        "keyword": "barbie outfit ideas",
+        "opportunity_estimate": 33,
+        "opportunity_evidence": [
+          "3-word phrase",
+          "verified volume 100-1,000 (modest competition likely)"
+        ],
+        "relevance": 0.33,
+        "source": "google_ads_keyword_planner",
+        "volume": 480
+      }
+    },
+    "beach outfit ideas": {
+      "decision": "rejected_low_opportunity_estimate",
+      "history": [
+        {
+          "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 33,
+          "source": "google_ads_keyword_planner",
+          "volume": 720
+        }
+      ],
+      "latest": {
+        "ads_competition": "HIGH",
+        "difficulty": null,
+        "difficulty_note": "not measured (free mode: long-tail rule applied instead)",
+        "intent": "informational",
+        "keyword": "beach outfit ideas",
+        "opportunity_estimate": 33,
+        "opportunity_evidence": [
+          "3-word phrase",
+          "verified volume 100-1,000 (modest competition likely)"
+        ],
+        "relevance": 0.33,
+        "source": "google_ads_keyword_planner",
+        "volume": 720
+      }
+    },
+    "beauty ai": {
+      "decision": "rejected_low_opportunity_estimate",
+      "history": [
+        {
+          "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 18,
+          "source": "google_ads_keyword_planner",
+          "volume": 1900
+        }
+      ],
+      "latest": {
+        "ads_competition": "LOW",
+        "difficulty": null,
+        "difficulty_note": "not measured (free mode: long-tail rule applied instead)",
+        "intent": "informational",
+        "keyword": "beauty ai",
+        "opportunity_estimate": 18,
+        "opportunity_evidence": [
+          "verified volume 1k-5k"
+        ],
+        "relevance": 0.5,
+        "source": "google_ads_keyword_planner",
+        "volume": 1900
+      }
+    },
+    "best online personal styling service": {
+      "decision": "rejected_low_volume",
+      "history": [
+        {
+          "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "commercial",
+          "opportunity_estimate": 25,
+          "source": "google_ads_keyword_planner",
+          "volume": 90
+        }
+      ],
+      "latest": {
+        "ads_competition": "HIGH",
+        "difficulty": null,
+        "difficulty_note": "not measured (free mode: long-tail rule applied instead)",
+        "intent": "commercial",
+        "keyword": "best online personal styling service",
+        "opportunity_estimate": 25,
+        "opportunity_evidence": [
+          "5+ word long-tail"
+        ],
+        "relevance": 0.0,
+        "source": "google_ads_keyword_planner",
+        "volume": 90
+      }
+    },
+    "best personal styling service": {
+      "decision": "rejected_low_opportunity_estimate",
+      "history": [
+        {
+          "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "commercial",
+          "opportunity_estimate": 40,
+          "source": "google_ads_keyword_planner",
+          "volume": 260
+        }
+      ],
+      "latest": {
+        "ads_competition": "MEDIUM",
+        "difficulty": null,
+        "difficulty_note": "not measured (free mode: long-tail rule applied instead)",
+        "intent": "commercial",
+        "keyword": "best personal styling service",
+        "opportunity_estimate": 40,
+        "opportunity_evidence": [
+          "4-word long-tail",
+          "verified volume 100-1,000 (modest competition likely)"
+        ],
+        "relevance": 0.0,
+        "source": "google_ads_keyword_planner",
+        "volume": 260
+      }
+    },
+    "birthday dinner outfit ideas": {
+      "decision": "rejected_low_opportunity_estimate",
+      "history": [
+        {
+          "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 44,
+          "source": "google_ads_keyword_planner",
+          "volume": 390
+        }
+      ],
+      "latest": {
+        "ads_competition": "HIGH",
+        "difficulty": null,
+        "difficulty_note": "not measured (free mode: long-tail rule applied instead)",
+        "intent": "informational",
+        "keyword": "birthday dinner outfit ideas",
+        "opportunity_estimate": 44,
+        "opportunity_evidence": [
+          "4-word long-tail",
+          "verified volume 100-1,000 (modest competition likely)"
+        ],
+        "relevance": 0.25,
+        "source": "google_ads_keyword_planner",
+        "volume": 390
+      }
+    },
+    "birthday dress ideas": {
+      "decision": "rejected_low_opportunity_estimate",
+      "history": [
+        {
+          "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 18,
+          "source": "google_ads_keyword_planner",
+          "volume": 2400
+        }
+      ],
+      "latest": {
+        "ads_competition": "HIGH",
+        "difficulty": null,
+        "difficulty_note": "not measured (free mode: long-tail rule applied instead)",
+        "intent": "informational",
+        "keyword": "birthday dress ideas",
+        "opportunity_estimate": 18,
+        "opportunity_evidence": [
+          "3-word phrase",
+          "verified volume 1k-5k"
+        ],
+        "relevance": 0.0,
+        "source": "google_ads_keyword_planner",
+        "volume": 2400
+      }
+    },
+    "birthday outfit ideas": {
+      "decision": "rejected_low_opportunity_estimate",
+      "history": [
+        {
+          "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 23,
+          "source": "google_ads_keyword_planner",
+          "volume": 2400
+        }
+      ],
+      "latest": {
+        "ads_competition": "HIGH",
+        "difficulty": null,
+        "difficulty_note": "not measured (free mode: long-tail rule applied instead)",
+        "intent": "informational",
+        "keyword": "birthday outfit ideas",
+        "opportunity_estimate": 23,
+        "opportunity_evidence": [
+          "3-word phrase",
+          "verified volume 1k-5k"
+        ],
+        "relevance": 0.33,
+        "source": "google_ads_keyword_planner",
+        "volume": 2400
+      }
+    },
+    "blazer outfit ideas": {
+      "decision": "rejected_low_opportunity_estimate",
+      "history": [
+        {
+          "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 33,
+          "source": "google_ads_keyword_planner",
+          "volume": 110
+        }
+      ],
+      "latest": {
+        "ads_competition": "HIGH",
+        "difficulty": null,
+        "difficulty_note": "not measured (free mode: long-tail rule applied instead)",
+        "intent": "informational",
+        "keyword": "blazer outfit ideas",
+        "opportunity_estimate": 33,
+        "opportunity_evidence": [
+          "3-word phrase",
+          "verified volume 100-1,000 (modest competition likely)"
+        ],
+        "relevance": 0.33,
+        "source": "google_ads_keyword_planner",
+        "volume": 110
+      }
+    },
+    "brunch dress ideas": {
+      "decision": "rejected_low_opportunity_estimate",
+      "history": [
+        {
+          "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 18,
+          "source": "google_ads_keyword_planner",
+          "volume": 2400
+        }
+      ],
+      "latest": {
+        "ads_competition": "HIGH",
+        "difficulty": null,
+        "difficulty_note": "not measured (free mode: long-tail rule applied instead)",
+        "intent": "informational",
+        "keyword": "brunch dress ideas",
+        "opportunity_estimate": 18,
+        "opportunity_evidence": [
+          "3-word phrase",
+          "verified volume 1k-5k"
+        ],
+        "relevance": 0.0,
+        "source": "google_ads_keyword_planner",
+        "volume": 2400
+      }
+    },
+    "brunch outfit ideas": {
+      "decision": "rejected_low_opportunity_estimate",
+      "history": [
+        {
+          "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 23,
+          "source": "google_ads_keyword_planner",
+          "volume": 2400
+        }
+      ],
+      "latest": {
+        "ads_competition": "HIGH",
+        "difficulty": null,
+        "difficulty_note": "not measured (free mode: long-tail rule applied instead)",
+        "intent": "informational",
+        "keyword": "brunch outfit ideas",
+        "opportunity_estimate": 23,
+        "opportunity_evidence": [
+          "3-word phrase",
+          "verified volume 1k-5k"
+        ],
+        "relevance": 0.33,
+        "source": "google_ads_keyword_planner",
+        "volume": 2400
+      }
+    },
+    "business casual outfit ideas female": {
+      "decision": "rejected_low_opportunity_estimate",
+      "history": [
+        {
+          "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 48,
+          "source": "google_ads_keyword_planner",
+          "volume": 170
+        }
+      ],
+      "latest": {
+        "ads_competition": "HIGH",
+        "difficulty": null,
+        "difficulty_note": "not measured (free mode: long-tail rule applied instead)",
+        "intent": "informational",
+        "keyword": "business casual outfit ideas female",
+        "opportunity_estimate": 48,
+        "opportunity_evidence": [
+          "5+ word long-tail",
+          "verified volume 100-1,000 (modest competition likely)"
+        ],
+        "relevance": 0.2,
+        "source": "google_ads_keyword_planner",
+        "volume": 170
+      }
+    },
+    "carnival outfit ideas": {
+      "decision": "rejected_low_opportunity_estimate",
+      "history": [
+        {
+          "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 33,
+          "source": "google_ads_keyword_planner",
+          "volume": 320
+        }
+      ],
+      "latest": {
+        "ads_competition": "HIGH",
+        "difficulty": null,
+        "difficulty_note": "not measured (free mode: long-tail rule applied instead)",
+        "intent": "informational",
+        "keyword": "carnival outfit ideas",
+        "opportunity_estimate": 33,
+        "opportunity_evidence": [
+          "3-word phrase",
+          "verified volume 100-1,000 (modest competition likely)"
+        ],
+        "relevance": 0.33,
+        "source": "google_ads_keyword_planner",
+        "volume": 320
+      }
+    },
+    "christmas day outfit ideas": {
+      "decision": "rejected_low_volume",
+      "history": [
+        {
+          "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 24,
+          "source": "google_ads_keyword_planner",
+          "volume": 90
+        }
+      ],
+      "latest": {
+        "ads_competition": "HIGH",
+        "difficulty": null,
+        "difficulty_note": "not measured (free mode: long-tail rule applied instead)",
+        "intent": "informational",
+        "keyword": "christmas day outfit ideas",
+        "opportunity_estimate": 24,
+        "opportunity_evidence": [
+          "4-word long-tail"
+        ],
+        "relevance": 0.25,
+        "source": "google_ads_keyword_planner",
+        "volume": 90
+      }
+    },
+    "christmas outfit ideas": {
+      "decision": "rejected_low_opportunity_estimate",
+      "history": [
+        {
+          "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 23,
+          "source": "google_ads_keyword_planner",
+          "volume": 2400
+        }
+      ],
+      "latest": {
+        "ads_competition": "HIGH",
+        "difficulty": null,
+        "difficulty_note": "not measured (free mode: long-tail rule applied instead)",
+        "intent": "informational",
+        "keyword": "christmas outfit ideas",
+        "opportunity_estimate": 23,
+        "opportunity_evidence": [
+          "3-word phrase",
+          "verified volume 1k-5k"
+        ],
+        "relevance": 0.33,
+        "source": "google_ads_keyword_planner",
+        "volume": 2400
+      }
+    },
+    "christmas party outfit ideas": {
+      "decision": "rejected_low_opportunity_estimate",
+      "history": [
+        {
+          "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 34,
+          "source": "google_ads_keyword_planner",
+          "volume": 1600
+        }
+      ],
+      "latest": {
+        "ads_competition": "HIGH",
+        "difficulty": null,
+        "difficulty_note": "not measured (free mode: long-tail rule applied instead)",
+        "intent": "informational",
+        "keyword": "christmas party outfit ideas",
+        "opportunity_estimate": 34,
+        "opportunity_evidence": [
+          "4-word long-tail",
+          "verified volume 1k-5k"
+        ],
+        "relevance": 0.25,
+        "source": "google_ads_keyword_planner",
+        "volume": 1600
+      }
+    },
+    "christmas party outfit ideas 2022": {
+      "decision": "rejected_low_volume",
+      "history": [
+        {
+          "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 28,
+          "source": "google_ads_keyword_planner",
+          "volume": 10
+        }
+      ],
+      "latest": {
+        "ads_competition": null,
+        "difficulty": null,
+        "difficulty_note": "not measured (free mode: long-tail rule applied instead)",
+        "intent": "informational",
+        "keyword": "christmas party outfit ideas 2022",
+        "opportunity_estimate": 28,
+        "opportunity_evidence": [
+          "5+ word long-tail"
+        ],
+        "relevance": 0.2,
+        "source": "google_ads_keyword_planner",
+        "volume": 10
+      }
+    },
+    "cinco de mayo outfit ideas": {
+      "decision": "rejected_low_opportunity_estimate",
+      "history": [
+        {
+          "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 48,
+          "source": "google_ads_keyword_planner",
+          "volume": 880
+        }
+      ],
+      "latest": {
+        "ads_competition": "HIGH",
+        "difficulty": null,
+        "difficulty_note": "not measured (free mode: long-tail rule applied instead)",
+        "intent": "informational",
+        "keyword": "cinco de mayo outfit ideas",
+        "opportunity_estimate": 48,
+        "opportunity_evidence": [
+          "5+ word long-tail",
+          "verified volume 100-1,000 (modest competition likely)"
+        ],
+        "relevance": 0.2,
+        "source": "google_ads_keyword_planner",
+        "volume": 880
+      }
+    },
+    "clothing like stitch fix": {
+      "decision": "rejected_low_volume",
+      "history": [
+        {
+          "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 20,
+          "source": "google_ads_keyword_planner",
+          "volume": 70
+        }
+      ],
+      "latest": {
+        "ads_competition": "HIGH",
+        "difficulty": null,
+        "difficulty_note": "not measured (free mode: long-tail rule applied instead)",
+        "intent": "informational",
+        "keyword": "clothing like stitch fix",
+        "opportunity_estimate": 20,
+        "opportunity_evidence": [
+          "4-word long-tail"
+        ],
+        "relevance": 0.0,
+        "source": "google_ads_keyword_planner",
+        "volume": 70
+      }
+    },
+    "clothing services like stitch fix": {
+      "decision": "rejected_low_volume",
+      "history": [
+        {
+          "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 25,
+          "source": "google_ads_keyword_planner",
+          "volume": 90
+        }
+      ],
+      "latest": {
+        "ads_competition": "HIGH",
+        "difficulty": null,
+        "difficulty_note": "not measured (free mode: long-tail rule applied instead)",
+        "intent": "informational",
+        "keyword": "clothing services like stitch fix",
+        "opportunity_estimate": 25,
+        "opportunity_evidence": [
+          "5+ word long-tail"
+        ],
+        "relevance": 0.0,
+        "source": "google_ads_keyword_planner",
+        "volume": 90
+      }
+    },
+    "clothing styling services": {
+      "decision": "rejected_low_opportunity_estimate",
+      "history": [
+        {
+          "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 28,
+          "source": "google_ads_keyword_planner",
+          "volume": 110
+        }
+      ],
+      "latest": {
+        "ads_competition": "MEDIUM",
+        "difficulty": null,
+        "difficulty_note": "not measured (free mode: long-tail rule applied instead)",
+        "intent": "informational",
+        "keyword": "clothing styling services",
+        "opportunity_estimate": 28,
+        "opportunity_evidence": [
+          "3-word phrase",
+          "verified volume 100-1,000 (modest competition likely)"
+        ],
+        "relevance": 0.0,
+        "source": "google_ads_keyword_planner",
+        "volume": 110
+      }
+    },
+    "clothing stylist": {
+      "decision": "rejected_low_opportunity_estimate",
+      "history": [
+        {
+          "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 28,
+          "source": "google_ads_keyword_planner",
+          "volume": 590
+        }
+      ],
+      "latest": {
+        "ads_competition": "MEDIUM",
+        "difficulty": null,
+        "difficulty_note": "not measured (free mode: long-tail rule applied instead)",
+        "intent": "informational",
+        "keyword": "clothing stylist",
+        "opportunity_estimate": 28,
+        "opportunity_evidence": [
+          "verified volume 100-1,000 (modest competition likely)"
+        ],
+        "relevance": 0.5,
+        "source": "google_ads_keyword_planner",
+        "volume": 590
+      }
+    },
+    "clothing subscription for men": {
+      "decision": "rejected_low_opportunity_estimate",
+      "history": [
+        {
+          "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 30,
+          "source": "google_ads_keyword_planner",
+          "volume": 1600
+        }
+      ],
+      "latest": {
+        "ads_competition": "HIGH",
+        "difficulty": null,
+        "difficulty_note": "not measured (free mode: long-tail rule applied instead)",
+        "intent": "informational",
+        "keyword": "clothing subscription for men",
+        "opportunity_estimate": 30,
+        "opportunity_evidence": [
+          "4-word long-tail",
+          "verified volume 1k-5k"
+        ],
+        "relevance": 0.0,
+        "source": "google_ads_keyword_planner",
+        "volume": 1600
+      }
+    },
+    "coachella outfit ideas": {
+      "decision": "rejected_low_opportunity_estimate",
+      "history": [
+        {
+          "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 33,
+          "source": "google_ads_keyword_planner",
+          "volume": 880
+        }
+      ],
+      "latest": {
+        "ads_competition": "HIGH",
+        "difficulty": null,
+        "difficulty_note": "not measured (free mode: long-tail rule applied instead)",
+        "intent": "informational",
+        "keyword": "coachella outfit ideas",
+        "opportunity_estimate": 33,
+        "opportunity_evidence": [
+          "3-word phrase",
+          "verified volume 100-1,000 (modest competition likely)"
+        ],
+        "relevance": 0.33,
+        "source": "google_ads_keyword_planner",
+        "volume": 880
+      }
+    },
+    "concert outfit ideas": {
+      "decision": "rejected_low_opportunity_estimate",
+      "history": [
+        {
+          "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 13,
+          "source": "google_ads_keyword_planner",
+          "volume": 8100
+        }
+      ],
+      "latest": {
+        "ads_competition": "HIGH",
+        "difficulty": null,
+        "difficulty_note": "not measured (free mode: long-tail rule applied instead)",
+        "intent": "informational",
+        "keyword": "concert outfit ideas",
+        "opportunity_estimate": 13,
+        "opportunity_evidence": [
+          "3-word phrase"
+        ],
+        "relevance": 0.33,
+        "source": "google_ads_keyword_planner",
+        "volume": 8100
+      }
+    },
+    "country concert outfit ideas": {
+      "decision": "rejected_low_opportunity_estimate",
+      "history": [
+        {
+          "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 34,
+          "source": "google_ads_keyword_planner",
+          "volume": 3600
+        }
+      ],
+      "latest": {
+        "ads_competition": "HIGH",
+        "difficulty": null,
+        "difficulty_note": "not measured (free mode: long-tail rule applied instead)",
+        "intent": "informational",
+        "keyword": "country concert outfit ideas",
+        "opportunity_estimate": 34,
+        "opportunity_evidence": [
+          "4-word long-tail",
+          "verified volume 1k-5k"
+        ],
+        "relevance": 0.25,
+        "source": "google_ads_keyword_planner",
+        "volume": 3600
+      }
+    },
+    "cowgirl outfit ideas": {
+      "decision": "rejected_low_opportunity_estimate",
+      "history": [
+        {
+          "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 23,
+          "source": "google_ads_keyword_planner",
+          "volume": 3600
+        }
+      ],
+      "latest": {
+        "ads_competition": "HIGH",
+        "difficulty": null,
+        "difficulty_note": "not measured (free mode: long-tail rule applied instead)",
+        "intent": "informational",
+        "keyword": "cowgirl outfit ideas",
+        "opportunity_estimate": 23,
+        "opportunity_evidence": [
+          "3-word phrase",
+          "verified volume 1k-5k"
+        ],
+        "relevance": 0.33,
+        "source": "google_ads_keyword_planner",
+        "volume": 3600
+      }
+    },
+    "cruise outfit ideas": {
+      "decision": "rejected_low_opportunity_estimate",
+      "history": [
+        {
+          "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 33,
+          "source": "google_ads_keyword_planner",
+          "volume": 880
+        }
+      ],
+      "latest": {
+        "ads_competition": "HIGH",
+        "difficulty": null,
+        "difficulty_note": "not measured (free mode: long-tail rule applied instead)",
+        "intent": "informational",
+        "keyword": "cruise outfit ideas",
+        "opportunity_estimate": 33,
+        "opportunity_evidence": [
+          "3-word phrase",
+          "verified volume 100-1,000 (modest competition likely)"
+        ],
+        "relevance": 0.33,
+        "source": "google_ads_keyword_planner",
+        "volume": 880
+      }
+    },
+    "cute date night outfits": {
+      "decision": "rejected_low_opportunity_estimate",
+      "history": [
+        {
+          "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 34,
+          "source": "google_ads_keyword_planner",
+          "volume": 1600
+        }
+      ],
+      "latest": {
+        "ads_competition": "HIGH",
+        "difficulty": null,
+        "difficulty_note": "not measured (free mode: long-tail rule applied instead)",
+        "intent": "informational",
+        "keyword": "cute date night outfits",
+        "opportunity_estimate": 34,
+        "opportunity_evidence": [
+          "4-word long-tail",
+          "verified volume 1k-5k"
+        ],
+        "relevance": 0.25,
+        "source": "google_ads_keyword_planner",
+        "volume": 1600
+      }
+    },
+    "cute date outfits": {
+      "decision": "rejected_low_opportunity_estimate",
+      "history": [
+        {
+          "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 33,
+          "source": "google_ads_keyword_planner",
+          "volume": 1000
+        }
+      ],
+      "latest": {
+        "ads_competition": "HIGH",
+        "difficulty": null,
+        "difficulty_note": "not measured (free mode: long-tail rule applied instead)",
+        "intent": "informational",
+        "keyword": "cute date outfits",
+        "opportunity_estimate": 33,
+        "opportunity_evidence": [
+          "3-word phrase",
+          "verified volume 100-1,000 (modest competition likely)"
+        ],
+        "relevance": 0.33,
+        "source": "google_ads_keyword_planner",
+        "volume": 1000
+      }
+    },
+    "cute outfit": {
+      "decision": "rejected_low_opportunity_estimate",
+      "history": [
+        {
+          "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 8,
+          "source": "google_ads_keyword_planner",
+          "volume": 40500
+        }
+      ],
+      "latest": {
+        "ads_competition": "HIGH",
+        "difficulty": null,
+        "difficulty_note": "not measured (free mode: long-tail rule applied instead)",
+        "intent": "informational",
+        "keyword": "cute outfit",
+        "opportunity_estimate": 8,
+        "opportunity_evidence": [],
+        "relevance": 0.5,
+        "source": "google_ads_keyword_planner",
+        "volume": 40500
+      }
+    },
+    "cute outfit ideas": {
+      "decision": "rejected_low_opportunity_estimate",
+      "history": [
+        {
+          "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 13,
+          "source": "google_ads_keyword_planner",
+          "volume": 6600
+        }
+      ],
+      "latest": {
+        "ads_competition": "MEDIUM",
+        "difficulty": null,
+        "difficulty_note": "not measured (free mode: long-tail rule applied instead)",
+        "intent": "informational",
+        "keyword": "cute outfit ideas",
+        "opportunity_estimate": 13,
+        "opportunity_evidence": [
+          "3-word phrase"
+        ],
+        "relevance": 0.33,
+        "source": "google_ads_keyword_planner",
+        "volume": 6600
+      }
+    },
+    "cute thanksgiving outfits": {
+      "decision": "rejected_low_opportunity_estimate",
+      "history": [
+        {
+          "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 23,
+          "source": "google_ads_keyword_planner",
+          "volume": 2900
+        }
+      ],
+      "latest": {
+        "ads_competition": "HIGH",
+        "difficulty": null,
+        "difficulty_note": "not measured (free mode: long-tail rule applied instead)",
+        "intent": "informational",
+        "keyword": "cute thanksgiving outfits",
+        "opportunity_estimate": 23,
+        "opportunity_evidence": [
+          "3-word phrase",
+          "verified volume 1k-5k"
+        ],
+        "relevance": 0.33,
+        "source": "google_ads_keyword_planner",
+        "volume": 2900
+      }
+    },
+    "date night dress ideas": {
+      "decision": "rejected_low_opportunity_estimate",
+      "history": [
+        {
+          "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 30,
+          "source": "google_ads_keyword_planner",
+          "volume": 1600
+        }
+      ],
+      "latest": {
+        "ads_competition": "HIGH",
+        "difficulty": null,
+        "difficulty_note": "not measured (free mode: long-tail rule applied instead)",
+        "intent": "informational",
+        "keyword": "date night dress ideas",
+        "opportunity_estimate": 30,
+        "opportunity_evidence": [
+          "4-word long-tail",
+          "verified volume 1k-5k"
+        ],
+        "relevance": 0.0,
+        "source": "google_ads_keyword_planner",
+        "volume": 1600
+      }
+    },
+    "date night outfit ideas": {
+      "decision": "rejected_low_opportunity_estimate",
+      "history": [
+        {
+          "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 34,
+          "source": "google_ads_keyword_planner",
+          "volume": 1600
+        }
+      ],
+      "latest": {
+        "ads_competition": "HIGH",
+        "difficulty": null,
+        "difficulty_note": "not measured (free mode: long-tail rule applied instead)",
+        "intent": "informational",
+        "keyword": "date night outfit ideas",
+        "opportunity_estimate": 34,
+        "opportunity_evidence": [
+          "4-word long-tail",
+          "verified volume 1k-5k"
+        ],
+        "relevance": 0.25,
+        "source": "google_ads_keyword_planner",
+        "volume": 1600
+      }
+    },
+    "date outfit": {
+      "decision": "rejected_low_opportunity_estimate",
+      "history": [
+        {
+          "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 18,
+          "source": "google_ads_keyword_planner",
+          "volume": 1900
+        }
+      ],
+      "latest": {
+        "ads_competition": "HIGH",
+        "difficulty": null,
+        "difficulty_note": "not measured (free mode: long-tail rule applied instead)",
+        "intent": "informational",
+        "keyword": "date outfit",
+        "opportunity_estimate": 18,
+        "opportunity_evidence": [
+          "verified volume 1k-5k"
+        ],
+        "relevance": 0.5,
+        "source": "google_ads_keyword_planner",
+        "volume": 1900
+      }
+    },
+    "date outfit ideas": {
+      "decision": "rejected_low_opportunity_estimate",
+      "history": [
+        {
+          "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 33,
+          "source": "google_ads_keyword_planner",
+          "volume": 590
+        }
+      ],
+      "latest": {
+        "ads_competition": "HIGH",
+        "difficulty": null,
+        "difficulty_note": "not measured (free mode: long-tail rule applied instead)",
+        "intent": "informational",
+        "keyword": "date outfit ideas",
+        "opportunity_estimate": 33,
+        "opportunity_evidence": [
+          "3-word phrase",
+          "verified volume 100-1,000 (modest competition likely)"
+        ],
+        "relevance": 0.33,
+        "source": "google_ads_keyword_planner",
+        "volume": 590
+      }
+    },
+    "dinner outfit ideas": {
+      "decision": "rejected_low_opportunity_estimate",
+      "history": [
+        {
+          "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 33,
+          "source": "google_ads_keyword_planner",
+          "volume": 480
+        }
+      ],
+      "latest": {
+        "ads_competition": "HIGH",
+        "difficulty": null,
+        "difficulty_note": "not measured (free mode: long-tail rule applied instead)",
+        "intent": "informational",
+        "keyword": "dinner outfit ideas",
+        "opportunity_estimate": 33,
+        "opportunity_evidence": [
+          "3-word phrase",
+          "verified volume 100-1,000 (modest competition likely)"
+        ],
+        "relevance": 0.33,
+        "source": "google_ads_keyword_planner",
+        "volume": 480
+      }
+    },
+    "disco outfit ideas": {
+      "decision": "rejected_low_opportunity_estimate",
+      "history": [
+        {
+          "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 33,
+          "source": "google_ads_keyword_planner",
+          "volume": 720
+        }
+      ],
+      "latest": {
+        "ads_competition": "HIGH",
+        "difficulty": null,
+        "difficulty_note": "not measured (free mode: long-tail rule applied instead)",
+        "intent": "informational",
+        "keyword": "disco outfit ideas",
+        "opportunity_estimate": 33,
+        "opportunity_evidence": [
+          "3-word phrase",
+          "verified volume 100-1,000 (modest competition likely)"
+        ],
+        "relevance": 0.33,
+        "source": "google_ads_keyword_planner",
+        "volume": 720
+      }
+    },
+    "disco theme dress": {
+      "decision": "rejected_low_opportunity_estimate",
+      "history": [
+        {
+          "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 28,
+          "source": "google_ads_keyword_planner",
+          "volume": 880
+        }
+      ],
+      "latest": {
+        "ads_competition": "HIGH",
+        "difficulty": null,
+        "difficulty_note": "not measured (free mode: long-tail rule applied instead)",
+        "intent": "informational",
+        "keyword": "disco theme dress",
+        "opportunity_estimate": 28,
+        "opportunity_evidence": [
+          "3-word phrase",
+          "verified volume 100-1,000 (modest competition likely)"
+        ],
+        "relevance": 0.0,
+        "source": "google_ads_keyword_planner",
+        "volume": 880
+      }
+    },
+    "disco theme outfits": {
+      "decision": "rejected_low_opportunity_estimate",
+      "history": [
+        {
+          "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 23,
+          "source": "google_ads_keyword_planner",
+          "volume": 3600
+        }
+      ],
+      "latest": {
+        "ads_competition": "HIGH",
+        "difficulty": null,
+        "difficulty_note": "not measured (free mode: long-tail rule applied instead)",
+        "intent": "informational",
+        "keyword": "disco theme outfits",
+        "opportunity_estimate": 23,
+        "opportunity_evidence": [
+          "3-word phrase",
+          "verified volume 1k-5k"
+        ],
+        "relevance": 0.33,
+        "source": "google_ads_keyword_planner",
+        "volume": 3600
+      }
+    },
+    "disco theme party outfits": {
+      "decision": "rejected_low_opportunity_estimate",
+      "history": [
+        {
+          "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 44,
+          "source": "google_ads_keyword_planner",
+          "volume": 880
+        }
+      ],
+      "latest": {
+        "ads_competition": "HIGH",
+        "difficulty": null,
+        "difficulty_note": "not measured (free mode: long-tail rule applied instead)",
+        "intent": "informational",
+        "keyword": "disco theme party outfits",
+        "opportunity_estimate": 44,
+        "opportunity_evidence": [
+          "4-word long-tail",
+          "verified volume 100-1,000 (modest competition likely)"
+        ],
+        "relevance": 0.25,
+        "source": "google_ads_keyword_planner",
+        "volume": 880
+      }
+    },
+    "edc outfit ideas": {
+      "decision": "rejected_low_opportunity_estimate",
+      "history": [
+        {
+          "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 33,
+          "source": "google_ads_keyword_planner",
+          "volume": 480
+        }
+      ],
+      "latest": {
+        "ads_competition": "HIGH",
+        "difficulty": null,
+        "difficulty_note": "not measured (free mode: long-tail rule applied instead)",
+        "intent": "informational",
+        "keyword": "edc outfit ideas",
+        "opportunity_estimate": 33,
+        "opportunity_evidence": [
+          "3-word phrase",
+          "verified volume 100-1,000 (modest competition likely)"
+        ],
+        "relevance": 0.33,
+        "source": "google_ads_keyword_planner",
+        "volume": 480
+      }
+    },
+    "eras tour outfit ideas": {
+      "decision": "rejected_low_opportunity_estimate",
+      "history": [
+        {
+          "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 44,
+          "source": "google_ads_keyword_planner",
+          "volume": 170
+        }
+      ],
+      "latest": {
+        "ads_competition": "HIGH",
+        "difficulty": null,
+        "difficulty_note": "not measured (free mode: long-tail rule applied instead)",
+        "intent": "informational",
+        "keyword": "eras tour outfit ideas",
+        "opportunity_estimate": 44,
+        "opportunity_evidence": [
+          "4-word long-tail",
+          "verified volume 100-1,000 (modest competition likely)"
+        ],
+        "relevance": 0.25,
+        "source": "google_ads_keyword_planner",
+        "volume": 170
+      }
+    },
+    "fall outfit ideas": {
+      "decision": "rejected_low_opportunity_estimate",
+      "history": [
+        {
+          "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 23,
+          "source": "google_ads_keyword_planner",
+          "volume": 3600
+        }
+      ],
+      "latest": {
+        "ads_competition": "HIGH",
+        "difficulty": null,
+        "difficulty_note": "not measured (free mode: long-tail rule applied instead)",
+        "intent": "informational",
+        "keyword": "fall outfit ideas",
+        "opportunity_estimate": 23,
+        "opportunity_evidence": [
+          "3-word phrase",
+          "verified volume 1k-5k"
+        ],
+        "relevance": 0.33,
+        "source": "google_ads_keyword_planner",
+        "volume": 3600
+      }
+    },
+    "fall outfit ideas 2022": {
+      "decision": "rejected_low_volume",
+      "history": [
+        {
+          "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 24,
+          "source": "google_ads_keyword_planner",
+          "volume": 10
+        }
+      ],
+      "latest": {
+        "ads_competition": null,
+        "difficulty": null,
+        "difficulty_note": "not measured (free mode: long-tail rule applied instead)",
+        "intent": "informational",
+        "keyword": "fall outfit ideas 2022",
+        "opportunity_estimate": 24,
+        "opportunity_evidence": [
+          "4-word long-tail"
+        ],
+        "relevance": 0.25,
+        "source": "google_ads_keyword_planner",
+        "volume": 10
+      }
+    },
+    "fashion advisor": {
+      "decision": "rejected_low_opportunity_estimate",
+      "history": [
+        {
+          "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 28,
+          "source": "google_ads_keyword_planner",
+          "volume": 210
+        }
+      ],
+      "latest": {
+        "ads_competition": "LOW",
+        "difficulty": null,
+        "difficulty_note": "not measured (free mode: long-tail rule applied instead)",
+        "intent": "informational",
+        "keyword": "fashion advisor",
+        "opportunity_estimate": 28,
+        "opportunity_evidence": [
+          "verified volume 100-1,000 (modest competition likely)"
+        ],
+        "relevance": 0.5,
+        "source": "google_ads_keyword_planner",
+        "volume": 210
+      }
+    },
+    "fashion ai": {
+      "decision": "rejected_low_opportunity_estimate",
+      "history": [
+        {
+          "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 25,
+          "source": "google_ads_keyword_planner",
+          "volume": 1600
+        }
+      ],
+      "latest": {
+        "ads_competition": "MEDIUM",
+        "difficulty": null,
+        "difficulty_note": "not measured (free mode: long-tail rule applied instead)",
+        "intent": "informational",
+        "keyword": "fashion ai",
+        "opportunity_estimate": 25,
+        "opportunity_evidence": [
+          "verified volume 1k-5k"
+        ],
+        "relevance": 1.0,
+        "source": "google_ads_keyword_planner",
+        "volume": 1600
+      }
+    },
+    "fashion consultant": {
+      "decision": "rejected_low_opportunity_estimate",
+      "history": [
+        {
+          "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 28,
+          "source": "google_ads_keyword_planner",
+          "volume": 880
+        }
+      ],
+      "latest": {
+        "ads_competition": "LOW",
+        "difficulty": null,
+        "difficulty_note": "not measured (free mode: long-tail rule applied instead)",
+        "intent": "informational",
+        "keyword": "fashion consultant",
+        "opportunity_estimate": 28,
+        "opportunity_evidence": [
+          "verified volume 100-1,000 (modest competition likely)"
+        ],
+        "relevance": 0.5,
+        "source": "google_ads_keyword_planner",
+        "volume": 880
+      }
+    },
+    "fashion ideas for women": {
+      "decision": "rejected_low_opportunity_estimate",
+      "history": [
+        {
+          "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 45,
+          "source": "google_ads_keyword_planner",
+          "volume": 390
+        }
+      ],
+      "latest": {
+        "ads_competition": "HIGH",
+        "difficulty": null,
+        "difficulty_note": "not measured (free mode: long-tail rule applied instead)",
+        "intent": "informational",
+        "keyword": "fashion ideas for women",
+        "opportunity_estimate": 45,
+        "opportunity_evidence": [
+          "4-word long-tail",
+          "verified volume 100-1,000 (modest competition likely)"
+        ],
+        "relevance": 0.33,
+        "source": "google_ads_keyword_planner",
+        "volume": 390
+      }
+    },
+    "festival outfit ideas": {
+      "decision": "rejected_low_opportunity_estimate",
+      "history": [
+        {
+          "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 33,
+          "source": "google_ads_keyword_planner",
+          "volume": 480
+        }
+      ],
+      "latest": {
+        "ads_competition": "HIGH",
+        "difficulty": null,
+        "difficulty_note": "not measured (free mode: long-tail rule applied instead)",
+        "intent": "informational",
+        "keyword": "festival outfit ideas",
+        "opportunity_estimate": 33,
+        "opportunity_evidence": [
+          "3-word phrase",
+          "verified volume 100-1,000 (modest competition likely)"
+        ],
+        "relevance": 0.33,
+        "source": "google_ads_keyword_planner",
+        "volume": 480
+      }
+    },
+    "find my style": {
+      "decision": "rejected_low_opportunity_estimate",
+      "history": [
+        {
+          "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 26,
+          "source": "google_ads_keyword_planner",
+          "volume": 1300
+        }
+      ],
+      "latest": {
+        "ads_competition": "MEDIUM",
+        "difficulty": null,
+        "difficulty_note": "not measured (free mode: long-tail rule applied instead)",
+        "intent": "informational",
+        "keyword": "find my style",
+        "opportunity_estimate": 26,
+        "opportunity_evidence": [
+          "3-word phrase",
+          "verified volume 1k-5k"
+        ],
+        "relevance": 0.5,
+        "source": "google_ads_keyword_planner",
+        "volume": 1300
+      }
+    },
+    "finding your style": {
+      "decision": "rejected_low_opportunity_estimate",
+      "history": [
+        {
+          "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 26,
+          "source": "google_ads_keyword_planner",
+          "volume": 1300
+        }
+      ],
+      "latest": {
+        "ads_competition": "MEDIUM",
+        "difficulty": null,
+        "difficulty_note": "not measured (free mode: long-tail rule applied instead)",
+        "intent": "informational",
+        "keyword": "finding your style",
+        "opportunity_estimate": 26,
+        "opportunity_evidence": [
+          "3-word phrase",
+          "verified volume 1k-5k"
+        ],
+        "relevance": 0.5,
+        "source": "google_ads_keyword_planner",
+        "volume": 1300
+      }
+    },
+    "first date outfit ideas": {
+      "decision": "rejected_low_opportunity_estimate",
+      "history": [
+        {
+          "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 34,
+          "source": "google_ads_keyword_planner",
+          "volume": 1900
+        }
+      ],
+      "latest": {
+        "ads_competition": "HIGH",
+        "difficulty": null,
+        "difficulty_note": "not measured (free mode: long-tail rule applied instead)",
+        "intent": "informational",
+        "keyword": "first date outfit ideas",
+        "opportunity_estimate": 34,
+        "opportunity_evidence": [
+          "4-word long-tail",
+          "verified volume 1k-5k"
+        ],
+        "relevance": 0.25,
+        "source": "google_ads_keyword_planner",
+        "volume": 1900
+      }
+    },
+    "freaknik outfit ideas": {
+      "decision": "rejected_low_opportunity_estimate",
+      "history": [
+        {
+          "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 33,
+          "source": "google_ads_keyword_planner",
+          "volume": 1000
+        }
+      ],
+      "latest": {
+        "ads_competition": "HIGH",
+        "difficulty": null,
+        "difficulty_note": "not measured (free mode: long-tail rule applied instead)",
+        "intent": "informational",
+        "keyword": "freaknik outfit ideas",
+        "opportunity_estimate": 33,
+        "opportunity_evidence": [
+          "3-word phrase",
+          "verified volume 100-1,000 (modest competition likely)"
+        ],
+        "relevance": 0.33,
+        "source": "google_ads_keyword_planner",
+        "volume": 1000
+      }
+    },
+    "gatsby theme outfit": {
+      "decision": "rejected_low_opportunity_estimate",
+      "history": [
+        {
+          "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 23,
+          "source": "google_ads_keyword_planner",
+          "volume": 1300
+        }
+      ],
+      "latest": {
+        "ads_competition": "HIGH",
+        "difficulty": null,
+        "difficulty_note": "not measured (free mode: long-tail rule applied instead)",
+        "intent": "informational",
+        "keyword": "gatsby theme outfit",
+        "opportunity_estimate": 23,
+        "opportunity_evidence": [
+          "3-word phrase",
+          "verified volume 1k-5k"
+        ],
+        "relevance": 0.33,
+        "source": "google_ads_keyword_planner",
+        "volume": 1300
+      }
+    },
+    "going out outfit ideas": {
+      "decision": "rejected_low_opportunity_estimate",
+      "history": [
+        {
+          "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 44,
+          "source": "google_ads_keyword_planner",
+          "volume": 260
+        }
+      ],
+      "latest": {
+        "ads_competition": "HIGH",
+        "difficulty": null,
+        "difficulty_note": "not measured (free mode: long-tail rule applied instead)",
+        "intent": "informational",
+        "keyword": "going out outfit ideas",
+        "opportunity_estimate": 44,
+        "opportunity_evidence": [
+          "4-word long-tail",
+          "verified volume 100-1,000 (modest competition likely)"
+        ],
+        "relevance": 0.25,
+        "source": "google_ads_keyword_planner",
+        "volume": 260
+      }
+    },
+    "graduation outfits": {
+      "decision": "rejected_low_opportunity_estimate",
+      "history": [
+        {
+          "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 8,
+          "source": "google_ads_keyword_planner",
+          "volume": 6600
+        }
+      ],
+      "latest": {
+        "ads_competition": "HIGH",
+        "difficulty": null,
+        "difficulty_note": "not measured (free mode: long-tail rule applied instead)",
+        "intent": "informational",
+        "keyword": "graduation outfits",
+        "opportunity_estimate": 8,
+        "opportunity_evidence": [],
+        "relevance": 0.5,
+        "source": "google_ads_keyword_planner",
+        "volume": 6600
+      }
+    },
+    "green outfit ideas": {
+      "decision": "rejected_low_opportunity_estimate",
+      "history": [
+        {
+          "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 33,
+          "source": "google_ads_keyword_planner",
+          "volume": 210
+        }
+      ],
+      "latest": {
+        "ads_competition": "HIGH",
+        "difficulty": null,
+        "difficulty_note": "not measured (free mode: long-tail rule applied instead)",
+        "intent": "informational",
+        "keyword": "green outfit ideas",
+        "opportunity_estimate": 33,
+        "opportunity_evidence": [
+          "3-word phrase",
+          "verified volume 100-1,000 (modest competition likely)"
+        ],
+        "relevance": 0.33,
+        "source": "google_ads_keyword_planner",
+        "volume": 210
+      }
+    },
+    "hairstyle try on": {
+      "decision": "rejected_low_opportunity_estimate",
+      "history": [
+        {
+          "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 16,
+          "source": "google_ads_keyword_planner",
+          "volume": 9900
+        }
+      ],
+      "latest": {
+        "ads_competition": "MEDIUM",
+        "difficulty": null,
+        "difficulty_note": "not measured (free mode: long-tail rule applied instead)",
+        "intent": "informational",
+        "keyword": "hairstyle try on",
+        "opportunity_estimate": 16,
+        "opportunity_evidence": [
+          "3-word phrase"
+        ],
+        "relevance": 0.5,
+        "source": "google_ads_keyword_planner",
+        "volume": 9900
+      }
+    },
+    "hairstyle try on app": {
+      "decision": "rejected_low_opportunity_estimate",
+      "history": [
+        {
+          "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "commercial",
+          "opportunity_estimate": 38,
+          "source": "google_ads_keyword_planner",
+          "volume": 1900
+        }
+      ],
+      "latest": {
+        "ads_competition": "MEDIUM",
+        "difficulty": null,
+        "difficulty_note": "not measured (free mode: long-tail rule applied instead)",
+        "intent": "commercial",
+        "keyword": "hairstyle try on app",
+        "opportunity_estimate": 38,
+        "opportunity_evidence": [
+          "4-word long-tail",
+          "verified volume 1k-5k"
+        ],
+        "relevance": 0.5,
+        "source": "google_ads_keyword_planner",
+        "volume": 1900
+      }
+    },
+    "halloween outfit ideas": {
+      "decision": "rejected_low_opportunity_estimate",
+      "history": [
+        {
+          "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 23,
+          "source": "google_ads_keyword_planner",
+          "volume": 1900
+        }
+      ],
+      "latest": {
+        "ads_competition": "MEDIUM",
+        "difficulty": null,
+        "difficulty_note": "not measured (free mode: long-tail rule applied instead)",
+        "intent": "informational",
+        "keyword": "halloween outfit ideas",
+        "opportunity_estimate": 23,
+        "opportunity_evidence": [
+          "3-word phrase",
+          "verified volume 1k-5k"
+        ],
+        "relevance": 0.33,
+        "source": "google_ads_keyword_planner",
+        "volume": 1900
+      }
+    },
+    "halloween outfits women": {
+      "decision": "rejected_low_opportunity_estimate",
+      "history": [
+        {
+          "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 23,
+          "source": "google_ads_keyword_planner",
+          "volume": 1600
+        }
+      ],
+      "latest": {
+        "ads_competition": "HIGH",
+        "difficulty": null,
+        "difficulty_note": "not measured (free mode: long-tail rule applied instead)",
+        "intent": "informational",
+        "keyword": "halloween outfits women",
+        "opportunity_estimate": 23,
+        "opportunity_evidence": [
+          "3-word phrase",
+          "verified volume 1k-5k"
+        ],
+        "relevance": 0.33,
+        "source": "google_ads_keyword_planner",
+        "volume": 1600
+      }
+    },
+    "harry styles concert outfits": {
+      "decision": "rejected_low_opportunity_estimate",
+      "history": [
+        {
+          "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 38,
+          "source": "google_ads_keyword_planner",
+          "volume": 4400
+        }
+      ],
+      "latest": {
+        "ads_competition": "HIGH",
+        "difficulty": null,
+        "difficulty_note": "not measured (free mode: long-tail rule applied instead)",
+        "intent": "informational",
+        "keyword": "harry styles concert outfits",
+        "opportunity_estimate": 38,
+        "opportunity_evidence": [
+          "4-word long-tail",
+          "verified volume 1k-5k"
+        ],
+        "relevance": 0.5,
+        "source": "google_ads_keyword_planner",
+        "volume": 4400
+      }
+    },
+    "hawaiian party outfit ideas female": {
+      "decision": "rejected_low_opportunity_estimate",
+      "history": [
+        {
+          "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 48,
+          "source": "google_ads_keyword_planner",
+          "volume": 320
+        }
+      ],
+      "latest": {
+        "ads_competition": "HIGH",
+        "difficulty": null,
+        "difficulty_note": "not measured (free mode: long-tail rule applied instead)",
+        "intent": "informational",
+        "keyword": "hawaiian party outfit ideas female",
+        "opportunity_estimate": 48,
+        "opportunity_evidence": [
+          "5+ word long-tail",
+          "verified volume 100-1,000 (modest competition likely)"
+        ],
+        "relevance": 0.2,
+        "source": "google_ads_keyword_planner",
+        "volume": 320
+      }
+    },
+    "hawaiian theme dress": {
+      "decision": "rejected_low_opportunity_estimate",
+      "history": [
+        {
+          "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 28,
+          "source": "google_ads_keyword_planner",
+          "volume": 590
+        }
+      ],
+      "latest": {
+        "ads_competition": "HIGH",
+        "difficulty": null,
+        "difficulty_note": "not measured (free mode: long-tail rule applied instead)",
+        "intent": "informational",
+        "keyword": "hawaiian theme dress",
+        "opportunity_estimate": 28,
+        "opportunity_evidence": [
+          "3-word phrase",
+          "verified volume 100-1,000 (modest competition likely)"
+        ],
+        "relevance": 0.0,
+        "source": "google_ads_keyword_planner",
+        "volume": 590
+      }
+    },
+    "hawaiian theme outfit": {
+      "decision": "rejected_low_opportunity_estimate",
+      "history": [
+        {
+          "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 23,
+          "source": "google_ads_keyword_planner",
+          "volume": 1900
+        }
+      ],
+      "latest": {
+        "ads_competition": "HIGH",
+        "difficulty": null,
+        "difficulty_note": "not measured (free mode: long-tail rule applied instead)",
+        "intent": "informational",
+        "keyword": "hawaiian theme outfit",
+        "opportunity_estimate": 23,
+        "opportunity_evidence": [
+          "3-word phrase",
+          "verified volume 1k-5k"
+        ],
+        "relevance": 0.33,
+        "source": "google_ads_keyword_planner",
+        "volume": 1900
+      }
+    },
+    "hawaiian theme party outfit": {
+      "decision": "rejected_low_opportunity_estimate",
+      "history": [
+        {
+          "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 44,
+          "source": "google_ads_keyword_planner",
+          "volume": 880
+        }
+      ],
+      "latest": {
+        "ads_competition": "HIGH",
+        "difficulty": null,
+        "difficulty_note": "not measured (free mode: long-tail rule applied instead)",
+        "intent": "informational",
+        "keyword": "hawaiian theme party outfit",
+        "opportunity_estimate": 44,
+        "opportunity_evidence": [
+          "4-word long-tail",
+          "verified volume 100-1,000 (modest competition likely)"
+        ],
+        "relevance": 0.25,
+        "source": "google_ads_keyword_planner",
+        "volume": 880
+      }
+    },
+    "holiday outfit ideas": {
+      "decision": "rejected_low_opportunity_estimate",
+      "history": [
+        {
+          "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 33,
+          "source": "google_ads_keyword_planner",
+          "volume": 480
+        }
+      ],
+      "latest": {
+        "ads_competition": "HIGH",
+        "difficulty": null,
+        "difficulty_note": "not measured (free mode: long-tail rule applied instead)",
+        "intent": "informational",
+        "keyword": "holiday outfit ideas",
+        "opportunity_estimate": 33,
+        "opportunity_evidence": [
+          "3-word phrase",
+          "verified volume 100-1,000 (modest competition likely)"
+        ],
+        "relevance": 0.33,
+        "source": "google_ads_keyword_planner",
+        "volume": 480
+      }
+    },
+    "holiday party outfit ideas": {
+      "decision": "rejected_low_opportunity_estimate",
+      "history": [
+        {
+          "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 44,
+          "source": "google_ads_keyword_planner",
+          "volume": 480
+        }
+      ],
+      "latest": {
+        "ads_competition": "LOW",
+        "difficulty": null,
+        "difficulty_note": "not measured (free mode: long-tail rule applied instead)",
+        "intent": "informational",
+        "keyword": "holiday party outfit ideas",
+        "opportunity_estimate": 44,
+        "opportunity_evidence": [
+          "4-word long-tail",
+          "verified volume 100-1,000 (modest competition likely)"
+        ],
+        "relevance": 0.25,
+        "source": "google_ads_keyword_planner",
+        "volume": 480
+      }
+    },
+    "hot pink outfit ideas": {
+      "decision": "rejected_low_opportunity_estimate",
+      "history": [
+        {
+          "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 44,
+          "source": "google_ads_keyword_planner",
+          "volume": 210
+        }
+      ],
+      "latest": {
+        "ads_competition": "LOW",
+        "difficulty": null,
+        "difficulty_note": "not measured (free mode: long-tail rule applied instead)",
+        "intent": "informational",
+        "keyword": "hot pink outfit ideas",
+        "opportunity_estimate": 44,
+        "opportunity_evidence": [
+          "4-word long-tail",
+          "verified volume 100-1,000 (modest competition likely)"
+        ],
+        "relevance": 0.25,
+        "source": "google_ads_keyword_planner",
+        "volume": 210
+      }
+    },
+    "i need a stylist": {
+      "decision": "rejected_low_opportunity_estimate",
+      "history": [
+        {
+          "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 48,
+          "source": "google_ads_keyword_planner",
+          "volume": 110
+        }
+      ],
+      "latest": {
+        "ads_competition": "MEDIUM",
+        "difficulty": null,
+        "difficulty_note": "not measured (free mode: long-tail rule applied instead)",
+        "intent": "informational",
+        "keyword": "i need a stylist",
+        "opportunity_estimate": 48,
+        "opportunity_evidence": [
+          "4-word long-tail",
+          "verified volume 100-1,000 (modest competition likely)"
+        ],
+        "relevance": 0.5,
+        "source": "google_ads_keyword_planner",
+        "volume": 110
+      }
+    },
+    "luau outfit ideas": {
+      "decision": "rejected_low_opportunity_estimate",
+      "history": [
+        {
+          "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 33,
+          "source": "google_ads_keyword_planner",
+          "volume": 390
+        }
+      ],
+      "latest": {
+        "ads_competition": "HIGH",
+        "difficulty": null,
+        "difficulty_note": "not measured (free mode: long-tail rule applied instead)",
+        "intent": "informational",
+        "keyword": "luau outfit ideas",
+        "opportunity_estimate": 33,
+        "opportunity_evidence": [
+          "3-word phrase",
+          "verified volume 100-1,000 (modest competition likely)"
+        ],
+        "relevance": 0.33,
+        "source": "google_ads_keyword_planner",
+        "volume": 390
+      }
+    },
+    "makeup ai": {
+      "decision": "rejected_low_opportunity_estimate",
+      "history": [
+        {
+          "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 35,
+          "source": "google_ads_keyword_planner",
+          "volume": 320
+        }
+      ],
+      "latest": {
+        "ads_competition": "MEDIUM",
+        "difficulty": null,
+        "difficulty_note": "not measured (free mode: long-tail rule applied instead)",
+        "intent": "informational",
+        "keyword": "makeup ai",
+        "opportunity_estimate": 35,
+        "opportunity_evidence": [
+          "verified volume 100-1,000 (modest competition likely)"
+        ],
+        "relevance": 1.0,
+        "source": "google_ads_keyword_planner",
+        "volume": 320
+      }
+    },
+    "mardi gras dress ideas": {
+      "decision": "rejected_low_opportunity_estimate",
+      "history": [
+        {
+          "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 40,
+          "source": "google_ads_keyword_planner",
+          "volume": 260
+        }
+      ],
+      "latest": {
+        "ads_competition": "HIGH",
+        "difficulty": null,
+        "difficulty_note": "not measured (free mode: long-tail rule applied instead)",
+        "intent": "informational",
+        "keyword": "mardi gras dress ideas",
+        "opportunity_estimate": 40,
+        "opportunity_evidence": [
+          "4-word long-tail",
+          "verified volume 100-1,000 (modest competition likely)"
+        ],
+        "relevance": 0.0,
+        "source": "google_ads_keyword_planner",
+        "volume": 260
+      }
+    },
+    "mardi gras outfit ideas": {
+      "decision": "rejected_low_opportunity_estimate",
+      "history": [
+        {
+          "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 34,
+          "source": "google_ads_keyword_planner",
+          "volume": 1900
+        }
+      ],
+      "latest": {
+        "ads_competition": "HIGH",
+        "difficulty": null,
+        "difficulty_note": "not measured (free mode: long-tail rule applied instead)",
+        "intent": "informational",
+        "keyword": "mardi gras outfit ideas",
+        "opportunity_estimate": 34,
+        "opportunity_evidence": [
+          "4-word long-tail",
+          "verified volume 1k-5k"
+        ],
+        "relevance": 0.25,
+        "source": "google_ads_keyword_planner",
+        "volume": 1900
+      }
+    },
+    "maternity outfit ideas": {
+      "decision": "rejected_low_opportunity_estimate",
+      "history": [
+        {
+          "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 33,
+          "source": "google_ads_keyword_planner",
+          "volume": 880
+        }
+      ],
+      "latest": {
+        "ads_competition": "HIGH",
+        "difficulty": null,
+        "difficulty_note": "not measured (free mode: long-tail rule applied instead)",
+        "intent": "informational",
+        "keyword": "maternity outfit ideas",
+        "opportunity_estimate": 33,
+        "opportunity_evidence": [
+          "3-word phrase",
+          "verified volume 100-1,000 (modest competition likely)"
+        ],
+        "relevance": 0.33,
+        "source": "google_ads_keyword_planner",
+        "volume": 880
+      }
+    },
+    "men's clothing stylist": {
+      "decision": "rejected_low_opportunity_estimate",
+      "history": [
+        {
+          "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 33,
+          "source": "google_ads_keyword_planner",
+          "volume": 110
+        }
+      ],
+      "latest": {
+        "ads_competition": "HIGH",
+        "difficulty": null,
+        "difficulty_note": "not measured (free mode: long-tail rule applied instead)",
+        "intent": "informational",
+        "keyword": "men's clothing stylist",
+        "opportunity_estimate": 33,
+        "opportunity_evidence": [
+          "3-word phrase",
+          "verified volume 100-1,000 (modest competition likely)"
+        ],
+        "relevance": 0.33,
+        "source": "google_ads_keyword_planner",
+        "volume": 110
+      }
+    },
+    "men's personal stylist online": {
+      "decision": "rejected_low_volume",
+      "history": [
+        {
+          "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 25,
+          "source": "google_ads_keyword_planner",
+          "volume": 20
+        }
+      ],
+      "latest": {
+        "ads_competition": "MEDIUM",
+        "difficulty": null,
+        "difficulty_note": "not measured (free mode: long-tail rule applied instead)",
+        "intent": "informational",
+        "keyword": "men's personal stylist online",
+        "opportunity_estimate": 25,
+        "opportunity_evidence": [
+          "4-word long-tail"
+        ],
+        "relevance": 0.33,
+        "source": "google_ads_keyword_planner",
+        "volume": 20
+      }
+    },
+    "mens online stylist": {
+      "decision": "rejected_low_opportunity_estimate",
+      "history": [
+        {
+          "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 36,
+          "source": "google_ads_keyword_planner",
+          "volume": 170
+        }
+      ],
+      "latest": {
+        "ads_competition": "HIGH",
+        "difficulty": null,
+        "difficulty_note": "not measured (free mode: long-tail rule applied instead)",
+        "intent": "informational",
+        "keyword": "mens online stylist",
+        "opportunity_estimate": 36,
+        "opportunity_evidence": [
+          "3-word phrase",
+          "verified volume 100-1,000 (modest competition likely)"
+        ],
+        "relevance": 0.5,
+        "source": "google_ads_keyword_planner",
+        "volume": 170
+      }
+    },
+    "mens styling service": {
+      "decision": "rejected_low_opportunity_estimate",
+      "history": [
+        {
+          "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 28,
+          "source": "google_ads_keyword_planner",
+          "volume": 110
+        }
+      ],
+      "latest": {
+        "ads_competition": "MEDIUM",
+        "difficulty": null,
+        "difficulty_note": "not measured (free mode: long-tail rule applied instead)",
+        "intent": "informational",
+        "keyword": "mens styling service",
+        "opportunity_estimate": 28,
+        "opportunity_evidence": [
+          "3-word phrase",
+          "verified volume 100-1,000 (modest competition likely)"
+        ],
+        "relevance": 0.0,
+        "source": "google_ads_keyword_planner",
+        "volume": 110
+      }
+    },
+    "neon outfit ideas": {
+      "decision": "rejected_low_opportunity_estimate",
+      "history": [
+        {
+          "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 33,
+          "source": "google_ads_keyword_planner",
+          "volume": 320
+        }
+      ],
+      "latest": {
+        "ads_competition": "HIGH",
+        "difficulty": null,
+        "difficulty_note": "not measured (free mode: long-tail rule applied instead)",
+        "intent": "informational",
+        "keyword": "neon outfit ideas",
+        "opportunity_estimate": 33,
+        "opportunity_evidence": [
+          "3-word phrase",
+          "verified volume 100-1,000 (modest competition likely)"
+        ],
+        "relevance": 0.33,
+        "source": "google_ads_keyword_planner",
+        "volume": 320
+      }
+    },
+    "new year outfit": {
+      "decision": "rejected_low_opportunity_estimate",
+      "history": [
+        {
+          "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 13,
+          "source": "google_ads_keyword_planner",
+          "volume": 8100
+        }
+      ],
+      "latest": {
+        "ads_competition": "HIGH",
+        "difficulty": null,
+        "difficulty_note": "not measured (free mode: long-tail rule applied instead)",
+        "intent": "informational",
+        "keyword": "new year outfit",
+        "opportunity_estimate": 13,
+        "opportunity_evidence": [
+          "3-word phrase"
+        ],
+        "relevance": 0.33,
+        "source": "google_ads_keyword_planner",
+        "volume": 8100
+      }
+    },
+    "new years eve outfit": {
+      "decision": "rejected_low_opportunity_estimate",
+      "history": [
+        {
+          "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 24,
+          "source": "google_ads_keyword_planner",
+          "volume": 14800
+        }
+      ],
+      "latest": {
+        "ads_competition": "HIGH",
+        "difficulty": null,
+        "difficulty_note": "not measured (free mode: long-tail rule applied instead)",
+        "intent": "informational",
+        "keyword": "new years eve outfit",
+        "opportunity_estimate": 24,
+        "opportunity_evidence": [
+          "4-word long-tail"
+        ],
+        "relevance": 0.25,
+        "source": "google_ads_keyword_planner",
+        "volume": 14800
+      }
+    },
+    "new years eve outfit ideas": {
+      "decision": "rejected_low_opportunity_estimate",
+      "history": [
+        {
+          "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 38,
+          "source": "google_ads_keyword_planner",
+          "volume": 4400
+        }
+      ],
+      "latest": {
+        "ads_competition": "HIGH",
+        "difficulty": null,
+        "difficulty_note": "not measured (free mode: long-tail rule applied instead)",
+        "intent": "informational",
+        "keyword": "new years eve outfit ideas",
+        "opportunity_estimate": 38,
+        "opportunity_evidence": [
+          "5+ word long-tail",
+          "verified volume 1k-5k"
+        ],
+        "relevance": 0.2,
+        "source": "google_ads_keyword_planner",
+        "volume": 4400
+      }
+    },
+    "new years eve outfit ideas 2022": {
+      "decision": "rejected_low_volume",
+      "history": [
+        {
+          "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 27,
+          "source": "google_ads_keyword_planner",
+          "volume": 10
+        }
+      ],
+      "latest": {
+        "ads_competition": null,
+        "difficulty": null,
+        "difficulty_note": "not measured (free mode: long-tail rule applied instead)",
+        "intent": "informational",
+        "keyword": "new years eve outfit ideas 2022",
+        "opportunity_estimate": 27,
+        "opportunity_evidence": [
+          "5+ word long-tail"
+        ],
+        "relevance": 0.17,
+        "source": "google_ads_keyword_planner",
+        "volume": 10
+      }
+    },
+    "new years eve outfit ideas 2023": {
+      "decision": "rejected_low_volume",
+      "history": [
+        {
+          "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 27,
+          "source": "google_ads_keyword_planner",
+          "volume": 50
+        }
+      ],
+      "latest": {
+        "ads_competition": "HIGH",
+        "difficulty": null,
+        "difficulty_note": "not measured (free mode: long-tail rule applied instead)",
+        "intent": "informational",
+        "keyword": "new years eve outfit ideas 2023",
+        "opportunity_estimate": 27,
+        "opportunity_evidence": [
+          "5+ word long-tail"
+        ],
+        "relevance": 0.17,
+        "source": "google_ads_keyword_planner",
+        "volume": 50
+      }
+    },
+    "new years outfit ideas": {
+      "decision": "rejected_low_opportunity_estimate",
+      "history": [
+        {
+          "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 34,
+          "source": "google_ads_keyword_planner",
+          "volume": 4400
+        }
+      ],
+      "latest": {
+        "ads_competition": "HIGH",
+        "difficulty": null,
+        "difficulty_note": "not measured (free mode: long-tail rule applied instead)",
+        "intent": "informational",
+        "keyword": "new years outfit ideas",
+        "opportunity_estimate": 34,
+        "opportunity_evidence": [
+          "4-word long-tail",
+          "verified volume 1k-5k"
+        ],
+        "relevance": 0.25,
+        "source": "google_ads_keyword_planner",
+        "volume": 4400
+      }
+    },
+    "nordstrom stylist": {
+      "decision": "rejected_low_opportunity_estimate",
+      "history": [
+        {
+          "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 18,
+          "source": "google_ads_keyword_planner",
+          "volume": 2900
+        }
+      ],
+      "latest": {
+        "ads_competition": "LOW",
+        "difficulty": null,
+        "difficulty_note": "not measured (free mode: long-tail rule applied instead)",
+        "intent": "informational",
+        "keyword": "nordstrom stylist",
+        "opportunity_estimate": 18,
+        "opportunity_evidence": [
+          "verified volume 1k-5k"
+        ],
+        "relevance": 0.5,
+        "source": "google_ads_keyword_planner",
+        "volume": 2900
+      }
+    },
+    "nye outfit ideas": {
+      "decision": "rejected_low_opportunity_estimate",
+      "history": [
+        {
+          "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 23,
+          "source": "google_ads_keyword_planner",
+          "volume": 4400
+        }
+      ],
+      "latest": {
+        "ads_competition": "HIGH",
+        "difficulty": null,
+        "difficulty_note": "not measured (free mode: long-tail rule applied instead)",
+        "intent": "informational",
+        "keyword": "nye outfit ideas",
+        "opportunity_estimate": 23,
+        "opportunity_evidence": [
+          "3-word phrase",
+          "verified volume 1k-5k"
+        ],
+        "relevance": 0.33,
+        "source": "google_ads_keyword_planner",
+        "volume": 4400
+      }
+    },
+    "online clothing stylist": {
+      "decision": "rejected_low_volume",
+      "history": [
+        {
+          "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 16,
+          "source": "google_ads_keyword_planner",
+          "volume": 50
+        }
+      ],
+      "latest": {
+        "ads_competition": "HIGH",
+        "difficulty": null,
+        "difficulty_note": "not measured (free mode: long-tail rule applied instead)",
+        "intent": "informational",
+        "keyword": "online clothing stylist",
+        "opportunity_estimate": 16,
+        "opportunity_evidence": [
+          "3-word phrase"
+        ],
+        "relevance": 0.5,
+        "source": "google_ads_keyword_planner",
+        "volume": 50
+      }
+    },
+    "online fashion stylist": {
+      "decision": "rejected_low_opportunity_estimate",
+      "history": [
+        {
+          "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 43,
+          "source": "google_ads_keyword_planner",
+          "volume": 170
+        }
+      ],
+      "latest": {
+        "ads_competition": "HIGH",
+        "difficulty": null,
+        "difficulty_note": "not measured (free mode: long-tail rule applied instead)",
+        "intent": "informational",
+        "keyword": "online fashion stylist",
+        "opportunity_estimate": 43,
+        "opportunity_evidence": [
+          "3-word phrase",
+          "verified volume 100-1,000 (modest competition likely)"
+        ],
+        "relevance": 1.0,
+        "source": "google_ads_keyword_planner",
+        "volume": 170
+      }
+    },
+    "online personal styling service": {
+      "decision": "rejected_low_opportunity_estimate",
+      "history": [
+        {
+          "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 20,
+          "source": "google_ads_keyword_planner",
+          "volume": 74000
+        }
+      ],
+      "latest": {
+        "ads_competition": "LOW",
+        "difficulty": null,
+        "difficulty_note": "not measured (free mode: long-tail rule applied instead)",
+        "intent": "informational",
+        "keyword": "online personal styling service",
+        "opportunity_estimate": 20,
+        "opportunity_evidence": [
+          "4-word long-tail"
+        ],
+        "relevance": 0.0,
+        "source": "google_ads_keyword_planner",
+        "volume": 74000
+      }
+    },
+    "online styling": {
+      "decision": "rejected_low_volume",
+      "history": [
+        {
+          "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 0,
+          "source": "google_ads_keyword_planner",
+          "volume": 50
+        }
+      ],
+      "latest": {
+        "ads_competition": "MEDIUM",
+        "difficulty": null,
+        "difficulty_note": "not measured (free mode: long-tail rule applied instead)",
+        "intent": "informational",
+        "keyword": "online styling",
+        "opportunity_estimate": 0,
+        "opportunity_evidence": [],
+        "relevance": 0.0,
+        "source": "google_ads_keyword_planner",
+        "volume": 50
+      }
+    },
+    "online styling services": {
+      "decision": "rejected_low_opportunity_estimate",
+      "history": [
+        {
+          "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 28,
+          "source": "google_ads_keyword_planner",
+          "volume": 140
+        }
+      ],
+      "latest": {
+        "ads_competition": "MEDIUM",
+        "difficulty": null,
+        "difficulty_note": "not measured (free mode: long-tail rule applied instead)",
+        "intent": "informational",
+        "keyword": "online styling services",
+        "opportunity_estimate": 28,
+        "opportunity_evidence": [
+          "3-word phrase",
+          "verified volume 100-1,000 (modest competition likely)"
+        ],
+        "relevance": 0.0,
+        "source": "google_ads_keyword_planner",
+        "volume": 140
+      }
+    },
+    "online stylist": {
+      "decision": "rejected_low_opportunity_estimate",
+      "history": [
+        {
+          "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 35,
+          "source": "google_ads_keyword_planner",
+          "volume": 480
+        }
+      ],
+      "latest": {
+        "ads_competition": "HIGH",
+        "difficulty": null,
+        "difficulty_note": "not measured (free mode: long-tail rule applied instead)",
+        "intent": "informational",
+        "keyword": "online stylist",
+        "opportunity_estimate": 35,
+        "opportunity_evidence": [
+          "verified volume 100-1,000 (modest competition likely)"
+        ],
+        "relevance": 1.0,
+        "source": "google_ads_keyword_planner",
+        "volume": 480
+      }
+    },
+    "online wardrobe stylist": {
+      "decision": "rejected_low_opportunity_estimate",
+      "history": [
+        {
+          "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 36,
+          "source": "google_ads_keyword_planner",
+          "volume": 170
+        }
+      ],
+      "latest": {
+        "ads_competition": "HIGH",
+        "difficulty": null,
+        "difficulty_note": "not measured (free mode: long-tail rule applied instead)",
+        "intent": "informational",
+        "keyword": "online wardrobe stylist",
+        "opportunity_estimate": 36,
+        "opportunity_evidence": [
+          "3-word phrase",
+          "verified volume 100-1,000 (modest competition likely)"
+        ],
+        "relevance": 0.5,
+        "source": "google_ads_keyword_planner",
+        "volume": 170
+      }
+    },
+    "outfit color matching": {
+      "decision": "rejected_low_opportunity_estimate",
+      "history": [
+        {
+          "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 28,
+          "source": "google_ads_keyword_planner",
+          "volume": 1600
+        }
+      ],
+      "latest": {
+        "ads_competition": "LOW",
+        "difficulty": null,
+        "difficulty_note": "not measured (free mode: long-tail rule applied instead)",
+        "intent": "informational",
+        "keyword": "outfit color matching",
+        "opportunity_estimate": 28,
+        "opportunity_evidence": [
+          "3-word phrase",
+          "verified volume 1k-5k"
+        ],
+        "relevance": 0.67,
+        "source": "google_ads_keyword_planner",
+        "volume": 1600
+      }
+    },
+    "outfit ideas": {
+      "decision": "rejected_low_opportunity_estimate",
+      "history": [
+        {
+          "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 8,
+          "source": "google_ads_keyword_planner",
+          "volume": 165000
+        }
+      ],
+      "latest": {
+        "ads_competition": "LOW",
+        "difficulty": null,
+        "difficulty_note": "not measured (free mode: long-tail rule applied instead)",
+        "intent": "informational",
+        "keyword": "outfit ideas",
+        "opportunity_estimate": 8,
+        "opportunity_evidence": [],
+        "relevance": 0.5,
+        "source": "google_ads_keyword_planner",
+        "volume": 165000
+      }
+    },
+    "outfit ideas for women": {
+      "decision": "rejected_low_opportunity_estimate",
+      "history": [
+        {
+          "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 25,
+          "source": "google_ads_keyword_planner",
+          "volume": 6600
+        }
+      ],
+      "latest": {
+        "ads_competition": "HIGH",
+        "difficulty": null,
+        "difficulty_note": "not measured (free mode: long-tail rule applied instead)",
+        "intent": "informational",
+        "keyword": "outfit ideas for women",
+        "opportunity_estimate": 25,
+        "opportunity_evidence": [
+          "4-word long-tail"
+        ],
+        "relevance": 0.33,
+        "source": "google_ads_keyword_planner",
+        "volume": 6600
+      }
+    },
+    "outfit rating": {
+      "decision": "rejected_low_volume",
+      "history": [
+        {
+          "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 8,
+          "source": "google_ads_keyword_planner",
+          "volume": 30
+        }
+      ],
+      "latest": {
+        "ads_competition": "LOW",
+        "difficulty": null,
+        "difficulty_note": "not measured (free mode: long-tail rule applied instead)",
+        "intent": "informational",
+        "keyword": "outfit rating",
+        "opportunity_estimate": 8,
+        "opportunity_evidence": [],
+        "relevance": 0.5,
+        "source": "google_ads_keyword_planner",
+        "volume": 30
+      }
+    },
+    "party outfit ideas": {
+      "decision": "rejected_low_opportunity_estimate",
+      "history": [
+        {
+          "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 33,
+          "source": "google_ads_keyword_planner",
+          "volume": 480
+        }
+      ],
+      "latest": {
+        "ads_competition": "HIGH",
+        "difficulty": null,
+        "difficulty_note": "not measured (free mode: long-tail rule applied instead)",
+        "intent": "informational",
+        "keyword": "party outfit ideas",
+        "opportunity_estimate": 33,
+        "opportunity_evidence": [
+          "3-word phrase",
+          "verified volume 100-1,000 (modest competition likely)"
+        ],
+        "relevance": 0.33,
+        "source": "google_ads_keyword_planner",
+        "volume": 480
+      }
+    },
+    "personal clothes shopper": {
+      "decision": "rejected_low_opportunity_estimate",
+      "history": [
+        {
+          "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 28,
+          "source": "google_ads_keyword_planner",
+          "volume": 260
+        }
+      ],
+      "latest": {
+        "ads_competition": "MEDIUM",
+        "difficulty": null,
+        "difficulty_note": "not measured (free mode: long-tail rule applied instead)",
+        "intent": "informational",
+        "keyword": "personal clothes shopper",
+        "opportunity_estimate": 28,
+        "opportunity_evidence": [
+          "3-word phrase",
+          "verified volume 100-1,000 (modest competition likely)"
+        ],
+        "relevance": 0.0,
+        "source": "google_ads_keyword_planner",
+        "volume": 260
+      }
+    },
+    "personal clothing stylist": {
+      "decision": "rejected_low_opportunity_estimate",
+      "history": [
+        {
+          "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 13,
+          "source": "google_ads_keyword_planner",
+          "volume": 9900
+        }
+      ],
+      "latest": {
+        "ads_competition": "MEDIUM",
+        "difficulty": null,
+        "difficulty_note": "not measured (free mode: long-tail rule applied instead)",
+        "intent": "informational",
+        "keyword": "personal clothing stylist",
+        "opportunity_estimate": 13,
+        "opportunity_evidence": [
+          "3-word phrase"
+        ],
+        "relevance": 0.33,
+        "source": "google_ads_keyword_planner",
+        "volume": 9900
+      }
+    },
+    "personal fashion stylist": {
+      "decision": "rejected_low_opportunity_estimate",
+      "history": [
+        {
+          "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 18,
+          "source": "google_ads_keyword_planner",
+          "volume": 9900
+        }
+      ],
+      "latest": {
+        "ads_competition": "MEDIUM",
+        "difficulty": null,
+        "difficulty_note": "not measured (free mode: long-tail rule applied instead)",
+        "intent": "informational",
+        "keyword": "personal fashion stylist",
+        "opportunity_estimate": 18,
+        "opportunity_evidence": [
+          "3-word phrase"
+        ],
+        "relevance": 0.67,
+        "source": "google_ads_keyword_planner",
+        "volume": 9900
+      }
+    },
+    "personal shopper clothes online": {
+      "decision": "rejected_low_volume",
+      "history": [
+        {
+          "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 20,
+          "source": "google_ads_keyword_planner",
+          "volume": 20
+        }
+      ],
+      "latest": {
+        "ads_competition": "MEDIUM",
+        "difficulty": null,
+        "difficulty_note": "not measured (free mode: long-tail rule applied instead)",
+        "intent": "informational",
+        "keyword": "personal shopper clothes online",
+        "opportunity_estimate": 20,
+        "opportunity_evidence": [
+          "4-word long-tail"
+        ],
+        "relevance": 0.0,
+        "source": "google_ads_keyword_planner",
+        "volume": 20
+      }
+    },
+    "personal styling": {
+      "decision": "rejected_low_opportunity_estimate",
+      "history": [
+        {
+          "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 10,
+          "source": "google_ads_keyword_planner",
+          "volume": 2400
+        }
+      ],
+      "latest": {
+        "ads_competition": "LOW",
+        "difficulty": null,
+        "difficulty_note": "not measured (free mode: long-tail rule applied instead)",
+        "intent": "informational",
+        "keyword": "personal styling",
+        "opportunity_estimate": 10,
+        "opportunity_evidence": [
+          "verified volume 1k-5k"
+        ],
+        "relevance": 0.0,
+        "source": "google_ads_keyword_planner",
+        "volume": 2400
+      }
+    },
+    "personal styling companies": {
+      "decision": "rejected_low_volume",
+      "history": [
+        {
+          "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 8,
+          "source": "google_ads_keyword_planner",
+          "volume": 20
+        }
+      ],
+      "latest": {
+        "ads_competition": "LOW",
+        "difficulty": null,
+        "difficulty_note": "not measured (free mode: long-tail rule applied instead)",
+        "intent": "informational",
+        "keyword": "personal styling companies",
+        "opportunity_estimate": 8,
+        "opportunity_evidence": [
+          "3-word phrase"
+        ],
+        "relevance": 0.0,
+        "source": "google_ads_keyword_planner",
+        "volume": 20
+      }
+    },
+    "personal styling service": {
+      "decision": "rejected_low_opportunity_estimate",
+      "history": [
+        {
+          "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 8,
+          "source": "google_ads_keyword_planner",
+          "volume": 9900
+        }
+      ],
+      "latest": {
+        "ads_competition": "LOW",
+        "difficulty": null,
+        "difficulty_note": "not measured (free mode: long-tail rule applied instead)",
+        "intent": "informational",
+        "keyword": "personal styling service",
+        "opportunity_estimate": 8,
+        "opportunity_evidence": [
+          "3-word phrase"
+        ],
+        "relevance": 0.0,
+        "source": "google_ads_keyword_planner",
+        "volume": 9900
+      }
+    },
+    "personal stylist for men": {
+      "decision": "rejected_low_opportunity_estimate",
+      "history": [
+        {
+          "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 45,
+          "source": "google_ads_keyword_planner",
+          "volume": 1000
+        }
+      ],
+      "latest": {
+        "ads_competition": "HIGH",
+        "difficulty": null,
+        "difficulty_note": "not measured (free mode: long-tail rule applied instead)",
+        "intent": "informational",
+        "keyword": "personal stylist for men",
+        "opportunity_estimate": 45,
+        "opportunity_evidence": [
+          "4-word long-tail",
+          "verified volume 100-1,000 (modest competition likely)"
+        ],
+        "relevance": 0.33,
+        "source": "google_ads_keyword_planner",
+        "volume": 1000
+      }
+    },
+    "personal stylist online": {
+      "decision": "rejected_low_opportunity_estimate",
+      "history": [
+        {
+          "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 36,
+          "source": "google_ads_keyword_planner",
+          "volume": 590
+        }
+      ],
+      "latest": {
+        "ads_competition": "MEDIUM",
+        "difficulty": null,
+        "difficulty_note": "not measured (free mode: long-tail rule applied instead)",
+        "intent": "informational",
+        "keyword": "personal stylist online",
+        "opportunity_estimate": 36,
+        "opportunity_evidence": [
+          "3-word phrase",
+          "verified volume 100-1,000 (modest competition likely)"
+        ],
+        "relevance": 0.5,
+        "source": "google_ads_keyword_planner",
+        "volume": 590
+      }
+    },
+    "personal stylist subscription": {
+      "decision": "rejected_low_volume",
+      "history": [
+        {
+          "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 13,
+          "source": "google_ads_keyword_planner",
+          "volume": 40
+        }
+      ],
+      "latest": {
+        "ads_competition": "LOW",
+        "difficulty": null,
+        "difficulty_note": "not measured (free mode: long-tail rule applied instead)",
+        "intent": "informational",
+        "keyword": "personal stylist subscription",
+        "opportunity_estimate": 13,
+        "opportunity_evidence": [
+          "3-word phrase"
+        ],
+        "relevance": 0.33,
+        "source": "google_ads_keyword_planner",
+        "volume": 40
+      }
+    },
+    "personal stylist website": {
+      "decision": "rejected_low_opportunity_estimate",
+      "history": [
+        {
+          "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 33,
+          "source": "google_ads_keyword_planner",
+          "volume": 110
+        }
+      ],
+      "latest": {
+        "ads_competition": "MEDIUM",
+        "difficulty": null,
+        "difficulty_note": "not measured (free mode: long-tail rule applied instead)",
+        "intent": "informational",
+        "keyword": "personal stylist website",
+        "opportunity_estimate": 33,
+        "opportunity_evidence": [
+          "3-word phrase",
+          "verified volume 100-1,000 (modest competition likely)"
+        ],
+        "relevance": 0.33,
+        "source": "google_ads_keyword_planner",
+        "volume": 110
+      }
+    },
+    "personal wardrobe stylist": {
+      "decision": "rejected_low_opportunity_estimate",
+      "history": [
+        {
+          "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 13,
+          "source": "google_ads_keyword_planner",
+          "volume": 9900
+        }
+      ],
+      "latest": {
+        "ads_competition": "MEDIUM",
+        "difficulty": null,
+        "difficulty_note": "not measured (free mode: long-tail rule applied instead)",
+        "intent": "informational",
+        "keyword": "personal wardrobe stylist",
+        "opportunity_estimate": 13,
+        "opportunity_evidence": [
+          "3-word phrase"
+        ],
+        "relevance": 0.33,
+        "source": "google_ads_keyword_planner",
+        "volume": 9900
+      }
+    },
+    "pink outfit ideas": {
+      "decision": "rejected_low_opportunity_estimate",
+      "history": [
+        {
+          "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 33,
+          "source": "google_ads_keyword_planner",
+          "volume": 390
+        }
+      ],
+      "latest": {
+        "ads_competition": "HIGH",
+        "difficulty": null,
+        "difficulty_note": "not measured (free mode: long-tail rule applied instead)",
+        "intent": "informational",
+        "keyword": "pink outfit ideas",
+        "opportunity_estimate": 33,
+        "opportunity_evidence": [
+          "3-word phrase",
+          "verified volume 100-1,000 (modest competition likely)"
+        ],
+        "relevance": 0.33,
+        "source": "google_ads_keyword_planner",
+        "volume": 390
+      }
+    },
+    "plus size birthday outfit ideas": {
+      "decision": "rejected_low_opportunity_estimate",
+      "history": [
+        {
+          "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 48,
+          "source": "google_ads_keyword_planner",
+          "volume": 390
+        }
+      ],
+      "latest": {
+        "ads_competition": "HIGH",
+        "difficulty": null,
+        "difficulty_note": "not measured (free mode: long-tail rule applied instead)",
+        "intent": "informational",
+        "keyword": "plus size birthday outfit ideas",
+        "opportunity_estimate": 48,
+        "opportunity_evidence": [
+          "5+ word long-tail",
+          "verified volume 100-1,000 (modest competition likely)"
+        ],
+        "relevance": 0.2,
+        "source": "google_ads_keyword_planner",
+        "volume": 390
+      }
+    },
+    "plus size brunch outfit ideas": {
+      "decision": "rejected_low_opportunity_estimate",
+      "history": [
+        {
+          "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 48,
+          "source": "google_ads_keyword_planner",
+          "volume": 110
+        }
+      ],
+      "latest": {
+        "ads_competition": "HIGH",
+        "difficulty": null,
+        "difficulty_note": "not measured (free mode: long-tail rule applied instead)",
+        "intent": "informational",
+        "keyword": "plus size brunch outfit ideas",
+        "opportunity_estimate": 48,
+        "opportunity_evidence": [
+          "5+ word long-tail",
+          "verified volume 100-1,000 (modest competition likely)"
+        ],
+        "relevance": 0.2,
+        "source": "google_ads_keyword_planner",
+        "volume": 110
+      }
+    },
+    "plus size halloween clothes": {
+      "decision": "rejected_low_opportunity_estimate",
+      "history": [
+        {
+          "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 40,
+          "source": "google_ads_keyword_planner",
+          "volume": 170
+        }
+      ],
+      "latest": {
+        "ads_competition": "HIGH",
+        "difficulty": null,
+        "difficulty_note": "not measured (free mode: long-tail rule applied instead)",
+        "intent": "informational",
+        "keyword": "plus size halloween clothes",
+        "opportunity_estimate": 40,
+        "opportunity_evidence": [
+          "4-word long-tail",
+          "verified volume 100-1,000 (modest competition likely)"
+        ],
+        "relevance": 0.0,
+        "source": "google_ads_keyword_planner",
+        "volume": 170
+      }
+    },
+    "plus size outfit ideas": {
+      "decision": "rejected_low_opportunity_estimate",
+      "history": [
+        {
+          "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 34,
+          "source": "google_ads_keyword_planner",
+          "volume": 1300
+        }
+      ],
+      "latest": {
+        "ads_competition": "HIGH",
+        "difficulty": null,
+        "difficulty_note": "not measured (free mode: long-tail rule applied instead)",
+        "intent": "informational",
+        "keyword": "plus size outfit ideas",
+        "opportunity_estimate": 34,
+        "opportunity_evidence": [
+          "4-word long-tail",
+          "verified volume 1k-5k"
+        ],
+        "relevance": 0.25,
+        "source": "google_ads_keyword_planner",
+        "volume": 1300
+      }
+    },
+    "plus size personal stylist": {
+      "decision": "rejected_low_opportunity_estimate",
+      "history": [
+        {
+          "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 44,
+          "source": "google_ads_keyword_planner",
+          "volume": 390
+        }
+      ],
+      "latest": {
+        "ads_competition": "HIGH",
+        "difficulty": null,
+        "difficulty_note": "not measured (free mode: long-tail rule applied instead)",
+        "intent": "informational",
+        "keyword": "plus size personal stylist",
+        "opportunity_estimate": 44,
+        "opportunity_evidence": [
+          "4-word long-tail",
+          "verified volume 100-1,000 (modest competition likely)"
+        ],
+        "relevance": 0.25,
+        "source": "google_ads_keyword_planner",
+        "volume": 390
+      }
+    },
+    "pool party outfit ideas": {
+      "decision": "rejected_low_opportunity_estimate",
+      "history": [
+        {
+          "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 44,
+          "source": "google_ads_keyword_planner",
+          "volume": 260
+        }
+      ],
+      "latest": {
+        "ads_competition": "HIGH",
+        "difficulty": null,
+        "difficulty_note": "not measured (free mode: long-tail rule applied instead)",
+        "intent": "informational",
+        "keyword": "pool party outfit ideas",
+        "opportunity_estimate": 44,
+        "opportunity_evidence": [
+          "4-word long-tail",
+          "verified volume 100-1,000 (modest competition likely)"
+        ],
+        "relevance": 0.25,
+        "source": "google_ads_keyword_planner",
+        "volume": 260
+      }
+    },
+    "pride outfit ideas": {
+      "decision": "rejected_low_opportunity_estimate",
+      "history": [
+        {
+          "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 33,
+          "source": "google_ads_keyword_planner",
+          "volume": 590
+        }
+      ],
+      "latest": {
+        "ads_competition": "HIGH",
+        "difficulty": null,
+        "difficulty_note": "not measured (free mode: long-tail rule applied instead)",
+        "intent": "informational",
+        "keyword": "pride outfit ideas",
+        "opportunity_estimate": 33,
+        "opportunity_evidence": [
+          "3-word phrase",
+          "verified volume 100-1,000 (modest competition likely)"
+        ],
+        "relevance": 0.33,
+        "source": "google_ads_keyword_planner",
+        "volume": 590
+      }
+    },
+    "pumpkin outfit": {
+      "decision": "rejected_low_opportunity_estimate",
+      "history": [
+        {
+          "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 28,
+          "source": "google_ads_keyword_planner",
+          "volume": 720
+        }
+      ],
+      "latest": {
+        "ads_competition": "HIGH",
+        "difficulty": null,
+        "difficulty_note": "not measured (free mode: long-tail rule applied instead)",
+        "intent": "informational",
+        "keyword": "pumpkin outfit",
+        "opportunity_estimate": 28,
+        "opportunity_evidence": [
+          "verified volume 100-1,000 (modest competition likely)"
+        ],
+        "relevance": 0.5,
+        "source": "google_ads_keyword_planner",
+        "volume": 720
+      }
+    },
+    "purple outfit ideas": {
+      "decision": "rejected_low_opportunity_estimate",
+      "history": [
+        {
+          "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 33,
+          "source": "google_ads_keyword_planner",
+          "volume": 210
+        }
+      ],
+      "latest": {
+        "ads_competition": "HIGH",
+        "difficulty": null,
+        "difficulty_note": "not measured (free mode: long-tail rule applied instead)",
+        "intent": "informational",
+        "keyword": "purple outfit ideas",
+        "opportunity_estimate": 33,
+        "opportunity_evidence": [
+          "3-word phrase",
+          "verified volume 100-1,000 (modest competition likely)"
+        ],
+        "relevance": 0.33,
+        "source": "google_ads_keyword_planner",
+        "volume": 210
+      }
+    },
+    "rave outfit ideas": {
+      "decision": "rejected_low_opportunity_estimate",
+      "history": [
+        {
+          "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 23,
+          "source": "google_ads_keyword_planner",
+          "volume": 1600
+        }
+      ],
+      "latest": {
+        "ads_competition": "HIGH",
+        "difficulty": null,
+        "difficulty_note": "not measured (free mode: long-tail rule applied instead)",
+        "intent": "informational",
+        "keyword": "rave outfit ideas",
+        "opportunity_estimate": 23,
+        "opportunity_evidence": [
+          "3-word phrase",
+          "verified volume 1k-5k"
+        ],
+        "relevance": 0.33,
+        "source": "google_ads_keyword_planner",
+        "volume": 1600
+      }
+    },
+    "red outfit ideas": {
+      "decision": "rejected_low_opportunity_estimate",
+      "history": [
+        {
+          "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 33,
+          "source": "google_ads_keyword_planner",
+          "volume": 210
+        }
+      ],
+      "latest": {
+        "ads_competition": "HIGH",
+        "difficulty": null,
+        "difficulty_note": "not measured (free mode: long-tail rule applied instead)",
+        "intent": "informational",
+        "keyword": "red outfit ideas",
+        "opportunity_estimate": 33,
+        "opportunity_evidence": [
+          "3-word phrase",
+          "verified volume 100-1,000 (modest competition likely)"
+        ],
+        "relevance": 0.33,
+        "source": "google_ads_keyword_planner",
+        "volume": 210
+      }
+    },
+    "rodeo outfit ideas": {
+      "decision": "rejected_low_opportunity_estimate",
+      "history": [
+        {
+          "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 33,
+          "source": "google_ads_keyword_planner",
+          "volume": 720
+        }
+      ],
+      "latest": {
+        "ads_competition": "HIGH",
+        "difficulty": null,
+        "difficulty_note": "not measured (free mode: long-tail rule applied instead)",
+        "intent": "informational",
+        "keyword": "rodeo outfit ideas",
+        "opportunity_estimate": 33,
+        "opportunity_evidence": [
+          "3-word phrase",
+          "verified volume 100-1,000 (modest competition likely)"
+        ],
+        "relevance": 0.33,
+        "source": "google_ads_keyword_planner",
+        "volume": 720
+      }
+    },
+    "safari outfit ideas": {
+      "decision": "rejected_low_opportunity_estimate",
+      "history": [
+        {
+          "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 33,
+          "source": "google_ads_keyword_planner",
+          "volume": 320
+        }
+      ],
+      "latest": {
+        "ads_competition": "HIGH",
+        "difficulty": null,
+        "difficulty_note": "not measured (free mode: long-tail rule applied instead)",
+        "intent": "informational",
+        "keyword": "safari outfit ideas",
+        "opportunity_estimate": 33,
+        "opportunity_evidence": [
+          "3-word phrase",
+          "verified volume 100-1,000 (modest competition likely)"
+        ],
+        "relevance": 0.33,
+        "source": "google_ads_keyword_planner",
+        "volume": 320
+      }
+    },
+    "seductive outfit ideas": {
+      "decision": "rejected_low_volume",
+      "history": [
+        {
+          "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 13,
+          "source": "google_ads_keyword_planner",
+          "volume": 20
+        }
+      ],
+      "latest": {
+        "ads_competition": "HIGH",
+        "difficulty": null,
+        "difficulty_note": "not measured (free mode: long-tail rule applied instead)",
+        "intent": "informational",
+        "keyword": "seductive outfit ideas",
+        "opportunity_estimate": 13,
+        "opportunity_evidence": [
+          "3-word phrase"
+        ],
+        "relevance": 0.33,
+        "source": "google_ads_keyword_planner",
+        "volume": 20
+      }
+    },
+    "sexy outfit ideas": {
+      "decision": "rejected_low_opportunity_estimate",
+      "history": [
+        {
+          "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 33,
+          "source": "google_ads_keyword_planner",
+          "volume": 1000
+        }
+      ],
+      "latest": {
+        "ads_competition": "HIGH",
+        "difficulty": null,
+        "difficulty_note": "not measured (free mode: long-tail rule applied instead)",
+        "intent": "informational",
+        "keyword": "sexy outfit ideas",
+        "opportunity_estimate": 33,
+        "opportunity_evidence": [
+          "3-word phrase",
+          "verified volume 100-1,000 (modest competition likely)"
+        ],
+        "relevance": 0.33,
+        "source": "google_ads_keyword_planner",
+        "volume": 1000
+      }
+    },
+    "shein outfit ideas": {
+      "decision": "rejected_low_opportunity_estimate",
+      "history": [
+        {
+          "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 33,
+          "source": "google_ads_keyword_planner",
+          "volume": 390
+        }
+      ],
+      "latest": {
+        "ads_competition": "HIGH",
+        "difficulty": null,
+        "difficulty_note": "not measured (free mode: long-tail rule applied instead)",
+        "intent": "informational",
+        "keyword": "shein outfit ideas",
+        "opportunity_estimate": 33,
+        "opportunity_evidence": [
+          "3-word phrase",
+          "verified volume 100-1,000 (modest competition likely)"
+        ],
+        "relevance": 0.33,
+        "source": "google_ads_keyword_planner",
+        "volume": 390
+      }
+    },
+    "silver outfit ideas": {
+      "decision": "rejected_low_volume",
+      "history": [
+        {
+          "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 13,
+          "source": "google_ads_keyword_planner",
+          "volume": 70
+        }
+      ],
+      "latest": {
+        "ads_competition": "HIGH",
+        "difficulty": null,
+        "difficulty_note": "not measured (free mode: long-tail rule applied instead)",
+        "intent": "informational",
+        "keyword": "silver outfit ideas",
+        "opportunity_estimate": 13,
+        "opportunity_evidence": [
+          "3-word phrase"
+        ],
+        "relevance": 0.33,
+        "source": "google_ads_keyword_planner",
+        "volume": 70
+      }
+    },
+    "sneaker ball outfit ideas": {
+      "decision": "rejected_low_opportunity_estimate",
+      "history": [
+        {
+          "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 44,
+          "source": "google_ads_keyword_planner",
+          "volume": 1000
+        }
+      ],
+      "latest": {
+        "ads_competition": "HIGH",
+        "difficulty": null,
+        "difficulty_note": "not measured (free mode: long-tail rule applied instead)",
+        "intent": "informational",
+        "keyword": "sneaker ball outfit ideas",
+        "opportunity_estimate": 44,
+        "opportunity_evidence": [
+          "4-word long-tail",
+          "verified volume 100-1,000 (modest competition likely)"
+        ],
+        "relevance": 0.25,
+        "source": "google_ads_keyword_planner",
+        "volume": 1000
+      }
+    },
+    "spring outfit ideas": {
+      "decision": "rejected_low_opportunity_estimate",
+      "history": [
+        {
+          "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 23,
+          "source": "google_ads_keyword_planner",
+          "volume": 1300
+        }
+      ],
+      "latest": {
+        "ads_competition": "LOW",
+        "difficulty": null,
+        "difficulty_note": "not measured (free mode: long-tail rule applied instead)",
+        "intent": "informational",
+        "keyword": "spring outfit ideas",
+        "opportunity_estimate": 23,
+        "opportunity_evidence": [
+          "3-word phrase",
+          "verified volume 1k-5k"
+        ],
+        "relevance": 0.33,
+        "source": "google_ads_keyword_planner",
+        "volume": 1300
+      }
+    },
+    "stitch fix clothing": {
+      "decision": "rejected_low_opportunity_estimate",
+      "history": [
+        {
+          "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 28,
+          "source": "google_ads_keyword_planner",
+          "volume": 1000
+        }
+      ],
+      "latest": {
+        "ads_competition": "HIGH",
+        "difficulty": null,
+        "difficulty_note": "not measured (free mode: long-tail rule applied instead)",
+        "intent": "informational",
+        "keyword": "stitch fix clothing",
+        "opportunity_estimate": 28,
+        "opportunity_evidence": [
+          "3-word phrase",
+          "verified volume 100-1,000 (modest competition likely)"
+        ],
+        "relevance": 0.0,
+        "source": "google_ads_keyword_planner",
+        "volume": 1000
+      }
+    },
+    "stitch fix men's outfits": {
+      "decision": "rejected_low_opportunity_estimate",
+      "history": [
+        {
+          "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 44,
+          "source": "google_ads_keyword_planner",
+          "volume": 210
+        }
+      ],
+      "latest": {
+        "ads_competition": "HIGH",
+        "difficulty": null,
+        "difficulty_note": "not measured (free mode: long-tail rule applied instead)",
+        "intent": "informational",
+        "keyword": "stitch fix men's outfits",
+        "opportunity_estimate": 44,
+        "opportunity_evidence": [
+          "4-word long-tail",
+          "verified volume 100-1,000 (modest competition likely)"
+        ],
+        "relevance": 0.25,
+        "source": "google_ads_keyword_planner",
+        "volume": 210
+      }
+    },
+    "style consultant": {
+      "decision": "rejected_low_opportunity_estimate",
+      "history": [
+        {
+          "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 28,
+          "source": "google_ads_keyword_planner",
+          "volume": 480
+        }
+      ],
+      "latest": {
+        "ads_competition": "LOW",
+        "difficulty": null,
+        "difficulty_note": "not measured (free mode: long-tail rule applied instead)",
+        "intent": "informational",
+        "keyword": "style consultant",
+        "opportunity_estimate": 28,
+        "opportunity_evidence": [
+          "verified volume 100-1,000 (modest competition likely)"
+        ],
+        "relevance": 0.5,
+        "source": "google_ads_keyword_planner",
+        "volume": 480
+      }
+    },
+    "style ideas": {
+      "decision": "rejected_low_opportunity_estimate",
+      "history": [
+        {
+          "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 18,
+          "source": "google_ads_keyword_planner",
+          "volume": 1900
+        }
+      ],
+      "latest": {
+        "ads_competition": "LOW",
+        "difficulty": null,
+        "difficulty_note": "not measured (free mode: long-tail rule applied instead)",
+        "intent": "informational",
+        "keyword": "style ideas",
+        "opportunity_estimate": 18,
+        "opportunity_evidence": [
+          "verified volume 1k-5k"
+        ],
+        "relevance": 0.5,
+        "source": "google_ads_keyword_planner",
+        "volume": 1900
+      }
+    },
+    "styling companies like stitch fix": {
+      "decision": "rejected_low_volume",
+      "history": [
+        {
+          "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 25,
+          "source": "google_ads_keyword_planner",
+          "volume": 20
+        }
+      ],
+      "latest": {
+        "ads_competition": "HIGH",
+        "difficulty": null,
+        "difficulty_note": "not measured (free mode: long-tail rule applied instead)",
+        "intent": "informational",
+        "keyword": "styling companies like stitch fix",
+        "opportunity_estimate": 25,
+        "opportunity_evidence": [
+          "5+ word long-tail"
+        ],
+        "relevance": 0.0,
+        "source": "google_ads_keyword_planner",
+        "volume": 20
+      }
+    },
+    "styling service": {
+      "decision": "rejected_low_opportunity_estimate",
+      "history": [
+        {
+          "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 20,
+          "source": "google_ads_keyword_planner",
+          "volume": 320
+        }
+      ],
+      "latest": {
+        "ads_competition": "MEDIUM",
+        "difficulty": null,
+        "difficulty_note": "not measured (free mode: long-tail rule applied instead)",
+        "intent": "informational",
+        "keyword": "styling service",
+        "opportunity_estimate": 20,
+        "opportunity_evidence": [
+          "verified volume 100-1,000 (modest competition likely)"
+        ],
+        "relevance": 0.0,
+        "source": "google_ads_keyword_planner",
+        "volume": 320
+      }
+    },
+    "styling services like stitch fix": {
+      "decision": "rejected_low_volume",
+      "history": [
+        {
+          "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 25,
+          "source": "google_ads_keyword_planner",
+          "volume": 40
+        }
+      ],
+      "latest": {
+        "ads_competition": "HIGH",
+        "difficulty": null,
+        "difficulty_note": "not measured (free mode: long-tail rule applied instead)",
+        "intent": "informational",
+        "keyword": "styling services like stitch fix",
+        "opportunity_estimate": 25,
+        "opportunity_evidence": [
+          "5+ word long-tail"
+        ],
+        "relevance": 0.0,
+        "source": "google_ads_keyword_planner",
+        "volume": 40
+      }
+    },
+    "stylist for men": {
+      "decision": "rejected_low_opportunity_estimate",
+      "history": [
+        {
+          "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 26,
+          "source": "google_ads_keyword_planner",
+          "volume": 1300
+        }
+      ],
+      "latest": {
+        "ads_competition": "MEDIUM",
+        "difficulty": null,
+        "difficulty_note": "not measured (free mode: long-tail rule applied instead)",
+        "intent": "informational",
+        "keyword": "stylist for men",
+        "opportunity_estimate": 26,
+        "opportunity_evidence": [
+          "3-word phrase",
+          "verified volume 1k-5k"
+        ],
+        "relevance": 0.5,
+        "source": "google_ads_keyword_planner",
+        "volume": 1300
+      }
+    },
+    "stylist subscription": {
+      "decision": "rejected_low_volume",
+      "history": [
+        {
+          "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 8,
+          "source": "google_ads_keyword_planner",
+          "volume": 90
+        }
+      ],
+      "latest": {
+        "ads_competition": "HIGH",
+        "difficulty": null,
+        "difficulty_note": "not measured (free mode: long-tail rule applied instead)",
+        "intent": "informational",
+        "keyword": "stylist subscription",
+        "opportunity_estimate": 8,
+        "opportunity_evidence": [],
+        "relevance": 0.5,
+        "source": "google_ads_keyword_planner",
+        "volume": 90
+      }
+    },
+    "stylists": {
+      "decision": "rejected_low_opportunity_estimate",
+      "history": [
+        {
+          "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 15,
+          "source": "google_ads_keyword_planner",
+          "volume": 22200
+        }
+      ],
+      "latest": {
+        "ads_competition": "LOW",
+        "difficulty": null,
+        "difficulty_note": "not measured (free mode: long-tail rule applied instead)",
+        "intent": "informational",
+        "keyword": "stylists",
+        "opportunity_estimate": 15,
+        "opportunity_evidence": [],
+        "relevance": 1.0,
+        "source": "google_ads_keyword_planner",
+        "volume": 22200
+      }
+    },
+    "summer outfit ideas": {
+      "decision": "rejected_low_opportunity_estimate",
+      "history": [
+        {
+          "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 23,
+          "source": "google_ads_keyword_planner",
+          "volume": 1900
+        }
+      ],
+      "latest": {
+        "ads_competition": "HIGH",
+        "difficulty": null,
+        "difficulty_note": "not measured (free mode: long-tail rule applied instead)",
+        "intent": "informational",
+        "keyword": "summer outfit ideas",
+        "opportunity_estimate": 23,
+        "opportunity_evidence": [
+          "3-word phrase",
+          "verified volume 1k-5k"
+        ],
+        "relevance": 0.33,
+        "source": "google_ads_keyword_planner",
+        "volume": 1900
+      }
+    },
+    "taylor swift era outfit ideas": {
+      "decision": "rejected_low_opportunity_estimate",
+      "history": [
+        {
+          "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 48,
+          "source": "google_ads_keyword_planner",
+          "volume": 210
+        }
+      ],
+      "latest": {
+        "ads_competition": "HIGH",
+        "difficulty": null,
+        "difficulty_note": "not measured (free mode: long-tail rule applied instead)",
+        "intent": "informational",
+        "keyword": "taylor swift era outfit ideas",
+        "opportunity_estimate": 48,
+        "opportunity_evidence": [
+          "5+ word long-tail",
+          "verified volume 100-1,000 (modest competition likely)"
+        ],
+        "relevance": 0.2,
+        "source": "google_ads_keyword_planner",
+        "volume": 210
+      }
+    },
+    "taylor swift eras tour outfit ideas": {
+      "decision": "rejected_low_opportunity_estimate",
+      "history": [
+        {
+          "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 47,
+          "source": "google_ads_keyword_planner",
+          "volume": 260
+        }
+      ],
+      "latest": {
+        "ads_competition": "HIGH",
+        "difficulty": null,
+        "difficulty_note": "not measured (free mode: long-tail rule applied instead)",
+        "intent": "informational",
+        "keyword": "taylor swift eras tour outfit ideas",
+        "opportunity_estimate": 47,
+        "opportunity_evidence": [
+          "5+ word long-tail",
+          "verified volume 100-1,000 (modest competition likely)"
+        ],
+        "relevance": 0.17,
+        "source": "google_ads_keyword_planner",
+        "volume": 260
+      }
+    },
+    "taylor swift lover outfit ideas": {
+      "decision": "rejected_low_volume",
+      "history": [
+        {
+          "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 28,
+          "source": "google_ads_keyword_planner",
+          "volume": 50
+        }
+      ],
+      "latest": {
+        "ads_competition": "HIGH",
+        "difficulty": null,
+        "difficulty_note": "not measured (free mode: long-tail rule applied instead)",
+        "intent": "informational",
+        "keyword": "taylor swift lover outfit ideas",
+        "opportunity_estimate": 28,
+        "opportunity_evidence": [
+          "5+ word long-tail"
+        ],
+        "relevance": 0.2,
+        "source": "google_ads_keyword_planner",
+        "volume": 50
+      }
+    },
+    "taylor swift outfit ideas": {
+      "decision": "rejected_low_opportunity_estimate",
+      "history": [
+        {
+          "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 34,
+          "source": "google_ads_keyword_planner",
+          "volume": 1300
+        }
+      ],
+      "latest": {
+        "ads_competition": "HIGH",
+        "difficulty": null,
+        "difficulty_note": "not measured (free mode: long-tail rule applied instead)",
+        "intent": "informational",
+        "keyword": "taylor swift outfit ideas",
+        "opportunity_estimate": 34,
+        "opportunity_evidence": [
+          "4-word long-tail",
+          "verified volume 1k-5k"
+        ],
+        "relevance": 0.25,
+        "source": "google_ads_keyword_planner",
+        "volume": 1300
+      }
+    },
+    "tea party outfit ideas": {
+      "decision": "rejected_low_opportunity_estimate",
+      "history": [
+        {
+          "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 34,
+          "source": "google_ads_keyword_planner",
+          "volume": 1900
+        }
+      ],
+      "latest": {
+        "ads_competition": "HIGH",
+        "difficulty": null,
+        "difficulty_note": "not measured (free mode: long-tail rule applied instead)",
+        "intent": "informational",
+        "keyword": "tea party outfit ideas",
+        "opportunity_estimate": 34,
+        "opportunity_evidence": [
+          "4-word long-tail",
+          "verified volume 1k-5k"
+        ],
+        "relevance": 0.25,
+        "source": "google_ads_keyword_planner",
+        "volume": 1900
+      }
+    },
+    "teacher outfit ideas": {
+      "decision": "rejected_low_opportunity_estimate",
+      "history": [
+        {
+          "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 23,
+          "source": "google_ads_keyword_planner",
+          "volume": 1300
+        }
+      ],
+      "latest": {
+        "ads_competition": "HIGH",
+        "difficulty": null,
+        "difficulty_note": "not measured (free mode: long-tail rule applied instead)",
+        "intent": "informational",
+        "keyword": "teacher outfit ideas",
+        "opportunity_estimate": 23,
+        "opportunity_evidence": [
+          "3-word phrase",
+          "verified volume 1k-5k"
+        ],
+        "relevance": 0.33,
+        "source": "google_ads_keyword_planner",
+        "volume": 1300
+      }
+    },
+    "test hairstyles on my face free": {
+      "decision": "rejected_low_opportunity_estimate",
+      "history": [
+        {
+          "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "commercial",
+          "opportunity_estimate": 40,
+          "source": "google_ads_keyword_planner",
+          "volume": 1600
+        }
+      ],
+      "latest": {
+        "ads_competition": "MEDIUM",
+        "difficulty": null,
+        "difficulty_note": "not measured (free mode: long-tail rule applied instead)",
+        "intent": "commercial",
+        "keyword": "test hairstyles on my face free",
+        "opportunity_estimate": 40,
+        "opportunity_evidence": [
+          "5+ word long-tail",
+          "verified volume 1k-5k"
+        ],
+        "relevance": 0.33,
+        "source": "google_ads_keyword_planner",
+        "volume": 1600
+      }
+    },
+    "thanksgiving outfit ideas": {
+      "decision": "rejected_low_opportunity_estimate",
+      "history": [
+        {
+          "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 23,
+          "source": "google_ads_keyword_planner",
+          "volume": 2900
+        }
+      ],
+      "latest": {
+        "ads_competition": "HIGH",
+        "difficulty": null,
+        "difficulty_note": "not measured (free mode: long-tail rule applied instead)",
+        "intent": "informational",
+        "keyword": "thanksgiving outfit ideas",
+        "opportunity_estimate": 23,
+        "opportunity_evidence": [
+          "3-word phrase",
+          "verified volume 1k-5k"
+        ],
+        "relevance": 0.33,
+        "source": "google_ads_keyword_planner",
+        "volume": 2900
+      }
+    },
+    "thanksgiving outfits": {
+      "decision": "rejected_low_opportunity_estimate",
+      "history": [
+        {
+          "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 8,
+          "source": "google_ads_keyword_planner",
+          "volume": 18100
+        }
+      ],
+      "latest": {
+        "ads_competition": "HIGH",
+        "difficulty": null,
+        "difficulty_note": "not measured (free mode: long-tail rule applied instead)",
+        "intent": "informational",
+        "keyword": "thanksgiving outfits",
+        "opportunity_estimate": 8,
+        "opportunity_evidence": [],
+        "relevance": 0.5,
+        "source": "google_ads_keyword_planner",
+        "volume": 18100
+      }
+    },
+    "thanksgiving outfits 2022": {
+      "decision": "rejected_low_volume",
+      "history": [
+        {
+          "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 13,
+          "source": "google_ads_keyword_planner",
+          "volume": 10
+        }
+      ],
+      "latest": {
+        "ads_competition": null,
+        "difficulty": null,
+        "difficulty_note": "not measured (free mode: long-tail rule applied instead)",
+        "intent": "informational",
+        "keyword": "thanksgiving outfits 2022",
+        "opportunity_estimate": 13,
+        "opportunity_evidence": [
+          "3-word phrase"
+        ],
+        "relevance": 0.33,
+        "source": "google_ads_keyword_planner",
+        "volume": 10
+      }
+    },
+    "travel outfit ideas": {
+      "decision": "rejected_low_opportunity_estimate",
+      "history": [
+        {
+          "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 33,
+          "source": "google_ads_keyword_planner",
+          "volume": 480
+        }
+      ],
+      "latest": {
+        "ads_competition": "HIGH",
+        "difficulty": null,
+        "difficulty_note": "not measured (free mode: long-tail rule applied instead)",
+        "intent": "informational",
+        "keyword": "travel outfit ideas",
+        "opportunity_estimate": 33,
+        "opportunity_evidence": [
+          "3-word phrase",
+          "verified volume 100-1,000 (modest competition likely)"
+        ],
+        "relevance": 0.33,
+        "source": "google_ads_keyword_planner",
+        "volume": 480
+      }
+    },
+    "try hairstyles on my face": {
+      "decision": "rejected_by_quality_gate: forbidden_claim:absolute guarantee; factual_issues:The camera-angle advice says a camera held high 'shortens the forehead'. A high angle usually makes the forehead look larger and the chin smaller, so this is backwards or at best oversimplified.; The ; invented_app_features:Step 2 implies the app le",
+      "history": [
+        {
+          "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 50,
+          "source": "google_ads_keyword_planner",
+          "volume": 590
+        },
+        {
+          "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 50,
+          "source": "google_ads_keyword_planner",
+          "volume": 590
+        }
+      ],
+      "latest": {
+        "ads_competition": "MEDIUM",
+        "coverage": 0.0,
+        "covering_page": null,
+        "decision": "candidate",
+        "difficulty": null,
+        "difficulty_note": "not measured (free mode: long-tail rule applied instead)",
+        "intent": "informational",
+        "keyword": "try hairstyles on my face",
+        "opportunity_estimate": 50,
+        "opportunity_evidence": [
+          "5+ word long-tail",
+          "verified volume 100-1,000 (modest competition likely)"
+        ],
+        "relevance": 0.33,
+        "source": "google_ads_keyword_planner",
+        "volume": 590
+      }
+    },
+    "try on different hairstyles": {
+      "decision": "rejected_low_opportunity_estimate",
+      "history": [
+        {
+          "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 35,
+          "source": "google_ads_keyword_planner",
+          "volume": 1900
+        }
+      ],
+      "latest": {
+        "ads_competition": "MEDIUM",
+        "difficulty": null,
+        "difficulty_note": "not measured (free mode: long-tail rule applied instead)",
+        "intent": "informational",
+        "keyword": "try on different hairstyles",
+        "opportunity_estimate": 35,
+        "opportunity_evidence": [
+          "4-word long-tail",
+          "verified volume 1k-5k"
+        ],
+        "relevance": 0.33,
+        "source": "google_ads_keyword_planner",
+        "volume": 1900
+      }
+    },
+    "try on hairstyles online": {
+      "decision": "rejected_low_opportunity_estimate",
+      "history": [
+        {
+          "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 48,
+          "source": "google_ads_keyword_planner",
+          "volume": 390
+        }
+      ],
+      "latest": {
+        "ads_competition": "MEDIUM",
+        "difficulty": null,
+        "difficulty_note": "not measured (free mode: long-tail rule applied instead)",
+        "intent": "informational",
+        "keyword": "try on hairstyles online",
+        "opportunity_estimate": 48,
+        "opportunity_evidence": [
+          "4-word long-tail",
+          "verified volume 100-1,000 (modest competition likely)"
+        ],
+        "relevance": 0.5,
+        "source": "google_ads_keyword_planner",
+        "volume": 390
+      }
+    },
+    "try on hairstyles with your picture for free": {
+      "decision": "rejected_low_opportunity_estimate",
+      "history": [
+        {
+          "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "commercial",
+          "opportunity_estimate": 40,
+          "source": "google_ads_keyword_planner",
+          "volume": 2900
+        }
+      ],
+      "latest": {
+        "ads_competition": "MEDIUM",
+        "difficulty": null,
+        "difficulty_note": "not measured (free mode: long-tail rule applied instead)",
+        "intent": "commercial",
+        "keyword": "try on hairstyles with your picture for free",
+        "opportunity_estimate": 40,
+        "opportunity_evidence": [
+          "5+ word long-tail",
+          "verified volume 1k-5k"
+        ],
+        "relevance": 0.33,
+        "source": "google_ads_keyword_planner",
+        "volume": 2900
+      }
+    },
+    "vacation outfit ideas": {
+      "decision": "rejected_low_opportunity_estimate",
+      "history": [
+        {
+          "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 33,
+          "source": "google_ads_keyword_planner",
+          "volume": 390
+        }
+      ],
+      "latest": {
+        "ads_competition": "HIGH",
+        "difficulty": null,
+        "difficulty_note": "not measured (free mode: long-tail rule applied instead)",
+        "intent": "informational",
+        "keyword": "vacation outfit ideas",
+        "opportunity_estimate": 33,
+        "opportunity_evidence": [
+          "3-word phrase",
+          "verified volume 100-1,000 (modest competition likely)"
+        ],
+        "relevance": 0.33,
+        "source": "google_ads_keyword_planner",
+        "volume": 390
+      }
+    },
+    "valentine's day outfit ideas": {
+      "decision": "rejected_low_opportunity_estimate",
+      "history": [
+        {
+          "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 34,
+          "source": "google_ads_keyword_planner",
+          "volume": 2400
+        }
+      ],
+      "latest": {
+        "ads_competition": "MEDIUM",
+        "difficulty": null,
+        "difficulty_note": "not measured (free mode: long-tail rule applied instead)",
+        "intent": "informational",
+        "keyword": "valentine's day outfit ideas",
+        "opportunity_estimate": 34,
+        "opportunity_evidence": [
+          "4-word long-tail",
+          "verified volume 1k-5k"
+        ],
+        "relevance": 0.25,
+        "source": "google_ads_keyword_planner",
+        "volume": 2400
+      }
+    },
+    "valentines outfit ideas": {
+      "decision": "rejected_low_opportunity_estimate",
+      "history": [
+        {
+          "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 23,
+          "source": "google_ads_keyword_planner",
+          "volume": 2400
+        }
+      ],
+      "latest": {
+        "ads_competition": "MEDIUM",
+        "difficulty": null,
+        "difficulty_note": "not measured (free mode: long-tail rule applied instead)",
+        "intent": "informational",
+        "keyword": "valentines outfit ideas",
+        "opportunity_estimate": 23,
+        "opportunity_evidence": [
+          "3-word phrase",
+          "verified volume 1k-5k"
+        ],
+        "relevance": 0.33,
+        "source": "google_ads_keyword_planner",
+        "volume": 2400
+      }
+    },
+    "virtual hair try on": {
+      "decision": "rejected_low_opportunity_estimate",
+      "history": [
+        {
+          "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 35,
+          "source": "google_ads_keyword_planner",
+          "volume": 1300
+        }
+      ],
+      "latest": {
+        "ads_competition": "MEDIUM",
+        "difficulty": null,
+        "difficulty_note": "not measured (free mode: long-tail rule applied instead)",
+        "intent": "informational",
+        "keyword": "virtual hair try on",
+        "opportunity_estimate": 35,
+        "opportunity_evidence": [
+          "4-word long-tail",
+          "verified volume 1k-5k"
+        ],
+        "relevance": 0.33,
+        "source": "google_ads_keyword_planner",
+        "volume": 1300
+      }
+    },
+    "virtual personal stylist": {
+      "decision": "rejected_low_opportunity_estimate",
+      "history": [
+        {
+          "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 33,
+          "source": "google_ads_keyword_planner",
+          "volume": 170
+        }
+      ],
+      "latest": {
+        "ads_competition": "MEDIUM",
+        "difficulty": null,
+        "difficulty_note": "not measured (free mode: long-tail rule applied instead)",
+        "intent": "informational",
+        "keyword": "virtual personal stylist",
+        "opportunity_estimate": 33,
+        "opportunity_evidence": [
+          "3-word phrase",
+          "verified volume 100-1,000 (modest competition likely)"
+        ],
+        "relevance": 0.33,
+        "source": "google_ads_keyword_planner",
+        "volume": 170
+      }
+    },
+    "virtual stylist": {
+      "decision": "rejected_low_opportunity_estimate",
+      "history": [
+        {
+          "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 28,
+          "source": "google_ads_keyword_planner",
+          "volume": 390
+        }
+      ],
+      "latest": {
+        "ads_competition": "MEDIUM",
+        "difficulty": null,
+        "difficulty_note": "not measured (free mode: long-tail rule applied instead)",
+        "intent": "informational",
+        "keyword": "virtual stylist",
+        "opportunity_estimate": 28,
+        "opportunity_evidence": [
+          "verified volume 100-1,000 (modest competition likely)"
+        ],
+        "relevance": 0.5,
+        "source": "google_ads_keyword_planner",
+        "volume": 390
+      }
+    },
+    "wardrobe stylist": {
+      "decision": "rejected_low_opportunity_estimate",
+      "history": [
+        {
+          "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 28,
+          "source": "google_ads_keyword_planner",
+          "volume": 880
+        }
+      ],
+      "latest": {
+        "ads_competition": "LOW",
+        "difficulty": null,
+        "difficulty_note": "not measured (free mode: long-tail rule applied instead)",
+        "intent": "informational",
+        "keyword": "wardrobe stylist",
+        "opportunity_estimate": 28,
+        "opportunity_evidence": [
+          "verified volume 100-1,000 (modest competition likely)"
+        ],
+        "relevance": 0.5,
+        "source": "google_ads_keyword_planner",
+        "volume": 880
+      }
+    },
+    "western theme outfit": {
+      "decision": "rejected_low_opportunity_estimate",
+      "history": [
+        {
+          "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 23,
+          "source": "google_ads_keyword_planner",
+          "volume": 2900
+        }
+      ],
+      "latest": {
+        "ads_competition": "HIGH",
+        "difficulty": null,
+        "difficulty_note": "not measured (free mode: long-tail rule applied instead)",
+        "intent": "informational",
+        "keyword": "western theme outfit",
+        "opportunity_estimate": 23,
+        "opportunity_evidence": [
+          "3-word phrase",
+          "verified volume 1k-5k"
+        ],
+        "relevance": 0.33,
+        "source": "google_ads_keyword_planner",
+        "volume": 2900
+      }
+    },
+    "white party outfit ideas": {
+      "decision": "rejected_low_opportunity_estimate",
+      "history": [
+        {
+          "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 44,
+          "source": "google_ads_keyword_planner",
+          "volume": 480
+        }
+      ],
+      "latest": {
+        "ads_competition": "HIGH",
+        "difficulty": null,
+        "difficulty_note": "not measured (free mode: long-tail rule applied instead)",
+        "intent": "informational",
+        "keyword": "white party outfit ideas",
+        "opportunity_estimate": 44,
+        "opportunity_evidence": [
+          "4-word long-tail",
+          "verified volume 100-1,000 (modest competition likely)"
+        ],
+        "relevance": 0.25,
+        "source": "google_ads_keyword_planner",
+        "volume": 480
+      }
+    },
+    "winter outfit ideas": {
+      "decision": "rejected_low_opportunity_estimate",
+      "history": [
+        {
+          "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 23,
+          "source": "google_ads_keyword_planner",
+          "volume": 1900
+        }
+      ],
+      "latest": {
+        "ads_competition": "HIGH",
+        "difficulty": null,
+        "difficulty_note": "not measured (free mode: long-tail rule applied instead)",
+        "intent": "informational",
+        "keyword": "winter outfit ideas",
+        "opportunity_estimate": 23,
+        "opportunity_evidence": [
+          "3-word phrase",
+          "verified volume 1k-5k"
+        ],
+        "relevance": 0.33,
+        "source": "google_ads_keyword_planner",
+        "volume": 1900
+      }
+    }
+  },
   "page_updates": [
     {
       "change": [
@@ -49,14 +5778,21 @@
       "claude_calls": 0,
       "decision": "skip: Google Ads Keyword Planner unavailable (GoogleAdsException); check developer token access level",
       "errors": 0
+    },
+    {
+      "at": "2026-11-03T14:15:50+00:00",
+      "changes": 0,
+      "claude_calls": 3,
+      "decision": "skip: no candidate passed planning + quality gate today",
+      "errors": 0
     }
   ],
   "usage": {
     "2026-11": {
-      "claude_calls": 0,
-      "input_tokens": 0,
-      "output_tokens": 0,
-      "usd_estimate": 0.0
+      "claude_calls": 3,
+      "input_tokens": 11382,
+      "output_tokens": 9629,
+      "usd_estimate": 0.1786
     }
   },
   "version": 1
