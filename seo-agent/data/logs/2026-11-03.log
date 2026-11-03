@@ -2,3 +2,7 @@
 2026-11-03 14:14:33,653 INFO seo_agent: Google Ads Keyword Planner returned 400 ideas
 2026-11-03 14:14:33,661 INFO seo_agent: Shortlisted 1 qualifying keywords (of 193 ideas)
 2026-11-03 14:14:33,661 INFO seo_agent: Keyword agent: 400 ideas, 193 relevant, 1 shortlisted
+2026-11-03 18:32:19,465 INFO seo_agent: Search Console: 28d clicks=0 impressions=0
+2026-11-03 18:32:23,132 INFO seo_agent: Google Ads Keyword Planner returned 400 ideas
+2026-11-03 18:32:23,137 INFO seo_agent: Shortlisted 1 qualifying keywords (of 193 ideas)
+2026-11-03 18:32:23,137 INFO seo_agent: Keyword agent: 400 ideas, 193 relevant, 1 shortlisted
