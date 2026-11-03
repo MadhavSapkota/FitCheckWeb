@@ -9,6 +9,10 @@ on:
         description: "Dry run (no file changes, no commit, no deploy)"
         type: boolean
         default: false
+      keyword:
+        description: "Re-test one keyword (optional, bypasses the 30-day rejection cooldown)"
+        type: string
+        default: ""
 
 # Minimal permissions: push content + trigger the existing Pages workflow.
 permissions:
@@ -55,12 +59,15 @@ jobs:
           GOOGLE_ADS_CUSTOMER_ID: ${{ secrets.GOOGLE_ADS_CUSTOMER_ID }}
           GOOGLE_ADS_LOGIN_CUSTOMER_ID: ${{ secrets.GOOGLE_ADS_LOGIN_CUSTOMER_ID }}
           GSC_SERVICE_ACCOUNT_JSON: ${{ secrets.GSC_SERVICE_ACCOUNT_JSON }}
+          FORCE_KEYWORD: ${{ inputs.keyword }}
         working-directory: seo-agent
         run: |
-          if [ "${{ inputs.dry_run }}" = "true" ]; then
-            python -m seo_agent.main run --dry-run
+          args=""
+          if [ "${{ inputs.dry_run }}" = "true" ]; then args="--dry-run"; fi
+          if [ -n "$FORCE_KEYWORD" ]; then
+            python -m seo_agent.main run $args --keyword "$FORCE_KEYWORD"
           else
-            python -m seo_agent.main run
+            python -m seo_agent.main run $args
           fi
 
       - name: Validate site (build test)

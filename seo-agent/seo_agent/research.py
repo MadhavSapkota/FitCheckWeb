@@ -95,6 +95,39 @@ def enrich(cfg: Config, ideas: list[dict[str, Any]]) -> list[dict[str, Any]]:
     return ideas
 
 
+def cluster_of(cfg: Config, kw: str) -> str:
+    """Topic cluster (pillar) a keyword belongs to, from keyword_research.topic_clusters. First match wins."""
+    toks = set(tokens(kw))
+    for name, terms in (cfg.get("keyword_research.topic_clusters") or {}).items():
+        if toks & {t.lower() for t in terms}:
+            return name
+    return "general-style"
+
+
+def cluster_duplicate(cfg: Config, i: dict[str, Any], articles: dict[str, Any]) -> str | None:
+    """Slug of a published article in the same cluster whose target query is near-identical (token Jaccard)."""
+    mine = set(tokens(i["keyword"])) - STOP
+    limit = cfg.get("keyword_research.cluster_duplicate_overlap", 0.6)
+    for slug, a in articles.items():
+        if a.get("cluster", cluster_of(cfg, a["keyword"])) != i.get("cluster"):
+            continue
+        for other in [a["keyword"], *a.get("secondary_keywords", [])]:
+            o = set(tokens(other)) - STOP
+            if mine and o and len(mine & o) / len(mine | o) >= limit:
+                return slug
+    return None
+
+
+def order_by_cluster(cands: list[dict[str, Any]], articles: dict[str, Any]) -> list[dict[str, Any]]:
+    """Best opportunity first; on ties prefer clusters that already have articles (build topical depth with
+    supporting long-tail pages), then clusters with none."""
+    have: dict[str, int] = {}
+    for a in articles.values():
+        have[a.get("cluster", "")] = have.get(a.get("cluster", ""), 0) + 1
+    return sorted(cands, key=lambda i: (-(i.get("opportunity_estimate") or 0), -min(have.get(i.get("cluster"), 0), 1),
+                                        -(i.get("volume") or 0)))
+
+
 def is_editorial(cfg: Config, i: dict[str, Any]) -> bool:
     return bool(cfg.get("keyword_research.unverified_topics.enabled")) and str(i.get("source", "")).startswith("editorial")
 

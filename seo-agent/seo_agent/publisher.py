@@ -102,17 +102,25 @@ def render_article(cfg: Config, a: dict[str, Any], related: list[dict[str, str]]
     })
 
 
+SITE_GA_RE = re.compile(r"<!-- Google Analytics 4.*?</script>\s*<script async[^>]*></script>\s*<script>.*?</script>", re.S)
+
+
 def analytics_snippet(cfg: Config) -> str:
-    """Optional GA4 tag for blog pages only: page views + a `cta_click` event on Play Store links.
-    Empty unless analytics.ga4_measurement_id is set (update your Privacy Policy before enabling)."""
+    """GA4 for blog pages. Reuses the exact tag from index.html (Consent Mode v2, cookie banner and the
+    `play_store_click` event) so blog Play Store clicks are counted like the rest of the site.
+    Empty unless analytics.ga4_measurement_id is set."""
     mid = cfg.get("analytics.ga4_measurement_id")
     if not mid or not re.fullmatch(r"G-[A-Z0-9]{4,12}", str(mid)):
         return ""
+    home = cfg.site_root / "index.html"
+    m = SITE_GA_RE.search(home.read_text(encoding="utf-8")[:20000]) if home.exists() else None
+    if m and mid in m.group(0):
+        return m.group(0)
     return (f'<script async src="https://www.googletagmanager.com/gtag/js?id={mid}"></script>\n'
             "<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}"
             f"gtag('js',new Date());gtag('config','{mid}',{{anonymize_ip:true}});"
             "document.addEventListener('click',function(e){var a=e.target.closest('a[data-cta]');if(!a)return;"
-            "gtag('event','cta_click',{placement:a.dataset.placement||'',article:a.dataset.article||'',"
+            "gtag('event','play_store_click',{page_path:location.pathname,placement:a.dataset.placement||'',article:a.dataset.article||'',"
             "link_url:a.href,transport_type:'beacon'});});</script>")
 
 
@@ -124,7 +132,8 @@ def pick_related(cfg: Config, articles: dict[str, Any], slug: str, n: int = 4) -
         if s == slug:
             continue
         other = set(tokens(a["keyword"] + " " + a["title"])) - STOP
-        scored.append((len(mine & other), a["published"], s, a))
+        same_cluster = 3 if me.get("cluster") and a.get("cluster") == me.get("cluster") else 0  # topic-cluster links first
+        scored.append((len(mine & other) + same_cluster, a["published"], s, a))
     scored.sort(key=lambda x: (-x[0], x[1]), reverse=False)
     out = [{"href": f"/{cfg.get('site.blog_dir')}/{s}/", "title": a["h1"]} for _, _, s, a in scored[:n]]
     if len(out) < n:
@@ -219,6 +228,17 @@ def add_head_meta(cfg: Config, page: Page) -> list[str]:
         add.append(f'<link rel="canonical" href="{url}">'); done.append("canonical")
     if 'property="og:url"' not in head:
         add.append(f'<meta property="og:url" content="{url}">'); done.append("og:url")
+    e = html.escape
+    desc = page.meta_description or (cfg.get("site.static_meta") or {}).get(page.path, "")
+    if desc and 'name="description"' not in head:
+        add.append(f'<meta name="description" content="{e(desc)}">'); done.append("meta description")
+    brand = cfg.get("project.brand_on_site", "FitCheck AI")
+    og = {"og:type": "website", "og:site_name": brand, "og:title": page.title or brand, "og:description": desc}
+    for prop, val in og.items():
+        if val and f'property="{prop}"' not in head:
+            add.append(f'<meta property="{prop}" content="{e(val)}">'); done.append(prop)
+    if 'name="twitter:card"' not in head:
+        add.append('<meta name="twitter:card" content="summary">'); done.append("twitter:card")
     if not add:
         return []
     p.write_text(raw[:head_end] + "\n".join(add) + "\n" + raw[head_end:], encoding="utf-8")

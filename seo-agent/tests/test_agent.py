@@ -84,6 +84,8 @@ def mock_apis(monkeypatch, *, body=None, review=None, ideas=None):
         "h1": "How to Match Colors in an Outfit", "body_html": body or fake_body("everyday wear"),
         "faqs": [{"question": "What colors go with navy?", "answer": "Tan, cream, white and burgundy all pair well."}],
         "cta_text": "Snap a photo and get an AI style score with tips on fit, color, and balance.", "summary": "Easy color rules."})
+    # Rewrite mock: returns the draft unchanged (so a bad draft keeps failing through every revision).
+    monkeypatch.setattr(content, "revise", lambda cfg, kw, plan, draft, feedback, facts: {**draft, "changes_made": []})
     monkeypatch.setattr(content, "review", lambda *a, **k: review or {"intent_match": True, "value_score": 8, "factual_issues": [],
                                                                        "invented_app_features": [], "unsupported_claims": [],
                                                                        "spam_policy_issues": [], "keyword_stuffing": False, "pass": True, "notes": "ok"})
@@ -125,6 +127,32 @@ def test_quality_gate_blocks_invented_features(site, monkeypatch):
     st = json.loads((site / "seo-agent" / "data" / "state.json").read_text())
     d = st["keywords"]["how to match colors in an outfit"]["decision"]
     assert "forbidden_claim" in d
+
+
+def test_rejected_draft_is_rewritten_with_feedback_and_published(site, monkeypatch):
+    bad = fake_body("x") + "<p>This look is guaranteed to flatter everyone.</p>"
+    mock_apis(monkeypatch, body=bad)
+    seen = []
+
+    def fake_review(cfg, keyword, intent, article, facts):
+        ok = "guaranteed" not in article["body_html"]
+        return {"intent_match": True, "value_score": 8, "factual_issues": [] if ok else ["absolute promise"],
+                "invented_app_features": [], "unsupported_claims": [], "spam_policy_issues": [], "keyword_stuffing": False,
+                "pass": ok, "notes": ""}
+
+    def fake_revise(cfg, kw, plan, draft, feedback, facts):
+        seen.append(feedback)
+        return {**draft, "body_html": draft["body_html"].replace("<p>This look is guaranteed to flatter everyone.</p>", ""),
+                "changes_made": ["removed absolute promise"]}
+    monkeypatch.setattr(content, "review", fake_review)
+    monkeypatch.setattr(content, "revise", fake_revise)
+    main.main(["run"])
+    st = json.loads((site / "seo-agent" / "data" / "state.json").read_text())
+    assert st["keywords"]["how to match colors in an outfit"]["decision"].startswith("published")
+    assert len(seen) == 1 and any("absolute guarantee" in f for f in seen[0]["quality_gate_failures"])
+    assert seen[0]["factual_issues"] == ["absolute promise"]
+    assert "guaranteed" not in (site / "blog" / "how-to-match-colors-in-an-outfit" / "index.html").read_text()
+    assert st["articles"]["how-to-match-colors-in-an-outfit"]["quality_gate"]["revisions"] == 1
 
 
 def test_quality_gate_blocks_stuffing_and_failed_review(site, monkeypatch):
@@ -198,7 +226,7 @@ def test_low_cost_mode_keyword_planner_only(site, monkeypatch):
     html = (site / "blog" / "how-to-match-colors-in-an-outfit" / "index.html").read_text()
     assert "Check Your Outfit With AI" in html
     assert html.count('data-placement="inline"') == 1 and 'data-placement="end"' in html
-    assert "googletagmanager" not in html  # tracking off by default
+    assert "G-NQ0WXQQXQW" in html and "play_store_click" in html  # blog pages track Play Store clicks like the site
     st = json.loads((site / "seo-agent" / "data" / "state.json").read_text())
     for k in ("outfit ideas", "what to wear with olive pants"):
         assert st["keywords"][k]["decision"] == "rejected_low_opportunity_estimate"

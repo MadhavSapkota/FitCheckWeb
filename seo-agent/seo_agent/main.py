@@ -104,8 +104,41 @@ def state_days_since(iso: str) -> int:
     return (date.fromisoformat(today()) - date.fromisoformat(iso)).days
 
 
-def new_article(cfg, state: State, facts: dict, pages, perf, dry: bool, report: dict) -> None:
-    if state.published_today() >= cfg.get("publishing.max_new_articles_per_day", 1):
+# Gate failures a rewrite cannot fix (keyword data, not article content).
+NOT_REVISABLE = ("volume_", "opportunity_estimate", "organic_difficulty", "intent_not_allowed", "bad_slug")
+
+
+def draft_until_pass(cfg, kw, plan, slug, a, articles, pages, facts, attempt) -> tuple[dict, dict]:
+    """Review -> quality gate -> (rewrite with the exact feedback -> review again), up to N revisions."""
+    max_rev = int(cfg.get("content.max_revisions", 3))
+    rounds = []
+    for n in range(max_rev + 1):
+        rev = writer_agent.review(cfg, a, facts)
+        html_ = publisher.render_article(cfg, a, publisher.pick_related(cfg, {**articles, slug: a}, slug))
+        gate = quality.check(cfg, kw=kw, intent=plan["intent"], article=a, rendered_html=html_, url=publisher.article_url(cfg, slug),
+                             slug=slug, review=rev, existing=pages)
+        rounds.append({"round": n, "passed": gate["passed"], "failures": gate["failures"], "changes_made": a.get("revision_changes", [])})
+        save_draft(cfg, slug, n, a, gate, rev)
+        if gate["passed"] or n == max_rev or any(f.startswith(NOT_REVISABLE) for f in gate["failures"]):
+            break
+        feedback = {"quality_gate_failures": gate["failures"], "reviewer_notes": rev.get("notes"),
+                    **{k: rev.get(k) for k in ("factual_issues", "invented_app_features", "unsupported_claims", "spam_policy_issues")}}
+        a = writer_agent.revise(cfg, kw, plan, a, feedback, facts)
+    attempt["rounds"], attempt["quality_gate"], attempt["review_notes"] = rounds, gate, rev.get("notes")
+    a.pop("revision_changes", None)
+    return a, gate
+
+
+def save_draft(cfg, slug: str, n: int, a: dict, gate: dict, rev: dict) -> None:
+    """Keeps every draft + its verdict (data/drafts/) so rejected articles can be inspected or re-tested."""
+    p = cfg.data_dir / "drafts" / f"{today()}-{slug}-r{n}.json"
+    p.parent.mkdir(parents=True, exist_ok=True)
+    p.write_text(json.dumps({"article": a, "gate": gate, "review": rev}, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+
+
+def new_article(cfg, state: State, facts: dict, pages, perf, dry: bool, report: dict, force_keyword: str | None = None) -> None:
+    limit = cfg.get("publishing.max_new_articles_per_day", 1)
+    if state.published_today() >= limit and not force_keyword:
         report["notes"].append("Daily new-article limit already reached")
         return
     if not research.measured_difficulty(cfg):
@@ -113,15 +146,37 @@ def new_article(cfg, state: State, facts: dict, pages, perf, dry: bool, report: 
     if not content.available():
         report["notes"].append("ANTHROPIC_API_KEY missing - content generation skipped")
         return
+    prev = state.data["keywords"].pop(force_keyword, None) if force_keyword else None  # re-test a rejected keyword
     short = keyword_agent.run(cfg, state, pages, perf, report)
+    if force_keyword:
+        short = [i for i in short if i["keyword"] == force_keyword] or \
+            ([{**prev["latest"], "keyword": force_keyword}] if prev and prev.get("latest") else [])
+        for i in short:
+            i["decision"] = "candidate"
+        report["notes"].append(f"Manual re-test of keyword '{force_keyword}'")
+    for i in short:
+        i["cluster"] = research.cluster_of(cfg, i["keyword"])
+    articles = state.data["articles"]
+    for i in short:  # topic clusters: no second article on a near-identical query in the same cluster
+        if i["decision"] == "candidate" and not force_keyword:
+            dup = research.cluster_duplicate(cfg, i, articles)
+            if dup:
+                i["decision"] = f"duplicate_in_cluster:{dup}"
+                state.record_keyword(i["keyword"], i, i["decision"])
     report["shortlist"] = [{k: i.get(k) for k in ("keyword", "volume", "difficulty", "opportunity_estimate", "gsc_impressions_28d",
-                                                  "intent", "decision", "covering_page", "source")} for i in short[:15]]
-    candidates = [i for i in short if i["decision"] == "candidate"]
+                                                  "intent", "cluster", "decision", "covering_page", "source")} for i in short[:15]]
+    candidates = research.order_by_cluster([i for i in short if i["decision"] == "candidate"], articles)
     if not candidates:
         report["decision"] = "skip: no keyword met the volume/evidence, opportunity, intent, relevance and coverage criteria"
         return
-    articles = state.data["articles"]
+    published, clusters_today = [], set()
     for kw in candidates[: cfg.get("keyword_research.max_candidates_per_run", 3)]:
+        if state.published_today() >= limit and not force_keyword:
+            break
+        if kw["cluster"] in clusters_today:
+            continue  # spread daily articles across clusters
+        if published:
+            pages = crawl(cfg)["pages"]  # include today's earlier article in duplicate checks
         plan, serp = strategy_agent.decide(cfg, kw, pages, facts)
         attempt = {"keyword": kw["keyword"], "volume": kw.get("volume"), "opportunity_estimate": kw.get("opportunity_estimate"),
                    "evidence": kw.get("opportunity_evidence"), "plan_action": plan.get("action"), "plan_reason": plan.get("reason")}
@@ -138,24 +193,22 @@ def new_article(cfg, state: State, facts: dict, pages, perf, dry: bool, report: 
         links = [{"href": "/", "title": "FitCheck AI home"}, {"href": "/how-it-works.html", "title": "How FitCheck AI works"}] + \
                 [{"href": f"/{cfg.get('site.blog_dir')}/{s}/", "title": a["h1"]} for s, a in articles.items()]
         a = writer_agent.write(cfg, kw, plan, serp, slug, links, facts)
-        rev = writer_agent.review(cfg, a, facts)
-        html_ = publisher.render_article(cfg, a, publisher.pick_related(cfg, {**articles, slug: a}, slug))
-        gate = quality.check(cfg, kw=kw, intent=plan["intent"], article=a, rendered_html=html_, url=publisher.article_url(cfg, slug),
-                             slug=slug, review=rev, existing=pages)
-        attempt["quality_gate"], attempt["review_notes"] = gate, rev.get("notes")
+        a["cluster"] = kw["cluster"]
+        a, gate = draft_until_pass(cfg, kw, plan, slug, a, articles, pages, facts, attempt)
         if not gate["passed"]:
             state.record_keyword(kw["keyword"], kw, f"rejected_by_quality_gate: {'; '.join(gate['failures'])[:300]}")
             continue
         if dry:
-            report["decision"] = f"[dry-run] would publish /{cfg.get('site.blog_dir')}/{slug}/"
-            return
-        a["quality_gate"] = {k: gate[k] for k in ("word_count", "keyword_density", "warnings")}
+            published.append(f"[dry-run] would publish /{cfg.get('site.blog_dir')}/{slug}/")
+            clusters_today.add(kw["cluster"])
+            continue
+        a["quality_gate"] = {k: gate[k] for k in ("word_count", "keyword_density", "warnings")} | {"revisions": len(attempt["rounds"]) - 1}
         editor_agent.publish(cfg, a, articles)
         state.record_keyword(kw["keyword"], kw, f"published:{slug}")
-        report["decision"] = f"published /{cfg.get('site.blog_dir')}/{slug}/ for '{kw['keyword']}'"
+        published.append(f"published /{cfg.get('site.blog_dir')}/{slug}/ for '{kw['keyword']}' after {len(attempt['rounds']) - 1} revision(s)")
         report["changes"].append(f"new article blog/{slug}/index.html")
-        return
-    report["decision"] = "skip: no candidate passed planning + quality gate today"
+        clusters_today.add(kw["cluster"])
+    report["decision"] = "; ".join(published) if published else "skip: no candidate passed planning + quality gate today"
 
 
 def write_report(cfg, report: dict, dry: bool) -> None:
@@ -183,6 +236,10 @@ def write_report(cfg, report: dict, dry: bool) -> None:
         if report.get("improvement_opportunities"):
             lines += ["Improvement opportunities:", *[f"- {o['page']} ({o['reason']}, {o['impressions']} impr, CTR {o['ctr']:.2%}, pos {o['position']:.1f})"
                                                        for o in report["improvement_opportunities"]], ""]
+    if report.get("article_performance"):
+        lines += ["## Article & keyword performance (Search Console, 28d)", "| article | cluster | target keyword | impressions | clicks | avg pos | keyword impr. | keyword pos |", "|---|---|---|---|---|---|---|---|",
+                  *[f"| {r['slug']} | {r['cluster']} | {r['keyword']} | {r['impressions']} | {r['clicks']} | {r['position']} | {r['keyword_impressions']} | {r['keyword_position']} |"
+                    for r in report["article_performance"]], ""]
     if report.get("cta_clicks") is not None:
         lines += ["## CTA clicks (Play Store link clicks - NOT installs)", *([f"- {c['period']} {c['page']}: {c['cta_clicks']}" for c in report["cta_clicks"]] or ["- none"]), ""]
     if report.get("usage"):
@@ -198,7 +255,7 @@ def write_report(cfg, report: dict, dry: bool) -> None:
     path.write_text(text, encoding="utf-8")
 
 
-def run(dry: bool) -> int:
+def run(dry: bool, force_keyword: str | None = None) -> int:
     cfg = load_config()
     setup_logging(None if dry else str(cfg.data_dir / "logs" / f"{today()}.log"))
     state = State(cfg.data_dir / "state.json")
@@ -224,7 +281,9 @@ def run(dry: bool) -> int:
             report["errors"].append(f"search console: {e}")
         try:
             improve_existing(cfg, state, facts, opps, dry, report)
-            new_article(cfg, state, facts, crawl(cfg)["pages"], perf, dry, report)
+            new_article(cfg, state, facts, crawl(cfg)["pages"], perf, dry, report, force_keyword)
+            if perf:
+                analytics_agent.article_performance(cfg, perf, state.data["articles"], report)
         except research.NoProvider as e:
             report["decision"] = f"skip: {e}"
         except BudgetExceeded as e:
@@ -252,6 +311,7 @@ def main(argv: list[str] | None = None) -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("command", choices=["run", "check"])
     ap.add_argument("--dry-run", action="store_true")
+    ap.add_argument("--keyword", help="re-test one keyword (bypasses the 30-day rejection cooldown)")
     args = ap.parse_args(argv)
     if args.command == "check":
         setup_logging()
@@ -260,7 +320,7 @@ def main(argv: list[str] | None = None) -> int:
             print("ERROR", e)
         print("site validation:", "FAILED" if errs else "OK")
         return 1 if errs else 0
-    return run(args.dry_run)
+    return run(args.dry_run, (args.keyword or "").strip().lower() or None)
 
 
 if __name__ == "__main__":

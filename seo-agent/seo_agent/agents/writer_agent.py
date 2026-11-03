@@ -21,6 +21,19 @@ def write(cfg: Config, kw: dict[str, Any], plan: dict[str, Any], serp: dict[str,
             "serp_snapshot": serp.get("organic", [])}
 
 
+def revise(cfg: Config, kw: dict[str, Any], plan: dict[str, Any], a: dict[str, Any], feedback: dict[str, Any],
+           facts: dict) -> dict[str, Any]:
+    fields = ("title", "meta_description", "h1", "body_html", "faqs", "cta_text", "summary")
+    d = content.revise(cfg, kw, plan, {k: a.get(k) for k in fields}, feedback, facts)
+    out = dict(a)
+    for k in fields:
+        if d.get(k):
+            out[k] = d[k].strip() if isinstance(d[k], str) else d[k]
+    out["faqs"] = (out.get("faqs") or [])[:6]
+    out["revision_changes"] = d.get("changes_made", [])
+    return out
+
+
 def review(cfg: Config, a: dict[str, Any], facts: dict) -> dict[str, Any]:
     return content.review(cfg, a["keyword"], a["intent"],
                           {k: a[k] for k in ("title", "meta_description", "h1", "body_html", "faqs", "cta_text")}, facts)

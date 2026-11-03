@@ -108,6 +108,29 @@ Return JSON: {{"title": "SEO title <= 60 chars", "meta_description": "140-155 ch
     return _json_call(cfg.get("content.model"), _sys(cfg), user)
 
 
+def revise(cfg: Config, kw: dict[str, Any], plan_: dict[str, Any], draft: dict[str, Any], feedback: dict[str, Any],
+           facts: dict) -> dict[str, Any]:
+    """Rewrites a rejected draft using the exact reviewer + quality-gate feedback."""
+    user = f"""Our editorial quality reviewer REJECTED this draft. Rewrite it so EVERY issue below is fixed.
+TARGET_KEYWORD: {kw['keyword']}
+PLAN: {json.dumps(plan_, ensure_ascii=False)}
+REJECTION_FEEDBACK (fix each item exactly): {json.dumps(feedback, ensure_ascii=False)}
+CURRENT_DRAFT: {json.dumps(draft, ensure_ascii=False)}
+APP_FACTS: {json.dumps(facts, ensure_ascii=False)}
+
+Rules for the rewrite:
+- Correct or delete every flagged statement. If you are not certain a styling/beauty claim is accurate, remove it.
+- Describe the app ONLY with wording directly supported by APP_FACTS. Do not describe app screens, menus, buttons,
+  options, sliders, comparisons or workflows that APP_FACTS do not state. Do not call the app or its AI images
+  private, secure, accurate or realistic beyond what APP_FACTS say.
+- Never use the words guarantee, guaranteed, guarantees, 100% accurate, or similar absolute promises.
+- Keep what was good: structure, practical examples, {cfg.get('content.min_words')}-{min(cfg.get('content.max_words'), 1800)} words,
+  at least 4 <h2> sections, the same allowed tags (no <h1>), natural keyword use (no stuffing), and only the internal links already present.
+Return the same JSON shape: {{"title": "<= 60 chars", "meta_description": "140-155 chars", "h1": str, "body_html": str,
+"faqs": [{{"question": str, "answer": str}}], "cta_text": str, "summary": str, "changes_made": [str]}}"""
+    return _json_call(cfg.get("content.model"), _sys(cfg), user)
+
+
 def review(cfg: Config, keyword: str, intent: str, article: dict[str, Any], facts: dict) -> dict[str, Any]:
     system = """You are a strict editorial QA reviewer and Google Search quality rater. Be skeptical. Output JSON only."""
     user = f"""Review this article for the query "{keyword}" (intent: {intent}).

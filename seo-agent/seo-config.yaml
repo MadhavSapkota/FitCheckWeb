@@ -12,6 +12,9 @@ site:
   # Hand-built pages listed in the sitemap. The agent never rewrites their layout.
   static_pages: ["index.html", "how-it-works.html", "privacy.html", "terms.html"]
   exclude_from_audit: ["hero.html"]          # component fragment, not a standalone page
+  # Meta descriptions added ONLY when a hand-built page has none (og:title/og:description/twitter:card are derived).
+  static_meta:
+    how-it-works.html: "How FitCheck AI works: upload a head-to-toe outfit photo, get an AI style score, and see tips on fit, color match and balance."
 
 schedule:
   frequency: daily
@@ -34,7 +37,17 @@ keyword_research:
   unverified_topics:
     enabled: false                 # OFF: verified data sources only (owner's choice)
     min_opportunity_estimate: 40   # needs 5+ words, question format, and app relevance
-  max_candidates_per_run: 3          # each candidate costs ~3 Claude calls
+  max_candidates_per_run: 4          # each candidate costs 3 Claude calls + 2 per revision
+  # Topic clusters (pillars). Each keyword joins the first cluster whose terms it contains. Related-guide links
+  # prefer the same cluster, and a keyword is skipped when a same-cluster article already targets a near-identical query.
+  cluster_duplicate_overlap: 0.6     # token Jaccard between queries in one cluster = duplicate
+  topic_clusters:
+    hair: [hair, hairstyle, hairstyles, haircut, haircuts, curl, curls, curly, bangs, fringe, bob, layers]
+    makeup: [makeup, beauty, lipstick, foundation, blush, eyeshadow, eyeliner, glam, contour, concealer]
+    color: [color, colour, colors, colours, palette, matching, match, combinations, contrast]
+    wardrobe: [wardrobe, closet, capsule, organize, organizer, planner, plan]
+    aesthetics: [aesthetic, aesthetics, y2k, streetwear, vintage, minimalist, "old", money, quiet, luxury]
+    outfits: [outfit, outfits, fit, wear, dress, jeans, shoes, sneakers, clothes, clothing, look, looks, style, styling]
   # Google Trends: no official API exists, so it is intentionally not used (unofficial scrapers break ToS/reliability).
   minimum_monthly_searches: 100
   maximum_organic_difficulty: 25   # applies when organic_difficulty_source: dataforseo
@@ -71,17 +84,18 @@ content:
   max_keyword_density_percent: 2.5
   max_similarity_to_existing: 0.45   # 0..1 shingle similarity; above this = near-duplicate
   coverage_threshold: 0.6            # share of keyword tokens already in an existing title/H1 = "covered"
+  max_revisions: 3                   # rejected drafts are rewritten with the reviewer's exact feedback, then re-reviewed
 
 publishing:
   automatic: true
-  max_new_articles_per_day: 1
+  max_new_articles_per_day: 2        # 1-2 per day, only when qualifying keywords pass every check
   update_existing_pages: true
   require_quality_gate: true
   max_page_updates_per_day: 2
 
 limits:                               # spending guardrails (checked before every Claude call)
-  max_claude_calls_per_run: 12
-  max_monthly_usd: 10                 # stop generating when the month's estimated spend reaches this
+  max_claude_calls_per_run: 30        # 2 articles x (plan + write + review + 3 x (rewrite + review)) + spare
+  max_monthly_usd: 25                 # stop generating when the month's estimated spend reaches this
   input_usd_per_mtok: 3.0             # VERIFY against https://www.anthropic.com/pricing for your model
   output_usd_per_mtok: 15.0
   # Also set a hard monthly limit in console.anthropic.com -> Settings -> Limits.
@@ -89,8 +103,8 @@ limits:                               # spending guardrails (checked before ever
 analytics:
   # Optional CTA click tracking (GA4). Leave empty to disable. Enabling adds Google Analytics to /blog/ pages
   # only - update privacy.html to disclose it first.
-  ga4_measurement_id: ""             # e.g. "G-ABC123XYZ"
-  ga4_property_id: ""                # numeric GA4 property id, for reading cta_click counts
+  ga4_measurement_id: "G-NQ0WXQQXQW" # same tag + consent banner as the rest of the site (disclosed in privacy.html)
+  ga4_property_id: ""                # numeric GA4 property id, to read play_store_click counts into the daily report
 
 seo:
   generate_meta_tags: true
