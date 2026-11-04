@@ -90,6 +90,16 @@
           "opportunity_estimate": 44,
           "source": "google_ads_keyword_planner",
           "volume": 590
+        },
+        {
+          "date": "2026-11-04",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 44,
+          "source": "google_ads_keyword_planner",
+          "volume": 590
         }
       ],
       "latest": {
@@ -123,6 +133,16 @@
         },
         {
           "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 44,
+          "source": "google_ads_keyword_planner",
+          "volume": 480
+        },
+        {
+          "date": "2026-11-04",
           "difficulty": null,
           "gsc_impressions_28d": null,
           "gsc_position": null,
@@ -170,6 +190,16 @@
           "opportunity_estimate": 23,
           "source": "google_ads_keyword_planner",
           "volume": 2400
+        },
+        {
+          "date": "2026-11-04",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 23,
+          "source": "google_ads_keyword_planner",
+          "volume": 2400
         }
       ],
       "latest": {
@@ -203,6 +233,16 @@
         },
         {
           "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 23,
+          "source": "google_ads_keyword_planner",
+          "volume": 4400
+        },
+        {
+          "date": "2026-11-04",
           "difficulty": null,
           "gsc_impressions_28d": null,
           "gsc_position": null,
@@ -250,6 +290,16 @@
           "opportunity_estimate": 34,
           "source": "google_ads_keyword_planner",
           "volume": 1300
+        },
+        {
+          "date": "2026-11-04",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 34,
+          "source": "google_ads_keyword_planner",
+          "volume": 1300
         }
       ],
       "latest": {
@@ -283,6 +333,16 @@
         },
         {
           "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 30,
+          "source": "google_ads_keyword_planner",
+          "volume": 2400
+        },
+        {
+          "date": "2026-11-04",
           "difficulty": null,
           "gsc_impressions_28d": null,
           "gsc_position": null,
@@ -330,6 +390,16 @@
           "opportunity_estimate": 13,
           "source": "google_ads_keyword_planner",
           "volume": 8100
+        },
+        {
+          "date": "2026-11-04",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 13,
+          "source": "google_ads_keyword_planner",
+          "volume": 8100
         }
       ],
       "latest": {
@@ -369,6 +439,16 @@
           "opportunity_estimate": 13,
           "source": "google_ads_keyword_planner",
           "volume": 9900
+        },
+        {
+          "date": "2026-11-04",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 13,
+          "source": "google_ads_keyword_planner",
+          "volume": 9900
         }
       ],
       "latest": {
@@ -401,6 +481,16 @@
         },
         {
           "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 34,
+          "source": "google_ads_keyword_planner",
+          "volume": 2900
+        },
+        {
+          "date": "2026-11-04",
           "difficulty": null,
           "gsc_impressions_28d": null,
           "gsc_position": null,
@@ -448,6 +538,16 @@
           "opportunity_estimate": 13,
           "source": "google_ads_keyword_planner",
           "volume": 9900
+        },
+        {
+          "date": "2026-11-04",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 13,
+          "source": "google_ads_keyword_planner",
+          "volume": 9900
         }
       ],
       "latest": {
@@ -480,6 +580,16 @@
         },
         {
           "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 23,
+          "source": "google_ads_keyword_planner",
+          "volume": 2400
+        },
+        {
+          "date": "2026-11-04",
           "difficulty": null,
           "gsc_impressions_28d": null,
           "gsc_position": null,
@@ -527,6 +637,16 @@
           "opportunity_estimate": 23,
           "source": "google_ads_keyword_planner",
           "volume": 4400
+        },
+        {
+          "date": "2026-11-04",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 23,
+          "source": "google_ads_keyword_planner",
+          "volume": 4400
         }
       ],
       "latest": {
@@ -560,6 +680,16 @@
         },
         {
           "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 34,
+          "source": "google_ads_keyword_planner",
+          "volume": 2400
+        },
+        {
+          "date": "2026-11-04",
           "difficulty": null,
           "gsc_impressions_28d": null,
           "gsc_position": null,
@@ -607,6 +737,16 @@
           "opportunity_estimate": 24,
           "source": "google_ads_keyword_planner",
           "volume": 6600
+        },
+        {
+          "date": "2026-11-04",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 24,
+          "source": "google_ads_keyword_planner",
+          "volume": 6600
         }
       ],
       "latest": {
@@ -639,6 +779,16 @@
         },
         {
           "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 38,
+          "source": "google_ads_keyword_planner",
+          "volume": 2900
+        },
+        {
+          "date": "2026-11-04",
           "difficulty": null,
           "gsc_impressions_28d": null,
           "gsc_position": null,
@@ -686,6 +836,16 @@
           "opportunity_estimate": 33,
           "source": "google_ads_keyword_planner",
           "volume": 390
+        },
+        {
+          "date": "2026-11-04",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 33,
+          "source": "google_ads_keyword_planner",
+          "volume": 390
         }
       ],
       "latest": {
@@ -726,6 +886,16 @@
           "opportunity_estimate": 35,
           "source": "google_ads_keyword_planner",
           "volume": 720
+        },
+        {
+          "date": "2026-11-04",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 35,
+          "source": "google_ads_keyword_planner",
+          "volume": 720
         }
       ],
       "latest": {
@@ -758,6 +928,16 @@
         },
         {
           "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 38,
+          "source": "google_ads_keyword_planner",
+          "volume": 260
+        },
+        {
+          "date": "2026-11-04",
           "difficulty": null,
           "gsc_impressions_28d": null,
           "gsc_position": null,
@@ -805,6 +985,16 @@
           "opportunity_estimate": 43,
           "source": "google_ads_keyword_planner",
           "volume": 260
+        },
+        {
+          "date": "2026-11-04",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 43,
+          "source": "google_ads_keyword_planner",
+          "volume": 260
         }
       ],
       "latest": {
@@ -838,6 +1028,16 @@
         },
         {
           "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 33,
+          "source": "google_ads_keyword_planner",
+          "volume": 390
+        },
+        {
+          "date": "2026-11-04",
           "difficulty": null,
           "gsc_impressions_28d": null,
           "gsc_position": null,
@@ -885,6 +1085,16 @@
           "opportunity_estimate": 44,
           "source": "google_ads_keyword_planner",
           "volume": 320
+        },
+        {
+          "date": "2026-11-04",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 44,
+          "source": "google_ads_keyword_planner",
+          "volume": 320
         }
       ],
       "latest": {
@@ -918,6 +1128,16 @@
         },
         {
           "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 48,
+          "source": "google_ads_keyword_planner",
+          "volume": 590
+        },
+        {
+          "date": "2026-11-04",
           "difficulty": null,
           "gsc_impressions_28d": null,
           "gsc_position": null,
@@ -965,6 +1185,16 @@
           "opportunity_estimate": 23,
           "source": "google_ads_keyword_planner",
           "volume": 3600
+        },
+        {
+          "date": "2026-11-04",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 23,
+          "source": "google_ads_keyword_planner",
+          "volume": 3600
         }
       ],
       "latest": {
@@ -998,6 +1228,16 @@
         },
         {
           "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 33,
+          "source": "google_ads_keyword_planner",
+          "volume": 480
+        },
+        {
+          "date": "2026-11-04",
           "difficulty": null,
           "gsc_impressions_28d": null,
           "gsc_position": null,
@@ -1045,6 +1285,16 @@
           "opportunity_estimate": 33,
           "source": "google_ads_keyword_planner",
           "volume": 720
+        },
+        {
+          "date": "2026-11-04",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 33,
+          "source": "google_ads_keyword_planner",
+          "volume": 720
         }
       ],
       "latest": {
@@ -1078,6 +1328,16 @@
         },
         {
           "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 18,
+          "source": "google_ads_keyword_planner",
+          "volume": 1900
+        },
+        {
+          "date": "2026-11-04",
           "difficulty": null,
           "gsc_impressions_28d": null,
           "gsc_position": null,
@@ -1124,6 +1384,16 @@
           "opportunity_estimate": 25,
           "source": "google_ads_keyword_planner",
           "volume": 90
+        },
+        {
+          "date": "2026-11-04",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "commercial",
+          "opportunity_estimate": 25,
+          "source": "google_ads_keyword_planner",
+          "volume": 90
         }
       ],
       "latest": {
@@ -1156,6 +1426,16 @@
         },
         {
           "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "commercial",
+          "opportunity_estimate": 40,
+          "source": "google_ads_keyword_planner",
+          "volume": 260
+        },
+        {
+          "date": "2026-11-04",
           "difficulty": null,
           "gsc_impressions_28d": null,
           "gsc_position": null,
@@ -1203,6 +1483,16 @@
           "opportunity_estimate": 44,
           "source": "google_ads_keyword_planner",
           "volume": 390
+        },
+        {
+          "date": "2026-11-04",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 44,
+          "source": "google_ads_keyword_planner",
+          "volume": 390
         }
       ],
       "latest": {
@@ -1236,6 +1526,16 @@
         },
         {
           "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 18,
+          "source": "google_ads_keyword_planner",
+          "volume": 2400
+        },
+        {
+          "date": "2026-11-04",
           "difficulty": null,
           "gsc_impressions_28d": null,
           "gsc_position": null,
@@ -1283,6 +1583,16 @@
           "opportunity_estimate": 23,
           "source": "google_ads_keyword_planner",
           "volume": 2400
+        },
+        {
+          "date": "2026-11-04",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 23,
+          "source": "google_ads_keyword_planner",
+          "volume": 2400
         }
       ],
       "latest": {
@@ -1316,6 +1626,16 @@
         },
         {
           "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 33,
+          "source": "google_ads_keyword_planner",
+          "volume": 110
+        },
+        {
+          "date": "2026-11-04",
           "difficulty": null,
           "gsc_impressions_28d": null,
           "gsc_position": null,
@@ -1363,6 +1683,16 @@
           "opportunity_estimate": 18,
           "source": "google_ads_keyword_planner",
           "volume": 2400
+        },
+        {
+          "date": "2026-11-04",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 18,
+          "source": "google_ads_keyword_planner",
+          "volume": 2400
         }
       ],
       "latest": {
@@ -1396,6 +1726,16 @@
         },
         {
           "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 23,
+          "source": "google_ads_keyword_planner",
+          "volume": 2400
+        },
+        {
+          "date": "2026-11-04",
           "difficulty": null,
           "gsc_impressions_28d": null,
           "gsc_position": null,
@@ -1443,6 +1783,16 @@
           "opportunity_estimate": 48,
           "source": "google_ads_keyword_planner",
           "volume": 170
+        },
+        {
+          "date": "2026-11-04",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 48,
+          "source": "google_ads_keyword_planner",
+          "volume": 170
         }
       ],
       "latest": {
@@ -1476,6 +1826,16 @@
         },
         {
           "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 33,
+          "source": "google_ads_keyword_planner",
+          "volume": 320
+        },
+        {
+          "date": "2026-11-04",
           "difficulty": null,
           "gsc_impressions_28d": null,
           "gsc_position": null,
@@ -1523,6 +1883,16 @@
           "opportunity_estimate": 24,
           "source": "google_ads_keyword_planner",
           "volume": 90
+        },
+        {
+          "date": "2026-11-04",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 24,
+          "source": "google_ads_keyword_planner",
+          "volume": 90
         }
       ],
       "latest": {
@@ -1555,6 +1925,16 @@
         },
         {
           "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 23,
+          "source": "google_ads_keyword_planner",
+          "volume": 2400
+        },
+        {
+          "date": "2026-11-04",
           "difficulty": null,
           "gsc_impressions_28d": null,
           "gsc_position": null,
@@ -1602,6 +1982,16 @@
           "opportunity_estimate": 34,
           "source": "google_ads_keyword_planner",
           "volume": 1600
+        },
+        {
+          "date": "2026-11-04",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 34,
+          "source": "google_ads_keyword_planner",
+          "volume": 1600
         }
       ],
       "latest": {
@@ -1642,6 +2032,16 @@
           "opportunity_estimate": 28,
           "source": "google_ads_keyword_planner",
           "volume": 10
+        },
+        {
+          "date": "2026-11-04",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 28,
+          "source": "google_ads_keyword_planner",
+          "volume": 10
         }
       ],
       "latest": {
@@ -1674,6 +2074,16 @@
         },
         {
           "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 48,
+          "source": "google_ads_keyword_planner",
+          "volume": 880
+        },
+        {
+          "date": "2026-11-04",
           "difficulty": null,
           "gsc_impressions_28d": null,
           "gsc_position": null,
@@ -1721,6 +2131,16 @@
           "opportunity_estimate": 20,
           "source": "google_ads_keyword_planner",
           "volume": 70
+        },
+        {
+          "date": "2026-11-04",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 20,
+          "source": "google_ads_keyword_planner",
+          "volume": 70
         }
       ],
       "latest": {
@@ -1760,6 +2180,16 @@
           "opportunity_estimate": 25,
           "source": "google_ads_keyword_planner",
           "volume": 90
+        },
+        {
+          "date": "2026-11-04",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 25,
+          "source": "google_ads_keyword_planner",
+          "volume": 90
         }
       ],
       "latest": {
@@ -1792,6 +2222,16 @@
         },
         {
           "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 28,
+          "source": "google_ads_keyword_planner",
+          "volume": 110
+        },
+        {
+          "date": "2026-11-04",
           "difficulty": null,
           "gsc_impressions_28d": null,
           "gsc_position": null,
@@ -1839,6 +2279,16 @@
           "opportunity_estimate": 28,
           "source": "google_ads_keyword_planner",
           "volume": 590
+        },
+        {
+          "date": "2026-11-04",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 28,
+          "source": "google_ads_keyword_planner",
+          "volume": 590
         }
       ],
       "latest": {
@@ -1871,6 +2321,16 @@
         },
         {
           "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 30,
+          "source": "google_ads_keyword_planner",
+          "volume": 1600
+        },
+        {
+          "date": "2026-11-04",
           "difficulty": null,
           "gsc_impressions_28d": null,
           "gsc_position": null,
@@ -1918,6 +2378,16 @@
           "opportunity_estimate": 33,
           "source": "google_ads_keyword_planner",
           "volume": 880
+        },
+        {
+          "date": "2026-11-04",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 33,
+          "source": "google_ads_keyword_planner",
+          "volume": 880
         }
       ],
       "latest": {
@@ -1958,6 +2428,16 @@
           "opportunity_estimate": 13,
           "source": "google_ads_keyword_planner",
           "volume": 8100
+        },
+        {
+          "date": "2026-11-04",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 13,
+          "source": "google_ads_keyword_planner",
+          "volume": 8100
         }
       ],
       "latest": {
@@ -1990,6 +2470,16 @@
         },
         {
           "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 34,
+          "source": "google_ads_keyword_planner",
+          "volume": 3600
+        },
+        {
+          "date": "2026-11-04",
           "difficulty": null,
           "gsc_impressions_28d": null,
           "gsc_position": null,
@@ -2037,6 +2527,16 @@
           "opportunity_estimate": 23,
           "source": "google_ads_keyword_planner",
           "volume": 3600
+        },
+        {
+          "date": "2026-11-04",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 23,
+          "source": "google_ads_keyword_planner",
+          "volume": 3600
         }
       ],
       "latest": {
@@ -2070,6 +2570,16 @@
         },
         {
           "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 33,
+          "source": "google_ads_keyword_planner",
+          "volume": 880
+        },
+        {
+          "date": "2026-11-04",
           "difficulty": null,
           "gsc_impressions_28d": null,
           "gsc_position": null,
@@ -2117,6 +2627,16 @@
           "opportunity_estimate": 34,
           "source": "google_ads_keyword_planner",
           "volume": 1600
+        },
+        {
+          "date": "2026-11-04",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 34,
+          "source": "google_ads_keyword_planner",
+          "volume": 1600
         }
       ],
       "latest": {
@@ -2150,6 +2670,16 @@
         },
         {
           "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 33,
+          "source": "google_ads_keyword_planner",
+          "volume": 1000
+        },
+        {
+          "date": "2026-11-04",
           "difficulty": null,
           "gsc_impressions_28d": null,
           "gsc_position": null,
@@ -2197,6 +2727,16 @@
           "opportunity_estimate": 8,
           "source": "google_ads_keyword_planner",
           "volume": 40500
+        },
+        {
+          "date": "2026-11-04",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 8,
+          "source": "google_ads_keyword_planner",
+          "volume": 40500
         }
       ],
       "latest": {
@@ -2227,6 +2767,16 @@
         },
         {
           "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 13,
+          "source": "google_ads_keyword_planner",
+          "volume": 6600
+        },
+        {
+          "date": "2026-11-04",
           "difficulty": null,
           "gsc_impressions_28d": null,
           "gsc_position": null,
@@ -2266,6 +2816,16 @@
         },
         {
           "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 23,
+          "source": "google_ads_keyword_planner",
+          "volume": 2900
+        },
+        {
+          "date": "2026-11-04",
           "difficulty": null,
           "gsc_impressions_28d": null,
           "gsc_position": null,
@@ -2313,6 +2873,16 @@
           "opportunity_estimate": 30,
           "source": "google_ads_keyword_planner",
           "volume": 1600
+        },
+        {
+          "date": "2026-11-04",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 30,
+          "source": "google_ads_keyword_planner",
+          "volume": 1600
         }
       ],
       "latest": {
@@ -2346,6 +2916,16 @@
         },
         {
           "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 34,
+          "source": "google_ads_keyword_planner",
+          "volume": 1600
+        },
+        {
+          "date": "2026-11-04",
           "difficulty": null,
           "gsc_impressions_28d": null,
           "gsc_position": null,
@@ -2393,6 +2973,16 @@
           "opportunity_estimate": 18,
           "source": "google_ads_keyword_planner",
           "volume": 1900
+        },
+        {
+          "date": "2026-11-04",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 18,
+          "source": "google_ads_keyword_planner",
+          "volume": 1900
         }
       ],
       "latest": {
@@ -2425,6 +3015,16 @@
         },
         {
           "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 33,
+          "source": "google_ads_keyword_planner",
+          "volume": 590
+        },
+        {
+          "date": "2026-11-04",
           "difficulty": null,
           "gsc_impressions_28d": null,
           "gsc_position": null,
@@ -2472,6 +3072,16 @@
           "opportunity_estimate": 33,
           "source": "google_ads_keyword_planner",
           "volume": 480
+        },
+        {
+          "date": "2026-11-04",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 33,
+          "source": "google_ads_keyword_planner",
+          "volume": 480
         }
       ],
       "latest": {
@@ -2505,6 +3115,16 @@
         },
         {
           "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 33,
+          "source": "google_ads_keyword_planner",
+          "volume": 720
+        },
+        {
+          "date": "2026-11-04",
           "difficulty": null,
           "gsc_impressions_28d": null,
           "gsc_position": null,
@@ -2552,6 +3172,16 @@
           "opportunity_estimate": 28,
           "source": "google_ads_keyword_planner",
           "volume": 880
+        },
+        {
+          "date": "2026-11-04",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 28,
+          "source": "google_ads_keyword_planner",
+          "volume": 880
         }
       ],
       "latest": {
@@ -2585,6 +3215,16 @@
         },
         {
           "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 23,
+          "source": "google_ads_keyword_planner",
+          "volume": 3600
+        },
+        {
+          "date": "2026-11-04",
           "difficulty": null,
           "gsc_impressions_28d": null,
           "gsc_position": null,
@@ -2632,6 +3272,16 @@
           "opportunity_estimate": 44,
           "source": "google_ads_keyword_planner",
           "volume": 880
+        },
+        {
+          "date": "2026-11-04",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 44,
+          "source": "google_ads_keyword_planner",
+          "volume": 880
         }
       ],
       "latest": {
@@ -2665,6 +3315,16 @@
         },
         {
           "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 33,
+          "source": "google_ads_keyword_planner",
+          "volume": 480
+        },
+        {
+          "date": "2026-11-04",
           "difficulty": null,
           "gsc_impressions_28d": null,
           "gsc_position": null,
@@ -2712,6 +3372,16 @@
           "opportunity_estimate": 44,
           "source": "google_ads_keyword_planner",
           "volume": 170
+        },
+        {
+          "date": "2026-11-04",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 44,
+          "source": "google_ads_keyword_planner",
+          "volume": 170
         }
       ],
       "latest": {
@@ -2745,6 +3415,16 @@
         },
         {
           "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 23,
+          "source": "google_ads_keyword_planner",
+          "volume": 3600
+        },
+        {
+          "date": "2026-11-04",
           "difficulty": null,
           "gsc_impressions_28d": null,
           "gsc_position": null,
@@ -2792,6 +3472,16 @@
           "opportunity_estimate": 24,
           "source": "google_ads_keyword_planner",
           "volume": 10
+        },
+        {
+          "date": "2026-11-04",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 24,
+          "source": "google_ads_keyword_planner",
+          "volume": 10
         }
       ],
       "latest": {
@@ -2824,6 +3514,16 @@
         },
         {
           "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 28,
+          "source": "google_ads_keyword_planner",
+          "volume": 210
+        },
+        {
+          "date": "2026-11-04",
           "difficulty": null,
           "gsc_impressions_28d": null,
           "gsc_position": null,
@@ -2870,6 +3570,16 @@
           "opportunity_estimate": 25,
           "source": "google_ads_keyword_planner",
           "volume": 1600
+        },
+        {
+          "date": "2026-11-04",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 25,
+          "source": "google_ads_keyword_planner",
+          "volume": 1600
         }
       ],
       "latest": {
@@ -2909,6 +3619,16 @@
           "opportunity_estimate": 28,
           "source": "google_ads_keyword_planner",
           "volume": 880
+        },
+        {
+          "date": "2026-11-04",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 28,
+          "source": "google_ads_keyword_planner",
+          "volume": 880
         }
       ],
       "latest": {
@@ -2941,6 +3661,16 @@
         },
         {
           "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 45,
+          "source": "google_ads_keyword_planner",
+          "volume": 390
+        },
+        {
+          "date": "2026-11-04",
           "difficulty": null,
           "gsc_impressions_28d": null,
           "gsc_position": null,
@@ -2988,6 +3718,16 @@
           "opportunity_estimate": 33,
           "source": "google_ads_keyword_planner",
           "volume": 480
+        },
+        {
+          "date": "2026-11-04",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 33,
+          "source": "google_ads_keyword_planner",
+          "volume": 480
         }
       ],
       "latest": {
@@ -3021,6 +3761,16 @@
         },
         {
           "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 26,
+          "source": "google_ads_keyword_planner",
+          "volume": 1300
+        },
+        {
+          "date": "2026-11-04",
           "difficulty": null,
           "gsc_impressions_28d": null,
           "gsc_position": null,
@@ -3068,6 +3818,16 @@
           "opportunity_estimate": 26,
           "source": "google_ads_keyword_planner",
           "volume": 1300
+        },
+        {
+          "date": "2026-11-04",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 26,
+          "source": "google_ads_keyword_planner",
+          "volume": 1300
         }
       ],
       "latest": {
@@ -3101,6 +3861,16 @@
         },
         {
           "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 34,
+          "source": "google_ads_keyword_planner",
+          "volume": 1900
+        },
+        {
+          "date": "2026-11-04",
           "difficulty": null,
           "gsc_impressions_28d": null,
           "gsc_position": null,
@@ -3148,6 +3918,16 @@
           "opportunity_estimate": 33,
           "source": "google_ads_keyword_planner",
           "volume": 1000
+        },
+        {
+          "date": "2026-11-04",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 33,
+          "source": "google_ads_keyword_planner",
+          "volume": 1000
         }
       ],
       "latest": {
@@ -3181,6 +3961,16 @@
         },
         {
           "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 23,
+          "source": "google_ads_keyword_planner",
+          "volume": 1300
+        },
+        {
+          "date": "2026-11-04",
           "difficulty": null,
           "gsc_impressions_28d": null,
           "gsc_position": null,
@@ -3228,6 +4018,16 @@
           "opportunity_estimate": 44,
           "source": "google_ads_keyword_planner",
           "volume": 260
+        },
+        {
+          "date": "2026-11-04",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 44,
+          "source": "google_ads_keyword_planner",
+          "volume": 260
         }
       ],
       "latest": {
@@ -3268,6 +4068,16 @@
           "opportunity_estimate": 8,
           "source": "google_ads_keyword_planner",
           "volume": 6600
+        },
+        {
+          "date": "2026-11-04",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 8,
+          "source": "google_ads_keyword_planner",
+          "volume": 6600
         }
       ],
       "latest": {
@@ -3298,6 +4108,16 @@
         },
         {
           "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 33,
+          "source": "google_ads_keyword_planner",
+          "volume": 210
+        },
+        {
+          "date": "2026-11-04",
           "difficulty": null,
           "gsc_impressions_28d": null,
           "gsc_position": null,
@@ -3345,6 +4165,16 @@
           "opportunity_estimate": 16,
           "source": "google_ads_keyword_planner",
           "volume": 9900
+        },
+        {
+          "date": "2026-11-04",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 16,
+          "source": "google_ads_keyword_planner",
+          "volume": 9900
         }
       ],
       "latest": {
@@ -3377,6 +4207,16 @@
         },
         {
           "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "commercial",
+          "opportunity_estimate": 38,
+          "source": "google_ads_keyword_planner",
+          "volume": 1900
+        },
+        {
+          "date": "2026-11-04",
           "difficulty": null,
           "gsc_impressions_28d": null,
           "gsc_position": null,
@@ -3424,6 +4264,16 @@
           "opportunity_estimate": 23,
           "source": "google_ads_keyword_planner",
           "volume": 1900
+        },
+        {
+          "date": "2026-11-04",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 23,
+          "source": "google_ads_keyword_planner",
+          "volume": 1900
         }
       ],
       "latest": {
@@ -3457,6 +4307,16 @@
         },
         {
           "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 23,
+          "source": "google_ads_keyword_planner",
+          "volume": 1600
+        },
+        {
+          "date": "2026-11-04",
           "difficulty": null,
           "gsc_impressions_28d": null,
           "gsc_position": null,
@@ -3504,6 +4364,16 @@
           "opportunity_estimate": 38,
           "source": "google_ads_keyword_planner",
           "volume": 4400
+        },
+        {
+          "date": "2026-11-04",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 38,
+          "source": "google_ads_keyword_planner",
+          "volume": 4400
         }
       ],
       "latest": {
@@ -3537,6 +4407,16 @@
         },
         {
           "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 48,
+          "source": "google_ads_keyword_planner",
+          "volume": 320
+        },
+        {
+          "date": "2026-11-04",
           "difficulty": null,
           "gsc_impressions_28d": null,
           "gsc_position": null,
@@ -3584,6 +4464,16 @@
           "opportunity_estimate": 28,
           "source": "google_ads_keyword_planner",
           "volume": 590
+        },
+        {
+          "date": "2026-11-04",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 28,
+          "source": "google_ads_keyword_planner",
+          "volume": 590
         }
       ],
       "latest": {
@@ -3617,6 +4507,16 @@
         },
         {
           "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 23,
+          "source": "google_ads_keyword_planner",
+          "volume": 1900
+        },
+        {
+          "date": "2026-11-04",
           "difficulty": null,
           "gsc_impressions_28d": null,
           "gsc_position": null,
@@ -3664,6 +4564,16 @@
           "opportunity_estimate": 44,
           "source": "google_ads_keyword_planner",
           "volume": 880
+        },
+        {
+          "date": "2026-11-04",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 44,
+          "source": "google_ads_keyword_planner",
+          "volume": 880
         }
       ],
       "latest": {
@@ -3697,6 +4607,16 @@
         },
         {
           "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 33,
+          "source": "google_ads_keyword_planner",
+          "volume": 480
+        },
+        {
+          "date": "2026-11-04",
           "difficulty": null,
           "gsc_impressions_28d": null,
           "gsc_position": null,
@@ -3744,6 +4664,16 @@
           "opportunity_estimate": 44,
           "source": "google_ads_keyword_planner",
           "volume": 480
+        },
+        {
+          "date": "2026-11-04",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 44,
+          "source": "google_ads_keyword_planner",
+          "volume": 480
         }
       ],
       "latest": {
@@ -3777,6 +4707,16 @@
         },
         {
           "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 44,
+          "source": "google_ads_keyword_planner",
+          "volume": 210
+        },
+        {
+          "date": "2026-11-04",
           "difficulty": null,
           "gsc_impressions_28d": null,
           "gsc_position": null,
@@ -3824,6 +4764,16 @@
           "opportunity_estimate": 48,
           "source": "google_ads_keyword_planner",
           "volume": 110
+        },
+        {
+          "date": "2026-11-04",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 48,
+          "source": "google_ads_keyword_planner",
+          "volume": 110
         }
       ],
       "latest": {
@@ -3857,6 +4807,16 @@
         },
         {
           "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 33,
+          "source": "google_ads_keyword_planner",
+          "volume": 390
+        },
+        {
+          "date": "2026-11-04",
           "difficulty": null,
           "gsc_impressions_28d": null,
           "gsc_position": null,
@@ -3904,6 +4864,16 @@
           "opportunity_estimate": 35,
           "source": "google_ads_keyword_planner",
           "volume": 320
+        },
+        {
+          "date": "2026-11-04",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 35,
+          "source": "google_ads_keyword_planner",
+          "volume": 320
         }
       ],
       "latest": {
@@ -3936,6 +4906,16 @@
         },
         {
           "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 40,
+          "source": "google_ads_keyword_planner",
+          "volume": 260
+        },
+        {
+          "date": "2026-11-04",
           "difficulty": null,
           "gsc_impressions_28d": null,
           "gsc_position": null,
@@ -3983,6 +4963,16 @@
           "opportunity_estimate": 34,
           "source": "google_ads_keyword_planner",
           "volume": 1900
+        },
+        {
+          "date": "2026-11-04",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 34,
+          "source": "google_ads_keyword_planner",
+          "volume": 1900
         }
       ],
       "latest": {
@@ -4016,6 +5006,16 @@
         },
         {
           "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 33,
+          "source": "google_ads_keyword_planner",
+          "volume": 880
+        },
+        {
+          "date": "2026-11-04",
           "difficulty": null,
           "gsc_impressions_28d": null,
           "gsc_position": null,
@@ -4063,6 +5063,16 @@
           "opportunity_estimate": 33,
           "source": "google_ads_keyword_planner",
           "volume": 110
+        },
+        {
+          "date": "2026-11-04",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 33,
+          "source": "google_ads_keyword_planner",
+          "volume": 110
         }
       ],
       "latest": {
@@ -4103,6 +5113,16 @@
           "opportunity_estimate": 25,
           "source": "google_ads_keyword_planner",
           "volume": 20
+        },
+        {
+          "date": "2026-11-04",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 25,
+          "source": "google_ads_keyword_planner",
+          "volume": 20
         }
       ],
       "latest": {
@@ -4135,6 +5155,16 @@
         },
         {
           "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 36,
+          "source": "google_ads_keyword_planner",
+          "volume": 170
+        },
+        {
+          "date": "2026-11-04",
           "difficulty": null,
           "gsc_impressions_28d": null,
           "gsc_position": null,
@@ -4182,6 +5212,16 @@
           "opportunity_estimate": 28,
           "source": "google_ads_keyword_planner",
           "volume": 110
+        },
+        {
+          "date": "2026-11-04",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 28,
+          "source": "google_ads_keyword_planner",
+          "volume": 110
         }
       ],
       "latest": {
@@ -4215,6 +5255,16 @@
         },
         {
           "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 33,
+          "source": "google_ads_keyword_planner",
+          "volume": 320
+        },
+        {
+          "date": "2026-11-04",
           "difficulty": null,
           "gsc_impressions_28d": null,
           "gsc_position": null,
@@ -4262,6 +5312,16 @@
           "opportunity_estimate": 13,
           "source": "google_ads_keyword_planner",
           "volume": 8100
+        },
+        {
+          "date": "2026-11-04",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 13,
+          "source": "google_ads_keyword_planner",
+          "volume": 8100
         }
       ],
       "latest": {
@@ -4301,6 +5361,16 @@
           "opportunity_estimate": 24,
           "source": "google_ads_keyword_planner",
           "volume": 14800
+        },
+        {
+          "date": "2026-11-04",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 24,
+          "source": "google_ads_keyword_planner",
+          "volume": 14800
         }
       ],
       "latest": {
@@ -4333,6 +5403,16 @@
         },
         {
           "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 38,
+          "source": "google_ads_keyword_planner",
+          "volume": 4400
+        },
+        {
+          "date": "2026-11-04",
           "difficulty": null,
           "gsc_impressions_28d": null,
           "gsc_position": null,
@@ -4380,6 +5460,16 @@
           "opportunity_estimate": 27,
           "source": "google_ads_keyword_planner",
           "volume": 10
+        },
+        {
+          "date": "2026-11-04",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 27,
+          "source": "google_ads_keyword_planner",
+          "volume": 10
         }
       ],
       "latest": {
@@ -4419,6 +5509,16 @@
           "opportunity_estimate": 27,
           "source": "google_ads_keyword_planner",
           "volume": 50
+        },
+        {
+          "date": "2026-11-04",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 27,
+          "source": "google_ads_keyword_planner",
+          "volume": 50
         }
       ],
       "latest": {
@@ -4451,6 +5551,16 @@
         },
         {
           "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 34,
+          "source": "google_ads_keyword_planner",
+          "volume": 4400
+        },
+        {
+          "date": "2026-11-04",
           "difficulty": null,
           "gsc_impressions_28d": null,
           "gsc_position": null,
@@ -4498,6 +5608,16 @@
           "opportunity_estimate": 18,
           "source": "google_ads_keyword_planner",
           "volume": 2900
+        },
+        {
+          "date": "2026-11-04",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 18,
+          "source": "google_ads_keyword_planner",
+          "volume": 2900
         }
       ],
       "latest": {
@@ -4530,6 +5650,16 @@
         },
         {
           "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 23,
+          "source": "google_ads_keyword_planner",
+          "volume": 4400
+        },
+        {
+          "date": "2026-11-04",
           "difficulty": null,
           "gsc_impressions_28d": null,
           "gsc_position": null,
@@ -4577,6 +5707,16 @@
           "opportunity_estimate": 16,
           "source": "google_ads_keyword_planner",
           "volume": 50
+        },
+        {
+          "date": "2026-11-04",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 16,
+          "source": "google_ads_keyword_planner",
+          "volume": 50
         }
       ],
       "latest": {
@@ -4609,6 +5749,16 @@
         },
         {
           "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 43,
+          "source": "google_ads_keyword_planner",
+          "volume": 170
+        },
+        {
+          "date": "2026-11-04",
           "difficulty": null,
           "gsc_impressions_28d": null,
           "gsc_position": null,
@@ -4656,6 +5806,16 @@
           "opportunity_estimate": 20,
           "source": "google_ads_keyword_planner",
           "volume": 74000
+        },
+        {
+          "date": "2026-11-04",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 20,
+          "source": "google_ads_keyword_planner",
+          "volume": 74000
         }
       ],
       "latest": {
@@ -4695,6 +5855,16 @@
           "opportunity_estimate": 0,
           "source": "google_ads_keyword_planner",
           "volume": 50
+        },
+        {
+          "date": "2026-11-04",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 0,
+          "source": "google_ads_keyword_planner",
+          "volume": 50
         }
       ],
       "latest": {
@@ -4725,6 +5895,16 @@
         },
         {
           "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 28,
+          "source": "google_ads_keyword_planner",
+          "volume": 140
+        },
+        {
+          "date": "2026-11-04",
           "difficulty": null,
           "gsc_impressions_28d": null,
           "gsc_position": null,
@@ -4772,6 +5952,16 @@
           "opportunity_estimate": 35,
           "source": "google_ads_keyword_planner",
           "volume": 480
+        },
+        {
+          "date": "2026-11-04",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 35,
+          "source": "google_ads_keyword_planner",
+          "volume": 480
         }
       ],
       "latest": {
@@ -4804,6 +5994,16 @@
         },
         {
           "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 36,
+          "source": "google_ads_keyword_planner",
+          "volume": 170
+        },
+        {
+          "date": "2026-11-04",
           "difficulty": null,
           "gsc_impressions_28d": null,
           "gsc_position": null,
@@ -4851,6 +6051,16 @@
           "opportunity_estimate": 28,
           "source": "google_ads_keyword_planner",
           "volume": 1600
+        },
+        {
+          "date": "2026-11-04",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 28,
+          "source": "google_ads_keyword_planner",
+          "volume": 1600
         }
       ],
       "latest": {
@@ -4891,6 +6101,16 @@
           "opportunity_estimate": 8,
           "source": "google_ads_keyword_planner",
           "volume": 165000
+        },
+        {
+          "date": "2026-11-04",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 8,
+          "source": "google_ads_keyword_planner",
+          "volume": 165000
         }
       ],
       "latest": {
@@ -4921,6 +6141,16 @@
         },
         {
           "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 25,
+          "source": "google_ads_keyword_planner",
+          "volume": 6600
+        },
+        {
+          "date": "2026-11-04",
           "difficulty": null,
           "gsc_impressions_28d": null,
           "gsc_position": null,
@@ -4967,6 +6197,16 @@
           "opportunity_estimate": 8,
           "source": "google_ads_keyword_planner",
           "volume": 30
+        },
+        {
+          "date": "2026-11-04",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 8,
+          "source": "google_ads_keyword_planner",
+          "volume": 30
         }
       ],
       "latest": {
@@ -4997,6 +6237,16 @@
         },
         {
           "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 33,
+          "source": "google_ads_keyword_planner",
+          "volume": 480
+        },
+        {
+          "date": "2026-11-04",
           "difficulty": null,
           "gsc_impressions_28d": null,
           "gsc_position": null,
@@ -5044,6 +6294,16 @@
           "opportunity_estimate": 28,
           "source": "google_ads_keyword_planner",
           "volume": 260
+        },
+        {
+          "date": "2026-11-04",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 28,
+          "source": "google_ads_keyword_planner",
+          "volume": 260
         }
       ],
       "latest": {
@@ -5077,6 +6337,16 @@
         },
         {
           "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 13,
+          "source": "google_ads_keyword_planner",
+          "volume": 9900
+        },
+        {
+          "date": "2026-11-04",
           "difficulty": null,
           "gsc_impressions_28d": null,
           "gsc_position": null,
@@ -5123,6 +6393,16 @@
           "opportunity_estimate": 18,
           "source": "google_ads_keyword_planner",
           "volume": 9900
+        },
+        {
+          "date": "2026-11-04",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 18,
+          "source": "google_ads_keyword_planner",
+          "volume": 9900
         }
       ],
       "latest": {
@@ -5155,6 +6435,16 @@
         },
         {
           "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 20,
+          "source": "google_ads_keyword_planner",
+          "volume": 20
+        },
+        {
+          "date": "2026-11-04",
           "difficulty": null,
           "gsc_impressions_28d": null,
           "gsc_position": null,
@@ -5201,6 +6491,16 @@
           "opportunity_estimate": 10,
           "source": "google_ads_keyword_planner",
           "volume": 2400
+        },
+        {
+          "date": "2026-11-04",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 10,
+          "source": "google_ads_keyword_planner",
+          "volume": 2400
         }
       ],
       "latest": {
@@ -5233,6 +6533,16 @@
         },
         {
           "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 8,
+          "source": "google_ads_keyword_planner",
+          "volume": 20
+        },
+        {
+          "date": "2026-11-04",
           "difficulty": null,
           "gsc_impressions_28d": null,
           "gsc_position": null,
@@ -5279,6 +6589,16 @@
           "opportunity_estimate": 8,
           "source": "google_ads_keyword_planner",
           "volume": 9900
+        },
+        {
+          "date": "2026-11-04",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 8,
+          "source": "google_ads_keyword_planner",
+          "volume": 9900
         }
       ],
       "latest": {
@@ -5311,6 +6631,16 @@
         },
         {
           "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 45,
+          "source": "google_ads_keyword_planner",
+          "volume": 1000
+        },
+        {
+          "date": "2026-11-04",
           "difficulty": null,
           "gsc_impressions_28d": null,
           "gsc_position": null,
@@ -5358,6 +6688,16 @@
           "opportunity_estimate": 36,
           "source": "google_ads_keyword_planner",
           "volume": 590
+        },
+        {
+          "date": "2026-11-04",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 36,
+          "source": "google_ads_keyword_planner",
+          "volume": 590
         }
       ],
       "latest": {
@@ -5398,6 +6738,16 @@
           "opportunity_estimate": 13,
           "source": "google_ads_keyword_planner",
           "volume": 40
+        },
+        {
+          "date": "2026-11-04",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 13,
+          "source": "google_ads_keyword_planner",
+          "volume": 40
         }
       ],
       "latest": {
@@ -5430,6 +6780,16 @@
         },
         {
           "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 33,
+          "source": "google_ads_keyword_planner",
+          "volume": 110
+        },
+        {
+          "date": "2026-11-04",
           "difficulty": null,
           "gsc_impressions_28d": null,
           "gsc_position": null,
@@ -5477,6 +6837,16 @@
           "opportunity_estimate": 13,
           "source": "google_ads_keyword_planner",
           "volume": 9900
+        },
+        {
+          "date": "2026-11-04",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 13,
+          "source": "google_ads_keyword_planner",
+          "volume": 9900
         }
       ],
       "latest": {
@@ -5509,6 +6879,16 @@
         },
         {
           "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 33,
+          "source": "google_ads_keyword_planner",
+          "volume": 390
+        },
+        {
+          "date": "2026-11-04",
           "difficulty": null,
           "gsc_impressions_28d": null,
           "gsc_position": null,
@@ -5556,6 +6936,16 @@
           "opportunity_estimate": 48,
           "source": "google_ads_keyword_planner",
           "volume": 390
+        },
+        {
+          "date": "2026-11-04",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 48,
+          "source": "google_ads_keyword_planner",
+          "volume": 390
         }
       ],
       "latest": {
@@ -5589,6 +6979,16 @@
         },
         {
           "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 48,
+          "source": "google_ads_keyword_planner",
+          "volume": 110
+        },
+        {
+          "date": "2026-11-04",
           "difficulty": null,
           "gsc_impressions_28d": null,
           "gsc_position": null,
@@ -5636,6 +7036,16 @@
           "opportunity_estimate": 40,
           "source": "google_ads_keyword_planner",
           "volume": 170
+        },
+        {
+          "date": "2026-11-04",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 40,
+          "source": "google_ads_keyword_planner",
+          "volume": 170
         }
       ],
       "latest": {
@@ -5669,6 +7079,16 @@
         },
         {
           "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 34,
+          "source": "google_ads_keyword_planner",
+          "volume": 1300
+        },
+        {
+          "date": "2026-11-04",
           "difficulty": null,
           "gsc_impressions_28d": null,
           "gsc_position": null,
@@ -5716,6 +7136,16 @@
           "opportunity_estimate": 44,
           "source": "google_ads_keyword_planner",
           "volume": 390
+        },
+        {
+          "date": "2026-11-04",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 44,
+          "source": "google_ads_keyword_planner",
+          "volume": 390
         }
       ],
       "latest": {
@@ -5749,6 +7179,16 @@
         },
         {
           "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 44,
+          "source": "google_ads_keyword_planner",
+          "volume": 260
+        },
+        {
+          "date": "2026-11-04",
           "difficulty": null,
           "gsc_impressions_28d": null,
           "gsc_position": null,
@@ -5796,6 +7236,16 @@
           "opportunity_estimate": 33,
           "source": "google_ads_keyword_planner",
           "volume": 590
+        },
+        {
+          "date": "2026-11-04",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 33,
+          "source": "google_ads_keyword_planner",
+          "volume": 590
         }
       ],
       "latest": {
@@ -5836,6 +7286,16 @@
           "opportunity_estimate": 28,
           "source": "google_ads_keyword_planner",
           "volume": 720
+        },
+        {
+          "date": "2026-11-04",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 28,
+          "source": "google_ads_keyword_planner",
+          "volume": 720
         }
       ],
       "latest": {
@@ -5868,6 +7328,16 @@
         },
         {
           "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 33,
+          "source": "google_ads_keyword_planner",
+          "volume": 210
+        },
+        {
+          "date": "2026-11-04",
           "difficulty": null,
           "gsc_impressions_28d": null,
           "gsc_position": null,
@@ -5915,6 +7385,16 @@
           "opportunity_estimate": 23,
           "source": "google_ads_keyword_planner",
           "volume": 1600
+        },
+        {
+          "date": "2026-11-04",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 23,
+          "source": "google_ads_keyword_planner",
+          "volume": 1600
         }
       ],
       "latest": {
@@ -5948,6 +7428,16 @@
         },
         {
           "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 33,
+          "source": "google_ads_keyword_planner",
+          "volume": 210
+        },
+        {
+          "date": "2026-11-04",
           "difficulty": null,
           "gsc_impressions_28d": null,
           "gsc_position": null,
@@ -5995,6 +7485,16 @@
           "opportunity_estimate": 33,
           "source": "google_ads_keyword_planner",
           "volume": 720
+        },
+        {
+          "date": "2026-11-04",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 33,
+          "source": "google_ads_keyword_planner",
+          "volume": 720
         }
       ],
       "latest": {
@@ -6028,6 +7528,16 @@
         },
         {
           "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 33,
+          "source": "google_ads_keyword_planner",
+          "volume": 320
+        },
+        {
+          "date": "2026-11-04",
           "difficulty": null,
           "gsc_impressions_28d": null,
           "gsc_position": null,
@@ -6075,6 +7585,16 @@
           "opportunity_estimate": 13,
           "source": "google_ads_keyword_planner",
           "volume": 20
+        },
+        {
+          "date": "2026-11-04",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 13,
+          "source": "google_ads_keyword_planner",
+          "volume": 20
         }
       ],
       "latest": {
@@ -6107,6 +7627,16 @@
         },
         {
           "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 33,
+          "source": "google_ads_keyword_planner",
+          "volume": 1000
+        },
+        {
+          "date": "2026-11-04",
           "difficulty": null,
           "gsc_impressions_28d": null,
           "gsc_position": null,
@@ -6154,6 +7684,16 @@
           "opportunity_estimate": 33,
           "source": "google_ads_keyword_planner",
           "volume": 390
+        },
+        {
+          "date": "2026-11-04",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 33,
+          "source": "google_ads_keyword_planner",
+          "volume": 390
         }
       ],
       "latest": {
@@ -6194,6 +7734,16 @@
           "opportunity_estimate": 13,
           "source": "google_ads_keyword_planner",
           "volume": 70
+        },
+        {
+          "date": "2026-11-04",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 13,
+          "source": "google_ads_keyword_planner",
+          "volume": 70
         }
       ],
       "latest": {
@@ -6226,6 +7776,16 @@
         },
         {
           "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 44,
+          "source": "google_ads_keyword_planner",
+          "volume": 1000
+        },
+        {
+          "date": "2026-11-04",
           "difficulty": null,
           "gsc_impressions_28d": null,
           "gsc_position": null,
@@ -6273,6 +7833,16 @@
           "opportunity_estimate": 23,
           "source": "google_ads_keyword_planner",
           "volume": 1300
+        },
+        {
+          "date": "2026-11-04",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 23,
+          "source": "google_ads_keyword_planner",
+          "volume": 1300
         }
       ],
       "latest": {
@@ -6306,6 +7876,16 @@
         },
         {
           "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 28,
+          "source": "google_ads_keyword_planner",
+          "volume": 1000
+        },
+        {
+          "date": "2026-11-04",
           "difficulty": null,
           "gsc_impressions_28d": null,
           "gsc_position": null,
@@ -6353,6 +7933,16 @@
           "opportunity_estimate": 44,
           "source": "google_ads_keyword_planner",
           "volume": 210
+        },
+        {
+          "date": "2026-11-04",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 44,
+          "source": "google_ads_keyword_planner",
+          "volume": 210
         }
       ],
       "latest": {
@@ -6386,6 +7976,16 @@
         },
         {
           "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 28,
+          "source": "google_ads_keyword_planner",
+          "volume": 480
+        },
+        {
+          "date": "2026-11-04",
           "difficulty": null,
           "gsc_impressions_28d": null,
           "gsc_position": null,
@@ -6432,6 +8032,16 @@
           "opportunity_estimate": 18,
           "source": "google_ads_keyword_planner",
           "volume": 1900
+        },
+        {
+          "date": "2026-11-04",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 18,
+          "source": "google_ads_keyword_planner",
+          "volume": 1900
         }
       ],
       "latest": {
@@ -6464,6 +8074,16 @@
         },
         {
           "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 25,
+          "source": "google_ads_keyword_planner",
+          "volume": 20
+        },
+        {
+          "date": "2026-11-04",
           "difficulty": null,
           "gsc_impressions_28d": null,
           "gsc_position": null,
@@ -6510,6 +8130,16 @@
           "opportunity_estimate": 20,
           "source": "google_ads_keyword_planner",
           "volume": 320
+        },
+        {
+          "date": "2026-11-04",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 20,
+          "source": "google_ads_keyword_planner",
+          "volume": 320
         }
       ],
       "latest": {
@@ -6549,6 +8179,16 @@
           "opportunity_estimate": 25,
           "source": "google_ads_keyword_planner",
           "volume": 40
+        },
+        {
+          "date": "2026-11-04",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 25,
+          "source": "google_ads_keyword_planner",
+          "volume": 40
         }
       ],
       "latest": {
@@ -6581,6 +8221,16 @@
         },
         {
           "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 26,
+          "source": "google_ads_keyword_planner",
+          "volume": 1300
+        },
+        {
+          "date": "2026-11-04",
           "difficulty": null,
           "gsc_impressions_28d": null,
           "gsc_position": null,
@@ -6628,6 +8278,16 @@
           "opportunity_estimate": 8,
           "source": "google_ads_keyword_planner",
           "volume": 90
+        },
+        {
+          "date": "2026-11-04",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 8,
+          "source": "google_ads_keyword_planner",
+          "volume": 90
         }
       ],
       "latest": {
@@ -6665,6 +8325,16 @@
           "opportunity_estimate": 15,
           "source": "google_ads_keyword_planner",
           "volume": 22200
+        },
+        {
+          "date": "2026-11-04",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 15,
+          "source": "google_ads_keyword_planner",
+          "volume": 22200
         }
       ],
       "latest": {
@@ -6695,6 +8365,16 @@
         },
         {
           "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 23,
+          "source": "google_ads_keyword_planner",
+          "volume": 1900
+        },
+        {
+          "date": "2026-11-04",
           "difficulty": null,
           "gsc_impressions_28d": null,
           "gsc_position": null,
@@ -6742,6 +8422,16 @@
           "opportunity_estimate": 48,
           "source": "google_ads_keyword_planner",
           "volume": 210
+        },
+        {
+          "date": "2026-11-04",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 48,
+          "source": "google_ads_keyword_planner",
+          "volume": 210
         }
       ],
       "latest": {
@@ -6775,6 +8465,16 @@
         },
         {
           "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 47,
+          "source": "google_ads_keyword_planner",
+          "volume": 260
+        },
+        {
+          "date": "2026-11-04",
           "difficulty": null,
           "gsc_impressions_28d": null,
           "gsc_position": null,
@@ -6822,6 +8522,16 @@
           "opportunity_estimate": 28,
           "source": "google_ads_keyword_planner",
           "volume": 50
+        },
+        {
+          "date": "2026-11-04",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 28,
+          "source": "google_ads_keyword_planner",
+          "volume": 50
         }
       ],
       "latest": {
@@ -6854,6 +8564,16 @@
         },
         {
           "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 34,
+          "source": "google_ads_keyword_planner",
+          "volume": 1300
+        },
+        {
+          "date": "2026-11-04",
           "difficulty": null,
           "gsc_impressions_28d": null,
           "gsc_position": null,
@@ -6901,6 +8621,16 @@
           "opportunity_estimate": 34,
           "source": "google_ads_keyword_planner",
           "volume": 1900
+        },
+        {
+          "date": "2026-11-04",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 34,
+          "source": "google_ads_keyword_planner",
+          "volume": 1900
         }
       ],
       "latest": {
@@ -6934,6 +8664,16 @@
         },
         {
           "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 23,
+          "source": "google_ads_keyword_planner",
+          "volume": 1300
+        },
+        {
+          "date": "2026-11-04",
           "difficulty": null,
           "gsc_impressions_28d": null,
           "gsc_position": null,
@@ -6981,6 +8721,16 @@
           "opportunity_estimate": 40,
           "source": "google_ads_keyword_planner",
           "volume": 1600
+        },
+        {
+          "date": "2026-11-04",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "commercial",
+          "opportunity_estimate": 40,
+          "source": "google_ads_keyword_planner",
+          "volume": 1600
         }
       ],
       "latest": {
@@ -7014,6 +8764,16 @@
         },
         {
           "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 23,
+          "source": "google_ads_keyword_planner",
+          "volume": 2900
+        },
+        {
+          "date": "2026-11-04",
           "difficulty": null,
           "gsc_impressions_28d": null,
           "gsc_position": null,
@@ -7061,6 +8821,16 @@
           "opportunity_estimate": 8,
           "source": "google_ads_keyword_planner",
           "volume": 18100
+        },
+        {
+          "date": "2026-11-04",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 8,
+          "source": "google_ads_keyword_planner",
+          "volume": 18100
         }
       ],
       "latest": {
@@ -7091,6 +8861,16 @@
         },
         {
           "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 13,
+          "source": "google_ads_keyword_planner",
+          "volume": 10
+        },
+        {
+          "date": "2026-11-04",
           "difficulty": null,
           "gsc_impressions_28d": null,
           "gsc_position": null,
@@ -7137,6 +8917,16 @@
           "opportunity_estimate": 33,
           "source": "google_ads_keyword_planner",
           "volume": 480
+        },
+        {
+          "date": "2026-11-04",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 33,
+          "source": "google_ads_keyword_planner",
+          "volume": 480
         }
       ],
       "latest": {
@@ -7156,7 +8946,7 @@
       }
     },
     "try hairstyles on my face": {
-      "decision": "published:try-hairstyles-on-your-face",
+      "decision": "rejected_already_targeted",
       "history": [
         {
           "date": "2026-11-03",
@@ -7177,14 +8967,20 @@
           "opportunity_estimate": 50,
           "source": "google_ads_keyword_planner",
           "volume": 590
+        },
+        {
+          "date": "2026-11-04",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 50,
+          "source": "google_ads_keyword_planner",
+          "volume": 590
         }
       ],
       "latest": {
         "ads_competition": "MEDIUM",
-        "cluster": "hair",
-        "coverage": 0.0,
-        "covering_page": null,
-        "decision": "candidate",
         "difficulty": null,
         "difficulty_note": "not measured (free mode: long-tail rule applied instead)",
         "intent": "informational",
@@ -7214,6 +9010,16 @@
         },
         {
           "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 35,
+          "source": "google_ads_keyword_planner",
+          "volume": 1900
+        },
+        {
+          "date": "2026-11-04",
           "difficulty": null,
           "gsc_impressions_28d": null,
           "gsc_position": null,
@@ -7261,6 +9067,16 @@
           "opportunity_estimate": 48,
           "source": "google_ads_keyword_planner",
           "volume": 390
+        },
+        {
+          "date": "2026-11-04",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 48,
+          "source": "google_ads_keyword_planner",
+          "volume": 390
         }
       ],
       "latest": {
@@ -7294,6 +9110,16 @@
         },
         {
           "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "commercial",
+          "opportunity_estimate": 40,
+          "source": "google_ads_keyword_planner",
+          "volume": 2900
+        },
+        {
+          "date": "2026-11-04",
           "difficulty": null,
           "gsc_impressions_28d": null,
           "gsc_position": null,
@@ -7341,6 +9167,16 @@
           "opportunity_estimate": 33,
           "source": "google_ads_keyword_planner",
           "volume": 390
+        },
+        {
+          "date": "2026-11-04",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 33,
+          "source": "google_ads_keyword_planner",
+          "volume": 390
         }
       ],
       "latest": {
@@ -7374,6 +9210,16 @@
         },
         {
           "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 34,
+          "source": "google_ads_keyword_planner",
+          "volume": 2400
+        },
+        {
+          "date": "2026-11-04",
           "difficulty": null,
           "gsc_impressions_28d": null,
           "gsc_position": null,
@@ -7421,6 +9267,16 @@
           "opportunity_estimate": 23,
           "source": "google_ads_keyword_planner",
           "volume": 2400
+        },
+        {
+          "date": "2026-11-04",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 23,
+          "source": "google_ads_keyword_planner",
+          "volume": 2400
         }
       ],
       "latest": {
@@ -7454,6 +9310,16 @@
         },
         {
           "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 35,
+          "source": "google_ads_keyword_planner",
+          "volume": 1300
+        },
+        {
+          "date": "2026-11-04",
           "difficulty": null,
           "gsc_impressions_28d": null,
           "gsc_position": null,
@@ -7501,6 +9367,16 @@
           "opportunity_estimate": 33,
           "source": "google_ads_keyword_planner",
           "volume": 170
+        },
+        {
+          "date": "2026-11-04",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 33,
+          "source": "google_ads_keyword_planner",
+          "volume": 170
         }
       ],
       "latest": {
@@ -7534,6 +9410,16 @@
         },
         {
           "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 28,
+          "source": "google_ads_keyword_planner",
+          "volume": 390
+        },
+        {
+          "date": "2026-11-04",
           "difficulty": null,
           "gsc_impressions_28d": null,
           "gsc_position": null,
@@ -7580,6 +9466,16 @@
           "opportunity_estimate": 28,
           "source": "google_ads_keyword_planner",
           "volume": 880
+        },
+        {
+          "date": "2026-11-04",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 28,
+          "source": "google_ads_keyword_planner",
+          "volume": 880
         }
       ],
       "latest": {
@@ -7612,6 +9508,16 @@
         },
         {
           "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 23,
+          "source": "google_ads_keyword_planner",
+          "volume": 2900
+        },
+        {
+          "date": "2026-11-04",
           "difficulty": null,
           "gsc_impressions_28d": null,
           "gsc_position": null,
@@ -7659,6 +9565,16 @@
           "opportunity_estimate": 44,
           "source": "google_ads_keyword_planner",
           "volume": 480
+        },
+        {
+          "date": "2026-11-04",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 44,
+          "source": "google_ads_keyword_planner",
+          "volume": 480
         }
       ],
       "latest": {
@@ -7692,6 +9608,16 @@
         },
         {
           "date": "2026-11-03",
+          "difficulty": null,
+          "gsc_impressions_28d": null,
+          "gsc_position": null,
+          "intent": "informational",
+          "opportunity_estimate": 23,
+          "source": "google_ads_keyword_planner",
+          "volume": 1900
+        },
+        {
+          "date": "2026-11-04",
           "difficulty": null,
           "gsc_impressions_28d": null,
           "gsc_position": null,
@@ -7779,6 +9705,13 @@
       "changes": 1,
       "claude_calls": 7,
       "decision": "published /blog/try-hairstyles-on-your-face/ for 'try hairstyles on my face' after 2 revision(s)",
+      "errors": 0
+    },
+    {
+      "at": "2026-11-04T14:32:44+00:00",
+      "changes": 0,
+      "claude_calls": 0,
+      "decision": "skip: no keyword met the volume/evidence, opportunity, intent, relevance and coverage criteria",
       "errors": 0
     }
   ],

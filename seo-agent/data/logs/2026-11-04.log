@@ -1,0 +1,4 @@
+2026-11-04 14:32:40,565 INFO seo_agent: Search Console: 28d clicks=0 impressions=0
+2026-11-04 14:32:44,782 INFO seo_agent: Google Ads Keyword Planner returned 400 ideas
+2026-11-04 14:32:44,790 INFO seo_agent: Shortlisted 0 qualifying keywords (of 193 ideas)
+2026-11-04 14:32:44,790 INFO seo_agent: Keyword agent: 400 ideas, 193 relevant, 0 shortlisted
