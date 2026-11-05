@@ -2,7 +2,7 @@
 # enabled: false  -> DRAFTS. The daily agent will not touch or publish them.
 # enabled: true   -> after owner approval: the daily agent re-renders them when related blog guides change, and the
 #                    workflow commits them. Describe ONLY what app_facts.yaml supports.
-enabled: false
+enabled: true
 
 pages:
   - slug: ai-outfit-checker
