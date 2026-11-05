@@ -175,12 +175,18 @@ def new_article(cfg, state: State, facts: dict, pages, perf, dry: bool, report: 
         report["decision"] = ("skip: no keyword met the feature-relevance, score, volume, intent and duplicate checks "
                               "(see 'Keywords by feature' for reasons)")
         return
-    published, clusters_today = [], set()
-    for kw in candidates[: cfg.get("keyword_research.max_candidates_per_run", 3)]:
+    published, clusters_today, failed_features = [], set(), set()
+    tried = 0
+    for kw in candidates:
+        if tried >= cfg.get("keyword_research.max_candidates_per_run", 3):
+            break
         if state.published_today() >= limit and not force_keyword:
             break
         if kw["cluster"] in clusters_today:
             continue  # spread daily articles across clusters
+        if kw["cluster"] in failed_features:
+            continue  # a same-feature draft already failed this run; try a different feature instead
+        tried += 1
         if published:
             pages = crawl(cfg)["pages"]  # include today's earlier article in duplicate checks
         plan, serp = strategy_agent.decide(cfg, kw, pages, facts)
@@ -208,6 +214,7 @@ def new_article(cfg, state: State, facts: dict, pages, perf, dry: bool, report: 
         a, gate = draft_until_pass(cfg, kw, plan, slug, a, articles, pages, facts, attempt)
         if not gate["passed"]:
             state.record_keyword(kw["keyword"], kw, f"rejected_by_quality_gate: {'; '.join(gate['failures'])[:300]}")
+            failed_features.add(kw["cluster"])
             continue
         if dry:
             published.append(f"[dry-run] would publish /{cfg.get('site.blog_dir')}/{slug}/")

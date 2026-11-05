@@ -175,6 +175,24 @@ def test_health_rules_in_quality_gate():
     assert not any(re.search(p, ok, flags=re.I) for p, _ in quality.FORBIDDEN)
 
 
+def test_required_disclaimers_are_not_flagged_as_claims():
+    ok = ("AI feedback is not medical advice. See a dermatologist or doctor for any skin concern. "
+          "The app does not diagnose skin conditions.")
+    assert not any(re.search(p, quality.claim_text(ok), flags=re.I) for p, _ in quality.FORBIDDEN)
+    bad = "See a dermatologist if you like, but this app can detect melanoma and diagnoses acne."
+    assert any(re.search(p, quality.claim_text(bad), flags=re.I) for p, _ in quality.FORBIDDEN)
+
+
+def test_reviewer_no_issue_and_minor_entries_ignored_only_when_passed():
+    passed = {"pass": True, "value_score": 8, "unsupported_claims": ["No medical claims found."],
+              "factual_issues": ["Minor: wording could be tighter."]}
+    assert quality.real_issues(passed, "unsupported_claims") == [] and quality.real_issues(passed, "factual_issues") == []
+    failed = {**passed, "pass": False}
+    assert quality.real_issues(failed, "factual_issues") == ["Minor: wording could be tighter."]
+    real = {**passed, "factual_issues": ["The vein test claim is stated as fact."]}
+    assert quality.real_issues(real, "factual_issues")
+
+
 def test_skin_article_requires_not_medical_advice_note(site, monkeypatch):
     mock_apis(monkeypatch, ideas=[{"keyword": "what is my skin undertone and how to find it", "volume": 880,
                                    "source": "google_ads_keyword_planner"}])
