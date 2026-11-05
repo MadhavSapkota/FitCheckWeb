@@ -1741,6 +1741,13 @@
       "claude_calls": 7,
       "decision": "published /blog/what-is-my-skin-tone/ for 'what is my skin tone' (feature skin-analysis, score 86.2) after 1 revision(s) + polish",
       "errors": 0
+    },
+    {
+      "at": "2026-11-05T14:42:21+00:00",
+      "changes": 0,
+      "claude_calls": 0,
+      "decision": "skip: daily article limit already reached today",
+      "errors": 0
     }
   ],
   "usage": {
