@@ -25,8 +25,12 @@ class State:
         entry = self.data["keywords"].setdefault(kw, {"history": []})
         entry["latest"] = metrics
         entry["decision"] = decision
-        entry["history"].append({"date": today(), **{k: metrics.get(k) for k in ("volume", "difficulty", "intent", "source", "opportunity_estimate",
-                                                                            "gsc_impressions_28d", "gsc_position")}})
+        entry["feature"] = metrics.get("feature") or entry.get("feature")
+        if decision.startswith("published:"):
+            entry["article"] = {"slug": decision.split(":", 1)[1], "published": today()}
+        entry["history"].append({"date": today(), "decision": decision,
+                                 **{k: metrics.get(k) for k in ("volume", "difficulty", "intent", "source", "feature", "score",
+                                                                "score_total", "gsc_impressions_28d", "gsc_position")}})
         entry["history"] = entry["history"][-30:]
 
     def used_keywords(self) -> set[str]:

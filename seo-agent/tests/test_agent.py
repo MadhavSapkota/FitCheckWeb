@@ -228,8 +228,11 @@ def test_low_cost_mode_keyword_planner_only(site, monkeypatch):
     assert html.count('data-placement="inline"') == 1 and 'data-placement="end"' in html
     assert "G-NQ0WXQQXQW" in html and "play_store_click" in html  # blog pages track Play Store clicks like the site
     st = json.loads((site / "seo-agent" / "data" / "state.json").read_text())
-    for k in ("outfit ideas", "what to wear with olive pants"):
-        assert st["keywords"][k]["decision"] == "rejected_low_opportunity_estimate"
+    # broad head term: blocked by the ranking-opportunity gate
+    assert st["keywords"]["outfit ideas"]["decision"] == "rejected_head_term_low_ranking_opportunity"
+    # loosely related trend query: qualifies on score but loses to the higher-scoring outfit-color topic (1/day)
+    olive = st["keywords"]["what to wear with olive pants"]
+    assert olive["latest"]["feature"] == "trends" and olive["latest"]["score_total"] < st["keywords"]["how to match colors in an outfit"]["latest"]["score_total"]
     rep = (site / "seo-agent" / "data" / "reports" / "2026-11-01.md").read_text()
     assert "NOT keyword difficulty" in rep and "Low-cost mode" in rep
 

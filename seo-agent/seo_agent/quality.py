@@ -22,8 +22,16 @@ FORBIDDEN = [
     (r"\b(we|our team) (tested|reviewed|tried)\b", "fabricated product testing"),
     (r"\b(buy|shop|order)\b[^.]{0,30}\b(in|inside|within|through) the app\b", "claims in-app shopping"),
     (r"\b(size|measurement)s? recommendation", "claims size recommendations"),
-    (r"\bAR\b|\baugmented reality\b|\blive try-on\b", "claims AR try-on"),
+    (r"\bAR\b|\baugmented reality\b", "claims AR technology"),
+    (r"\b(live|real-time)\b[^.]{0,30}\b(clothes|clothing|outfit) try-?on\b", "claims live clothing try-on (outfit try-on is AI images)"),
     (r"\b(diagnos|dermatolog)", "medical/skin diagnosis claim"),
+    # skin & hair: no medical, treatment, or accuracy claims
+    (r"\b(cure[sd]?|treat(s|ed|ing)?|heal(s|ed|ing)?|fix(es)?)\b[^.]{0,25}\b(acne|eczema|rosacea|psoriasis|dermatitis|hair loss|alopecia|dandruff|infection)",
+     "medical treatment claim"),
+    (r"\b(detect|identif|spot|screen)\w*\b[^.]{0,30}\b(cancer|melanoma|mole|disease|condition|disorder|infection|deficienc)",
+     "medical detection claim"),
+    (r"\bclinically\s+(proven|tested|validated)\b|\bmedical[- ]grade\b", "clinical claim"),
+    (r"\b\d{2,3}\s?%\s+accura", "accuracy percentage claim"),
     (r"\b(guarantee[sd]?|100% accurate|perfect score every time)\b", "absolute guarantee"),
 ]
 
@@ -81,9 +89,22 @@ def check(cfg: Config, *, kw: dict[str, Any], intent: str, article: dict[str, An
     if cfg.get("keyword_research.organic_difficulty_source") == "dataforseo":
         if kw.get("difficulty") is None or kw["difficulty"] > cfg.get("keyword_research.maximum_organic_difficulty"):
             fails.append("organic_difficulty_above_threshold_or_missing")
-    elif kw.get("opportunity_estimate", 0) < (cfg.get("keyword_research.unverified_topics.min_opportunity_estimate", 40)
-                                             if editorial else cfg.get("keyword_research.min_opportunity_estimate", 50)):
+    elif editorial and kw.get("score_total", kw.get("opportunity_estimate", 0)) < cfg.get(
+            "keyword_research.unverified_topics.min_opportunity_estimate", 40):
         fails.append("opportunity_estimate_below_threshold")
+    elif not editorial and kw.get("score"):
+        from . import scoring
+        why = scoring.qualifies(cfg, kw)
+        if why:
+            fails.append(f"opportunity_estimate_below_threshold:{why}")
+    elif not editorial and kw.get("opportunity_estimate", 0) < cfg.get("scoring.min_total", 45):
+        fails.append("opportunity_estimate_below_threshold")
+    # skin / hair analysis articles must say the feedback is not medical advice
+    feat = (cfg.get("features") or {}).get(kw.get("feature") or "", {})
+    written = re.sub(r"<[^>]+>", " ", article.get("body_html", "") + " " + " ".join(f.get("answer", "") for f in article.get("faqs", [])))
+    if feat.get("health") and not re.search(r"not (a substitute for )?(medical|professional medical) advice|not medical advice",
+                                            written, flags=re.I):  # in the writer's own text, not just the CTA
+        fails.append("health_topic_missing_not_medical_advice_note")
     if intent not in cfg.get("keyword_research.allowed_intents"):
         fails.append(f"intent_not_allowed:{intent}")
     # structure / metadata

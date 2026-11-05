@@ -31,3 +31,7 @@ def finalize(cfg: Config, articles: dict[str, Any], report: dict) -> None:
         if not any(c in x for x in report["changes"]):
             report["changes"].append(f"internal links refreshed: {c}")
     publisher.write_sitemap(cfg, articles)
+    from .. import landing
+    if landing.enabled(cfg):  # owner-approved landing pages: keep their related-guide lists current
+        for p in landing.render_all(cfg, articles):
+            report["changes"].append(f"landing page updated: {p.relative_to(cfg.site_root).as_posix()}")

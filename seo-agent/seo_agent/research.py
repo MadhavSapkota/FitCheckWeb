@@ -3,8 +3,8 @@ from __future__ import annotations
 
 from typing import Any
 
-from . import dataforseo, keyword_planner
-from .audit import STOP, Page, coverage_score, tokens
+from . import dataforseo, keyword_planner, scoring
+from .audit import STOP, Page, tokens
 from .config import Config
 from .log import log
 from .state import State
@@ -37,10 +37,7 @@ def relevant(cfg: Config, kw: str) -> bool:
     low = kw.lower()
     if any(b in low for b in cfg.get("keyword_research.blocked_terms", [])):
         return False
-    toks = set(tokens(low))
-    toks |= {t[:-1] for t in toks if t.endswith("s") and len(t) > 3}  # simple plural match: colors -> color
-    terms = set(cfg.get("keyword_research.relevance_terms", []))
-    if not toks & terms:
+    if not scoring.classify(cfg, low)[1]:  # must map to a FitCheck feature (config `features:`)
         return False
     # skip navigational queries for other brands/apps (heuristic: 'app' + a capitalized brand is unknowable;
     # keep it simple - skip explicit competitor/download patterns)
@@ -48,9 +45,8 @@ def relevant(cfg: Config, kw: str) -> bool:
 
 
 def relevance_score(cfg: Config, kw: str) -> float:
-    toks = {t[:-1] if t.endswith("s") and len(t) > 3 else t for t in tokens(kw)} - STOP
-    core = {"outfit", "fit", "style", "stylist", "fashion", "makeup", "hair", "hairstyle", "color", "ai", "wear"}
-    return len(toks & core) / max(1, len(toks))
+    """Feature relevance as 0..1 (see scoring.classify)."""
+    return scoring.classify(cfg, kw)[1] / 100
 
 
 def measured_difficulty(cfg: Config) -> bool:
@@ -96,35 +92,31 @@ def enrich(cfg: Config, ideas: list[dict[str, Any]]) -> list[dict[str, Any]]:
 
 
 def cluster_of(cfg: Config, kw: str) -> str:
-    """Topic cluster (pillar) a keyword belongs to, from keyword_research.topic_clusters. First match wins."""
-    toks = set(tokens(kw))
-    for name, terms in (cfg.get("keyword_research.topic_clusters") or {}).items():
-        if toks & {t.lower() for t in terms}:
-            return name
-    return "general-style"
+    """Topic cluster = the FitCheck feature the keyword maps to (config `features:`)."""
+    return scoring.classify(cfg, kw)[0] or "general-style"
+
+
+def _stem(t: str) -> str:
+    return t[:-1] if t.endswith("s") and len(t) > 3 else t
 
 
 def cluster_duplicate(cfg: Config, i: dict[str, Any], articles: dict[str, Any]) -> str | None:
-    """Slug of a published article in the same cluster whose target query is near-identical (token Jaccard)."""
-    mine = set(tokens(i["keyword"])) - STOP
-    limit = cfg.get("keyword_research.cluster_duplicate_overlap", 0.6)
-    for slug, a in articles.items():
-        if a.get("cluster", cluster_of(cfg, a["keyword"])) != i.get("cluster"):
-            continue
-        for other in [a["keyword"], *a.get("secondary_keywords", [])]:
-            o = set(tokens(other)) - STOP
-            if mine and o and len(mine & o) / len(mine | o) >= limit:
-                return slug
+    """Page (article slug or landing page path) that already satisfies substantially the same search intent.
+    See intent.py: same feature + same intent type + strong normalized overlap. Word overlap alone never blocks."""
+    from . import intent
+    feat = i.get("feature") or cluster_of(cfg, i["keyword"])
+    d = intent.duplicate_of(cfg, i["keyword"], feat, articles)
+    if d:
+        i["duplicate_of"] = d
+        return d["slug"]
     return None
 
 
-def order_by_cluster(cands: list[dict[str, Any]], articles: dict[str, Any]) -> list[dict[str, Any]]:
-    """Best opportunity first; on ties prefer clusters that already have articles (build topical depth with
-    supporting long-tail pages), then clusters with none."""
-    have: dict[str, int] = {}
-    for a in articles.values():
-        have[a.get("cluster", "")] = have.get(a.get("cluster", ""), 0) + 1
-    return sorted(cands, key=lambda i: (-(i.get("opportunity_estimate") or 0), -min(have.get(i.get("cluster"), 0), 1),
+def order_by_cluster(cands: list[dict[str, Any]], articles: dict[str, Any], cfg: Config | None = None) -> list[dict[str, Any]]:
+    """Highest total score first, plus a small editorial-mix boost for under-covered features (scoring.mix_boost)."""
+    for i in cands:
+        i["mix_boost"] = scoring.mix_boost(cfg, i.get("feature", ""), articles) if cfg else 0.0
+    return sorted(cands, key=lambda i: (-((i.get("score_total") or i.get("opportunity_estimate") or 0) + i["mix_boost"]),
                                         -(i.get("volume") or 0)))
 
 
@@ -135,7 +127,6 @@ def is_editorial(cfg: Config, i: dict[str, Any]) -> bool:
 def shortlist(cfg: Config, ideas: list[dict[str, Any]], pages: list[Page], state: State) -> list[dict[str, Any]]:
     min_vol = cfg.get("keyword_research.minimum_monthly_searches", 100)
     min_gsc = cfg.get("keyword_research.min_gsc_impressions_if_volume_unverified", 30)
-    min_opp = cfg.get("keyword_research.min_opportunity_estimate", 50)
     min_opp_editorial = cfg.get("keyword_research.unverified_topics.min_opportunity_estimate", 40)
     max_kd = cfg.get("keyword_research.maximum_organic_difficulty", 25)
     intents = set(cfg.get("keyword_research.allowed_intents", ["informational", "commercial"]))
@@ -158,22 +149,22 @@ def shortlist(cfg: Config, ideas: list[dict[str, Any]], pages: list[Page], state
             reason = "rejected_difficulty"
         elif i.get("intent") not in intents:
             reason = "rejected_intent"
-        elif i.get("opportunity_estimate", 0) < (min_opp_editorial if is_editorial(cfg, i) else min_opp):
-            reason = "rejected_low_opportunity_estimate"
+        elif is_editorial(cfg, i) and i.get("score_total", 0) < min_opp_editorial:
+            reason = "rejected_low_score"
+        elif not is_editorial(cfg, i) and scoring.qualifies(cfg, i):
+            reason = scoring.qualifies(cfg, i)
         elif kw in used:
             reason = "rejected_already_targeted"
         elif state.rejected_recently(kw):
             reason = "rejected_recently_failed_quality_gate"
-        else:
-            cov, page = coverage_score(kw, pages)
-            i["coverage"], i["covering_page"] = round(cov, 2), page
-            if cov >= cov_thr:
-                reason = "covered_by_existing_page"
-        i["relevance"] = round(relevance_score(cfg, kw), 2)
+        elif cluster_duplicate(cfg, i, state.data.get("articles", {})):
+            d = i["duplicate_of"]
+            reason = f"duplicate_intent_of_{d['kind']}:{d['slug']}"
+        i["relevance"] = round(i["score"]["feature_relevance"] / 100, 2) if i.get("score") else round(relevance_score(cfg, kw), 2)
         state.record_keyword(kw, i, reason or "candidate")
-        if reason is None or reason == "covered_by_existing_page":
-            i["decision"] = reason or "candidate"
+        i["decision"] = reason or "candidate"
+        if reason is None:
             out.append(i)
-    out.sort(key=lambda i: (-(i["decision"] == "candidate"), -i.get("opportunity_estimate", 0), -(i.get("volume") or 0)))
+    out.sort(key=lambda i: (-(i["decision"] == "candidate"), -i.get("score_total", 0), -(i.get("volume") or 0)))
     log.info("Shortlisted %d qualifying keywords (of %d ideas)", len(out), len(ideas))
     return out

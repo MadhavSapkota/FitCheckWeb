@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="{{lang}}">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#ffffff">
+<title>{{title}}</title>
+<meta name="description" content="{{description}}">
+<link rel="canonical" href="{{canonical}}">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="{{brand}}">
+<meta property="og:title" content="{{title}}">
+<meta property="og:description" content="{{description}}">
+<meta property="og:url" content="{{canonical}}">
+<meta property="og:image" content="{{og_image}}">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+<link rel="stylesheet" href="/blog/blog.css">
+<link rel="stylesheet" href="/assets/landing.css">
+{{analytics}}
+<script type="application/ld+json">{{jsonld}}</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="bh"><div class="wrap bh-in"><a class="brand" href="/">{{brand}}</a><nav aria-label="Main"><a href="/#how-it-works">How it works</a><a href="/blog/">Style guides</a><a class="cta-sm" href="{{app_url}}" target="_blank" rel="noopener" data-cta="play-store" data-placement="header">Get the app</a></nav></div></header>
+<main id="main" class="wrap landing">
+<nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a> › <span>{{nav}}</span></nav>
+<section class="lp-hero">
+<div class="lp-hero-text">
+<h1>{{h1}}</h1>
+<p class="lede">{{lede}}</p>
+{{hero_cta}}
+<p class="small">Free on Android · iOS coming soon</p>
+</div>
+<div class="lp-media">{{images}}</div>
+</section>
+<section class="lp-steps" aria-labelledby="steps-h"><h2 id="steps-h">{{steps_title}}</h2><ol>{{steps}}</ol></section>
+{{sections}}
+<section aria-labelledby="benefits-h"><h2 id="benefits-h">Why use it</h2><ul class="lp-list">{{benefits}}</ul></section>
+<section aria-labelledby="limits-h"><h2 id="limits-h">{{limits_title}}</h2><ul>{{limits}}</ul></section>
+<section class="faq" aria-labelledby="faq-h"><h2 id="faq-h">Frequently asked questions</h2>{{faq_html}}</section>
+<aside class="app-cta" aria-label="Get the app">
+<p class="app-cta-title">{{cta_title}}</p>
+<p>{{cta_text}}</p>
+{{end_cta}}
+<p class="small">Free on Android · iOS coming soon</p>
+</aside>
+{{guides_html}}
+<nav class="lp-more" aria-label="More FitCheck features"><h2>More FitCheck features</h2><ul>{{other_features}}</ul></nav>
+</main>
+<footer class="bf"><div class="wrap"><p><a href="/">{{brand}}</a> · <a href="/blog/">Style guides</a> · <a href="/privacy.html">Privacy Policy</a> · <a href="/terms.html">Terms of Service</a></p></div></footer>
+</body>
+</html>

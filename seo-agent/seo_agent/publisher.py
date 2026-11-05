@@ -65,7 +65,7 @@ def render_article(cfg: Config, a: dict[str, Any], related: list[dict[str, str]]
     brand = cfg.get("project.brand_on_site", "FitCheck AI")
     from .agents import conversion_agent
     body = conversion_agent.insert_inline(cfg, sanitize_body(cfg, a["body_html"], url), a)
-    cta = conversion_agent.choose(a)
+    cta = conversion_agent.choose(a, cfg)
     faqs = [f for f in a.get("faqs", []) if f.get("question") and f.get("answer")]
     faq_html = ""
     if faqs:
@@ -98,6 +98,7 @@ def render_article(cfg: Config, a: dict[str, Any], related: list[dict[str, str]]
         "cta_text": e(a.get("cta_text") or "Snap a photo and get an AI style score with tips on fit, color, and balance."),
         "related_html": related_html(related),
         "cta_button": conversion_agent.button_html(cfg, cta["button"], "end", a["slug"]),
+        "feature_link": conversion_agent.landing_html(cfg, a),
         "analytics": analytics_snippet(cfg),
     })
 
@@ -125,17 +126,24 @@ def analytics_snippet(cfg: Config) -> str:
 
 
 def pick_related(cfg: Config, articles: dict[str, Any], slug: str, n: int = 4) -> list[dict[str, str]]:
+    from .research import cluster_of
     me = articles[slug]
     mine = set(tokens(me["keyword"] + " " + me["title"])) - STOP
+    my_feat = cluster_of(cfg, me["keyword"])
     scored = []
     for s, a in articles.items():
         if s == slug:
             continue
         other = set(tokens(a["keyword"] + " " + a["title"])) - STOP
-        same_cluster = 3 if me.get("cluster") and a.get("cluster") == me.get("cluster") else 0  # topic-cluster links first
+        same_cluster = 3 if cluster_of(cfg, a["keyword"]) == my_feat else 0  # same-feature links first
         scored.append((len(mine & other) + same_cluster, a["published"], s, a))
     scored.sort(key=lambda x: (-x[0], x[1]), reverse=False)
     out = [{"href": f"/{cfg.get('site.blog_dir')}/{s}/", "title": a["h1"]} for _, _, s, a in scored[:n]]
+    if len(out) < n:
+        from .agents import conversion_agent
+        land = conversion_agent.landing_link(cfg, me)
+        if land:
+            out.append({"href": land["href"], "title": land["title"]})
     if len(out) < n:
         out.append({"href": "/how-it-works.html", "title": "How FitCheck AI works"})
     return out

@@ -83,6 +83,10 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           # Stage ONLY paths the agent owns or may safely edit.
           git add blog sitemap.xml robots.txt seo-agent/data index.html how-it-works.html privacy.html terms.html
+          # Feature landing pages: only staged when they already exist in the repo (owner-approved, committed by hand).
+          for d in ai-outfit-checker ai-makeup-assistant ai-hairstyle-try-on digital-wardrobe virtual-outfit-try-on ai-skin-analysis; do
+            if git ls-files --error-unmatch "$d/index.html" >/dev/null 2>&1; then git add "$d/index.html"; fi
+          done
           if git diff --cached --quiet; then
             echo "No changes today."
             echo "changed=false" >> "$GITHUB_OUTPUT"
@@ -101,6 +105,13 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: gh workflow run jekyll-gh-pages.yml --ref "${GITHUB_REF_NAME}"
+
+      # Confirms today's new/updated article URLs are live (HTTP 200 + correct canonical) after the Pages deploy.
+      # Bounded polling with backoff (max 15 min). This checks deployment only; it never claims Google indexing.
+      - name: Verify deployment
+        if: ${{ steps.commit.outputs.changed == 'true' }}
+        working-directory: seo-agent
+        run: python -m seo_agent.main verify --wait 900
 
       - name: Upload report and logs
         if: always()

@@ -6,6 +6,7 @@ from datetime import date, timedelta
 from typing import Any
 
 from .config import Config, env
+from .http import with_backoff
 from .log import log
 
 SCOPES = ["https://www.googleapis.com/auth/webmasters.readonly"]
@@ -24,6 +25,7 @@ def _service():
     return build("searchconsole", "v1", credentials=creds, cache_discovery=False)
 
 
+@with_backoff(attempts=3)
 def _query(svc, prop: str, days: int, dims: list[str], end: date) -> list[dict[str, Any]]:
     start = end - timedelta(days=days - 1)
     body = {"startDate": start.isoformat(), "endDate": end.isoformat(), "dimensions": dims, "rowLimit": 1000}

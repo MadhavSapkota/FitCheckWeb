@@ -4,7 +4,7 @@ from __future__ import annotations
 import json
 from typing import Any
 
-from tenacity import retry, retry_if_not_exception_type, stop_after_attempt, wait_exponential
+from tenacity import retry, retry_if_exception, stop_after_attempt, wait_exponential
 
 from .budget import BudgetExceeded
 
@@ -20,7 +20,25 @@ Rules you must follow:
 - Never claim the app or AI is perfect, objective, or a professional stylist. Feedback is a starting point.
 - No keyword stuffing: use the target phrase naturally (title, H1, intro, once or twice in body). Use synonyms.
 - Follow Google Search spam policies: no scaled low-value content, no doorway pages, no hidden text, no misleading claims.
+- Skin and hair topics: cosmetic and style guidance only. Never diagnose, detect, or treat any skin, scalp, or hair
+  condition (acne, eczema, hair loss, moles, etc.), never promise accuracy, and say plainly that AI feedback is not
+  medical advice; suggest a dermatologist or doctor for any health concern.
 - Output must be valid JSON only."""
+
+
+def feature_brief(cfg: Config, kw: dict[str, Any]) -> str:
+    """The FitCheck feature this article supports: what the app can genuinely do for this reader."""
+    fid = kw.get("feature")
+    f = (cfg.get("features") or {}).get(fid or "") or {}
+    if not f:
+        return "FEATURE: none specific - keep app mentions minimal and general."
+    out = f"FEATURE: {f.get('label', fid)} (id {fid}). Show how this feature helps the reader, using APP_FACTS only."
+    if f.get("landing") and f["landing"] != "/":
+        out += f" If {f['landing']} is in INTERNAL_LINKS, link it once with natural descriptive anchor text."
+    if f.get("health"):
+        out += (" HEALTH-ADJACENT TOPIC: cosmetic/style guidance only; include one sentence stating the AI feedback is "
+                "not medical advice and to see a dermatologist or doctor for concerns. No diagnosis, detection, or treatment claims.")
+    return out
 
 
 def _client():
@@ -42,7 +60,15 @@ def _extract_json(text: str) -> dict[str, Any]:
     return json.loads(text[start:end + 1])
 
 
-@retry(retry=retry_if_not_exception_type(BudgetExceeded), stop=stop_after_attempt(3), wait=wait_exponential(min=4, max=40), reraise=True)
+def _retry_json(e: BaseException) -> bool:
+    """Retry transient API errors and malformed/truncated JSON; never auth, permission, 400, or budget errors."""
+    from .http import is_transient
+    if isinstance(e, BudgetExceeded):
+        return False
+    return is_transient(e) or isinstance(e, (ValueError, json.JSONDecodeError))
+
+
+@retry(retry=retry_if_exception(_retry_json), stop=stop_after_attempt(3), wait=wait_exponential(min=4, max=40), reraise=True)
 def _json_call(model: str, system: str, user: str, max_tokens: int = 16000) -> dict[str, Any]:
     from . import budget
     b = budget.current()
@@ -90,6 +116,7 @@ def write_article(cfg: Config, kw: dict[str, Any], plan_: dict[str, Any], serp: 
                   links: list[dict[str, str]], facts: dict) -> dict[str, Any]:
     user = f"""Write the article.
 TARGET_KEYWORD: {kw['keyword']}
+{feature_brief(cfg, kw)}
 PLAN: {json.dumps(plan_, ensure_ascii=False)}
 WHAT_COMPETITORS_COVER (titles/snippets only, do not copy): {json.dumps([{'title': o['title'], 'snippet': o['description']} for o in serp.get('organic', [])], ensure_ascii=False)}
 INTERNAL_LINKS_YOU_MAY_USE (use 2-4 where genuinely relevant, exact href): {json.dumps(links, ensure_ascii=False)}
@@ -113,6 +140,7 @@ def revise(cfg: Config, kw: dict[str, Any], plan_: dict[str, Any], draft: dict[s
     """Rewrites a rejected draft using the exact reviewer + quality-gate feedback."""
     user = f"""Our editorial quality reviewer REJECTED this draft. Rewrite it so EVERY issue below is fixed.
 TARGET_KEYWORD: {kw['keyword']}
+{feature_brief(cfg, kw)}
 PLAN: {json.dumps(plan_, ensure_ascii=False)}
 REJECTION_FEEDBACK (fix each item exactly): {json.dumps(feedback, ensure_ascii=False)}
 CURRENT_DRAFT: {json.dumps(draft, ensure_ascii=False)}
@@ -139,7 +167,8 @@ ARTICLE: {json.dumps(article, ensure_ascii=False)}
 Check: does it satisfy the search intent; does it give meaningful, practical, accurate information;
 any invented statistics/studies/testimonials/product testing; any claim about the app not supported by APP_FACTS
 (or anything in not_offered_do_not_claim); keyword stuffing; Google spam-policy problems (scaled low-value content,
-doorway, misleading); inaccurate styling/beauty advice; unsafe advice.
+doorway, misleading); inaccurate styling/beauty advice; unsafe advice; for skin/hair topics any medical diagnosis,
+detection, treatment, or accuracy claim (list these under unsupported_claims).
 Return JSON: {{"intent_match": bool, "value_score": 1-10, "factual_issues": [str], "invented_app_features": [str],
 "unsupported_claims": [str], "spam_policy_issues": [str], "keyword_stuffing": bool, "pass": bool, "notes": str}}"""
     return _json_call(cfg.get("content.review_model"), system, user)

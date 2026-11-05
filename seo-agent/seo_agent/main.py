@@ -3,6 +3,10 @@
 Usage:
   python -m seo_agent.main run [--dry-run]     # full daily pipeline
   python -m seo_agent.main check               # site validation only ("build test"); exit 1 on errors
+  python -m seo_agent.main rescore             # offline: re-score stored keywords, compare thresholds 40/45/50
+  python -m seo_agent.main weekly [--dry-run]  # weekly performance report (also runs automatically once a week)
+  python -m seo_agent.main verify [--wait N]   # after deploy: today's new URLs return 200 with the right canonical
+  python -m seo_agent.main landing             # render feature landing pages from landing_pages.yaml
 """
 from __future__ import annotations
 
@@ -13,7 +17,7 @@ import sys
 import traceback
 from typing import Any
 
-from . import budget, content, publisher, quality, research
+from . import budget, content, publisher, quality, reports, research
 from .agents import analytics_agent, editor_agent, keyword_agent, strategy_agent, writer_agent
 from .budget import Budget, BudgetExceeded
 from .audit import broken_links, crawl
@@ -155,7 +159,7 @@ def new_article(cfg, state: State, facts: dict, pages, perf, dry: bool, report: 
             i["decision"] = "candidate"
         report["notes"].append(f"Manual re-test of keyword '{force_keyword}'")
     for i in short:
-        i["cluster"] = research.cluster_of(cfg, i["keyword"])
+        i["cluster"] = i.get("feature") or research.cluster_of(cfg, i["keyword"])
     articles = state.data["articles"]
     for i in short:  # topic clusters: no second article on a near-identical query in the same cluster
         if i["decision"] == "candidate" and not force_keyword:
@@ -164,10 +168,12 @@ def new_article(cfg, state: State, facts: dict, pages, perf, dry: bool, report: 
                 i["decision"] = f"duplicate_in_cluster:{dup}"
                 state.record_keyword(i["keyword"], i, i["decision"])
     report["shortlist"] = [{k: i.get(k) for k in ("keyword", "volume", "difficulty", "opportunity_estimate", "gsc_impressions_28d",
-                                                  "intent", "cluster", "decision", "covering_page", "source")} for i in short[:15]]
-    candidates = research.order_by_cluster([i for i in short if i["decision"] == "candidate"], articles)
+                                                  "intent", "cluster", "feature", "score", "score_total", "decision",
+                                                  "covering_page", "source")} for i in short[:15]]
+    candidates = research.order_by_cluster([i for i in short if i["decision"] == "candidate"], articles, cfg)
     if not candidates:
-        report["decision"] = "skip: no keyword met the volume/evidence, opportunity, intent, relevance and coverage criteria"
+        report["decision"] = ("skip: no keyword met the feature-relevance, score, volume, intent and duplicate checks "
+                              "(see 'Keywords by feature' for reasons)")
         return
     published, clusters_today = [], set()
     for kw in candidates[: cfg.get("keyword_research.max_candidates_per_run", 3)]:
@@ -178,8 +184,9 @@ def new_article(cfg, state: State, facts: dict, pages, perf, dry: bool, report: 
         if published:
             pages = crawl(cfg)["pages"]  # include today's earlier article in duplicate checks
         plan, serp = strategy_agent.decide(cfg, kw, pages, facts)
-        attempt = {"keyword": kw["keyword"], "volume": kw.get("volume"), "opportunity_estimate": kw.get("opportunity_estimate"),
-                   "evidence": kw.get("opportunity_evidence"), "plan_action": plan.get("action"), "plan_reason": plan.get("reason")}
+        attempt = {"keyword": kw["keyword"], "feature": kw.get("feature"), "volume": kw.get("volume"),
+                   "score_total": kw.get("score_total"), "score": kw.get("score"), "mix_boost": kw.get("mix_boost"),
+                   "evidence": kw.get("score_evidence"), "plan_action": plan.get("action"), "plan_reason": plan.get("reason")}
         report["attempts"].append(attempt)
         if plan.get("action") != "new":
             state.record_keyword(kw["keyword"], kw, f"planner_{plan.get('action')}: {str(plan.get('reason', ''))[:120]}")
@@ -190,10 +197,14 @@ def new_article(cfg, state: State, facts: dict, pages, perf, dry: bool, report: 
         slug = re.sub(r"[^a-z0-9-]+", "-", (plan.get("slug") or kw["keyword"]).lower()).strip("-")[:70]
         if slug in articles or publisher.article_path(cfg, slug).exists():
             slug = f"{slug}-guide"
-        links = [{"href": "/", "title": "FitCheck AI home"}, {"href": "/how-it-works.html", "title": "How FitCheck AI works"}] + \
+        from .agents import conversion_agent
+        land = conversion_agent.landing_link(cfg, {"keyword": kw["keyword"], "feature": kw.get("feature")})
+        links = ([land] if land else []) + \
+                [{"href": "/", "title": "FitCheck AI home"}, {"href": "/how-it-works.html", "title": "How FitCheck AI works"}] + \
                 [{"href": f"/{cfg.get('site.blog_dir')}/{s}/", "title": a["h1"]} for s, a in articles.items()]
         a = writer_agent.write(cfg, kw, plan, serp, slug, links, facts)
         a["cluster"] = kw["cluster"]
+        a["feature"] = kw.get("feature")
         a, gate = draft_until_pass(cfg, kw, plan, slug, a, articles, pages, facts, attempt)
         if not gate["passed"]:
             state.record_keyword(kw["keyword"], kw, f"rejected_by_quality_gate: {'; '.join(gate['failures'])[:300]}")
@@ -205,7 +216,9 @@ def new_article(cfg, state: State, facts: dict, pages, perf, dry: bool, report: 
         a["quality_gate"] = {k: gate[k] for k in ("word_count", "keyword_density", "warnings")} | {"revisions": len(attempt["rounds"]) - 1}
         editor_agent.publish(cfg, a, articles)
         state.record_keyword(kw["keyword"], kw, f"published:{slug}")
-        published.append(f"published /{cfg.get('site.blog_dir')}/{slug}/ for '{kw['keyword']}' after {len(attempt['rounds']) - 1} revision(s)")
+        published.append(f"published /{cfg.get('site.blog_dir')}/{slug}/ for '{kw['keyword']}' (feature {kw.get('feature')}, "
+                         f"score {kw.get('score_total')}) after {len(attempt['rounds']) - 1} revision(s)")
+        report["published_urls"] = report.get("published_urls", []) + [publisher.article_url(cfg, slug)]
         report["changes"].append(f"new article blog/{slug}/index.html")
         clusters_today.add(kw["cluster"])
     report["decision"] = "; ".join(published) if published else "skip: no candidate passed planning + quality gate today"
@@ -222,10 +235,29 @@ def write_report(cfg, report: dict, dry: bool) -> None:
     if report.get("site_issues") or report.get("page_issues"):
         lines += ["## Audit findings", *[f"- site: {i}" for i in report.get("site_issues", [])],
                   *[f"- {p}: {', '.join(v)}" for p, v in report.get("page_issues", {}).items()], ""]
+    if report.get("discovery"):
+        lines += ["## Keyword discovery (Keyword Planner ideas per feature seed group)",
+                  ", ".join(f"{g}: {n}" for g, n in report["discovery"].items()), ""]
+    if report.get("feature_summary"):
+        lines += ["## Keywords by feature", "| feature | relevant ideas | qualifying | best keyword (score*) | most common skip reason |",
+                  "|---|---|---|---|---|",
+                  *[f"| {r['feature']} | {r['ideas']} | {r['qualifying']} | {r['best']} ({r['best_total']}) | {r['top_skip_reason']} |"
+                    for r in report["feature_summary"]], ""]
     if report.get("shortlist"):
-        lines += ["## Keyword shortlist", "| keyword | volume | opportunity estimate* | GSC impr. 28d | intent | decision |", "|---|---|---|---|---|---|",
-                  *[f"| {k['keyword']} | {k['volume'] if k['volume'] is not None else 'unverified'} | {k['opportunity_estimate']} | {k.get('gsc_impressions_28d') or '-'} | {k['intent']} | {k['decision']} |" for k in report["shortlist"]],
-                  "", "*Opportunity estimate = labeled heuristic from available evidence, NOT keyword difficulty.", ""]
+        def comp(k, name):
+            return (k.get("score") or {}).get(name, "-")
+        lines += ["## Keyword shortlist",
+                  "| keyword | feature | score* | relevance | ranking opp. | demand | conversion | usefulness | volume | GSC impr. 28d | intent | decision |",
+                  "|---|---|---|---|---|---|---|---|---|---|---|---|",
+                  *[f"| {k['keyword']} | {k.get('feature') or '-'} | {k.get('score_total', k.get('opportunity_estimate'))} | {comp(k, 'feature_relevance')} | "
+                    f"{comp(k, 'ranking_opportunity')} | {comp(k, 'search_demand')} | {comp(k, 'conversion_potential')} | {comp(k, 'content_usefulness')} | "
+                    f"{k['volume'] if k['volume'] is not None else 'unverified'} | {k.get('gsc_impressions_28d') or '-'} | {k['intent']} | {k['decision']} |"
+                    for k in report["shortlist"]],
+                  "", "*Score = five-component heuristic (opportunity estimate), NOT keyword difficulty or a Google ranking formula. "
+                  "Volume = Google Ads Keyword Planner (verified) unless marked unverified.", ""]
+    if report.get("published_urls"):
+        lines += ["## Published URLs", *[f"- {u} (deployment is verified by the workflow's 'Verify deployment' step; "
+                                         "indexing is NOT verified)" for u in report["published_urls"]], ""]
     if report["attempts"]:
         lines += ["## Attempts", "```json", json.dumps(report["attempts"], indent=2)[:12000], "```", ""]
     if report.get("search_console"):
@@ -284,6 +316,17 @@ def run(dry: bool, force_keyword: str | None = None) -> int:
             new_article(cfg, state, facts, crawl(cfg)["pages"], perf, dry, report, force_keyword)
             if perf:
                 analytics_agent.article_performance(cfg, perf, state.data["articles"], report)
+            if reports.weekly_due(cfg):
+                try:  # reporting must never block publishing
+                    text = reports.weekly(cfg, state, perf, clicks)
+                    if dry:
+                        print(text)
+                    else:
+                        reports.weekly_path(cfg).parent.mkdir(parents=True, exist_ok=True)
+                        reports.weekly_path(cfg).write_text(text, encoding="utf-8")
+                        report["changes"].append(f"weekly report {reports.weekly_path(cfg).name}")
+                except Exception as e:  # noqa: BLE001
+                    report["notes"].append(f"weekly report failed: {type(e).__name__}: {str(e)[:200]}")
         except research.NoProvider as e:
             report["decision"] = f"skip: {e}"
         except BudgetExceeded as e:
@@ -309,10 +352,47 @@ def run(dry: bool, force_keyword: str | None = None) -> int:
 
 def main(argv: list[str] | None = None) -> int:
     ap = argparse.ArgumentParser()
-    ap.add_argument("command", choices=["run", "check"])
+    ap.add_argument("command", choices=["run", "check", "rescore", "weekly", "verify", "landing"])
     ap.add_argument("--dry-run", action="store_true")
     ap.add_argument("--keyword", help="re-test one keyword (bypasses the 30-day rejection cooldown)")
+    ap.add_argument("--wait", type=int, default=600, help="verify: seconds to wait for the deployment")
+    ap.add_argument("--out", help="rescore: also write the report to this file")
     args = ap.parse_args(argv)
+    if args.command in ("rescore", "weekly", "verify", "landing"):
+        setup_logging()
+        cfg = load_config()
+        state = State(cfg.data_dir / "state.json")
+        if args.command == "rescore":
+            text = reports.rescore(cfg, state)
+            print(text)
+            if args.out:
+                from pathlib import Path
+                Path(args.out).write_text(text, encoding="utf-8")
+            return 0
+        if args.command == "landing":
+            from . import landing
+            for p in landing.render_all(cfg):
+                print("wrote", p.relative_to(cfg.site_root))
+            return 0
+        if args.command == "weekly":
+            perf = clicks = None
+            rep: dict[str, Any] = {"notes": [], "errors": []}
+            try:
+                perf = analytics_agent.search_performance(cfg, rep)
+                clicks = analytics_agent.cta_clicks(cfg, rep)
+            except Exception as e:  # noqa: BLE001
+                print("analytics unavailable:", e)
+            text = reports.weekly(cfg, state, perf, clicks)
+            print(text)
+            if not args.dry_run:
+                reports.weekly_path(cfg).parent.mkdir(parents=True, exist_ok=True)
+                reports.weekly_path(cfg).write_text(text, encoding="utf-8")
+            return 0
+        fails = reports.verify(cfg, state, args.wait)
+        for f in fails:
+            print("NOT LIVE", f)
+        print("deployment verification:", "FAILED" if fails else "OK")
+        return 1 if fails else 0
     if args.command == "check":
         setup_logging()
         errs = validate_site(load_config())
