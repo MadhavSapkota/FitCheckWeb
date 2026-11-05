@@ -64,9 +64,13 @@ def render_article(cfg: Config, a: dict[str, Any], related: list[dict[str, str]]
     url = article_url(cfg, a["slug"])
     brand = cfg.get("project.brand_on_site", "FitCheck AI")
     from .agents import conversion_agent
-    body = conversion_agent.insert_inline(cfg, sanitize_body(cfg, a["body_html"], url), a)
-    cta = conversion_agent.choose(a, cfg)
     faqs = [f for f in a.get("faqs", []) if f.get("question") and f.get("answer")]
+    clean = sanitize_body(cfg, a["body_html"], url)
+    if faqs:  # the template renders the FAQ section; drop a body FAQ heading (+ its intro) so it is not duplicated
+        clean = re.sub(r"<h2>\s*(frequently asked questions|faqs?|common questions)\s*</h2>.*?(?=<h2|$)", "", clean,
+                       flags=re.I | re.S)
+    body = conversion_agent.insert_inline(cfg, clean, a)
+    cta = conversion_agent.choose(a, cfg)
     faq_html = ""
     if faqs:
         faq_html = '<section class="faq" aria-labelledby="faq-h"><h2 id="faq-h">Frequently asked questions</h2>' + "".join(

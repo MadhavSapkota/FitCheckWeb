@@ -129,6 +129,7 @@ Requirements:
 - Include concrete, practical examples (e.g. specific color pairings, outfit formulas, proportions).
 - Mention the app at most twice, naturally, only where it helps (e.g. getting feedback on fit/color/balance). Do not link to external sites.
 - faqs: 3-5 real questions searchers ask, each answered in 2-4 sentences. Do not repeat body text verbatim.
+  Put them ONLY in the faqs field: no FAQ heading or FAQ section inside body_html (the page renders it).
 Return JSON: {{"title": "SEO title <= 60 chars", "meta_description": "140-155 chars, compelling, no quotes",
 "h1": str, "body_html": str, "faqs": [{{"question": str, "answer": str}}],
 "cta_text": "one sentence inviting the reader to try the app, factual per APP_FACTS", "summary": "one sentence for the blog index"}}"""

@@ -224,6 +224,16 @@ def test_one_article_per_day_and_feature_cta(site, monkeypatch):
     assert (site / "seo-agent" / "data" / "reports" / "weekly-2026-W44.md").exists()
 
 
+def test_faq_heading_not_duplicated(cfg):
+    a = {"slug": "x-y", "keyword": "what is my skin tone", "title": "What Is My Skin Tone? A Guide", "h1": "What Is My Skin Tone",
+         "meta_description": "m" * 140, "published": "2026-11-05", "modified": "2026-11-05",
+         "body_html": "<p>Intro.</p><h2>Depth</h2><p>a</p><h2>Frequently asked questions</h2><p>Common follow-ups.</p>",
+         "faqs": [{"question": "Q?", "answer": "A."}]}
+    html = publisher.render_article(cfg, a, [])
+    assert html.lower().count("frequently asked questions</h2>") == 1 and "Common follow-ups" not in html
+    assert "<h2>Depth</h2>" in html
+
+
 def test_polish_applies_reviewer_suggestions_only_if_still_passing(site, monkeypatch):
     from seo_agent import content
     cfg_p = site / "seo-agent" / "seo-config.yaml"
