@@ -176,6 +176,32 @@ def test_health_rules_in_quality_gate():
     assert not any(re.search(p, ok, flags=re.I) for p, _ in quality.FORBIDDEN)
 
 
+def test_questions_and_denials_are_not_claims_but_answers_are_checked():
+    ok = ("Can the app detect skin conditions? No. FitCheck does not diagnose or detect skin conditions. "
+          "It is not a substitute for a dermatologist. FitCheck does not give size recommendations.")
+    assert not [l for p, l in quality.FORBIDDEN if re.search(p, quality.claim_text(ok), flags=re.I)]
+    bad = "Can the app detect skin conditions? Yes, it can detect melanoma early. It gives size recommendations too."
+    hits = {l for p, l in quality.FORBIDDEN if re.search(p, quality.claim_text(bad), flags=re.I)}
+    assert "medical detection claim" in hits and "claims size recommendations" in hits
+
+
+def test_unverified_photo_storage_claims_blocked():
+    for s in ("Your photos are never stored.", "Saved looks stay on your device.", "Images are deleted after 24 hours.",
+              "Photos never leave your phone.", "Your selfies are encrypted."):
+        assert any(label == "unverified photo storage claim" and re.search(p, s, flags=re.I)
+                   for p, label in quality.FORBIDDEN), s
+    for s in ("Upload a clear photo in natural light.", "Outfit scoring runs on your device.",
+              "Save your favorite looks to your digital closet."):
+        assert not any(label == "unverified photo storage claim" and re.search(p, s, flags=re.I)
+                       for p, label in quality.FORBIDDEN), s
+
+
+def test_landing_pages_make_no_storage_claims(cfg):
+    text = (cfg.agent_dir / "landing_pages.yaml").read_text()
+    for pat in (r"stays? on (your|the) device", r"does not store", r"private to you", r"never (stored|uploaded)"):
+        assert not re.search(pat, text, flags=re.I), pat
+
+
 def test_required_disclaimers_are_not_flagged_as_claims():
     ok = ("AI feedback is not medical advice. See a dermatologist or doctor for any skin concern. "
           "The app does not diagnose skin conditions.")

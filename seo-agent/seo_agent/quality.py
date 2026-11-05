@@ -32,6 +32,11 @@ FORBIDDEN = [
      "medical detection claim"),
     (r"\bclinically\s+(proven|tested|validated)\b|\bmedical[- ]grade\b", "clinical claim"),
     (r"\b\d{2,3}\s?%\s+accura", "accuracy percentage claim"),
+    # photo privacy: storage/retention/deletion/encryption behaviour is not confirmed, so no article may assert it
+    (r"\b(photos?|images?|pictures?|selfies?|looks?|data)\b[^.]{0,40}\b(never|not|aren't|isn't|are|is)\s+"
+     r"(stored|saved|kept|retained|uploaded|shared|sold|deleted|encrypted)\b", "unverified photo storage claim"),
+    (r"\b(stays?|remain)\s+on\s+(your|the)\s+(device|phone)\b|\bnever\s+leaves?\s+(your|the)\s+(device|phone)\b"
+     r"|\bend-to-end\s+encrypt|\bautomatically\s+deleted\b", "unverified photo storage claim"),
     (r"\b(guarantee[sd]?|100% accurate|perfect score every time)\b", "absolute guarantee"),
 ]
 
@@ -41,15 +46,21 @@ FORBIDDEN = [
 SAFE_SENTENCE = re.compile(
     r"\b(see|consult|visit|ask|talk to|check with|speak (to|with))\s+(a|an|your)?\s*(board-certified\s+)?"
     r"(dermatologist|doctor|physician|gp|healthcare professional|medical professional)s?(\s+or\s+(a\s+)?(dermatologist|doctor|physician))?"
+    r"|\bnot\s+a\s+substitute\s+for\s+(a|an|your)?\s*(dermatologist|doctor|physician|professional(\s+\w+)?|medical\s+\w+)"
     r"|\bnot\s+(a\s+substitute\s+for\s+)?(professional\s+)?(medical advice|a\s+(medical\s+)?diagnosis|medical)"
+    r"|\b(does not|doesn't|do not|don't)\s+(give|offer|provide|make|include)\s+(\w+\s+){0,2}(size|measurement|medical|diagnos)\w*(\s+\w+){0,2}"
     r"|\b(does not|doesn't|do not|don't|cannot|can't|won't|never|is not designed to|isn't designed to)\s+"
     r"(diagnose|detect|treat|identify|assess)(\s+or\s+(diagnose|detect|treat|identify|assess))?",
     flags=re.I)
 
 
+QUESTION_SENTENCE = re.compile(r"[^.!?\n]*\?")
+
+
 def claim_text(text: str) -> str:
-    """Text with disclaimers/referrals removed, so 'see a dermatologist' or 'does not diagnose' never trips a claim rule."""
-    return SAFE_SENTENCE.sub(" ", text)
+    """Text with disclaimers/referrals and questions removed, so 'see a dermatologist', 'does not diagnose' or an FAQ
+    question like 'Can the app detect skin conditions?' never trips a claim rule. Answers are still checked."""
+    return SAFE_SENTENCE.sub(" ", QUESTION_SENTENCE.sub(" ", text))
 
 
 NO_ISSUE = re.compile(r"^\s*(no|none|n/a|nothing)\b", re.I)

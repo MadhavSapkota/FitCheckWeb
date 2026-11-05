@@ -29,9 +29,10 @@ features:
   - "Live skin analysis with the camera: an AI skin overview with cosmetic beauty suggestions (not medical advice)."
   - "AI fashion image generation: AI-generated fashion images and styling previews of you from your photo."
 privacy:
-  - "Outfit scoring runs on the device; the developer does not store photos or reuse them."
-  - "Saved looks stay on the device."
-  # Never claim photos never leave the phone / are never uploaded (AI image features use online APIs).
+  - "Outfit scoring runs on the device."
+  - "AI image features (hairstyle try-on, outfit try-on, AI fashion images) process your photo online to create the images."
+  # Storage, retention, deletion and encryption of photos are NOT yet confirmed by the owner (2026-11-05):
+  # never state where photos or saved looks are stored, how long they are kept, or that they are deleted/encrypted.
 photo_tips:
   - "Use a clear, well-lit, head-to-toe photo including shoes for outfits."
   - "For makeup and hair, face natural light, hold the camera at eye level, avoid filters."
@@ -46,6 +47,8 @@ not_offered_do_not_claim:
   - "Accuracy percentages for skin, hair, or outfit analysis"
   - "Exact garment fit or sizing in virtual try-on images"
   - "Social feed, sharing community, or followers"
+  - "Any statement about photo storage, retention, deletion, encryption, or third-party AI provider data handling (not confirmed)"
+  - "That photos never leave the phone or are never uploaded (AI image features process photos online)"
   - "Any ratings count, download count, awards, or press coverage"
   - "Any user statistics, testimonials, or study results"
   - "Scientific or 'data-backed' accuracy of scores (scores are AI opinion, a second opinion)"

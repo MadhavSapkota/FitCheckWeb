@@ -57,7 +57,7 @@ pages:
       - {title: "A quick second opinion.", text: "Get an instant fit check instead of second-guessing in the mirror."}
       - {title: "Specific, practical tips.", text: "Feedback points to concrete changes like shoes, color contrast, or fit balance."}
       - {title: "Plan ahead.", text: "Save top-scoring looks and plan daily outfits for work, parties, workouts, weekends, and date nights."}
-      - {title: "Private by design.", text: "Outfit scoring runs on your device; the developer does not store or reuse your photos."}
+      - {title: "Scored on your phone.", text: "Outfit scoring runs on your device."}
     limits_title: "Good to know"
     limits:
       - "The score is an AI opinion and a starting point, not an objective verdict. Your taste and comfort come first."
@@ -66,7 +66,7 @@ pages:
     faqs:
       - {q: "How does an AI outfit checker rate my outfit?", a: "You take or upload a full-body photo and FitCheck gives the outfit an AI style score with a breakdown of color match, proportion, and overall balance, plus suggestions on what to adjust."}
       - {q: "Is the outfit score accurate?", a: "Treat it as a second opinion rather than a fact. Style is personal, and the score is meant to point out color, fit balance, and accessory ideas you can decide on yourself."}
-      - {q: "Does FitCheck save my outfit photos?", a: "Outfit scoring runs on your device and the developer does not store or reuse your photos. Looks you choose to save stay on your device."}
+      - {q: "What kind of photo works best?", a: "A clear, well-lit, head-to-toe photo that includes your shoes, taken without filters, gives the outfit checker the most to work with."}
       - {q: "Is FitCheck free?", a: "FitCheck is free to download on Google Play for Android. An iOS version is coming soon."}
     cta:
       title: "Check your outfit before you head out"
@@ -216,15 +216,15 @@ pages:
     benefits:
       - {title: "Less morning stress.", text: "Outfits are already planned when you need them."}
       - {title: "See what you own.", text: "Your best combinations are saved in one place."}
-      - {title: "Stays on your phone.", text: "Saved looks stay on your device."}
+      - {title: "Track your style.", text: "Keep your highest-rated outfits and see how your style evolves."}
     limits_title: "Good to know"
     limits:
       - "FitCheck does not include shopping or price comparison."
-      - "There is no social feed. Your closet is private to you."
+      - "There is no social feed or followers."
     faqs:
       - {q: "What is a digital wardrobe app?", a: "It is a virtual closet on your phone where you save outfits, organize clothes by season or occasion, and plan what to wear."}
       - {q: "Can I plan outfits for the week?", a: "Yes. FitCheck lets you plan daily outfits ahead for work, parties, workouts, casual weekends, and events like date nights."}
-      - {q: "Where are my saved looks stored?", a: "Saved looks stay on your device."}
+      - {q: "Can I keep track of my best outfits?", a: "Yes. Save your favorite and top-scoring looks to your digital closet and see how your style evolves over time."}
       - {q: "Can it help me build a capsule wardrobe?", a: "Yes. Organize your saved outfits by season or occasion to spot the versatile pieces that belong in a capsule wardrobe."}
     cta:
       title: "Organize your closet and plan your week"
