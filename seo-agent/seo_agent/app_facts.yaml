@@ -29,8 +29,9 @@ features:
   - "Live skin analysis with the camera: an AI skin overview with cosmetic beauty suggestions (not medical advice)."
   - "AI fashion image generation: AI-generated fashion images and styling previews of you from your photo."
 privacy:
-  - "Outfit scoring runs on the device."
-  - "AI image features (hairstyle try-on, outfit try-on, AI fashion images) process your photo online to create the images."
+  # Owner-approved wording (2026-11-05). Use it ONLY about outfit scoring / fit check, and keep privacy mentions short.
+  - "Outfit scoring: Your photos are processed directly on your device."
+  # Do not describe where AI image features (hairstyle try-on, outfit try-on, AI fashion images) process photos.
   # Storage, retention, deletion and encryption of photos are NOT yet confirmed by the owner (2026-11-05):
   # never state where photos or saved looks are stored, how long they are kept, or that they are deleted/encrypted.
 photo_tips:
@@ -48,7 +49,7 @@ not_offered_do_not_claim:
   - "Exact garment fit or sizing in virtual try-on images"
   - "Social feed, sharing community, or followers"
   - "Any statement about photo storage, retention, deletion, encryption, or third-party AI provider data handling (not confirmed)"
-  - "That photos never leave the phone or are never uploaded (AI image features process photos online)"
+  - "That AI image features (hairstyle try-on, outfit try-on, AI fashion images) process photos on the device, or that photos never leave the phone"
   - "Any ratings count, download count, awards, or press coverage"
   - "Any user statistics, testimonials, or study results"
   - "Scientific or 'data-backed' accuracy of scores (scores are AI opinion, a second opinion)"

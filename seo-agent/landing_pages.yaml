@@ -57,7 +57,7 @@ pages:
       - {title: "A quick second opinion.", text: "Get an instant fit check instead of second-guessing in the mirror."}
       - {title: "Specific, practical tips.", text: "Feedback points to concrete changes like shoes, color contrast, or fit balance."}
       - {title: "Plan ahead.", text: "Save top-scoring looks and plan daily outfits for work, parties, workouts, weekends, and date nights."}
-      - {title: "Scored on your phone.", text: "Outfit scoring runs on your device."}
+      - {title: "Private by design.", text: "Your photos are processed directly on your device."}
     limits_title: "Good to know"
     limits:
       - "The score is an AI opinion and a starting point, not an objective verdict. Your taste and comfort come first."
@@ -170,7 +170,6 @@ pages:
     limits_title: "Good to know"
     limits:
       - "Try-on images are AI-generated previews, so real results depend on your hair texture, density, and your stylist."
-      - "AI image features use online processing. Outfit scoring runs on the device."
       - "Hair analysis is cosmetic and style guidance only, not medical advice."
     faqs:
       - {q: "Can I try hairstyles on my own face?", a: "Yes. Upload a photo and FitCheck generates AI images of you with a new hairstyle so you can compare looks before a cut or color."}
@@ -276,7 +275,6 @@ pages:
     limits_title: "Good to know"
     limits:
       - "Images are AI-generated previews and do not show exact fit or sizing."
-      - "AI image features use online processing. Outfit scoring runs on the device."
       - "FitCheck does not sell clothes or include shopping."
     faqs:
       - {q: "How does virtual outfit try-on work?", a: "You upload a photo and FitCheck generates AI images of you in different outfits, so you can preview styles on yourself."}
