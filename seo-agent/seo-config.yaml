@@ -10,8 +10,13 @@ site:
   root_dir: "."                              # repo folder served by GitHub Pages
   blog_dir: "blog"
   # Hand-built pages listed in the sitemap. The agent never rewrites their layout.
-  static_pages: ["index.html", "how-it-works.html", "privacy.html", "terms.html"]
+  static_pages: ["index.html", "how-it-works.html", "privacy.html", "terms.html",
+                 "ai-outfit-checker/index.html", "ai-makeup-assistant/index.html", "ai-hairstyle-try-on/index.html",
+                 "digital-wardrobe/index.html", "virtual-outfit-try-on/index.html", "ai-skin-analysis/index.html"]
   exclude_from_audit: ["hero.html"]          # component fragment, not a standalone page
+  # Tool-intent queries a hand-built page already satisfies (feature landing pages declare theirs in landing_pages.yaml).
+  page_targets:
+    index.html: [fitcheck, fitcheck app, fitcheck ai, fit check app, fitcheck ai app, style ai fit check]
   # Meta descriptions added ONLY when a hand-built page has none (og:title/og:description/twitter:card are derived).
   static_meta:
     how-it-works.html: "How FitCheck AI works: upload a head-to-toe outfit photo, get an AI style score, and see tips on fit, color match and balance."
@@ -28,6 +33,7 @@ keyword_research:
   #                 long-tail length, question format, verified volume band, relevance, Search Console rankings.
   #   dataforseo -> paid: measured organic keyword difficulty + live top-10 SERP.
   organic_difficulty_source: none
+  # Legacy single-number threshold; still applied to editorial topics. Regular keywords use `scoring:` below.
   min_opportunity_estimate: 50
   # Search Console queries with no verified volume are allowed only with this much real demand evidence:
   min_gsc_impressions_if_volume_unverified: 30
@@ -38,16 +44,10 @@ keyword_research:
     enabled: false                 # OFF: verified data sources only (owner's choice)
     min_opportunity_estimate: 40   # needs 5+ words, question format, and app relevance
   max_candidates_per_run: 4          # each candidate costs 3 Claude calls + 2 per revision
-  # Topic clusters (pillars). Each keyword joins the first cluster whose terms it contains. Related-guide links
-  # prefer the same cluster, and a keyword is skipped when a same-cluster article already targets a near-identical query.
-  cluster_duplicate_overlap: 0.6     # token Jaccard between queries in one cluster = duplicate
-  topic_clusters:
-    hair: [hair, hairstyle, hairstyles, haircut, haircuts, curl, curls, curly, bangs, fringe, bob, layers]
-    makeup: [makeup, beauty, lipstick, foundation, blush, eyeshadow, eyeliner, glam, contour, concealer]
-    color: [color, colour, colors, colours, palette, matching, match, combinations, contrast]
-    wardrobe: [wardrobe, closet, capsule, organize, organizer, planner, plan]
-    aesthetics: [aesthetic, aesthetics, y2k, streetwear, vintage, minimalist, "old", money, quiet, luxury]
-    outfits: [outfit, outfits, fit, wear, dress, jeans, shoes, sneakers, clothes, clothing, look, looks, style, styling]
+  # Duplicate intent: a keyword is skipped when a published article's target/secondary query overlaps this much
+  # (token Jaccard). Any feature: cluster_duplicate_overlap. Same feature: same_feature_overlap (stricter).
+  cluster_duplicate_overlap: 0.6
+  same_feature_overlap: 0.5
   # Google Trends: no official API exists, so it is intentionally not used (unofficial scrapers break ToS/reliability).
   minimum_monthly_searches: 100
   maximum_organic_difficulty: 25   # applies when organic_difficulty_source: dataforseo
@@ -55,25 +55,201 @@ keyword_research:
   language_constant: "languageConstants/1000"   # Google Ads: English
   location: US
   location_code: 2840                           # Google Ads geo target / DataForSEO location (United States)
-  max_ideas_per_run: 400
+  # Keyword Planner is queried once PER FEATURE (features.*.seeds) so broad "outfit ideas" seeds can no longer
+  # crowd out makeup, skin, wardrobe, and try-on ideas. This cap applies to each feature's request group.
+  max_ideas_per_run: 150
   allowed_intents: ["informational", "commercial"]
+  # Extra general seeds (in addition to every feature's seeds below).
   seed_keywords:
-    - ai outfit checker
-    - ai fit check
-    - outfit rating
-    - outfit color matching
-    - fashion ai
-    - outfit analyzer
     - ai fashion stylist
     - personal styling
-    - makeup ai
-    - beauty ai
-    - hairstyle try on
-    - outfit ideas
-  # A keyword must contain at least one of these terms to be considered relevant.
-  relevance_terms: [outfit, fit, style, styling, stylist, fashion, wear, clothes, clothing, color, colour,
-                    makeup, beauty, hair, hairstyle, look, wardrobe, closet, dress, jeans, shoes, sneakers]
-  blocked_terms: [porn, nude, casino, crack, torrent, apk download, mod apk]
+  # Relevance comes from the `features:` map below (a keyword must match a FitCheck feature).
+  blocked_terms: [porn, nude, casino, crack, torrent, apk download, mod apk, costume, wig, tattoo,
+                  surgery, botox, filler, acne treatment, hair loss treatment, prescription,
+                  personal stylist, wardrobe stylist, image consultant, stylist near, stylist salary, stylist jobs]
+
+# --------------------------------------------------------------------------------------------------------------
+# Five-component keyword score (0-100 each). A transparent HEURISTIC to rank topics, NOT a Google ranking formula
+# and NOT keyword difficulty. Every component and its evidence is stored in state.json and printed in reports.
+scoring:
+  weights: {feature_relevance: 0.30, ranking_opportunity: 0.25, search_demand: 0.15,
+            conversion_potential: 0.20, content_usefulness: 0.10}
+  min_total: 50                  # tested 40 / 45 / 50 on stored keywords (python -m seo_agent.main rescore): identical
+                                 # results after the gates, so the stricter 50 is used; lower to 45 only if runs starve
+  min_feature_relevance: 60      # needs a feature phrase or 2+ feature words; one loose word (55) is not enough
+  min_ranking_opportunity: 25    # skips head terms a new domain cannot realistically rank for
+  mix_boost_max: 5               # ranking points for features below their editorial-mix target
+  mix_penalty_max: 10            # ranking points removed from features far above their target (topic diversity)
+
+# --------------------------------------------------------------------------------------------------------------
+# FitCheck features. Every keyword is classified into exactly one feature (highest relevance; ties -> listed first).
+#   phrases: strong multi-word matches (relevance 95)   terms: single words (relevance 55, +15 per extra hit, max 85)
+#   relevance_cap: lowers the ceiling for loosely related features (e.g. general trends)
+#   conversion: base app-download potential 0-100      mix: editorial-mix target in % (flexible, not a quota)
+#   landing: feature page articles link to (only when the file exists)   health: stricter medical-claim rules
+features:
+  outfit-checker:
+    label: "AI FitCheck & live outfit check"
+    landing: "/ai-outfit-checker/"
+    conversion: 85
+    mix: 25
+    phrases: [fit check, outfit checker, outfit check, rate my outfit, rate my fit, rate outfit, outfit rating, outfit rater,
+              outfit analyzer, outfit analysis, does my outfit look good, does this outfit look good, is my outfit good,
+              what should i wear, what to wear today, outfit color, colors go together, colours go together, match colors,
+              color matching, color combination, outfit matcher, outfit score, outfit feedback, ai stylist,
+              ai personal stylist, ai fashion stylist, stylist app, styling app, style app, outfit app]
+    # Only specific words here: generic words like "outfit" belong to `trends` (low conversion), and human-stylist
+    # queries ("personal stylist near me") are not FitCheck's offer (app_facts: no human stylists).
+    terms: [rate, rating, rater, checker, analyzer, color, colour, colors]
+    seeds: [outfit checker, rate my outfit, does my outfit look good, what should i wear today, outfit color matching,
+            what colors go together in an outfit, ai stylist, outfit rating app]
+    cta: {button: "Check Your Outfit With AI",
+          text: "Snap a head-to-toe photo and get an AI style score with tips on fit, color, and balance."}
+  makeup-assistant:
+    label: "AI makeup assistant"
+    landing: "/ai-makeup-assistant/"
+    conversion: 80
+    mix: 8
+    phrases: [makeup assistant, makeup advisor, makeup suits my face, makeup suits me, makeup for my face,
+              makeup for skin tone, makeup for my skin tone, makeup recommendations, makeup suggestions, makeup analyzer,
+              makeup analysis, makeup for face shape, makeup for my face shape, everyday makeup, natural makeup look,
+              beauty assistant, makeup tips, makeup look, makeup looks]
+    terms: [makeup, beauty, foundation, blush, eyeshadow, eyeliner, contour, concealer, glam, bronzer, highlighter]
+    seeds: [what makeup suits my face, makeup for my skin tone, best makeup for my face shape, everyday makeup look,
+            makeup recommendations, ai makeup]
+    cta: {button: "Get AI Makeup Feedback",
+          text: "Snap a close-up in natural light and get AI beauty feedback on your makeup look."}
+  makeup-try-on:
+    label: "Live virtual makeup try-on"
+    landing: "/ai-makeup-assistant/"
+    conversion: 90
+    mix: 7
+    phrases: [makeup try on, try on makeup, try makeup, makeup filter, makeup simulator, lipstick try on,
+              try on lipstick, lipstick filter, virtual makeup, makeup app, makeup camera, test makeup, makeup preview]
+    terms: [lipstick]
+    seeds: [virtual makeup try on, try makeup on my face, makeup filter, lipstick try on, makeup simulator, makeup app]
+    cta: {button: "Try Makeup Looks Live",
+          text: "Use the live camera to preview makeup looks on your own face before you commit."}
+  hairstyle-recommendations:
+    label: "Hairstyle recommendations"
+    landing: "/ai-hairstyle-try-on/"
+    conversion: 75
+    mix: 5
+    phrases: [hairstyle suits me, haircut suits me, hairstyle suits my face, hairstyle for my face, hairstyles for face shape,
+              hairstyle for face shape, haircut for face shape, haircuts for face shape, hairstyle for round face,
+              haircut for round face, hairstyle for oval face, what hairstyle, which hairstyle, what haircut, which haircut,
+              hairstyle ideas, haircut ideas, hair color for skin tone, hair colour for skin tone, hair color ideas]
+    terms: [hair, hairstyle, hairstyles, haircut, haircuts, bangs, fringe, bob, layers, curls, curly, braids, pixie]
+    seeds: [what hairstyle suits me, hairstyles for my face shape, haircut for round face, hair color for my skin tone,
+            haircut ideas]
+    cta: {button: "Find Hairstyles That Suit You",
+          text: "Explore hairstyle, curl, and hair color ideas and see how a look comes together on you."}
+  hairstyle-try-on:
+    label: "Virtual hairstyle try-on"
+    landing: "/ai-hairstyle-try-on/"
+    conversion: 92
+    mix: 6
+    phrases: [hairstyle try on, hairstyles try on, try on hairstyles, try on hairstyle, try hairstyles, try a hairstyle,
+              try on different hairstyles, try different hairstyles, hair style try on, try on hair styles,
+              try hair styles, hair style app, hair style filter, hair style simulator,
+              haircut try on, try on haircut, try on haircuts, hair try on, hairstyle simulator, haircut simulator,
+              haircut filter, hairstyle filter, hair filter, hairstyle app, haircut app, virtual hairstyle, virtual haircut,
+              virtual hair, hair color try on, try hair color, try on hair color, hairstyles on my face, hairstyles on your face,
+              hairstyles with your picture, hairstyles on my picture]
+    terms: []
+    seeds: [hairstyle try on, try hairstyles on my face, haircut filter, virtual haircut, hairstyle simulator,
+            hair color try on]
+    cta: {button: "Try Hairstyles On Your Photo",
+          text: "Upload a photo and see AI images of you with a new hairstyle before you book the cut."}
+  hair-analysis:
+    label: "Live hair analysis"
+    landing: "/ai-hairstyle-try-on/"
+    conversion: 75
+    mix: 4
+    health: true
+    phrases: [hair analysis, hair analyzer, hair analyser, hair type test, hair type quiz, what is my hair type,
+              hair porosity, hair health, hair scanner, hair texture, hair density, hair type]
+    terms: [porosity]
+    seeds: [hair analysis, what is my hair type, hair type test, hair porosity test, hair analyzer app]
+    cta: {button: "Check Your Hair With AI",
+          text: "Get a quick AI look at your hair from your camera, plus style ideas that work with it."}
+  skin-analysis:
+    label: "Live skin analysis"
+    landing: "/ai-skin-analysis/"
+    conversion: 80
+    mix: 10
+    health: true
+    phrases: [skin analysis, skin analyzer, skin analyser, skin scanner, skin tone analyzer, skin type test,
+              skin type quiz, what is my skin type, what is my skin tone, skin undertone, undertone test, skin check app,
+              face analysis, face analyzer, skin app, skin tone test]
+    terms: [skin, undertone, undertones, complexion]
+    seeds: [skin analysis, skin type test, what is my skin tone, skin undertone test, skin analyzer app, face analysis app]
+    cta: {button: "Try AI Skin Analysis",
+          text: "Get an AI overview of your skin from a selfie as a starting point for your beauty routine. Not medical advice."}
+  wardrobe:
+    label: "Digital wardrobe management"
+    landing: "/digital-wardrobe/"
+    conversion: 85
+    mix: 10
+    phrases: [digital wardrobe, virtual closet, digital closet, wardrobe app, closet app, wardrobe organizer,
+              closet organizer app, outfit planner, outfit plan, capsule wardrobe, wardrobe management, organize my closet,
+              organize your closet, organize my wardrobe, what to wear from my closet, outfit calendar, outfit tracker]
+    terms: [wardrobe, closet, capsule]
+    seeds: [digital wardrobe app, virtual closet app, wardrobe organizer, capsule wardrobe, outfit planner app,
+            how to organize your closet]
+    cta: {button: "Organize Your Wardrobe",
+          text: "Save your favorite looks, sort outfits by season or occasion, and plan what to wear ahead."}
+  outfit-try-on:
+    label: "Virtual outfit try-on"
+    landing: "/virtual-outfit-try-on/"
+    conversion: 90
+    mix: 10
+    phrases: [virtual try on, try on clothes, clothes try on, try clothes on, outfit try on, try on outfits, try outfits,
+              virtual fitting, fitting room app, dressing room app, virtual dressing room, see clothes on me, try on dress,
+              dress try on]
+    terms: []
+    seeds: [virtual try on clothes, try on clothes online, virtual fitting room, try outfits on yourself,
+            virtual dressing room app]
+    cta: {button: "Try Outfits On Virtually",
+          text: "See AI-generated images of yourself in different outfits, made from your own photo."}
+  fashion-generator:
+    label: "AI fashion image generation"
+    landing: "/virtual-outfit-try-on/"
+    conversion: 80
+    mix: 10
+    phrases: [outfit generator, fashion generator, ai fashion, ai outfit, clothes generator, clothing generator,
+              ai clothing, ai clothes, ai fashion photo, ai fashion model, generate outfit, generate outfits, outfit maker,
+              outfit creator, ai dress, fashion ai]
+    terms: []
+    seeds: [ai outfit generator, ai fashion generator, outfit generator, ai clothes generator, outfit maker]
+    cta: {button: "Generate Outfits With AI",
+          text: "Turn your photo into AI fashion images and preview new outfits on yourself."}
+  trends:
+    label: "Trending fashion & style inspiration"
+    landing: "/ai-outfit-checker/"
+    conversion: 35
+    mix: 4
+    relevance_cap: 65
+    min_total: 60          # low app-conversion topics must be clearly strong to qualify
+    phrases: [outfit ideas, outfits ideas, what to wear to, what to wear for, what to wear with, aesthetic outfits,
+              old money, quiet luxury, streetwear, y2k, fashion trends, trending outfits, outfit inspiration, outfit inspo,
+              date outfit, birthday outfit, casual outfit, how to style, how to wear]
+    terms: [outfit, outfits, style, fashion, dress, jeans, shoes, sneakers, clothes, clothing, wear, trend, trends,
+            aesthetic, vintage, minimalist, look, looks]
+    seeds: [outfit ideas, fashion trends 2026, old money outfits, streetwear outfit ideas, date night outfit ideas,
+            birthday outfit ideas, casual outfit ideas]
+    cta: {button: "Check Your Outfit With AI",
+          text: "Put the look together, then snap a photo for an AI style score with tips on fit, color, and balance."}
+  branded:
+    label: "FitCheck branded"
+    landing: "/"
+    conversion: 95
+    mix: 1
+    phrases: [fitcheck, fit check app, fitcheck ai, style ai fit check]
+    terms: []
+    seeds: [fitcheck app, fitcheck ai, fit check app]
+    cta: {button: "Get FitCheck on Google Play",
+          text: "Rate your outfit, makeup, and hair with AI. Free on Android."}
 
 content:
   provider: anthropic
@@ -83,18 +259,19 @@ content:
   max_words: 2200
   max_keyword_density_percent: 2.5
   max_similarity_to_existing: 0.45   # 0..1 shingle similarity; above this = near-duplicate
-  coverage_threshold: 0.6            # share of keyword tokens already in an existing title/H1 = "covered"
+  # Duplicate prevention is INTENT-based (seo_agent/intent.py): same feature + same intent type (tool vs informational)
+  # + strong normalized overlap. Shared words with a landing page or article never block a keyword on their own.
   max_revisions: 3                   # rejected drafts are rewritten with the reviewer's exact feedback, then re-reviewed
 
 publishing:
   automatic: true
-  max_new_articles_per_day: 2        # 1-2 per day, only when qualifying keywords pass every check
+  max_new_articles_per_day: 1        # at most ONE quality article per day; none when nothing qualifies
   update_existing_pages: true
   require_quality_gate: true
   max_page_updates_per_day: 2
 
 limits:                               # spending guardrails (checked before every Claude call)
-  max_claude_calls_per_run: 30        # 2 articles x (plan + write + review + 3 x (rewrite + review)) + spare
+  max_claude_calls_per_run: 30        # up to 4 candidates tried x (plan + write + review + revisions), 1 published
   max_monthly_usd: 25                 # stop generating when the month's estimated spend reaches this
   input_usd_per_mtok: 3.0             # VERIFY against https://www.anthropic.com/pricing for your model
   output_usd_per_mtok: 15.0

@@ -1,0 +1,15 @@
+/* Feature landing pages - extends /blog/blog.css (same editorial black & white theme). */
+.landing{max-width:1100px;padding-block:clamp(32px,5vw,72px) clamp(48px,7vw,104px)}
+.lp-hero{display:grid;gap:clamp(24px,4vw,56px);align-items:center;grid-template-columns:1fr}
+@media(min-width:860px){.lp-hero{grid-template-columns:1.1fr .9fr}}
+.lp-hero .lede{font-size:19px;max-width:56ch}
+.lp-media{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px}
+.lp-media figure{margin:0}
+.lp-media img{display:block;width:100%;height:auto;max-height:520px;object-fit:cover;background:var(--soft)}
+.landing section{max-width:760px}
+.landing .lp-hero{max-width:none}
+.lp-steps ol{padding-left:22px}.lp-steps li,.lp-list li{margin:10px 0}
+.lp-more ul{list-style:none;padding:0;display:flex;flex-wrap:wrap;gap:10px}
+.lp-more a{display:inline-block;border:1.5px solid #000;padding:10px 14px;text-decoration:none;color:#000;font-size:13px;font-weight:600;letter-spacing:.06em;text-transform:uppercase}
+.lp-more a:hover{background:#000;color:#fff}
+.lp-more h2{font-size:clamp(18px,2vw,22px)}

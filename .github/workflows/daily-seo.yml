@@ -29,8 +29,11 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 45
     steps:
+      # Check out the LATEST branch head (not the commit that triggered the run), so a run queued behind another
+      # (concurrency group) sees that run's published article and the 1-article/day limit holds.
       - uses: actions/checkout@v4
         with:
+          ref: ${{ github.ref_name }}
           fetch-depth: 0
 
       - uses: actions/setup-python@v5
@@ -63,26 +66,32 @@ jobs:
         working-directory: seo-agent
         run: |
           args=""
-          if [ "${{ inputs.dry_run }}" = "true" ]; then args="--dry-run"; fi
+          if [ "${{ inputs.dry_run }}" = "true" ] || [ "${GITHUB_REF}" != "refs/heads/master" ]; then args="--dry-run"; fi
           if [ -n "$FORCE_KEYWORD" ]; then
             python -m seo_agent.main run $args --keyword "$FORCE_KEYWORD"
           else
             python -m seo_agent.main run $args
           fi
 
+      # Publishing only ever happens from master. On any other branch the run is forced to behave like a dry run
+      # after the agent step: no commit, no push, no deploy.
       - name: Validate site (build test)
-        if: ${{ inputs.dry_run != true }}
+        if: ${{ inputs.dry_run != true && github.ref == 'refs/heads/master' }}
         working-directory: seo-agent
         run: python -m seo_agent.main check
 
       - name: Commit and push changes
         id: commit
-        if: ${{ inputs.dry_run != true }}
+        if: ${{ inputs.dry_run != true && github.ref == 'refs/heads/master' }}
         run: |
           git config user.name "seo-agent[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           # Stage ONLY paths the agent owns or may safely edit.
           git add blog sitemap.xml robots.txt seo-agent/data index.html how-it-works.html privacy.html terms.html
+          # Feature landing pages: only staged when they already exist in the repo (owner-approved, committed by hand).
+          for d in ai-outfit-checker ai-makeup-assistant ai-hairstyle-try-on digital-wardrobe virtual-outfit-try-on ai-skin-analysis; do
+            if git ls-files --error-unmatch "$d/index.html" >/dev/null 2>&1; then git add "$d/index.html"; fi
+          done
           if git diff --cached --quiet; then
             echo "No changes today."
             echo "changed=false" >> "$GITHUB_OUTPUT"
@@ -90,6 +99,7 @@ jobs:
           fi
           git commit -m "SEO agent: daily update $(date -u +%F)"
           git pull --rebase origin "${GITHUB_REF_NAME}"
+          # Re-validate AFTER merging the latest remote state: fails (no push) if this would make 2 articles today.
           (cd seo-agent && python -m seo_agent.main check)
           git push origin "HEAD:${GITHUB_REF_NAME}"
           echo "changed=true" >> "$GITHUB_OUTPUT"
@@ -102,6 +112,13 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: gh workflow run jekyll-gh-pages.yml --ref "${GITHUB_REF_NAME}"
 
+      # Confirms today's new/updated article URLs are live (HTTP 200 + correct canonical) after the Pages deploy.
+      # Bounded polling with backoff (max 15 min). This checks deployment only; it never claims Google indexing.
+      - name: Verify deployment
+        if: ${{ steps.commit.outputs.changed == 'true' }}
+        working-directory: seo-agent
+        run: python -m seo_agent.main verify --wait 900
+
       - name: Upload report and logs
         if: always()
         uses: actions/upload-artifact@v4
@@ -110,5 +127,6 @@ jobs:
           path: |
             seo-agent/data/reports/
             seo-agent/data/logs/
+            seo-agent/data/drafts/
           if-no-files-found: ignore
           retention-days: 30

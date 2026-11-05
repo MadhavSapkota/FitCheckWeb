@@ -1,0 +1,340 @@
+# Feature landing pages. Render locally with:  python -m seo_agent.main landing
+# enabled: false  -> DRAFTS. The daily agent will not touch or publish them.
+# enabled: true   -> after owner approval: the daily agent re-renders them when related blog guides change, and the
+#                    workflow commits them. Describe ONLY what app_facts.yaml supports.
+enabled: true
+
+pages:
+  - slug: ai-outfit-checker
+    nav: AI Outfit Checker
+    features: [outfit-checker, trends]
+    # Tool-intent queries this page satisfies. Blog guides on informational queries ("does my outfit look good")
+    # are still allowed and link here.
+    targets: [ai outfit checker, outfit checker, outfit checker app, rate my outfit app, outfit rating app, outfit analyzer,
+              ai fit check, ai stylist app, ai fashion stylist app]
+    title: "AI Outfit Checker: Rate My Outfit Instantly | FitCheck"
+    meta: "Not sure your outfit works? Snap a head-to-toe photo and get an AI outfit score with tips on fit, color match, and balance. Free on Android."
+    h1: "AI outfit checker: does my outfit look good?"
+    lede: "Snap a full-body photo and FitCheck gives your outfit an AI style score, then explains what works and the small changes that would make it better, like swapping shoes or adjusting color contrast."
+    images:
+      - {src: "/assets/responsive/fitcheck-look-05-hd-720.webp", width: 720, height: 964,
+         alt: "Woman in a cream sweater and blue jeans tying a white sneaker, checking her casual outfit"}
+      - {src: "/assets/responsive/fitcheck-look-09-hd-720.webp", width: 720, height: 1410,
+         alt: "Mirror selfie of a cream sweater, gray jeans, and white sneakers with the caption Does this fit for me?"}
+    steps_title: "How the outfit checker works"
+    steps:
+      - {title: "Take a head-to-toe photo.", text: "Use good light and include your shoes, so the whole outfit is visible. You can also upload a photo you already have."}
+      - {title: "Get your AI outfit score.", text: "FitCheck rates the look and breaks it down by color match, proportion, and overall balance."}
+      - {title: "Apply the easy fixes.", text: "Read what works and what to adjust, such as switching shoes, changing color contrast, or rebalancing a loose top with a slimmer bottom."}
+      - {title: "Save the winners.", text: "Keep your highest-rated outfits in your digital closet and track how your style evolves."}
+    sections:
+      - h2: "When an outfit checker helps most"
+        html: >-
+          <p>Most outfit doubts come down to three questions: do the colors go together, do the proportions work, and
+          does the look fit the occasion? An outfit checker gives you a fast second opinion on all three before you
+          leave the house, so you are not relying on a mirror and guesswork.</p>
+          <ul><li><strong>Before work or a meeting:</strong> check that the outfit looks polished and balanced.</li>
+          <li><strong>Before a date or event:</strong> compare two options and keep the one that scores better.</li>
+          <li><strong>When trying a new aesthetic:</strong> see how a Streetwear, Old Money, Y2K, Vintage, Minimalist,
+          or Quiet Luxury look comes together on you.</li>
+          <li><strong>When a piece feels off:</strong> find out whether it is the color, the fit balance, or the accessories.</li></ul>
+      - h2: "What FitCheck looks at in your outfit"
+        html: >-
+          <h3>Color match</h3><p>Which pieces, patterns, and color combinations go together, and where stronger or
+          softer contrast would help. A navy top with tan trousers reads calm and balanced; adding a bright third color
+          is easier when it repeats somewhere else, like a bag or shoes.</p>
+          <h3>Proportion and fit balance</h3><p>Whether volume is balanced between top and bottom. A rule of thumb many
+          stylists use: pair one relaxed piece with one fitted piece, and define the waist when both are loose.</p>
+          <h3>Overall balance and accessories</h3><p>How shoes, bags, and accessories finish the look, with tips on
+          accessory pairing so the outfit feels intentional rather than busy.</p>
+      - h2: "Get the best result from your photo"
+        html: >-
+          <ul><li>Stand in natural or bright, even light and avoid strong filters.</li>
+          <li>Show the whole outfit from head to toe, including shoes.</li>
+          <li>Stand straight with the camera at about chest height so proportions are not distorted.</li>
+          <li>Use a plain background when you can, so the outfit is the focus.</li></ul>
+    benefits:
+      - {title: "A quick second opinion.", text: "Get an instant fit check instead of second-guessing in the mirror."}
+      - {title: "Specific, practical tips.", text: "Feedback points to concrete changes like shoes, color contrast, or fit balance."}
+      - {title: "Plan ahead.", text: "Save top-scoring looks and plan daily outfits for work, parties, workouts, weekends, and date nights."}
+      - {title: "Private by design.", text: "Your photos are processed directly on your device."}
+    limits_title: "Good to know"
+    limits:
+      - "The score is an AI opinion and a starting point, not an objective verdict. Your taste and comfort come first."
+      - "FitCheck does not give size recommendations, take body measurements, or sell clothes."
+      - "The app is available on Android. An iOS version is coming soon."
+    faqs:
+      - {q: "How does an AI outfit checker rate my outfit?", a: "You take or upload a full-body photo and FitCheck gives the outfit an AI style score with a breakdown of color match, proportion, and overall balance, plus suggestions on what to adjust."}
+      - {q: "Is the outfit score accurate?", a: "Treat it as a second opinion rather than a fact. Style is personal, and the score is meant to point out color, fit balance, and accessory ideas you can decide on yourself."}
+      - {q: "What kind of photo works best?", a: "A clear, well-lit, head-to-toe photo that includes your shoes, taken without filters, gives the outfit checker the most to work with."}
+      - {q: "Is FitCheck free?", a: "FitCheck is free to download on Google Play for Android. An iOS version is coming soon."}
+    cta:
+      title: "Check your outfit before you head out"
+      text: "Snap a head-to-toe photo and get an AI style score with tips on fit, color, and balance."
+      button: "Check My Outfit"
+
+  - slug: ai-makeup-assistant
+    nav: AI Makeup Assistant & Try-On
+    features: [makeup-assistant, makeup-try-on]
+    targets: [ai makeup assistant, makeup assistant app, ai makeup advisor, ai makeup app, virtual makeup try on,
+              makeup try on app, try makeup online, live makeup filter, makeup simulator]
+    title: "AI Makeup Assistant & Virtual Makeup Try-On | FitCheck"
+    meta: "Find makeup that suits you. Get AI feedback on your makeup look and preview looks live with your camera before you commit. Free on Android."
+    h1: "AI makeup assistant and live virtual makeup try-on"
+    lede: "Wondering what makeup suits your face? FitCheck gives AI feedback on your makeup look, from an everyday glow to full glam, and lets you preview makeup live through your camera."
+    images:
+      - {src: "/assets/makeup/soft-makeup.webp", width: 720, height: 1282, alt: "Soft, natural everyday makeup look"}
+      - {src: "/assets/makeup/golden-makeup.webp", width: 720, height: 1284, alt: "Warm golden glam makeup look"}
+    steps_title: "How the makeup assistant works"
+    steps:
+      - {title: "Face the light.", text: "Sit facing natural light with the camera at eye level and no beauty filters."}
+      - {title: "Get AI makeup feedback.", text: "Snap a close-up and FitCheck gives beauty feedback on your look, whether it is a natural everyday glow or full glam."}
+      - {title: "Try looks live.", text: "Use the live camera makeup assist to preview and guide your makeup on your own face."}
+      - {title: "Adjust one thing at a time.", text: "Use the feedback to tweak intensity, color, or placement until the look suits the occasion."}
+    sections:
+      - h2: "AI makeup feedback: what suits you"
+        html: >-
+          <p>The right makeup depends on your features, your undertone, the lighting, and the occasion. Instead of
+          guessing, take a clear close-up and get feedback on how the look comes together, then adjust one thing at a
+          time: the intensity of blush, the depth of a lip color, or how defined the eyes are.</p>
+          <ul><li><strong>Everyday looks:</strong> keep base light and let one feature, like brows or a tinted lip, lead.</li>
+          <li><strong>Evening and glam:</strong> balance a bold eye with a softer lip, or a bold lip with simpler eyes.</li>
+          <li><strong>Matching your undertone:</strong> warm undertones often suit peach, coral, and golden shades; cool
+          undertones often suit rose, berry, and silvery shades. Neutral undertones can usually wear both.</li></ul>
+      - id: virtual-makeup-try-on
+        h2: "Live virtual makeup try-on"
+        html: >-
+          <p>Trying a new lipstick or eye look is easier when you can see it before you commit. FitCheck's makeup assist
+          works with your live camera, so you can preview looks on your own face and get guidance while you apply.</p>
+          <p>For the most useful preview, use even, natural light: warm indoor bulbs can make shades look more orange,
+          and strong overhead light exaggerates shadows.</p>
+    benefits:
+      - {title: "Personal, not generic.", text: "Feedback is about your face and your look, not a one-size-fits-all tutorial."}
+      - {title: "Try before you commit.", text: "Preview makeup live with your camera before a full application."}
+      - {title: "From natural to glam.", text: "Useful for a quick everyday glow as well as event makeup."}
+    limits_title: "Good to know"
+    limits:
+      - "AI feedback is an opinion and a starting point, not professional makeup artistry."
+      - "FitCheck does not sell makeup or recommend specific products to buy."
+      - "Makeup and skin tips are cosmetic only and not medical advice. See a dermatologist for skin concerns."
+    faqs:
+      - {q: "Can AI tell me what makeup suits my face?", a: "FitCheck gives AI feedback on your makeup look from a clear close-up, so you can see what works and what to adjust. Treat it as a second opinion alongside your own preferences."}
+      - {q: "How do I try on makeup virtually?", a: "Open the makeup assist in FitCheck and use your live camera to preview looks on your own face. Face natural light and avoid filters for the most realistic view."}
+      - {q: "Does it work for both natural and glam makeup?", a: "Yes. FitCheck gives feedback on makeup looks ranging from an everyday glow to full glam."}
+      - {q: "Is the makeup assistant free?", a: "FitCheck is free to download on Google Play for Android. An iOS version is coming soon."}
+    cta:
+      title: "Find your best makeup look"
+      text: "Get AI feedback on your makeup and preview looks live with your camera."
+      button: "Try the Makeup Assistant"
+
+  - slug: ai-hairstyle-try-on
+    nav: AI Hairstyle Try-On
+    features: [hairstyle-try-on, hairstyle-recommendations, hair-analysis]
+    targets: [ai hairstyle try on, hairstyle try on app, virtual hairstyle try on, hairstyle simulator, ai hair analysis,
+              hair analyzer app, ai hairstyle app]
+    title: "AI Hairstyle Try-On: See New Hairstyles on You | FitCheck"
+    meta: "Try hairstyles on your own face before you cut. Upload a photo, see AI images of you with a new hairstyle, and explore cuts, curls, and colors."
+    h1: "Try hairstyles on your face with AI"
+    lede: "Not sure a new cut or color will suit you? Upload a photo and FitCheck generates AI images of you with a new hairstyle, so you can compare looks before you book the appointment."
+    images:
+      - {src: "/assets/hairstyles/layered-hair.webp", width: 800, height: 800, alt: "Collage of layered haircut inspiration"}
+      - {src: "/assets/hairstyles/short-to-long.webp", width: 800, height: 800, alt: "Hairstyle inspiration showing short and long hair lengths"}
+    steps_title: "How the hairstyle try-on works"
+    steps:
+      - {title: "Upload a clear photo.", text: "Face the camera in natural light, hair visible, with the camera at eye level and no filters."}
+      - {title: "Pick a hairstyle to try.", text: "Explore cuts, curls, and hair colors you are curious about."}
+      - {title: "See yourself with the new look.", text: "FitCheck generates AI images of you with the new hairstyle from your photo."}
+      - {title: "Decide with confidence.", text: "Try a few looks, then take the image you like to your stylist as a reference."}
+    sections:
+      - h2: "What hairstyle suits me?"
+        html: >-
+          <p>Face shape is a helpful starting point, but hair texture, how much styling time you want, and your
+          features matter just as much. Some widely used guidelines:</p>
+          <ul><li><strong>Round faces:</strong> length past the chin, side parts, and soft layers add vertical lines.</li>
+          <li><strong>Square faces:</strong> soft waves and layers around the jaw soften strong angles.</li>
+          <li><strong>Long faces:</strong> curtain bangs and volume at the sides balance length.</li>
+          <li><strong>Oval faces:</strong> most cuts work, so choose based on texture and upkeep.</li></ul>
+          <p>Guidelines only go so far. Seeing the hairstyle on your own face is the fastest way to know.</p>
+      - id: hair-analysis
+        h2: "Live hair analysis and hair color ideas"
+        html: >-
+          <p>Use FitCheck's live camera hair analysis to get a quick AI look at your hair and ideas for styles, curls, and
+          colors that work with it. When choosing a color, many colorists match warmth to your undertone: golden,
+          copper, and caramel tones for warm undertones; ash, platinum, and cool brown for cool undertones.</p>
+          <p>Hair analysis in FitCheck is for style ideas only. It is not medical advice and does not assess hair loss,
+          scalp conditions, or hair health. See a dermatologist or doctor for any concern.</p>
+    benefits:
+      - {title: "No-regret haircuts.", text: "See a big change on yourself before committing to it."}
+      - {title: "Cuts, curls, and color.", text: "Explore hairstyle, curl, and hair color inspiration in one place."}
+      - {title: "A clear brief for your stylist.", text: "Bring the AI image you like as a visual reference."}
+    limits_title: "Good to know"
+    limits:
+      - "Try-on images are AI-generated previews, so real results depend on your hair texture, density, and your stylist."
+      - "Hair analysis is cosmetic and style guidance only, not medical advice."
+    faqs:
+      - {q: "Can I try hairstyles on my own face?", a: "Yes. Upload a photo and FitCheck generates AI images of you with a new hairstyle so you can compare looks before a cut or color."}
+      - {q: "How do I know what hairstyle suits my face shape?", a: "Face-shape guidelines are a good start, for example soft layers for square faces or longer lengths for round faces, but seeing the style on your own face is the quickest way to decide."}
+      - {q: "Will the salon result look exactly like the AI image?", a: "Not exactly. The image is a preview. Your real result depends on your hair texture, density, and your stylist, so use it as a reference."}
+      - {q: "Does hair analysis check hair health or hair loss?", a: "No. FitCheck's hair analysis is for style ideas only and is not medical advice. See a dermatologist or doctor about hair or scalp concerns."}
+    cta:
+      title: "See your next hairstyle first"
+      text: "Upload a photo and see AI images of you with a new hairstyle before you book the cut."
+      button: "Try Hairstyles On Me"
+
+  - slug: digital-wardrobe
+    nav: Digital Wardrobe
+    features: [wardrobe]
+    targets: [digital wardrobe app, digital wardrobe, virtual closet app, wardrobe organizer app, closet organizer app,
+              wardrobe app, outfit planner app]
+    title: "Digital Wardrobe App: Organize Your Closet | FitCheck"
+    meta: "Organize your closet in a digital wardrobe. Save favorite looks, sort outfits by season or occasion, build a capsule wardrobe, and plan what to wear."
+    h1: "Digital wardrobe and outfit planner"
+    lede: "Turn your favorite and top-scoring looks into a digital closet. Organize outfits by season or occasion, build a capsule wardrobe, and plan what to wear ahead of time."
+    images:
+      - {src: "/assets/screenshot-closet.svg", width: 360, height: 640, alt: "Illustrated preview of the FitCheck digital closet with saved outfits"}
+      - {src: "/assets/responsive/fitcheck-look-12-hd-720.webp", width: 720, height: 1279,
+         alt: "Woman in a white T-shirt, wide-leg blue jeans, and black-and-white sneakers with a crossbody bag"}
+    steps_title: "How the digital wardrobe works"
+    steps:
+      - {title: "Save your looks.", text: "Keep your favorite and highest-rated outfits in your digital closet."}
+      - {title: "Organize them.", text: "Sort clothes and outfits by season or occasion."}
+      - {title: "Plan ahead.", text: "Plan daily outfits for work, parties, workouts, casual weekends, and date nights."}
+      - {title: "Track your style.", text: "Look back at your top-rated outfits and see how your style evolves."}
+    sections:
+      - h2: "How to organize your wardrobe so you actually use it"
+        html: >-
+          <ol><li><strong>Edit first.</strong> Remove what does not fit or you have not worn in a year.</li>
+          <li><strong>Group by occasion and season.</strong> Work, weekend, events, and workout clothes; then warm and cold weather.</li>
+          <li><strong>Find your core outfits.</strong> Save the combinations you reach for and that score well.</li>
+          <li><strong>Fill real gaps only.</strong> If three saved outfits need the same missing piece, that is the one worth buying.</li></ol>
+      - h2: "Build a capsule wardrobe"
+        html: >-
+          <p>A capsule wardrobe is a small set of versatile pieces that mix and match. Start with a neutral base (for
+          example navy, gray, cream, or black), add two or three accent colors, and choose pieces that work at least
+          three ways. Saving your outfits makes it easy to see which pieces earn their place.</p>
+    benefits:
+      - {title: "Less morning stress.", text: "Outfits are already planned when you need them."}
+      - {title: "See what you own.", text: "Your best combinations are saved in one place."}
+      - {title: "Track your style.", text: "Keep your highest-rated outfits and see how your style evolves."}
+    limits_title: "Good to know"
+    limits:
+      - "FitCheck does not include shopping or price comparison."
+      - "There is no social feed or followers."
+    faqs:
+      - {q: "What is a digital wardrobe app?", a: "It is a virtual closet on your phone where you save outfits, organize clothes by season or occasion, and plan what to wear."}
+      - {q: "Can I plan outfits for the week?", a: "Yes. FitCheck lets you plan daily outfits ahead for work, parties, workouts, casual weekends, and events like date nights."}
+      - {q: "Can I keep track of my best outfits?", a: "Yes. Save your favorite and top-scoring looks to your digital closet and see how your style evolves over time."}
+      - {q: "Can it help me build a capsule wardrobe?", a: "Yes. Organize your saved outfits by season or occasion to spot the versatile pieces that belong in a capsule wardrobe."}
+    cta:
+      title: "Organize your closet and plan your week"
+      text: "Save your favorite looks, sort them by season or occasion, and plan what to wear ahead."
+      button: "Get the Digital Wardrobe"
+
+  - slug: virtual-outfit-try-on
+    nav: Virtual Outfit Try-On
+    features: [outfit-try-on, fashion-generator]
+    targets: [virtual outfit try on, virtual outfit try on app, ai outfit try on, ai outfit generator, ai fashion generator,
+              ai fashion image generator]
+    title: "Virtual Outfit Try-On & AI Fashion Generator | FitCheck"
+    meta: "See yourself in new outfits before you wear them. FitCheck creates AI-generated images of you in different outfits from your own photo."
+    h1: "Virtual outfit try-on with AI fashion images"
+    lede: "Curious how a different style would look on you? FitCheck uses your photo to generate AI images of you in different outfits, so you can explore looks without changing clothes."
+    images:
+      - {src: "/assets/responsive/fitcheck-look-07-hd-720.webp", width: 720, height: 1285,
+         alt: "Woman in a graphic T-shirt, black cargo pants, and tan shoes, with a caption about trying new fashion looks"}
+      - {src: "/assets/responsive/fitcheck-look-04-hd-720.webp", width: 720, height: 1044,
+         alt: "Woman in a tied white shirt and dark wide-leg trousers with sunglasses on a rooftop"}
+    steps_title: "How virtual outfit try-on works"
+    steps:
+      - {title: "Upload a clear photo of yourself.", text: "A well-lit, head-to-toe photo works best."}
+      - {title: "Choose outfits to try.", text: "Pick the looks you are curious about, for an occasion or a new style direction."}
+      - {title: "See AI-generated images of you.", text: "FitCheck generates images of you wearing different outfits."}
+      - {title: "Recreate it with your clothes.", text: "Use the look as inspiration, then check your real outfit with the AI outfit checker."}
+    sections:
+      - h2: "Why try outfits virtually"
+        html: >-
+          <p>Changing your style is a gamble when you can only picture it. Seeing an AI fashion image of yourself in a
+          new aesthetic makes it easier to decide what to try next, which colors to experiment with, and what to look
+          for in your own closet.</p>
+          <ul><li><strong>Explore a new style direction</strong> before you buy anything. In the app you can also browse
+          aesthetics such as Old Money, Y2K, Streetwear, Vintage, Minimalist, and Quiet Luxury.</li>
+          <li><strong>Plan outfits for an event</strong> by previewing a few directions.</li>
+          <li><strong>Get inspired</strong> by seeing styles on yourself instead of on a model.</li></ul>
+      - id: ai-fashion-generator
+        h2: "AI fashion image generation"
+        html: >-
+          <p>FitCheck's AI image feature turns your photo into fashion images of you in different outfits. The images
+          are AI-generated previews for inspiration. They are not a fitting, so they do not show exact sizing or how a
+          specific garment will fit.</p>
+          <p>When you have put together a real outfit inspired by a preview, take a photo and use the
+          <a href="/ai-outfit-checker/">AI outfit checker</a> to get a style score and tips on fit, color, and balance.</p>
+    benefits:
+      - {title: "See it on you.", text: "Preview styles on yourself rather than on a model."}
+      - {title: "Fast inspiration.", text: "Explore several aesthetics in minutes."}
+      - {title: "Pairs with the outfit checker.", text: "Turn inspiration into a real outfit and check it."}
+    limits_title: "Good to know"
+    limits:
+      - "Images are AI-generated previews and do not show exact fit or sizing."
+      - "FitCheck does not sell clothes or include shopping."
+    faqs:
+      - {q: "How does virtual outfit try-on work?", a: "You upload a photo and FitCheck generates AI images of you in different outfits, so you can preview styles on yourself."}
+      - {q: "Does it show how clothes will fit?", a: "No. The images are AI-generated previews for inspiration and do not show exact sizing or fit."}
+      - {q: "Do I need to own the clothes to try them?", a: "No. The images are AI-generated previews from your photo, so you can explore looks first and then recreate them with clothes you have."}
+      - {q: "Is it free?", a: "FitCheck is free to download on Google Play for Android. An iOS version is coming soon."}
+    cta:
+      title: "See yourself in a new style"
+      text: "Generate AI images of yourself in different outfits from your own photo."
+      button: "Try Outfits On Me"
+
+  - slug: ai-skin-analysis
+    nav: AI Skin Analysis
+    features: [skin-analysis]
+    targets: [ai skin analysis, ai skin analyzer, skin analysis app, skin analyzer app, ai skin scanner, live skin analysis]
+    title: "AI Skin Analysis: Live Skin Tone & Type Check | FitCheck"
+    meta: "Use your camera for a live AI skin overview, then pick makeup shades that suit your tone and undertone. Cosmetic guidance, not medical advice."
+    h1: "AI skin analysis for your beauty routine"
+    lede: "Use your camera for a live AI skin overview, then get cosmetic tips on makeup shades and routine ideas that suit your skin tone and undertone."
+    images:
+      - {src: "/assets/makeup/soft-makeup.webp", width: 720, height: 1282, alt: "Close-up portrait with soft, natural makeup"}
+    steps_title: "How live skin analysis works"
+    steps:
+      - {title: "Use natural light.", text: "Face a window, remove filters, and hold the camera at eye level with a clean face or light makeup."}
+      - {title: "Start the live analysis.", text: "Point the camera at your face and FitCheck analyzes your skin live."}
+      - {title: "Read your overview.", text: "Get an AI overview of your skin with cosmetic beauty suggestions."}
+      - {title: "Use it for makeup.", text: "Apply the tips to choose foundation, blush, and lip shades with the makeup assistant."}
+    sections:
+      - h2: "Skin tone vs. undertone"
+        html: >-
+          <p><strong>Skin tone</strong> is how light or deep your skin is. <strong>Undertone</strong> is the color beneath
+          the surface: warm (golden or peachy), cool (pink or rosy), or neutral (a mix). Undertone matters more than tone
+          when choosing foundation and makeup shades.</p>
+          <ul><li><strong>Vein check:</strong> greenish veins often suggest warm, bluish suggest cool, and a mix suggests neutral.</li>
+          <li><strong>Jewelry check:</strong> if gold flatters you more, you may be warm; if silver does, you may be cool.</li></ul>
+      - h2: "Use your results for makeup"
+        html: >-
+          <p>Once you know your undertone, match foundation along the jawline in daylight, and choose blush and lip
+          shades in the same temperature family. Then get feedback on the finished look with the
+          <a href="/ai-makeup-assistant/">AI makeup assistant</a>.</p>
+      - h2: "Not medical advice"
+        html: >-
+          <p>FitCheck's skin analysis is cosmetic guidance for beauty and makeup. It is not medical advice, it does not
+          diagnose skin conditions, and it is not a substitute for a dermatologist. If you have concerns about a mole,
+          rash, acne, or any change in your skin, see a dermatologist or doctor.</p>
+    benefits:
+      - {title: "Live and quick.", text: "Get a skin overview from your camera in moments."}
+      - {title: "Better shade choices.", text: "Use tone and undertone tips when picking makeup."}
+      - {title: "Connected to makeup.", text: "Move straight to makeup feedback in the same app."}
+    limits_title: "Important limits"
+    limits:
+      - "Cosmetic guidance only. Not medical advice and not a diagnosis."
+      - "Results depend on lighting and camera quality, so treat them as a starting point."
+      - "See a dermatologist or doctor for any skin concern."
+    faqs:
+      - {q: "What does AI skin analysis tell me?", a: "It gives a cosmetic overview of your skin from your camera, with tips on tone, undertone, and makeup shades. It is not medical advice."}
+      - {q: "How do I find my skin undertone?", a: "Look at your veins in daylight (greenish often means warm, bluish cool), compare gold and silver jewelry, or use FitCheck's live skin analysis as a starting point."}
+      - {q: "Can the app detect skin conditions?", a: "No. FitCheck does not diagnose or detect skin conditions. See a dermatologist or doctor about any concern."}
+      - {q: "Is AI skin analysis free?", a: "FitCheck is free to download on Google Play for Android. An iOS version is coming soon."}
+    cta:
+      title: "Get a live skin overview"
+      text: "Use your camera for an AI skin overview and makeup shade tips. Cosmetic guidance, not medical advice."
+      button: "Try Skin Analysis"

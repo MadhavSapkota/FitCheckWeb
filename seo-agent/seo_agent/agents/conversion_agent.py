@@ -18,7 +18,24 @@ CTA_RULES = [
 ]
 
 
-def choose(article: dict[str, Any]) -> dict[str, str]:
+def feature_of(cfg: Config | None, article: dict[str, Any]) -> str | None:
+    if not cfg:
+        return None
+    from .. import scoring
+    f = article.get("feature")
+    if f and f in scoring.features(cfg):
+        return f
+    return scoring.classify(cfg, article.get("keyword", ""))[0]
+
+
+def choose(article: dict[str, Any], cfg: Config | None = None) -> dict[str, str]:
+    """CTA matched to the reader's intent: the article's FitCheck feature (config features.*.cta) first,
+    then the generic topic rules."""
+    fid = feature_of(cfg, article)
+    if fid:
+        c = ((cfg.get("features") or {}).get(fid) or {}).get("cta") or {}
+        if c.get("button") and c.get("text"):
+            return {"button": c["button"], "feature": c["text"], "feature_id": fid}
     t = set(tokens(article.get("keyword", "") + " " + article.get("h1", "")))
     for terms, button, feature in CTA_RULES:
         if not terms or t & terms:
@@ -31,8 +48,28 @@ def button_html(cfg: Config, text: str, placement: str, slug: str) -> str:
             f'data-cta="play-store" data-placement="{placement}" data-article="{html.escape(slug)}">{html.escape(text)}</a>')
 
 
+def landing_link(cfg: Config, article: dict[str, Any]) -> dict[str, str] | None:
+    """The feature landing page for this article, only when that page exists in the site."""
+    fid = feature_of(cfg, article)
+    f = (cfg.get("features") or {}).get(fid or "") or {}
+    href = f.get("landing")
+    if not href or href == "/":
+        return None
+    target = cfg.site_root / href.strip("/") / "index.html"
+    if not target.exists():
+        return None
+    return {"href": href, "title": f.get("label", fid)}
+
+
+def landing_html(cfg: Config, article: dict[str, Any]) -> str:
+    link = landing_link(cfg, article)
+    if not link:
+        return ""
+    return f'<p class="small">Learn more: <a href="{html.escape(link["href"])}">how FitCheck\'s {html.escape(link["title"].lower())} works</a></p>'
+
+
 def inline_cta(cfg: Config, article: dict[str, Any]) -> str:
-    c = choose(article)
+    c = choose(article, cfg)
     return (f'<aside class="inline-cta" aria-label="Try the app"><p><strong>Want a quick second opinion?</strong> '
             f'{html.escape(c["feature"])}</p>{button_html(cfg, c["button"], "inline", article["slug"])}</aside>')
 

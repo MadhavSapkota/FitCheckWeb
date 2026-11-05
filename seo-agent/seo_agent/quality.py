@@ -22,10 +22,61 @@ FORBIDDEN = [
     (r"\b(we|our team) (tested|reviewed|tried)\b", "fabricated product testing"),
     (r"\b(buy|shop|order)\b[^.]{0,30}\b(in|inside|within|through) the app\b", "claims in-app shopping"),
     (r"\b(size|measurement)s? recommendation", "claims size recommendations"),
-    (r"\bAR\b|\baugmented reality\b|\blive try-on\b", "claims AR try-on"),
+    (r"\bAR\b|\baugmented reality\b", "claims AR technology"),
+    (r"\b(live|real-time)\b[^.]{0,30}\b(clothes|clothing|outfit) try-?on\b", "claims live clothing try-on (outfit try-on is AI images)"),
     (r"\b(diagnos|dermatolog)", "medical/skin diagnosis claim"),
+    # skin & hair: no medical, treatment, or accuracy claims
+    (r"\b(cure[sd]?|treat(s|ed|ing)?|heal(s|ed|ing)?|fix(es)?)\b[^.]{0,25}\b(acne|eczema|rosacea|psoriasis|dermatitis|hair loss|alopecia|dandruff|infection)",
+     "medical treatment claim"),
+    (r"\b(detect|identif|spot|screen)\w*\b[^.]{0,30}\b(cancer|melanoma|mole|disease|condition|disorder|infection|deficienc)",
+     "medical detection claim"),
+    (r"\bclinically\s+(proven|tested|validated)\b|\bmedical[- ]grade\b", "clinical claim"),
+    (r"\b\d{2,3}\s?%\s+accura", "accuracy percentage claim"),
+    # photo privacy: storage/retention/deletion/encryption behaviour is not confirmed, so no article may assert it
+    (r"\b(photos?|images?|pictures?|selfies?|looks?|data)\b[^.]{0,40}\b(never|not|aren't|isn't|are|is)\s+"
+     r"(stored|saved|kept|retained|uploaded|shared|sold|deleted|encrypted)\b", "unverified photo storage claim"),
+    (r"\b(stays?|remain)\s+on\s+(your|the)\s+(device|phone)\b|\bnever\s+leaves?\s+(your|the)\s+(device|phone)\b"
+     r"|\bend-to-end\s+encrypt|\bautomatically\s+deleted\b", "unverified photo storage claim"),
     (r"\b(guarantee[sd]?|100% accurate|perfect score every time)\b", "absolute guarantee"),
 ]
+
+
+# Responsible-use sentences the writer is REQUIRED to include on skin/hair topics. They must never count as claims.
+# Only the referral / negation PHRASE is removed (never the whole sentence), so a claim next to it is still caught.
+SAFE_SENTENCE = re.compile(
+    r"\b(see|consult|visit|ask|talk to|check with|speak (to|with))\s+(a|an|your)?\s*(board-certified\s+)?"
+    r"(dermatologist|doctor|physician|gp|healthcare professional|medical professional)s?(\s+or\s+(a\s+)?(dermatologist|doctor|physician))?"
+    r"|\bnot\s+a\s+substitute\s+for\s+(a|an|your)?\s*(dermatologist|doctor|physician|professional(\s+\w+)?|medical\s+\w+)"
+    r"|\bnot\s+(a\s+substitute\s+for\s+)?(professional\s+)?(medical advice|a\s+(medical\s+)?diagnosis|medical)"
+    r"|\b(does not|doesn't|do not|don't)\s+(give|offer|provide|make|include)\s+(\w+\s+){0,2}(size|measurement|medical|diagnos)\w*(\s+\w+){0,2}"
+    r"|\b(does not|doesn't|do not|don't|cannot|can't|won't|never|is not designed to|isn't designed to)\s+"
+    r"(diagnose|detect|treat|identify|assess)(\s+or\s+(diagnose|detect|treat|identify|assess))?",
+    flags=re.I)
+
+
+QUESTION_SENTENCE = re.compile(r"[^.!?\n]*\?")
+
+
+def claim_text(text: str) -> str:
+    """Text with disclaimers/referrals and questions removed, so 'see a dermatologist', 'does not diagnose' or an FAQ
+    question like 'Can the app detect skin conditions?' never trips a claim rule. Answers are still checked."""
+    return SAFE_SENTENCE.sub(" ", QUESTION_SENTENCE.sub(" ", text))
+
+
+NO_ISSUE = re.compile(r"^\s*(no|none|n/a|nothing)\b", re.I)
+
+
+def real_issues(review: dict[str, Any], key: str) -> list[str]:
+    """Reviewer list entries that are actual problems. Drops 'No ... found' entries; drops self-labelled 'Minor'
+    notes only when the reviewer itself passed the article with a value score >= 8."""
+    lenient = bool(review.get("pass")) and int(review.get("value_score") or 0) >= 8
+    out = []
+    for x in review.get(key) or []:
+        s = str(x)
+        if NO_ISSUE.match(s) or (lenient and re.match(r"^\s*minor\b", s, flags=re.I)):
+            continue
+        out.append(s)
+    return out
 
 
 def shingles(text: str, n: int = 5) -> set[tuple[str, ...]]:
@@ -81,9 +132,22 @@ def check(cfg: Config, *, kw: dict[str, Any], intent: str, article: dict[str, An
     if cfg.get("keyword_research.organic_difficulty_source") == "dataforseo":
         if kw.get("difficulty") is None or kw["difficulty"] > cfg.get("keyword_research.maximum_organic_difficulty"):
             fails.append("organic_difficulty_above_threshold_or_missing")
-    elif kw.get("opportunity_estimate", 0) < (cfg.get("keyword_research.unverified_topics.min_opportunity_estimate", 40)
-                                             if editorial else cfg.get("keyword_research.min_opportunity_estimate", 50)):
+    elif editorial and kw.get("score_total", kw.get("opportunity_estimate", 0)) < cfg.get(
+            "keyword_research.unverified_topics.min_opportunity_estimate", 40):
         fails.append("opportunity_estimate_below_threshold")
+    elif not editorial and kw.get("score"):
+        from . import scoring
+        why = scoring.qualifies(cfg, kw)
+        if why:
+            fails.append(f"opportunity_estimate_below_threshold:{why}")
+    elif not editorial and kw.get("opportunity_estimate", 0) < cfg.get("scoring.min_total", 45):
+        fails.append("opportunity_estimate_below_threshold")
+    # skin / hair analysis articles must say the feedback is not medical advice
+    feat = (cfg.get("features") or {}).get(kw.get("feature") or "", {})
+    written = re.sub(r"<[^>]+>", " ", article.get("body_html", "") + " " + " ".join(f.get("answer", "") for f in article.get("faqs", [])))
+    if feat.get("health") and not re.search(r"not (a substitute for )?(medical|professional medical) advice|not medical advice",
+                                            written, flags=re.I):  # in the writer's own text, not just the CTA
+        fails.append("health_topic_missing_not_medical_advice_note")
     if intent not in cfg.get("keyword_research.allowed_intents"):
         fails.append(f"intent_not_allowed:{intent}")
     # structure / metadata
@@ -142,8 +206,9 @@ def check(cfg: Config, *, kw: dict[str, Any], intent: str, article: dict[str, An
     if not soup.find("a", attrs={"data-cta": "play-store", "data-placement": "end"}):
         fails.append("missing_app_cta")
     # invented features / fabricated claims (deterministic)
+    claims = claim_text(all_text)
     for pat, label in FORBIDDEN:
-        if re.search(pat, all_text, flags=re.I):
+        if re.search(pat, claims, flags=re.I):
             fails.append(f"forbidden_claim:{label}")
     # LLM editorial review
     if not review.get("pass"):
@@ -153,8 +218,9 @@ def check(cfg: Config, *, kw: dict[str, Any], intent: str, article: dict[str, An
     if int(review.get("value_score") or 0) < 7:
         fails.append(f"low_value_score:{review.get('value_score')}")
     for key in ("factual_issues", "invented_app_features", "unsupported_claims", "spam_policy_issues"):
-        if review.get(key):
-            fails.append(f"{key}:{'; '.join(map(str, review[key]))[:200]}")
+        issues = real_issues(review, key)
+        if issues:
+            fails.append(f"{key}:{'; '.join(issues)[:200]}")
     if review.get("keyword_stuffing"):
         fails.append("review_keyword_stuffing")
     return {"passed": not fails, "failures": fails, "warnings": warns, "word_count": wc,

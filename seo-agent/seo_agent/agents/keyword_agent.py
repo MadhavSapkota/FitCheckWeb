@@ -3,7 +3,7 @@ from __future__ import annotations
 
 from typing import Any
 
-from .. import research
+from .. import research, scoring
 from ..audit import Page, tokens
 from ..config import Config, load_app_facts
 from ..log import log
@@ -23,8 +23,38 @@ def gsc_query_ideas(cfg: Config, perf: dict[str, Any] | None) -> dict[str, dict[
     return out
 
 
+def seed_groups(cfg: Config, extra: list[str]) -> dict[str, list[str]]:
+    """One Keyword Planner request group per FitCheck feature, so every feature gets its own ideas."""
+    groups = {fid: list(f.get("seeds") or []) for fid, f in scoring.features(cfg).items() if f.get("seeds")}
+    general = list(cfg.get("keyword_research.seed_keywords", [])) + extra
+    if general:
+        groups["general"] = general
+    return groups
+
+
+def discover_all(cfg: Config, groups: dict[str, list[str]], report: dict) -> list[dict[str, Any]]:
+    """Runs discovery per feature group. One failing group never stops the others; if ALL fail, NoProvider."""
+    ideas: dict[str, dict[str, Any]] = {}
+    last: Exception | None = None
+    ok = 0
+    for gid, seeds in groups.items():
+        try:
+            found = research.discover(cfg, seeds)
+        except research.NoProvider as e:
+            last = e
+            continue
+        ok += 1
+        for i in found:
+            ideas.setdefault(i["keyword"], {**i, "seed_group": gid})
+        report.setdefault("discovery", {})[gid] = len(found)
+    if not ok and last is not None:
+        raise last
+    return list(ideas.values())
+
+
 def opportunity_estimate(cfg: Config, i: dict[str, Any]) -> tuple[int, list[str]]:
-    """HEURISTIC 0-100 'opportunity estimate'. It is NOT keyword difficulty and is labeled as such everywhere.
+    """LEGACY (kept for reference/tests): the old single-number estimate. Replaced by scoring.score().
+    HEURISTIC 0-100 'opportunity estimate'. It is NOT keyword difficulty and is labeled as such everywhere.
     Evidence used: phrase length (long-tail), question format, verified volume band, relevance,
     and Search Console evidence that Google already ranks the site near page 1-3 for the query."""
     score, why = 0, []
@@ -59,10 +89,11 @@ def opportunity_estimate(cfg: Config, i: dict[str, Any]) -> tuple[int, list[str]
 def run(cfg: Config, state: State, pages: list[Page], perf: dict[str, Any] | None, report: dict) -> list[dict[str, Any]]:
     gsc = gsc_query_ideas(cfg, perf)
     seeds = list(cfg.get("keyword_research.seed_keywords", []))
-    seeds += [q for q, m in sorted(gsc.items(), key=lambda kv: -kv[1]["gsc_impressions_28d"]) if research.relevant(cfg, q)][:20]
+    gsc_seeds = [q for q, m in sorted(gsc.items(), key=lambda kv: -kv[1]["gsc_impressions_28d"]) if research.relevant(cfg, q)][:20]
+    seeds += gsc_seeds
     ideas: dict[str, dict[str, Any]] = {}
     try:
-        for i in research.discover(cfg, seeds):
+        for i in discover_all(cfg, seed_groups(cfg, gsc_seeds), report):
             ideas[i["keyword"]] = i
     except research.NoProvider as e:
         editorial = cfg.get("keyword_research.unverified_topics.enabled", False)
@@ -85,8 +116,42 @@ def run(cfg: Config, state: State, pages: list[Page], perf: dict[str, Any] | Non
         ideas.setdefault(q, {"keyword": q, "volume": None, "source": "search_console (volume unverified)"}).update(m)
     found = [i for i in ideas.values() if research.relevant(cfg, i["keyword"])]
     found = research.enrich(cfg, found)
+    articles = state.data.get("articles", {})
     for i in found:
-        i["opportunity_estimate"], i["opportunity_evidence"] = opportunity_estimate(cfg, i)
+        scoring.score(cfg, i, pages, articles)
     short = research.shortlist(cfg, found, pages, state)
+    report["feature_summary"] = feature_summary(cfg, found)
+    reasons: dict[str, int] = {}
+    for i in found:
+        r = str(i.get("decision", "")).split(":")[0]
+        if r != "candidate" and not r.startswith("duplicate_intent"):
+            reasons[r] = reasons.get(r, 0) + 1
+    dec = [str(i.get("decision", "")) for i in found]
+    report["selection_counts"] = {
+        "discovered": len(ideas), "relevant": len(found), "qualifying": len(short),
+        "duplicates": sum(d.startswith("duplicate_intent") for d in dec),
+        "dup_landing": sum(d.startswith("duplicate_intent_of_landing") for d in dec),
+        "dup_article": sum(d.startswith("duplicate_intent_of_article") for d in dec),
+        "reasons": dict(sorted(reasons.items(), key=lambda kv: -kv[1]))}
     log.info("Keyword agent: %d ideas, %d relevant, %d shortlisted", len(ideas), len(found), len(short))
     return short
+
+
+def feature_summary(cfg: Config, found: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    """Per feature: ideas found, qualifying count, best keyword, and the most common skip reason."""
+    rows = []
+    for fid in [*scoring.features(cfg), "none"]:
+        mine = [i for i in found if i.get("feature") == fid]
+        if not mine and fid == "none":
+            continue
+        q = [i for i in mine if i.get("decision") == "candidate"]
+        best = max(mine, key=lambda i: i.get("score_total", 0), default=None)
+        reasons: dict[str, int] = {}
+        for i in mine:
+            if i.get("decision") != "candidate":
+                r = str(i.get("decision") or i.get("_reason") or "")
+                reasons[r] = reasons.get(r, 0) + 1
+        rows.append({"feature": fid, "ideas": len(mine), "qualifying": len(q),
+                     "best": best["keyword"] if best else "-", "best_total": best.get("score_total") if best else None,
+                     "top_skip_reason": max(reasons, key=reasons.get) if reasons else "-"})
+    return rows

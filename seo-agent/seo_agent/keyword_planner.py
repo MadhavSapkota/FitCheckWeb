@@ -8,7 +8,14 @@ from __future__ import annotations
 from typing import Any
 
 from .config import Config, env
+from .http import with_backoff
 from .log import log
+
+
+@with_backoff(attempts=3, min_wait=5, max_wait=60)
+def _ideas(service, req) -> list:
+    """One Keyword Planner request; retried only on rate limits / transient Google errors."""
+    return list(service.generate_keyword_ideas(request=req))
 
 # Google no longer requires a developer token (access is managed per Google Cloud project);
 # GOOGLE_ADS_DEVELOPER_TOKEN is still passed when set, for older setups.
@@ -47,7 +54,7 @@ def keyword_ideas(cfg: Config, seeds: list[str]) -> list[dict[str, Any]]:
         req.include_adult_keywords = False
         req.keyword_plan_network = client.enums.KeywordPlanNetworkEnum.GOOGLE_SEARCH
         req.keyword_seed.keywords.extend(seeds[i:i + 20])
-        for idea in service.generate_keyword_ideas(request=req):
+        for idea in _ideas(service, req):
             m = idea.keyword_idea_metrics
             kw = idea.text.strip().lower()
             out[kw] = {
