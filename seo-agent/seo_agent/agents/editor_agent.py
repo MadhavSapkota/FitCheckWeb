@@ -25,12 +25,31 @@ def publish(cfg: Config, a: dict[str, Any], articles: dict[str, Any]) -> None:
     publisher.write_article(cfg, a, articles)
 
 
+def prune_drafts(cfg: Config, keep_days: int = 30) -> int:
+    """Review drafts (data/drafts/YYYY-MM-DD-*.json) are for inspection only; keep the last `keep_days` days."""
+    from datetime import date
+    d = cfg.data_dir / "drafts"
+    if not d.exists():
+        return 0
+    removed = 0
+    for f in d.glob("*.json"):
+        try:
+            age = (date.fromisoformat(today()) - date.fromisoformat(f.name[:10])).days
+        except ValueError:
+            continue
+        if age > keep_days:
+            f.unlink()
+            removed += 1
+    return removed
+
+
 def finalize(cfg: Config, articles: dict[str, Any], report: dict) -> None:
     publisher.write_blog_index(cfg, articles)
     for c in publisher.refresh_related_blocks(cfg, articles):
         if not any(c in x for x in report["changes"]):
             report["changes"].append(f"internal links refreshed: {c}")
     publisher.write_sitemap(cfg, articles)
+    prune_drafts(cfg)
     from .. import landing
     if landing.enabled(cfg):  # owner-approved landing pages: keep their related-guide lists current
         for p in landing.render_all(cfg, articles):
