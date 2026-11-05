@@ -121,5 +121,6 @@ jobs:
           path: |
             seo-agent/data/reports/
             seo-agent/data/logs/
+            seo-agent/data/drafts/
           if-no-files-found: ignore
           retention-days: 30
