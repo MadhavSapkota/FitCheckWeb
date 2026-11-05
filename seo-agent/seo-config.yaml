@@ -150,7 +150,8 @@ features:
     conversion: 92
     mix: 6
     phrases: [hairstyle try on, hairstyles try on, try on hairstyles, try on hairstyle, try hairstyles, try a hairstyle,
-              try on different hairstyles, try different hairstyles,
+              try on different hairstyles, try different hairstyles, hair style try on, try on hair styles,
+              try hair styles, hair style app, hair style filter, hair style simulator,
               haircut try on, try on haircut, try on haircuts, hair try on, hairstyle simulator, haircut simulator,
               haircut filter, hairstyle filter, hair filter, hairstyle app, haircut app, virtual hairstyle, virtual haircut,
               virtual hair, hair color try on, try hair color, try on hair color, hairstyles on my face, hairstyles on your face,
@@ -205,7 +206,7 @@ features:
     mix: 10
     phrases: [virtual try on, try on clothes, clothes try on, try clothes on, outfit try on, try on outfits, try outfits,
               virtual fitting, fitting room app, dressing room app, virtual dressing room, see clothes on me, try on dress,
-              dress try on, try on app]
+              dress try on]
     terms: []
     seeds: [virtual try on clothes, try on clothes online, virtual fitting room, try outfits on yourself,
             virtual dressing room app]

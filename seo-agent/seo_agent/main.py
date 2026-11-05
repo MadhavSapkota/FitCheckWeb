@@ -169,7 +169,7 @@ def new_article(cfg, state: State, facts: dict, pages, perf, dry: bool, report: 
                 state.record_keyword(i["keyword"], i, i["decision"])
     report["shortlist"] = [{k: i.get(k) for k in ("keyword", "volume", "difficulty", "opportunity_estimate", "gsc_impressions_28d",
                                                   "intent", "cluster", "feature", "score", "score_total", "decision",
-                                                  "covering_page", "source")} for i in short[:15]]
+                                                  "covering_page", "source")} for i in short[:20]]
     candidates = research.order_by_cluster([i for i in short if i["decision"] == "candidate"], articles, cfg)
     if not candidates:
         report["decision"] = ("skip: no keyword met the feature-relevance, score, volume, intent and duplicate checks "
@@ -180,8 +180,8 @@ def new_article(cfg, state: State, facts: dict, pages, perf, dry: bool, report: 
     for kw in candidates:
         if tried >= cfg.get("keyword_research.max_candidates_per_run", 3):
             break
-        if state.published_today() >= limit and not force_keyword:
-            break
+        if state.published_today() + (len(published) if dry else 0) >= limit and not force_keyword:
+            break  # dry runs save nothing, so count their would-be publishes toward the daily limit too
         if kw["cluster"] in clusters_today:
             continue  # spread daily articles across clusters
         if kw["cluster"] in failed_features:
@@ -245,6 +245,13 @@ def write_report(cfg, report: dict, dry: bool) -> None:
     if report.get("discovery"):
         lines += ["## Keyword discovery (Keyword Planner ideas per feature seed group)",
                   ", ".join(f"{g}: {n}" for g, n in report["discovery"].items()), ""]
+    if report.get("selection_counts"):
+        c = report["selection_counts"]
+        lines += ["## Selection summary",
+                  f"- discovered: {c['discovered']} ideas; relevant to a FitCheck feature: {c['relevant']}",
+                  f"- passed scoring requirements (candidates): {c['qualifying']}",
+                  f"- rejected as duplicate intent: {c['duplicates']} (landing page: {c['dup_landing']}, existing article: {c['dup_article']})",
+                  "- other rejections: " + ", ".join(f"{k} {v}" for k, v in c["reasons"].items()), ""]
     if report.get("feature_summary"):
         lines += ["## Keywords by feature", "| feature | relevant ideas | qualifying | best keyword (score*) | most common skip reason |",
                   "|---|---|---|---|---|",

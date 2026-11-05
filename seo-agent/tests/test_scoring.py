@@ -33,6 +33,7 @@ def cfg():
     ("ai outfit generator", "fashion-generator"),
     ("old money outfit ideas", "trends"),
     ("fitcheck app", "branded"),
+    ("hair style try on app", "hairstyle-try-on"),
 ])
 def test_every_feature_is_classified(cfg, kw, feature):
     assert scoring.classify(cfg, kw)[0] == feature
@@ -221,6 +222,20 @@ def test_one_article_per_day_and_feature_cta(site, monkeypatch):
     rep = (site / "seo-agent" / "data" / "reports" / "2026-11-01.md").read_text()
     assert "## Keywords by feature" in rep and "relevance | ranking opp." in rep
     assert (site / "seo-agent" / "data" / "reports" / "weekly-2026-W44.md").exists()
+
+
+def test_dry_run_respects_one_article_per_day(site, monkeypatch, capsys):
+    cfg_p = site / "seo-agent" / "seo-config.yaml"
+    cfg_p.write_text(cfg_p.read_text().replace("organic_difficulty_source: dataforseo", "organic_difficulty_source: none"))
+    mock_apis(monkeypatch, ideas=[
+        {"keyword": "how to match colors in an outfit", "volume": 880, "source": "google_ads_keyword_planner"},
+        {"keyword": "how to organize your closet", "volume": 5400, "source": "google_ads_keyword_planner"},
+        {"keyword": "what is my hair type", "volume": 5400, "source": "google_ads_keyword_planner"}])
+    assert main.main(["run", "--dry-run"]) == 0
+    out = capsys.readouterr().out
+    assert out.count("[dry-run] would publish") == 1
+    assert "## Selection summary" in out and "rejected as duplicate intent" in out
+    assert not any((site / "blog").glob("*/index.html"))
 
 
 def test_article_links_feature_landing_page_when_it_exists(site, monkeypatch):

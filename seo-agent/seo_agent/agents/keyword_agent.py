@@ -121,6 +121,18 @@ def run(cfg: Config, state: State, pages: list[Page], perf: dict[str, Any] | Non
         scoring.score(cfg, i, pages, articles)
     short = research.shortlist(cfg, found, pages, state)
     report["feature_summary"] = feature_summary(cfg, found)
+    reasons: dict[str, int] = {}
+    for i in found:
+        r = str(i.get("decision", "")).split(":")[0]
+        if r != "candidate" and not r.startswith("duplicate_intent"):
+            reasons[r] = reasons.get(r, 0) + 1
+    dec = [str(i.get("decision", "")) for i in found]
+    report["selection_counts"] = {
+        "discovered": len(ideas), "relevant": len(found), "qualifying": len(short),
+        "duplicates": sum(d.startswith("duplicate_intent") for d in dec),
+        "dup_landing": sum(d.startswith("duplicate_intent_of_landing") for d in dec),
+        "dup_article": sum(d.startswith("duplicate_intent_of_article") for d in dec),
+        "reasons": dict(sorted(reasons.items(), key=lambda kv: -kv[1]))}
     log.info("Keyword agent: %d ideas, %d relevant, %d shortlisted", len(ideas), len(found), len(short))
     return short
 
