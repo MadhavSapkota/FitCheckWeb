@@ -29,8 +29,11 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 45
     steps:
+      # Check out the LATEST branch head (not the commit that triggered the run), so a run queued behind another
+      # (concurrency group) sees that run's published article and the 1-article/day limit holds.
       - uses: actions/checkout@v4
         with:
+          ref: ${{ github.ref_name }}
           fetch-depth: 0
 
       - uses: actions/setup-python@v5
@@ -96,6 +99,7 @@ jobs:
           fi
           git commit -m "SEO agent: daily update $(date -u +%F)"
           git pull --rebase origin "${GITHUB_REF_NAME}"
+          # Re-validate AFTER merging the latest remote state: fails (no push) if this would make 2 articles today.
           (cd seo-agent && python -m seo_agent.main check)
           git push origin "HEAD:${GITHUB_REF_NAME}"
           echo "changed=true" >> "$GITHUB_OUTPUT"

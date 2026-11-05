@@ -47,6 +47,7 @@ def validate_site(cfg) -> list[str]:
                     json.loads(block)
                 except json.JSONDecodeError as e:
                     errors.append(f"{p.path}: invalid JSON-LD ({e})")
+    errors += daily_limit_errors(cfg)
     sm = cfg.site_root / "sitemap.xml"
     if sm.exists():
         try:
@@ -55,6 +56,22 @@ def validate_site(cfg) -> list[str]:
         except Exception as e:  # noqa: BLE001
             errors.append(f"sitemap.xml: invalid XML ({e})")
     return errors
+
+
+def daily_limit_errors(cfg) -> list[str]:
+    """Last line of defense before a push: fails when the (merged) state holds more articles published on one
+    calendar day than allowed, e.g. two overlapping runs that both published."""
+    p = cfg.data_dir / "state.json"
+    if not p.exists():
+        return []
+    limit = int(cfg.get("publishing.max_new_articles_per_day", 1))
+    per_day: dict[str, list[str]] = {}
+    for slug, a in json.loads(p.read_text(encoding="utf-8")).get("articles", {}).items():
+        per_day.setdefault(a.get("published", ""), []).append(slug)
+    day = today()
+    if len(per_day.get(day, [])) > limit:
+        return [f"daily article limit exceeded on {day}: {per_day[day]} (max {limit})"]
+    return []
 
 
 # ---------------------------------------------------------------- steps
@@ -162,8 +179,9 @@ def save_draft(cfg, slug: str, n: int, a: dict, gate: dict, rev: dict) -> None:
 
 def new_article(cfg, state: State, facts: dict, pages, perf, dry: bool, report: dict, force_keyword: str | None = None) -> None:
     limit = cfg.get("publishing.max_new_articles_per_day", 1)
-    if state.published_today() >= limit and not force_keyword:
+    if state.published_today() >= limit:  # applies to manual re-tests (--keyword) too
         report["notes"].append("Daily new-article limit already reached")
+        report["decision"] = "skip: daily article limit already reached today"
         return
     if not research.measured_difficulty(cfg):
         report["notes"].append("Low-cost mode: organic difficulty NOT measured; a labeled opportunity estimate is used instead")
@@ -182,7 +200,7 @@ def new_article(cfg, state: State, facts: dict, pages, perf, dry: bool, report: 
         i["cluster"] = i.get("feature") or research.cluster_of(cfg, i["keyword"])
     articles = state.data["articles"]
     for i in short:  # topic clusters: no second article on a near-identical query in the same cluster
-        if i["decision"] == "candidate" and not force_keyword:
+        if i["decision"] == "candidate":  # duplicate-intent check applies to manual re-tests too
             dup = research.cluster_duplicate(cfg, i, articles)
             if dup:
                 i["decision"] = f"duplicate_in_cluster:{dup}"
@@ -200,7 +218,7 @@ def new_article(cfg, state: State, facts: dict, pages, perf, dry: bool, report: 
     for kw in candidates:
         if tried >= cfg.get("keyword_research.max_candidates_per_run", 3):
             break
-        if state.published_today() + (len(published) if dry else 0) >= limit and not force_keyword:
+        if state.published_today() + (len(published) if dry else 0) >= limit:
             break  # dry runs save nothing, so count their would-be publishes toward the daily limit too
         if kw["cluster"] in clusters_today:
             continue  # spread daily articles across clusters

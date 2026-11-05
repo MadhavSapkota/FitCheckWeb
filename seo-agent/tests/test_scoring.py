@@ -272,6 +272,39 @@ def test_failed_polish_keeps_the_passing_draft(site, monkeypatch):
     assert "guaranteed" not in html.lower()
 
 
+def _free(site):
+    p = site / "seo-agent" / "seo-config.yaml"
+    p.write_text(p.read_text().replace("organic_difficulty_source: dataforseo", "organic_difficulty_source: none"))
+
+
+def test_retest_keyword_cannot_bypass_daily_limit(site, monkeypatch):
+    _free(site)
+    mock_apis(monkeypatch, ideas=[
+        {"keyword": "how to match colors in an outfit", "volume": 880, "source": "google_ads_keyword_planner"},
+        {"keyword": "how to organize your closet", "volume": 5400, "source": "google_ads_keyword_planner"}])
+    assert main.main(["run"]) == 0
+    assert len(list((site / "blog").glob("*/index.html"))) == 1
+    assert main.main(["run", "--keyword", "how to organize your closet"]) == 0  # manual re-test, same day
+    assert len(list((site / "blog").glob("*/index.html"))) == 1
+    assert "daily article limit already reached" in (site / "seo-agent" / "data" / "reports" / "2026-11-01.md").read_text()
+
+
+def test_overlapping_runs_are_caught_before_push(site, monkeypatch):
+    """Simulates two runs that both published (merged state after `git pull --rebase`): validation must fail."""
+    _free(site)
+    mock_apis(monkeypatch)
+    assert main.main(["run"]) == 0
+    assert main.main(["check"]) == 0
+    p = site / "seo-agent" / "data" / "state.json"
+    st = json.loads(p.read_text())
+    other = dict(next(iter(st["articles"].values())), slug="another-article", keyword="another topic")
+    st["articles"]["another-article"] = other
+    p.write_text(json.dumps(st))
+    assert main.main(["check"]) == 1
+    cfg = config_mod.load_config(root=site)
+    assert main.daily_limit_errors(cfg) and "daily article limit exceeded" in main.daily_limit_errors(cfg)[0]
+
+
 def test_dry_run_respects_one_article_per_day(site, monkeypatch, capsys):
     cfg_p = site / "seo-agent" / "seo-config.yaml"
     cfg_p.write_text(cfg_p.read_text().replace("organic_difficulty_source: dataforseo", "organic_difficulty_source: none"))
