@@ -63,21 +63,23 @@ jobs:
         working-directory: seo-agent
         run: |
           args=""
-          if [ "${{ inputs.dry_run }}" = "true" ]; then args="--dry-run"; fi
+          if [ "${{ inputs.dry_run }}" = "true" ] || [ "${GITHUB_REF}" != "refs/heads/master" ]; then args="--dry-run"; fi
           if [ -n "$FORCE_KEYWORD" ]; then
             python -m seo_agent.main run $args --keyword "$FORCE_KEYWORD"
           else
             python -m seo_agent.main run $args
           fi
 
+      # Publishing only ever happens from master. On any other branch the run is forced to behave like a dry run
+      # after the agent step: no commit, no push, no deploy.
       - name: Validate site (build test)
-        if: ${{ inputs.dry_run != true }}
+        if: ${{ inputs.dry_run != true && github.ref == 'refs/heads/master' }}
         working-directory: seo-agent
         run: python -m seo_agent.main check
 
       - name: Commit and push changes
         id: commit
-        if: ${{ inputs.dry_run != true }}
+        if: ${{ inputs.dry_run != true && github.ref == 'refs/heads/master' }}
         run: |
           git config user.name "seo-agent[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"

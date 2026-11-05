@@ -128,9 +128,29 @@ def draft_until_pass(cfg, kw, plan, slug, a, articles, pages, facts, attempt) ->
         feedback = {"quality_gate_failures": gate["failures"], "reviewer_notes": rev.get("notes"),
                     **{k: rev.get(k) for k in ("factual_issues", "invented_app_features", "unsupported_claims", "spam_policy_issues")}}
         a = writer_agent.revise(cfg, kw, plan, a, feedback, facts)
+    if gate["passed"] and POLISH_RE.search(str(rev.get("notes") or "")):
+        # Passed, but the reviewer suggested small fixes (typos, wording). One polish rewrite; it must pass the full
+        # review + quality gate again, otherwise the already-passing draft is kept unchanged.
+        try:
+            b = writer_agent.revise(cfg, kw, plan, a, {"reviewer_suggestions_to_apply": rev.get("notes"),
+                                                      "instruction": "Apply only these small fixes; keep everything else."}, facts)
+            rev2 = writer_agent.review(cfg, b, facts)
+            html2 = publisher.render_article(cfg, b, publisher.pick_related(cfg, {**articles, slug: b}, slug))
+            gate2 = quality.check(cfg, kw=kw, intent=plan["intent"], article=b, rendered_html=html2,
+                                  url=publisher.article_url(cfg, slug), slug=slug, review=rev2, existing=pages)
+            rounds.append({"round": "polish", "passed": gate2["passed"], "failures": gate2["failures"],
+                           "changes_made": b.get("revision_changes", [])})
+            save_draft(cfg, slug, len(rounds) - 1, b, gate2, rev2)
+            if gate2["passed"]:
+                a, gate, rev = b, gate2, rev2
+        except BudgetExceeded:
+            pass  # keep the passing draft
     attempt["rounds"], attempt["quality_gate"], attempt["review_notes"] = rounds, gate, rev.get("notes")
     a.pop("revision_changes", None)
     return a, gate
+
+
+POLISH_RE = re.compile(r"\b(typo|misspell|grammar|consider|suggest|reword|minor|should say|fix)", re.I)
 
 
 def save_draft(cfg, slug: str, n: int, a: dict, gate: dict, rev: dict) -> None:
@@ -220,11 +240,14 @@ def new_article(cfg, state: State, facts: dict, pages, perf, dry: bool, report: 
             published.append(f"[dry-run] would publish /{cfg.get('site.blog_dir')}/{slug}/")
             clusters_today.add(kw["cluster"])
             continue
-        a["quality_gate"] = {k: gate[k] for k in ("word_count", "keyword_density", "warnings")} | {"revisions": len(attempt["rounds"]) - 1}
+        a["quality_gate"] = {k: gate[k] for k in ("word_count", "keyword_density", "warnings")} | \
+            {"revisions": sum(1 for r in attempt["rounds"] if r["round"] not in (0, "polish")),
+             "polished": any(r["round"] == "polish" and r["passed"] for r in attempt["rounds"])}
         editor_agent.publish(cfg, a, articles)
         state.record_keyword(kw["keyword"], kw, f"published:{slug}")
         published.append(f"published /{cfg.get('site.blog_dir')}/{slug}/ for '{kw['keyword']}' (feature {kw.get('feature')}, "
-                         f"score {kw.get('score_total')}) after {len(attempt['rounds']) - 1} revision(s)")
+                         f"score {kw.get('score_total')}) after {a['quality_gate']['revisions']} revision(s)"
+                         + (" + polish" if a["quality_gate"]["polished"] else ""))
         report["published_urls"] = report.get("published_urls", []) + [publisher.article_url(cfg, slug)]
         report["changes"].append(f"new article blog/{slug}/index.html")
         clusters_today.add(kw["cluster"])

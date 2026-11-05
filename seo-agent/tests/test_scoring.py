@@ -224,6 +224,44 @@ def test_one_article_per_day_and_feature_cta(site, monkeypatch):
     assert (site / "seo-agent" / "data" / "reports" / "weekly-2026-W44.md").exists()
 
 
+def test_polish_applies_reviewer_suggestions_only_if_still_passing(site, monkeypatch):
+    from seo_agent import content
+    cfg_p = site / "seo-agent" / "seo-config.yaml"
+    cfg_p.write_text(cfg_p.read_text().replace("organic_difficulty_source: dataforseo", "organic_difficulty_source: none"))
+    body = fake_body("x") + "<p>Try a emerald green scarf near your face.</p>"
+    mock_apis(monkeypatch, body=body)
+
+    def review(cfg, keyword, intent, article, facts):
+        typo = "a emerald" in article["body_html"]
+        return {"intent_match": True, "value_score": 8, "factual_issues": [], "invented_app_features": [],
+                "unsupported_claims": [], "spam_policy_issues": [], "keyword_stuffing": False, "pass": True,
+                "notes": "Minor: fix the typo 'a emerald' -> 'an emerald'." if typo else "Good."}
+    monkeypatch.setattr(content, "review", review)
+    monkeypatch.setattr(content, "revise", lambda cfg, kw, plan, draft, fb, facts: {
+        **draft, "body_html": draft["body_html"].replace("a emerald", "an emerald"), "changes_made": ["typo"]})
+    assert main.main(["run"]) == 0
+    html = (site / "blog" / "how-to-match-colors-in-an-outfit" / "index.html").read_text()
+    assert "an emerald" in html and "a emerald" not in html
+    st = json.loads((site / "seo-agent" / "data" / "state.json").read_text())
+    assert st["articles"]["how-to-match-colors-in-an-outfit"]["quality_gate"]["polished"] is True
+
+
+def test_failed_polish_keeps_the_passing_draft(site, monkeypatch):
+    from seo_agent import content
+    cfg_p = site / "seo-agent" / "seo-config.yaml"
+    cfg_p.write_text(cfg_p.read_text().replace("organic_difficulty_source: dataforseo", "organic_difficulty_source: none"))
+    mock_apis(monkeypatch)
+    monkeypatch.setattr(content, "review", lambda cfg, keyword, intent, article, facts: {
+        "intent_match": True, "value_score": 8, "factual_issues": [], "invented_app_features": [], "unsupported_claims": [],
+        "spam_policy_issues": [], "keyword_stuffing": False, "pass": "guaranteed" not in article["body_html"],
+        "notes": "Consider tightening the intro."})
+    monkeypatch.setattr(content, "revise", lambda cfg, kw, plan, draft, fb, facts: {
+        **draft, "body_html": draft["body_html"] + "<p>Results guaranteed.</p>", "changes_made": []})
+    assert main.main(["run"]) == 0
+    html = (site / "blog" / "how-to-match-colors-in-an-outfit" / "index.html").read_text()
+    assert "guaranteed" not in html.lower()
+
+
 def test_dry_run_respects_one_article_per_day(site, monkeypatch, capsys):
     cfg_p = site / "seo-agent" / "seo-config.yaml"
     cfg_p.write_text(cfg_p.read_text().replace("organic_difficulty_source: dataforseo", "organic_difficulty_source: none"))
