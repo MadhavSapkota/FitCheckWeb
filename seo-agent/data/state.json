@@ -1826,6 +1826,13 @@
       "claude_calls": 5,
       "decision": "published /blog/what-should-i-wear-today/ for 'what should i wear today' (feature outfit-checker, score 84.2) after 0 revision(s) + polish",
       "errors": 0
+    },
+    {
+      "at": "2026-11-06T14:19:59+00:00",
+      "changes": 0,
+      "claude_calls": 0,
+      "decision": "skip: daily article limit already reached today",
+      "errors": 0
     }
   ],
   "usage": {
