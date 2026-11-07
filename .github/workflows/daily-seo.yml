@@ -1,8 +1,8 @@
 name: Daily SEO agent
 
 on:
-  schedule:
-    - cron: "0 0 * * *"    # once a day, 6:00 PM CST (00:00 UTC)
+  # Started every day at exactly 6:00 PM America/Chicago by an external scheduler (cron-job.org) via workflow_dispatch.
+  # GitHub's own cron is not used: it often fires hours late and cannot follow daylight saving time.
   workflow_dispatch:
     inputs:
       dry_run:
@@ -35,6 +35,10 @@ jobs:
         with:
           ref: ${{ github.ref_name }}
           fetch-depth: 0
+
+      # The 1-article/day limit counts days in Chicago time, so it stays correct across daylight saving changes.
+      - name: Set local date
+        run: echo "SEO_AGENT_TODAY=$(TZ=America/Chicago date +%F)" >> "$GITHUB_ENV"
 
       - uses: actions/setup-python@v5
         with:
