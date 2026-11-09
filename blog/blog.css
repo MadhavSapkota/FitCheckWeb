@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap');
 /* Blog styles - matches the main site palette (bg #f1efea, ink #30232b, accent #762f4a) and Inter font. */
 @font-face{font-family:Inter;src:url('/assets/fonts/inter-regular.woff') format('woff');font-weight:400;font-display:swap}
 @font-face{font-family:Inter;src:url('/assets/fonts/inter-semibold.woff') format('woff');font-weight:600;font-display:swap}
@@ -41,7 +41,6 @@ th{background:var(--soft)}
 
 /* Editorial black & white theme */
 :root{--bg:#fff;--card:#fff;--ink:#000;--body:#333;--primary:#000;--soft:#f4f4f4;--line:#e5e5e5}
-*{border-radius:0!important;box-shadow:none!important}
 .wrap{width:auto;max-width:1440px;padding-inline:clamp(20px,4vw,56px)}
 .bh-in{min-height:76px}
 .brand{font-family:'Archivo',Inter,sans-serif;font-stretch:85%;font-weight:600;font-size:26px;text-transform:uppercase;letter-spacing:.02em}
@@ -62,3 +61,38 @@ h2{font-size:clamp(22px,2.4vw,30px);margin-top:56px}
 .app-cta .cta{background:#fff;color:#000;border-color:#fff}
 .inline-cta{border-left:3px solid #000;padding:24px 28px}
 .bf{background:#000;padding:48px 0}.bf,.bf a,.bf p{color:#fff}
+
+/* THEME:START */
+:root{--bg:#f5f5f5;--card:#fff;--ink:#000;--body:#555;--primary:#dc0a55;--soft:#fff;--line:#e4e4e4;--disp:'Outfit',Inter,system-ui,sans-serif}
+html,body{overflow-x:clip}
+a{color:var(--ink)}
+.bh{background:#000;border-bottom:0}
+.bh .brand,.brand{font-family:var(--disp);font-stretch:100%;font-size:25px;letter-spacing:-.01em;text-transform:none;color:#fff}
+.bh nav a{font:600 14px/1 var(--disp);letter-spacing:0;text-transform:none;color:#fff}
+.bh nav a:hover{color:#ff6fa3}
+.bh nav a.cta-sm,.cta{display:inline-flex;align-items:center;justify-content:center;background:var(--primary);color:#fff;border:2px solid var(--primary);border-radius:999px;font:600 15px/1 var(--disp);letter-spacing:0;text-transform:none}
+.bh nav a.cta-sm{padding:11px 18px;font-size:14px;color:#fff}
+.cta{min-height:50px;padding:0 28px}
+.bh nav a.cta-sm:hover,.cta:hover{background:#b80847;border-color:#b80847;color:#fff}
+h1,h2,.cards a{font-family:var(--disp);font-stretch:100%;text-transform:none;letter-spacing:-.015em;line-height:1.08;color:var(--ink)}
+h1{font-size:clamp(40px,5.4vw,76px)}
+h2{font-size:clamp(26px,2.8vw,36px)}
+h3{font-family:var(--disp)}
+.article a:not(.cta){text-underline-offset:3px}
+.cards{grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:20px;border-top:0;margin-top:32px}
+.cards li{background:#fff;border:0;border-radius:20px;padding:28px}
+.cards a{font-size:24px;font-weight:600}
+.cards a:hover{color:var(--primary)}
+.faq details{background:#fff;border:0;border-radius:16px;padding:18px 24px;margin:12px 0}
+.faq summary{font:600 18px/1.3 var(--disp)}
+.faq details p{margin-bottom:0}
+.app-cta{background:#000;border:0;border-radius:20px;padding:clamp(28px,4vw,48px)}
+.app-cta-title{font:600 clamp(26px,3vw,38px)/1.1 var(--disp);margin-bottom:12px}
+.app-cta .cta{background:var(--primary);border-color:var(--primary);color:#fff}
+.app-cta .cta:hover{background:#b80847;border-color:#b80847}
+.inline-cta{background:#fff;border:0;border-radius:20px;padding:24px 28px}
+table{background:#fff;border-radius:12px}
+th{background:#f5f5f5}
+th,td{border-color:var(--line)}
+.bf{background:#000;border-top:0}
+/* THEME:END */
