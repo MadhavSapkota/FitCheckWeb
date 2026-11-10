@@ -79,8 +79,8 @@ h1{font-size:clamp(40px,5.4vw,76px)}
 h2{font-size:clamp(26px,2.8vw,36px)}
 h3{font-family:var(--disp)}
 .article a:not(.cta){text-underline-offset:3px}
-.cards{grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:20px;border-top:0;margin-top:32px}
-.cards li{background:#fff;border:0;border-radius:20px;padding:28px}
+.cards{grid-template-columns:1fr;gap:0;border-top:1px solid var(--line);margin-top:32px;max-width:900px}
+.cards li{background:transparent;border:0;border-bottom:1px solid var(--line);border-radius:0;padding:24px 0}
 .cards a{font-size:24px;font-weight:600}
 .cards a:hover{color:var(--primary)}
 .faq details{background:#fff;border:0;border-radius:16px;padding:18px 24px;margin:12px 0}
