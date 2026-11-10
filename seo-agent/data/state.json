@@ -872,7 +872,7 @@
     "finding your personal style": {"decision":"rejected_low_feature_relevance","feature":"trends","latest":{"ads_competition":"MEDIUM","feature":"trends","intent":"informational","intent_type":"informational","keyword":"finding your personal style","score":{"content_usefulness":85,"conversion_potential":35,"feature_relevance":55,"ranking_opportunity":50,"search_demand":41},"score_total":50.6,"source":"google_ads_keyword_planner","volume":110},"updated":"2026-11-05"},
     "finding your style": {"decision":"rejected_low_feature_relevance","feature":"trends","latest":{"ads_competition":"MEDIUM","feature":"trends","intent":"informational","intent_type":"informational","keyword":"finding your style","score":{"content_usefulness":85,"conversion_potential":35,"feature_relevance":55,"ranking_opportunity":35,"search_demand":62},"score_total":50.0,"source":"google_ads_keyword_planner","volume":1300},"updated":"2026-11-05"},
     "first date outfit ideas": {"decision":"rejected_low_opportunity_estimate","latest":{"ads_competition":"HIGH","intent":"informational","keyword":"first date outfit ideas","source":"google_ads_keyword_planner","volume":1900},"updated":"2026-11-04"},
-    "fit check": {"decision":"rejected_head_term_low_ranking_opportunity","feature":"outfit-checker","latest":{"ads_competition":"LOW","feature":"outfit-checker","gsc_impressions_28d":1,"gsc_position":100,"intent":"informational","intent_type":"informational","keyword":"fit check","score":{"content_usefulness":70,"conversion_potential":85,"feature_relevance":95,"ranking_opportunity":15,"search_demand":73},"score_total":67.2,"source":"google_ads_keyword_planner","volume":4400},"updated":"2026-11-08"},
+    "fit check": {"decision":"rejected_volume_unverified_and_little_search_console_evidence","feature":"outfit-checker","latest":{"feature":"outfit-checker","gsc_impressions_28d":5,"gsc_position":38.8,"intent":"informational","intent_type":"informational","keyword":"fit check","score":{"content_usefulness":70,"conversion_potential":85,"feature_relevance":95,"ranking_opportunity":15,"search_demand":5},"score_total":57.0,"source":"search_console (volume unverified)","volume":null},"updated":"2026-11-09"},
     "fit check app": {"decision":"rejected_low_volume","feature":"outfit-checker","latest":{"ads_competition":"LOW","feature":"outfit-checker","intent":"commercial","intent_type":"tool","keyword":"fit check app","score":{"content_usefulness":70,"conversion_potential":93,"feature_relevance":95,"ranking_opportunity":35,"search_demand":30},"score_total":67.3,"source":"google_ads_keyword_planner","volume":30},"updated":"2026-11-07"},
     "fit maker clothes": {"decision":"rejected_low_volume","feature":"trends","latest":{"feature":"trends","intent":"informational","intent_type":"tool","keyword":"fit maker clothes","score":{"content_usefulness":85,"conversion_potential":35,"feature_relevance":55,"ranking_opportunity":35,"search_demand":20},"score_total":43.8,"source":"google_ads_keyword_planner","volume":10},"updated":"2026-11-05"},
     "fitcheck ai": {"decision":"rejected_low_volume","feature":"branded","latest":{"ads_competition":"LOW","feature":"branded","intent":"informational","intent_type":"tool","keyword":"fitcheck ai","score":{"content_usefulness":85,"conversion_potential":100,"feature_relevance":95,"ranking_opportunity":45,"search_demand":34},"score_total":73.3,"source":"google_ads_keyword_planner","volume":50},"updated":"2026-11-05"},
@@ -1991,6 +1991,13 @@
       "changes": 6,
       "claude_calls": 5,
       "decision": "published /blog/what-makeup-suits-my-face/ for 'what makeup suits my face quiz' (feature makeup-assistant, score 84.0) after 0 revision(s) + polish",
+      "errors": 0
+    },
+    {
+      "at": "2026-11-10T00:03:26+00:00",
+      "changes": 1,
+      "claude_calls": 0,
+      "decision": "skip: no keyword met the feature-relevance, score, volume, intent and duplicate checks (see 'Keywords by feature' for reasons)",
       "errors": 0
     }
   ],

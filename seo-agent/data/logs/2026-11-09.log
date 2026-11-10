@@ -1,0 +1,16 @@
+2026-11-10 00:03:25,430 INFO seo_agent: Search Console: 28d clicks=0 impressions=12
+2026-11-10 00:03:25,681 ERROR seo_agent: Google Ads Keyword Planner failed: ('invalid_grant: Token has been expired or revoked.', {'error': 'invalid_grant', 'error_description': 'Token has been expired or revoked.'})
+2026-11-10 00:03:25,756 ERROR seo_agent: Google Ads Keyword Planner failed: ('invalid_grant: Token has been expired or revoked.', {'error': 'invalid_grant', 'error_description': 'Token has been expired or revoked.'})
+2026-11-10 00:03:25,826 ERROR seo_agent: Google Ads Keyword Planner failed: ('invalid_grant: Token has been expired or revoked.', {'error': 'invalid_grant', 'error_description': 'Token has been expired or revoked.'})
+2026-11-10 00:03:25,904 ERROR seo_agent: Google Ads Keyword Planner failed: ('invalid_grant: Token has been expired or revoked.', {'error': 'invalid_grant', 'error_description': 'Token has been expired or revoked.'})
+2026-11-10 00:03:26,006 ERROR seo_agent: Google Ads Keyword Planner failed: ('invalid_grant: Token has been expired or revoked.', {'error': 'invalid_grant', 'error_description': 'Token has been expired or revoked.'})
+2026-11-10 00:03:26,062 ERROR seo_agent: Google Ads Keyword Planner failed: ('invalid_grant: Token has been expired or revoked.', {'error': 'invalid_grant', 'error_description': 'Token has been expired or revoked.'})
+2026-11-10 00:03:26,114 ERROR seo_agent: Google Ads Keyword Planner failed: ('invalid_grant: Token has been expired or revoked.', {'error': 'invalid_grant', 'error_description': 'Token has been expired or revoked.'})
+2026-11-10 00:03:26,188 ERROR seo_agent: Google Ads Keyword Planner failed: ('invalid_grant: Token has been expired or revoked.', {'error': 'invalid_grant', 'error_description': 'Token has been expired or revoked.'})
+2026-11-10 00:03:26,254 ERROR seo_agent: Google Ads Keyword Planner failed: ('invalid_grant: Token has been expired or revoked.', {'error': 'invalid_grant', 'error_description': 'Token has been expired or revoked.'})
+2026-11-10 00:03:26,326 ERROR seo_agent: Google Ads Keyword Planner failed: ('invalid_grant: Token has been expired or revoked.', {'error': 'invalid_grant', 'error_description': 'Token has been expired or revoked.'})
+2026-11-10 00:03:26,377 ERROR seo_agent: Google Ads Keyword Planner failed: ('invalid_grant: Token has been expired or revoked.', {'error': 'invalid_grant', 'error_description': 'Token has been expired or revoked.'})
+2026-11-10 00:03:26,437 ERROR seo_agent: Google Ads Keyword Planner failed: ('invalid_grant: Token has been expired or revoked.', {'error': 'invalid_grant', 'error_description': 'Token has been expired or revoked.'})
+2026-11-10 00:03:26,487 ERROR seo_agent: Google Ads Keyword Planner failed: ('invalid_grant: Token has been expired or revoked.', {'error': 'invalid_grant', 'error_description': 'Token has been expired or revoked.'})
+2026-11-10 00:03:26,502 INFO seo_agent: Shortlisted 0 qualifying keywords (of 1 ideas)
+2026-11-10 00:03:26,502 INFO seo_agent: Keyword agent: 1 ideas, 1 relevant, 0 shortlisted
