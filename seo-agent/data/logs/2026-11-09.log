@@ -30,3 +30,19 @@
 2026-11-10 03:14:32,762 ERROR seo_agent: Google Ads Keyword Planner failed: ('invalid_client: The provided client secret is invalid.', {'error': 'invalid_client', 'error_description': 'The provided client secret is invalid.'})
 2026-11-10 03:14:32,782 INFO seo_agent: Shortlisted 0 qualifying keywords (of 1 ideas)
 2026-11-10 03:14:32,782 INFO seo_agent: Keyword agent: 1 ideas, 1 relevant, 0 shortlisted
+2026-11-10 03:38:26,505 INFO seo_agent: Search Console: 28d clicks=0 impressions=12
+2026-11-10 03:38:28,949 INFO seo_agent: Google Ads Keyword Planner returned 150 ideas
+2026-11-10 03:38:30,079 INFO seo_agent: Google Ads Keyword Planner returned 150 ideas
+2026-11-10 03:38:31,877 INFO seo_agent: Google Ads Keyword Planner returned 150 ideas
+2026-11-10 03:38:34,796 INFO seo_agent: Google Ads Keyword Planner returned 150 ideas
+2026-11-10 03:38:35,909 INFO seo_agent: Google Ads Keyword Planner returned 150 ideas
+2026-11-10 03:38:37,279 INFO seo_agent: Google Ads Keyword Planner returned 150 ideas
+2026-11-10 03:38:38,385 INFO seo_agent: Google Ads Keyword Planner returned 150 ideas
+2026-11-10 03:38:40,886 INFO seo_agent: Google Ads Keyword Planner returned 150 ideas
+2026-11-10 03:38:41,778 INFO seo_agent: Google Ads Keyword Planner returned 150 ideas
+2026-11-10 03:38:42,521 INFO seo_agent: Google Ads Keyword Planner returned 150 ideas
+2026-11-10 03:38:45,277 INFO seo_agent: Google Ads Keyword Planner returned 150 ideas
+2026-11-10 03:38:46,062 INFO seo_agent: Google Ads Keyword Planner returned 18 ideas
+2026-11-10 03:38:47,847 INFO seo_agent: Google Ads Keyword Planner returned 150 ideas
+2026-11-10 03:39:16,653 INFO seo_agent: Shortlisted 105 qualifying keywords (of 1412 ideas)
+2026-11-10 03:39:16,655 INFO seo_agent: Keyword agent: 1802 ideas, 1412 relevant, 105 shortlisted
