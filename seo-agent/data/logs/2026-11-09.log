@@ -14,3 +14,19 @@
 2026-11-10 00:03:26,487 ERROR seo_agent: Google Ads Keyword Planner failed: ('invalid_grant: Token has been expired or revoked.', {'error': 'invalid_grant', 'error_description': 'Token has been expired or revoked.'})
 2026-11-10 00:03:26,502 INFO seo_agent: Shortlisted 0 qualifying keywords (of 1 ideas)
 2026-11-10 00:03:26,502 INFO seo_agent: Keyword agent: 1 ideas, 1 relevant, 0 shortlisted
+2026-11-10 03:14:30,442 INFO seo_agent: Search Console: 28d clicks=0 impressions=12
+2026-11-10 03:14:30,840 ERROR seo_agent: Google Ads Keyword Planner failed: ('invalid_client: The provided client secret is invalid.', {'error': 'invalid_client', 'error_description': 'The provided client secret is invalid.'})
+2026-11-10 03:14:31,006 ERROR seo_agent: Google Ads Keyword Planner failed: ('invalid_client: The provided client secret is invalid.', {'error': 'invalid_client', 'error_description': 'The provided client secret is invalid.'})
+2026-11-10 03:14:31,168 ERROR seo_agent: Google Ads Keyword Planner failed: ('invalid_client: The provided client secret is invalid.', {'error': 'invalid_client', 'error_description': 'The provided client secret is invalid.'})
+2026-11-10 03:14:31,317 ERROR seo_agent: Google Ads Keyword Planner failed: ('invalid_client: The provided client secret is invalid.', {'error': 'invalid_client', 'error_description': 'The provided client secret is invalid.'})
+2026-11-10 03:14:31,473 ERROR seo_agent: Google Ads Keyword Planner failed: ('invalid_client: The provided client secret is invalid.', {'error': 'invalid_client', 'error_description': 'The provided client secret is invalid.'})
+2026-11-10 03:14:31,661 ERROR seo_agent: Google Ads Keyword Planner failed: ('invalid_client: The provided client secret is invalid.', {'error': 'invalid_client', 'error_description': 'The provided client secret is invalid.'})
+2026-11-10 03:14:31,815 ERROR seo_agent: Google Ads Keyword Planner failed: ('invalid_client: The provided client secret is invalid.', {'error': 'invalid_client', 'error_description': 'The provided client secret is invalid.'})
+2026-11-10 03:14:31,967 ERROR seo_agent: Google Ads Keyword Planner failed: ('invalid_client: The provided client secret is invalid.', {'error': 'invalid_client', 'error_description': 'The provided client secret is invalid.'})
+2026-11-10 03:14:32,131 ERROR seo_agent: Google Ads Keyword Planner failed: ('invalid_client: The provided client secret is invalid.', {'error': 'invalid_client', 'error_description': 'The provided client secret is invalid.'})
+2026-11-10 03:14:32,292 ERROR seo_agent: Google Ads Keyword Planner failed: ('invalid_client: The provided client secret is invalid.', {'error': 'invalid_client', 'error_description': 'The provided client secret is invalid.'})
+2026-11-10 03:14:32,458 ERROR seo_agent: Google Ads Keyword Planner failed: ('invalid_client: The provided client secret is invalid.', {'error': 'invalid_client', 'error_description': 'The provided client secret is invalid.'})
+2026-11-10 03:14:32,614 ERROR seo_agent: Google Ads Keyword Planner failed: ('invalid_client: The provided client secret is invalid.', {'error': 'invalid_client', 'error_description': 'The provided client secret is invalid.'})
+2026-11-10 03:14:32,762 ERROR seo_agent: Google Ads Keyword Planner failed: ('invalid_client: The provided client secret is invalid.', {'error': 'invalid_client', 'error_description': 'The provided client secret is invalid.'})
+2026-11-10 03:14:32,782 INFO seo_agent: Shortlisted 0 qualifying keywords (of 1 ideas)
+2026-11-10 03:14:32,782 INFO seo_agent: Keyword agent: 1 ideas, 1 relevant, 0 shortlisted
