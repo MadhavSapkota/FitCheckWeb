@@ -2231,6 +2231,13 @@
       "claude_calls": 9,
       "decision": "published /blog/what-haircut-looks-good-on-me/ for 'what haircut will look good on me' (feature hairstyle-recommendations, score 82.0) after 2 revision(s) + polish",
       "errors": 0
+    },
+    {
+      "at": "2026-11-12T03:47:12+00:00",
+      "changes": 0,
+      "claude_calls": 0,
+      "decision": "skip: daily article limit already reached today",
+      "errors": 0
     }
   ],
   "usage": {
