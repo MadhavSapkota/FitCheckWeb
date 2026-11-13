@@ -1,0 +1,66 @@
+{
+  "end_date": "2026-11-10",
+  "totals_7d": {
+    "clicks": 0,
+    "impressions": 28,
+    "ctr": 0.0
+  },
+  "totals_28d": {
+    "clicks": 0,
+    "impressions": 28,
+    "ctr": 0.0
+  },
+  "top_queries_28d": [
+    {
+      "query": "fit check",
+      "clicks": 0,
+      "impressions": 14,
+      "ctr": 0,
+      "position": 37.357142857142854
+    },
+    {
+      "query": "fitcheck",
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 77
+    },
+    {
+      "query": "fitcheck look",
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 9
+    }
+  ],
+  "top_pages_28d": [
+    {
+      "page": "https://fitcheck-fashion.com/",
+      "clicks": 0,
+      "impressions": 16,
+      "ctr": 0,
+      "position": 29.5625
+    },
+    {
+      "page": "https://fitcheck-fashion.com/how-it-works.html",
+      "clicks": 0,
+      "impressions": 10,
+      "ctr": 0,
+      "position": 23.1
+    },
+    {
+      "page": "https://fitcheck-fashion.com/blog/try-hairstyles-on-your-face/",
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 11
+    },
+    {
+      "page": "https://fitcheck-fashion.com/privacy.html",
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 9
+    }
+  ]
+}
