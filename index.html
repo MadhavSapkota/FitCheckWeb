@@ -330,6 +330,8 @@ details[open] summary::after{background:var(--pink);color:#fff}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 
 /* Comparison section */
+.app-ico{display:block;width:56px;height:56px;border-radius:22%;object-fit:cover;background:#fff;flex:none;border:1px solid var(--line)}
+.cmp-vs{display:flex;align-items:center;gap:10px;color:var(--mute);font:600 14px/1 var(--disp)}
 .cmp-home{background:var(--grey)}
 .cmp-grid{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:20px}
 .cmp-grid li{display:flex;flex-direction:column;gap:12px;background:#fff;border-radius:var(--radius,20px);padding:32px}
@@ -415,9 +417,9 @@ details[open] summary::after{background:var(--pink);color:#fff}
 <section class="section cmp-home" id="compare" aria-labelledby="compare-title"><div class="wrap">
   <div class="sec-head"><div><h2 id="compare-title">How FitCheck compares</h2><p>Looking for a YouCam Makeup, Acloset or Whering alternative? Style apps do different jobs, so see where FitCheck fits and which one suits you.</p></div><a class="btn" href="compare/">All comparisons</a></div>
   <ul class="cmp-grid">
-    <li><h3><a href="compare/fitcheck-vs-youcam-makeup/">FitCheck vs YouCam Makeup</a></h3><p>YouCam Makeup is a photo and selfie editor with virtual makeup.</p><p><strong>Pick YouCam</strong> to edit and retouch photos.<br><strong>Pick FitCheck</strong> for feedback on the look you are actually wearing.</p></li>
-    <li><h3><a href="compare/fitcheck-vs-acloset/">FitCheck vs Acloset</a></h3><p>Acloset is a digital wardrobe with an AI stylist chat.</p><p><strong>Pick Acloset</strong> to catalog every item you own.<br><strong>Pick FitCheck</strong> for a score on the outfit you have on, from one photo.</p></li>
-    <li><h3><a href="compare/fitcheck-vs-whering/">FitCheck vs Whering</a></h3><p>Whering is a social digital closet with wear statistics.</p><p><strong>Pick Whering</strong> to track how often you wear each piece.<br><strong>Pick FitCheck</strong> for a verdict on today's outfit, plus makeup and hair feedback.</p></li>
+    <li><div class="cmp-vs"><img class="app-ico" src="assets/compare/fitcheck-icon.png" alt="FitCheck app icon" width="56" height="56" loading="lazy" decoding="async"><span aria-hidden="true">vs</span><img class="app-ico" src="assets/compare/youcam-makeup-icon.png" alt="YouCam Makeup app icon" width="56" height="56" loading="lazy" decoding="async"></div><h3><a href="compare/fitcheck-vs-youcam-makeup/">FitCheck vs YouCam Makeup</a></h3><p>YouCam Makeup is a photo and selfie editor with virtual makeup.</p><p><strong>Pick YouCam</strong> to edit and retouch photos.<br><strong>Pick FitCheck</strong> for feedback on the look you are actually wearing.</p></li>
+    <li><div class="cmp-vs"><img class="app-ico" src="assets/compare/fitcheck-icon.png" alt="FitCheck app icon" width="56" height="56" loading="lazy" decoding="async"><span aria-hidden="true">vs</span><img class="app-ico" src="assets/compare/acloset-icon.png" alt="Acloset app icon" width="56" height="56" loading="lazy" decoding="async"></div><h3><a href="compare/fitcheck-vs-acloset/">FitCheck vs Acloset</a></h3><p>Acloset is a digital wardrobe with an AI stylist chat.</p><p><strong>Pick Acloset</strong> to catalog every item you own.<br><strong>Pick FitCheck</strong> for a score on the outfit you have on, from one photo.</p></li>
+    <li><div class="cmp-vs"><img class="app-ico" src="assets/compare/fitcheck-icon.png" alt="FitCheck app icon" width="56" height="56" loading="lazy" decoding="async"><span aria-hidden="true">vs</span><img class="app-ico" src="assets/compare/whering-icon.png" alt="Whering app icon" width="56" height="56" loading="lazy" decoding="async"></div><h3><a href="compare/fitcheck-vs-whering/">FitCheck vs Whering</a></h3><p>Whering is a social digital closet with wear statistics.</p><p><strong>Pick Whering</strong> to track how often you wear each piece.<br><strong>Pick FitCheck</strong> for a verdict on today's outfit, plus makeup and hair feedback.</p></li>
   </ul>
   <div class="cmp-more"><p class="cmp-note">Details about other apps come from their Google Play listings and were checked on November 16, 2026. FitCheck is not affiliated with these apps.</p></div>
 </div></section>

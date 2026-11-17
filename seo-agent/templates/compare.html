@@ -33,6 +33,12 @@
 .cmp-cards a:hover{color:var(--primary)}
 .cmp-cards p{margin:0;font-size:16px}
 .cmp-cards .small{margin-top:10px}
+.app-ico,.app-ico-sm{display:block;border-radius:22%;object-fit:cover;background:#fff;flex:none;border:1px solid #e4e4e4}
+.app-ico{width:56px;height:56px}.app-ico-sm{width:28px;height:28px;border-radius:8px}
+.cmp-vs{display:flex;align-items:center;gap:10px;color:#777;font:600 14px/1 var(--disp)}
+.cmp-vs-lg{gap:14px;margin-bottom:24px;flex-wrap:wrap}.cmp-vs-lg .app-ico{width:72px;height:72px}.cmp-vs-lg span{color:#c8c8c8;font-size:16px}
+.cmp-th{display:inline-flex;align-items:center;gap:10px}
+.cmp-cards .cmp-vs{margin-bottom:16px}
 </style>
 {{analytics}}
 <script type="application/ld+json">{{jsonld}}</script>
@@ -44,6 +50,7 @@
 <nav class="crumbs" aria-label="Breadcrumb">{{crumbs}}</nav>
 <section class="lp-hero">
 <div class="lp-hero-text">
+{{icons}}
 <h1>{{h1}}</h1>
 <p class="lede">{{lede}}</p>
 {{hero_cta}}
