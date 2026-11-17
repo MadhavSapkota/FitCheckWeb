@@ -330,36 +330,99 @@ details[open] summary::after{background:var(--pink);color:#fff}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 
 /* Comparison section */
-.cmp-home{background:var(--grey)}
-.cmp-home .sec-head p{max-width:620px}
-.cmpc-grid{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
-.cmpc-grid li{display:flex}
-.cmpc-link{display:flex;flex-direction:column;gap:14px;width:100%;padding:30px;background:#fff;border-radius:var(--radius,20px);border:1px solid #ececec;color:inherit;text-decoration:none;transition:transform .2s ease,box-shadow .2s ease,border-color .2s ease}
-.cmpc-link:hover{transform:translateY(-4px);box-shadow:0 18px 44px rgba(0,0,0,.10);border-color:#000}
-.cmpc-link:focus-visible{outline:3px solid var(--pink,#dc0a55);outline-offset:3px}
-.cmpc-icons{display:flex;align-items:center;gap:12px}
+/* Homepage app comparisons */
+.cmp-home{position:relative;overflow:hidden;background:radial-gradient(60% 50% at 8% 0%,#dc0a5538 0%,transparent 70%),radial-gradient(50% 45% at 100% 100%,#7b3dff30 0%,transparent 70%),#0e0a10;border:0;color:#fff}
+.cmp-home::before{content:"";position:absolute;inset:0;background-image:radial-gradient(#ffffff14 1px,transparent 1px);background-size:26px 26px;-webkit-mask-image:linear-gradient(180deg,#000,transparent 70%);mask-image:linear-gradient(180deg,#000,transparent 70%);pointer-events:none}
+.cmp-home>.wrap{position:relative}
+.cmp-home .sec-head{align-items:flex-end;gap:32px;margin-bottom:48px}
+.cmp-eyebrow{display:inline-flex;align-items:center;gap:8px;margin-bottom:18px;padding:7px 14px;border-radius:999px;border:1px solid #ffffff24;background:#ffffff0d;color:#ffc2d8;font:600 11px/1.4 var(--disp);letter-spacing:.16em;text-transform:uppercase}
+.cmp-eyebrow::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--pink);box-shadow:0 0 12px var(--pink)}
+.cmp-home .sec-head h2{color:#fff;font-size:clamp(40px,5vw,72px);line-height:1;letter-spacing:-.045em;background:linear-gradient(100deg,#fff 40%,#ff8fb5 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.cmp-home .sec-head p{max-width:560px;color:#cbbfc7;font-size:18px;line-height:1.6;margin:18px 0 0}
+.cmp-home .sec-head>.btn{flex-shrink:0;gap:14px;background:#fff;border:0;color:#1b1218;padding:16px 26px;font-size:15px;font-weight:700;box-shadow:0 12px 30px -10px #dc0a5599;transition:background .2s,color .2s,transform .2s}
+.cmp-home .sec-head>.btn:hover{background:var(--pink);color:#fff;transform:translateY(-2px)}
+.cmpc-grid{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px}
+.cmpc-grid>li{display:flex;min-width:0;--a:#dc0a55}
+.cmpc-grid>li.a-youcam{--a:#ff4d8d}.cmpc-grid>li.a-acloset{--a:#f2c94c}.cmpc-grid>li.a-whering{--a:#b6ff3b}.cmpc-grid>li.a-alta{--a:#7aa2ff}.cmpc-grid>li.a-fits{--a:#ffa66b}
+.cmpc-link{position:relative;isolation:isolate;overflow:hidden;display:flex;flex-direction:column;gap:20px;width:100%;padding:28px;background:linear-gradient(165deg,#ffffff14,#ffffff05);border:1px solid #ffffff1c;border-radius:28px;color:#fff;text-decoration:none;-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);transition:transform .3s ease,box-shadow .3s ease,border-color .3s ease}
+.cmpc-link::before{content:"";position:absolute;z-index:-1;top:-90px;right:-90px;width:260px;height:260px;border-radius:50%;background:radial-gradient(closest-side,var(--a),transparent);opacity:.28;transition:opacity .3s,transform .3s}
+.cmpc-link::after{content:"VS";position:absolute;z-index:-1;right:18px;bottom:62px;font:800 120px/1 var(--disp);letter-spacing:-.06em;color:transparent;-webkit-text-stroke:1px #ffffff12;pointer-events:none}
+.cmpc-link:hover{transform:translateY(-8px);border-color:color-mix(in srgb,var(--a) 65%,transparent);box-shadow:0 30px 60px -24px color-mix(in srgb,var(--a) 60%,transparent)}
+.cmpc-link:hover::before{opacity:.5;transform:scale(1.25)}
+.cmpc-link:focus-visible{outline:3px solid var(--a);outline-offset:4px}
+.cmpc-top{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.cmpc-category{flex:none;font:600 11px/1.4 var(--disp);letter-spacing:.06em;text-transform:uppercase;color:var(--a);background:color-mix(in srgb,var(--a) 14%,transparent);border:1px solid color-mix(in srgb,var(--a) 35%,transparent);border-radius:999px;padding:6px 12px;white-space:nowrap}
+.cmpc-icons{display:flex;align-items:center}
 .app-ico{display:block;width:56px;height:56px;border-radius:22%;object-fit:cover;background:#fff;flex:none;border:1px solid var(--line)}
-.cmpc-icons .app-ico{width:64px;height:64px}
-.cmpc-vs{display:grid;place-items:center;width:30px;height:30px;border-radius:50%;background:#000;color:#fff;font:700 11px/1 var(--disp)}
-.cmpc-link h3{margin:4px 0 0;font:600 clamp(22px,2vw,28px)/1.1 var(--disp);letter-spacing:-.015em;color:#000}
-.cmpc-what{margin:0;color:var(--mute);font-size:16px;line-height:1.5}
-.cmpc-pick{display:grid;gap:8px}
-.cmpc-row{margin:0;padding:12px 14px;border-radius:14px;background:#f5f5f5;font-size:15px;line-height:1.45;color:#333}
-.cmpc-row b{display:block;margin-bottom:3px;font:600 12px/1 var(--disp);letter-spacing:.06em;text-transform:uppercase;color:#777}
-.cmpc-fc{background:#fff0f5}.cmpc-fc b{color:var(--pink,#dc0a55)}
-.cmpc-go{margin-top:auto;padding-top:6px;font:600 15px/1 var(--disp);color:var(--pink,#dc0a55)}
-.cmpc-link:hover .cmpc-go{text-decoration:underline;text-underline-offset:4px}
-.cmpc-cta .cmpc-link{justify-content:space-between;background:#000;border-color:#000}
-.cmpc-cta h3{color:#fff;font-size:clamp(26px,2.6vw,34px)}
-.cmpc-cta .cmpc-what{color:#c8c8c8}
-.cmpc-stack{display:flex;flex-wrap:wrap;gap:8px}
-.cmpc-stack .app-ico{width:44px;height:44px;border:0}
-.cmpc-cta .cmpc-btn{align-self:flex-start;padding:14px 24px;border-radius:999px;background:var(--pink,#dc0a55);color:#fff;font:600 15px/1 var(--disp)}
-.cmpc-cta .cmpc-link:hover .cmpc-btn{background:var(--pink-dark,#b80847)}
-.cmp-more{margin-top:28px}
-.cmp-note{color:var(--mute);font-size:14px;max-width:640px}
-@media(max-width:1000px){.cmpc-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media(max-width:640px){.cmpc-grid{grid-template-columns:1fr}.cmpc-link{padding:24px}}
+.cmpc-icons .app-ico{width:64px;height:64px;border:0;box-shadow:0 10px 24px -6px #000a;transition:transform .3s}
+.cmpc-link:hover .cmpc-icons .app-ico:first-child{transform:rotate(-8deg) translateX(-3px)}
+.cmpc-link:hover .cmpc-icons .app-ico:last-child{transform:rotate(8deg) translateX(3px)}
+.cmpc-vs{position:relative;z-index:1;display:grid;place-items:center;width:30px;height:30px;margin:0 -9px;border-radius:50%;background:var(--pink);border:3px solid #17101a;color:#fff;font:800 10px/1 var(--disp);box-shadow:0 0 18px #dc0a55aa}
+.cmpc-link h3{margin:0;font:700 clamp(26px,2.3vw,34px)/1.05 var(--disp);letter-spacing:-.035em;color:#fff}
+.cmpc-title-prefix{display:block;margin-bottom:8px;color:#a99ca4;font:500 13px/1.4 var(--disp);letter-spacing:.04em}
+.cmpc-what{margin:-8px 0 0;color:#c4b8c0;font-size:15px;line-height:1.6;min-height:3.2em}
+.cmpc-pick{display:grid;gap:10px;margin-top:auto}
+.cmpc-row{margin:0;padding:14px 16px;border-radius:16px;background:#ffffff0d;border:1px solid #ffffff12;font-size:14px;line-height:1.55;color:#ddd2d9}
+.cmpc-row b{display:block;margin-bottom:4px;font:700 10.5px/1.4 var(--disp);letter-spacing:.14em;text-transform:uppercase;color:#9a8d95}
+.cmpc-row:not(.cmpc-fc) b::before{content:"–";display:inline-grid;place-items:center;width:16px;height:16px;margin-right:7px;border-radius:50%;background:#ffffff1f;color:#cfc3ca;font-size:11px;letter-spacing:0;vertical-align:1px}
+.cmpc-fc{border:0;background:linear-gradient(135deg,#dc0a55,#ff4d8d);color:#fff;font-weight:500;box-shadow:0 14px 28px -12px #dc0a55cc}
+.cmpc-fc b{color:#ffe0ec}
+.cmpc-fc b::before{content:"✓";display:inline-grid;place-items:center;width:16px;height:16px;margin-right:7px;border-radius:50%;background:#fff;color:var(--pink);font-size:9px;letter-spacing:0;vertical-align:1px}
+.cmpc-go{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-top:6px;font:600 15px/1.4 var(--disp);color:#fff}
+.cmpc-arrow{display:grid;place-items:center;width:38px;height:38px;border-radius:50%;border:1px solid #ffffff30;font-size:17px;transition:background .25s,color .25s,transform .25s,border-color .25s}
+.cmpc-link:hover .cmpc-arrow{background:var(--a);border-color:var(--a);color:#111;transform:translate(3px,-3px) rotate(0)}
+.cmpc-cta .cmpc-link{gap:24px;justify-content:flex-start;background:radial-gradient(90% 60% at 100% 0%,#ffffff40,transparent 60%),linear-gradient(150deg,#ff3d86 0%,#dc0a55 50%,#8c0a52 100%);border:0;color:#fff;box-shadow:0 36px 70px -26px #dc0a55cc}
+.cmpc-cta .cmpc-link::before{display:none}
+.cmpc-cta .cmpc-link::after{content:"5";right:10px;bottom:-34px;font-size:300px;-webkit-text-stroke:2px #ffffff26}
+.cmpc-cta .cmpc-link:hover{box-shadow:0 40px 80px -24px #ff3d86cc;border:0}
+.cmpc-cta .cmp-eyebrow{align-self:flex-start;margin:0;background:#00000026;border-color:#ffffff30;color:#fff;font-size:10.5px}
+.cmpc-cta .cmp-eyebrow::before{background:#fff;box-shadow:0 0 10px #fff}
+.cmpc-cta h3{color:#fff;font-size:clamp(34px,3vw,46px);line-height:1;max-width:280px;margin-bottom:12px}
+.cmpc-cta .cmpc-what{color:#ffe3ee;min-height:0;margin:0;font-size:16px}
+.cmpc-stack{display:flex;padding-left:0}
+.cmpc-stack .app-ico{width:48px;height:48px;border:3px solid #e6105f;box-shadow:0 8px 16px -4px #0006}
+.cmpc-stack .app-ico+.app-ico{margin-left:-14px}
+.cmpc-table{display:grid;border-radius:16px;padding:2px 16px;background:#00000026;font-size:14px;font-weight:500;color:#fff}
+.cmpc-table span{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:13px 0;border-bottom:1px solid #ffffff1f}
+.cmpc-table span:last-child{border-bottom:0}
+.cmpc-table i{font-style:normal;color:#fff;font-size:15px}
+.cmpc-cta .cmpc-btn{display:flex;align-items:center;justify-content:center;gap:10px;margin-top:auto;padding:17px 22px;border-radius:999px;background:#fff;color:#b80847;font:700 15px/1.4 var(--disp);box-shadow:0 14px 28px -10px #0006;transition:transform .2s}
+.cmpc-cta .cmpc-link:hover .cmpc-btn{transform:translateY(-3px)}
+.cmp-more{margin-top:32px}
+.cmp-note{display:flex;align-items:flex-start;gap:9px;color:#9a8d95;font-size:12px;line-height:1.65;max-width:760px;margin:0}
+.cmp-note>span{flex:none;display:grid;place-items:center;width:16px;height:16px;margin-top:2px;border:1px solid #6d6068;border-radius:50%;font-size:10px}
+@media(max-width:1100px){.cmpc-link{padding:24px}.cmpc-category{font-size:10px;padding:5px 10px}.cmpc-icons .app-ico{width:54px;height:54px}}
+@media(max-width:960px){.cmpc-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.cmpc-cta{grid-column:1/-1}.cmpc-cta h3{max-width:none}.cmp-home .sec-head{align-items:flex-start;flex-direction:column;gap:22px}.cmpc-what{min-height:0}}
+@media(max-width:600px){.cmpc-grid{grid-template-columns:1fr;gap:16px}.cmpc-link{padding:22px;gap:18px;border-radius:24px}.cmp-home .sec-head{margin-bottom:30px}.cmp-home .sec-head h2{font-size:42px}.cmp-home .sec-head p{font-size:16px}.cmp-home .sec-head>.btn{width:100%;justify-content:center}.cmpc-pick{margin-top:2px}.cmpc-row{font-size:15px}.cmpc-go{min-height:44px}.cmpc-category{font-size:10px}.cmpc-link::after{font-size:90px}.cmpc-cta .cmpc-link::after{font-size:220px}.cmpc-cta .cmpc-btn{margin-top:0;width:100%}.cmpc-cta .cmpc-link{gap:22px}}
+@media(prefers-reduced-motion:reduce){.cmp-home .cmpc-link,.cmp-home .cmpc-arrow,.cmp-home .cmpc-btn,.cmp-home .btn,.cmpc-icons .app-ico,.cmpc-link::before{transition:none}.cmp-home .cmpc-link:hover,.cmp-home .cmpc-link:hover .cmpc-arrow,.cmp-home .cmpc-link:hover .cmpc-btn,.cmp-home .sec-head>.btn:hover,.cmpc-link:hover .cmpc-icons .app-ico{transform:none}}
+/* light theme */
+.cmp-home{background:radial-gradient(55% 45% at 6% 0%,#dc0a5514,transparent 70%),radial-gradient(45% 40% at 100% 100%,#ffb3cf2e,transparent 70%),#fbf7f9;color:#201b1e;border-block:1px solid #efe6eb}
+.cmp-home::before{background-image:radial-gradient(#2a1a2218 1px,transparent 1px)}
+.cmp-eyebrow{border-color:#f6d3e0;background:#fff0f5;color:#b80847}
+.cmp-home .sec-head h2{background:linear-gradient(100deg,#201b1e 55%,#dc0a55);-webkit-background-clip:text;background-clip:text}
+.cmp-home .sec-head p{color:#6d6268}
+.cmp-home .sec-head>.btn{background:#201b1e;color:#fff;box-shadow:0 12px 26px -12px #201b1e99}
+.cmp-home .sec-head>.btn:hover{background:var(--pink);color:#fff}
+.cmpc-grid>li:not(.cmpc-cta) .cmpc-link{background:#fff;border-color:#ebe3e8;color:#201b1e;box-shadow:0 1px 2px #30222c08,0 10px 24px -18px #30222c33;-webkit-backdrop-filter:none;backdrop-filter:none}
+.cmpc-grid>li:not(.cmpc-cta) .cmpc-link::before{opacity:.14}
+.cmpc-grid>li:not(.cmpc-cta) .cmpc-link::after{-webkit-text-stroke:1px #2a1a2210}
+.cmpc-grid>li:not(.cmpc-cta) .cmpc-link:hover{box-shadow:0 26px 48px -26px color-mix(in srgb,var(--a) 70%,#000)}
+.cmpc-grid>li:not(.cmpc-cta) .cmpc-link:hover::before{opacity:.3}
+.cmpc-category{color:#4a3a43;background:color-mix(in srgb,var(--a) 22%,#fff);border-color:color-mix(in srgb,var(--a) 45%,#fff)}
+.cmpc-icons .app-ico{border:1px solid #ece4e8;box-shadow:0 8px 18px -8px #30222c55}
+.cmpc-vs{border-color:#fff;background:#201b1e;box-shadow:none}
+.cmpc-grid>li:not(.cmpc-cta) h3{color:#201b1e}
+.cmpc-title-prefix{color:#8a7b82}
+.cmpc-grid>li:not(.cmpc-cta) .cmpc-what{color:#6d6268}
+.cmpc-row{background:#f7f4f6;border-color:#f0e9ed;color:#3f353b}
+.cmpc-row b{color:#85747d}
+.cmpc-row:not(.cmpc-fc) b::before{background:#e9e1e6;color:#85747d}
+.cmpc-fc{background:linear-gradient(135deg,#dc0a55,#f0407c);color:#fff;border:0}
+.cmpc-fc b{color:#ffe0ec}
+.cmpc-go{color:#b80847}
+.cmpc-arrow{border-color:#f3d3e0;background:#fff0f5}
+.cmpc-link:hover .cmpc-arrow{background:var(--pink);border-color:var(--pink);color:#fff}
+.cmp-note{color:#7a6b73}.cmp-note>span{border-color:#cdbec6}
 </style>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"MobileApplication","name":"FitCheck AI Style Assistant","alternateName":"FitCheck: AI Outfit Planner","operatingSystem":"Android","applicationCategory":"LifestyleApplication","description":"AI outfit scores and styling feedback on fit, color, and balance from a photo.","downloadUrl":"https://play.google.com/store/apps/details?id=com.aistyleassistant.app","installUrl":"https://play.google.com/store/apps/details?id=com.aistyleassistant.app"}</script>
 </head>
@@ -433,16 +496,16 @@ details[open] summary::after{background:var(--pink);color:#fff}
 
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"ItemList","name":"FitCheck app comparisons","itemListElement":[{"@type":"ListItem","position":1,"name":"FitCheck vs YouCam Makeup","url":"https://fitcheck-fashion.com/compare/fitcheck-vs-youcam-makeup/"},{"@type":"ListItem","position":2,"name":"FitCheck vs Acloset","url":"https://fitcheck-fashion.com/compare/fitcheck-vs-acloset/"},{"@type":"ListItem","position":3,"name":"FitCheck vs Whering","url":"https://fitcheck-fashion.com/compare/fitcheck-vs-whering/"},{"@type":"ListItem","position":4,"name":"FitCheck vs Alta","url":"https://fitcheck-fashion.com/compare/fitcheck-vs-alta/"},{"@type":"ListItem","position":5,"name":"FitCheck vs Fits","url":"https://fitcheck-fashion.com/compare/fitcheck-vs-fits/"},{"@type":"ListItem","position":6,"name":"Best style apps compared","url":"https://fitcheck-fashion.com/compare/best-style-apps/"}]}</script>
 <section class="section cmp-home" id="compare" aria-labelledby="compare-title"><div class="wrap">
-  <div class="sec-head"><div><h2 id="compare-title">How FitCheck compares</h2><p>Looking for a YouCam Makeup, Acloset, Whering, Alta or Fits alternative? Style apps do different jobs, so see where FitCheck fits and which one suits you.</p></div><a class="btn" href="compare/best-style-apps/">Compare all 5 apps</a></div>
+  <div class="sec-head"><div><span class="cmp-eyebrow">Find your style app</span><h2 id="compare-title">How FitCheck compares</h2><p>A second opinion on your look, or a home for your wardrobe? Find the app that fits what you need.</p></div><a class="btn" href="compare/best-style-apps/">Compare all 5 apps <span aria-hidden="true">↗</span></a></div>
   <ul class="cmpc-grid">
-    <li><a class="cmpc-link" href="compare/fitcheck-vs-youcam-makeup/"><div class="cmpc-icons"><img class="app-ico" src="assets/compare/fitcheck-icon.png" alt="FitCheck app icon" width="64" height="64" loading="lazy" decoding="async"><span class="cmpc-vs" aria-hidden="true">VS</span><img class="app-ico" src="assets/compare/youcam-makeup-icon.png" alt="YouCam Makeup app icon" width="64" height="64" loading="lazy" decoding="async"></div><h3>FitCheck vs YouCam Makeup</h3><p class="cmpc-what">YouCam Makeup is a photo and selfie editor with virtual makeup.</p><div class="cmpc-pick"><p class="cmpc-row"><b>Pick YouCam</b>to edit and retouch photos.</p><p class="cmpc-row cmpc-fc"><b>Pick FitCheck</b>for feedback on the look you are actually wearing.</p></div><span class="cmpc-go">Read the comparison &rarr;</span></a></li>
-    <li><a class="cmpc-link" href="compare/fitcheck-vs-acloset/"><div class="cmpc-icons"><img class="app-ico" src="assets/compare/fitcheck-icon.png" alt="FitCheck app icon" width="64" height="64" loading="lazy" decoding="async"><span class="cmpc-vs" aria-hidden="true">VS</span><img class="app-ico" src="assets/compare/acloset-icon.png" alt="Acloset app icon" width="64" height="64" loading="lazy" decoding="async"></div><h3>FitCheck vs Acloset</h3><p class="cmpc-what">Acloset is a digital wardrobe with an AI stylist chat.</p><div class="cmpc-pick"><p class="cmpc-row"><b>Pick Acloset</b>to catalog every item you own.</p><p class="cmpc-row cmpc-fc"><b>Pick FitCheck</b>for a score on the outfit you have on, from one photo.</p></div><span class="cmpc-go">Read the comparison &rarr;</span></a></li>
-    <li><a class="cmpc-link" href="compare/fitcheck-vs-whering/"><div class="cmpc-icons"><img class="app-ico" src="assets/compare/fitcheck-icon.png" alt="FitCheck app icon" width="64" height="64" loading="lazy" decoding="async"><span class="cmpc-vs" aria-hidden="true">VS</span><img class="app-ico" src="assets/compare/whering-icon.png" alt="Whering app icon" width="64" height="64" loading="lazy" decoding="async"></div><h3>FitCheck vs Whering</h3><p class="cmpc-what">Whering is a social digital closet with wear statistics.</p><div class="cmpc-pick"><p class="cmpc-row"><b>Pick Whering</b>to track how often you wear each piece.</p><p class="cmpc-row cmpc-fc"><b>Pick FitCheck</b>for a verdict on today's outfit, plus makeup and hair feedback.</p></div><span class="cmpc-go">Read the comparison &rarr;</span></a></li>
-    <li><a class="cmpc-link" href="compare/fitcheck-vs-alta/"><div class="cmpc-icons"><img class="app-ico" src="assets/compare/fitcheck-icon.png" alt="FitCheck app icon" width="64" height="64" loading="lazy" decoding="async"><span class="cmpc-vs" aria-hidden="true">VS</span><img class="app-ico" src="assets/compare/alta-icon.png" alt="Alta app icon" width="64" height="64" loading="lazy" decoding="async"></div><h3>FitCheck vs Alta</h3><p class="cmpc-what">Alta is an AI closet that generates outfits from the clothes you own.</p><div class="cmpc-pick"><p class="cmpc-row"><b>Pick Alta</b>to build outfits from your closet and plan trips.</p><p class="cmpc-row cmpc-fc"><b>Pick FitCheck</b>for a score on the outfit you have on, plus makeup and hair feedback.</p></div><span class="cmpc-go">Read the comparison &rarr;</span></a></li>
-    <li><a class="cmpc-link" href="compare/fitcheck-vs-fits/"><div class="cmpc-icons"><img class="app-ico" src="assets/compare/fitcheck-icon.png" alt="FitCheck app icon" width="64" height="64" loading="lazy" decoding="async"><span class="cmpc-vs" aria-hidden="true">VS</span><img class="app-ico" src="assets/compare/fits-icon.png" alt="Fits app icon" width="64" height="64" loading="lazy" decoding="async"></div><h3>FitCheck vs Fits</h3><p class="cmpc-what">Fits is an outfit planner and closet with a calendar.</p><div class="cmpc-pick"><p class="cmpc-row"><b>Pick Fits</b>to log and plan outfits from your closet.</p><p class="cmpc-row cmpc-fc"><b>Pick FitCheck</b>for a verdict on today's outfit, from one photo.</p></div><span class="cmpc-go">Read the comparison &rarr;</span></a></li>
-    <li class="cmpc-cta"><a class="cmpc-link" href="compare/best-style-apps/"><div class="cmpc-stack"><img class="app-ico" src="assets/compare/fitcheck-icon.png" alt="FitCheck app icon" width="44" height="44" loading="lazy" decoding="async"><img class="app-ico" src="assets/compare/youcam-makeup-icon.png" alt="YouCam Makeup app icon" width="44" height="44" loading="lazy" decoding="async"><img class="app-ico" src="assets/compare/acloset-icon.png" alt="Acloset app icon" width="44" height="44" loading="lazy" decoding="async"><img class="app-ico" src="assets/compare/whering-icon.png" alt="Whering app icon" width="44" height="44" loading="lazy" decoding="async"><img class="app-ico" src="assets/compare/alta-icon.png" alt="Alta app icon" width="44" height="44" loading="lazy" decoding="async"><img class="app-ico" src="assets/compare/fits-icon.png" alt="Fits app icon" width="44" height="44" loading="lazy" decoding="async"></div><div><h3>All 5 apps in one table</h3><p class="cmpc-what">See every feature side by side, with FitCheck in the highlighted column.</p></div><span class="cmpc-btn">Open the full comparison &rarr;</span></a></li>
+    <li class="a-youcam"><a class="cmpc-link" href="compare/fitcheck-vs-youcam-makeup/"><div class="cmpc-top"><div class="cmpc-icons"><img class="app-ico" src="assets/compare/fitcheck-icon.png" alt="FitCheck app icon" width="64" height="64" loading="lazy" decoding="async"><span class="cmpc-vs" aria-hidden="true">VS</span><img class="app-ico" src="assets/compare/youcam-makeup-icon.png" alt="YouCam Makeup app icon" width="64" height="64" loading="lazy" decoding="async"></div><span class="cmpc-category">Photo editing</span></div><h3><span class="cmpc-title-prefix">FitCheck vs</span>YouCam Makeup</h3><p class="cmpc-what">YouCam Makeup is a photo and selfie editor with virtual makeup.</p><div class="cmpc-pick"><p class="cmpc-row"><b>Pick YouCam</b>to edit and retouch photos.</p><p class="cmpc-row cmpc-fc"><b>Pick FitCheck</b>for feedback on the look you are actually wearing.</p></div><span class="cmpc-go"><span>Read comparison</span><span class="cmpc-arrow" aria-hidden="true">↗</span></span></a></li>
+    <li class="a-acloset"><a class="cmpc-link" href="compare/fitcheck-vs-acloset/"><div class="cmpc-top"><div class="cmpc-icons"><img class="app-ico" src="assets/compare/fitcheck-icon.png" alt="FitCheck app icon" width="64" height="64" loading="lazy" decoding="async"><span class="cmpc-vs" aria-hidden="true">VS</span><img class="app-ico" src="assets/compare/acloset-icon.png" alt="Acloset app icon" width="64" height="64" loading="lazy" decoding="async"></div><span class="cmpc-category">Digital wardrobe</span></div><h3><span class="cmpc-title-prefix">FitCheck vs</span>Acloset</h3><p class="cmpc-what">Acloset is a digital wardrobe with an AI stylist chat.</p><div class="cmpc-pick"><p class="cmpc-row"><b>Pick Acloset</b>to catalog every item you own.</p><p class="cmpc-row cmpc-fc"><b>Pick FitCheck</b>for a score on the outfit you have on, from one photo.</p></div><span class="cmpc-go"><span>Read comparison</span><span class="cmpc-arrow" aria-hidden="true">↗</span></span></a></li>
+    <li class="a-whering"><a class="cmpc-link" href="compare/fitcheck-vs-whering/"><div class="cmpc-top"><div class="cmpc-icons"><img class="app-ico" src="assets/compare/fitcheck-icon.png" alt="FitCheck app icon" width="64" height="64" loading="lazy" decoding="async"><span class="cmpc-vs" aria-hidden="true">VS</span><img class="app-ico" src="assets/compare/whering-icon.png" alt="Whering app icon" width="64" height="64" loading="lazy" decoding="async"></div><span class="cmpc-category">Social closet</span></div><h3><span class="cmpc-title-prefix">FitCheck vs</span>Whering</h3><p class="cmpc-what">Whering is a social digital closet with wear statistics.</p><div class="cmpc-pick"><p class="cmpc-row"><b>Pick Whering</b>to track how often you wear each piece.</p><p class="cmpc-row cmpc-fc"><b>Pick FitCheck</b>for a verdict on today's outfit, plus makeup and hair feedback.</p></div><span class="cmpc-go"><span>Read comparison</span><span class="cmpc-arrow" aria-hidden="true">↗</span></span></a></li>
+    <li class="a-alta"><a class="cmpc-link" href="compare/fitcheck-vs-alta/"><div class="cmpc-top"><div class="cmpc-icons"><img class="app-ico" src="assets/compare/fitcheck-icon.png" alt="FitCheck app icon" width="64" height="64" loading="lazy" decoding="async"><span class="cmpc-vs" aria-hidden="true">VS</span><img class="app-ico" src="assets/compare/alta-icon.png" alt="Alta app icon" width="64" height="64" loading="lazy" decoding="async"></div><span class="cmpc-category">AI outfit planning</span></div><h3><span class="cmpc-title-prefix">FitCheck vs</span>Alta</h3><p class="cmpc-what">Alta is an AI closet that generates outfits from the clothes you own.</p><div class="cmpc-pick"><p class="cmpc-row"><b>Pick Alta</b>to build outfits from your closet and plan trips.</p><p class="cmpc-row cmpc-fc"><b>Pick FitCheck</b>for a score on the outfit you have on, plus makeup and hair feedback.</p></div><span class="cmpc-go"><span>Read comparison</span><span class="cmpc-arrow" aria-hidden="true">↗</span></span></a></li>
+    <li class="a-fits"><a class="cmpc-link" href="compare/fitcheck-vs-fits/"><div class="cmpc-top"><div class="cmpc-icons"><img class="app-ico" src="assets/compare/fitcheck-icon.png" alt="FitCheck app icon" width="64" height="64" loading="lazy" decoding="async"><span class="cmpc-vs" aria-hidden="true">VS</span><img class="app-ico" src="assets/compare/fits-icon.png" alt="Fits app icon" width="64" height="64" loading="lazy" decoding="async"></div><span class="cmpc-category">Outfit calendar</span></div><h3><span class="cmpc-title-prefix">FitCheck vs</span>Fits</h3><p class="cmpc-what">Fits is an outfit planner and closet with a calendar.</p><div class="cmpc-pick"><p class="cmpc-row"><b>Pick Fits</b>to log and plan outfits from your closet.</p><p class="cmpc-row cmpc-fc"><b>Pick FitCheck</b>for a verdict on today's outfit, from one photo.</p></div><span class="cmpc-go"><span>Read comparison</span><span class="cmpc-arrow" aria-hidden="true">↗</span></span></a></li>
+    <li class="cmpc-cta"><a class="cmpc-link" href="compare/best-style-apps/"><span class="cmp-eyebrow">The bigger picture</span><div class="cmpc-stack"><img class="app-ico" src="assets/compare/fitcheck-icon.png" alt="FitCheck app icon" width="44" height="44" loading="lazy" decoding="async"><img class="app-ico" src="assets/compare/youcam-makeup-icon.png" alt="YouCam Makeup app icon" width="44" height="44" loading="lazy" decoding="async"><img class="app-ico" src="assets/compare/acloset-icon.png" alt="Acloset app icon" width="44" height="44" loading="lazy" decoding="async"><img class="app-ico" src="assets/compare/whering-icon.png" alt="Whering app icon" width="44" height="44" loading="lazy" decoding="async"><img class="app-ico" src="assets/compare/alta-icon.png" alt="Alta app icon" width="44" height="44" loading="lazy" decoding="async"><img class="app-ico" src="assets/compare/fits-icon.png" alt="Fits app icon" width="44" height="44" loading="lazy" decoding="async"></div><div><h3>Your options.<br>Side by side.</h3><p class="cmpc-what">Compare all 5 apps with FitCheck in one simple feature guide.</p></div><div class="cmpc-table" aria-hidden="true"><span>Outfit feedback <i>↗</i></span><span>Makeup &amp; hair <i>↗</i></span><span>Wardrobe &amp; planning <i>↗</i></span></div><span class="cmpc-btn">Open the full comparison <span aria-hidden="true">→</span></span></a></li>
   </ul>
-  <div class="cmp-more"><p class="cmp-note">Details about other apps come from their Google Play listings and were checked on November 16, 2026. FitCheck is not affiliated with these apps.</p></div>
+  <div class="cmp-more"><p class="cmp-note"><span aria-hidden="true">i</span>Details about other apps come from their Google Play listings and were checked on November 16, 2026. FitCheck is not affiliated with these apps.</p></div>
 </div></section>
 <section class="section" id="faq" aria-labelledby="faq-title"><div class="wrap faq-grid">
   <div><h2 id="faq-title">FAQ</h2><p class="sub">Still have questions? <a href="mailto:sapkotamadhav500@gmail.com">Contact support</a></p></div>
