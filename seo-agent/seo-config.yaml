@@ -19,6 +19,9 @@ site:
   # Tool-intent queries a hand-built page already satisfies (feature landing pages declare theirs in landing_pages.yaml).
   page_targets:
     index.html: [fitcheck, fitcheck app, fitcheck ai, fit check app, fitcheck ai app, style ai fit check]
+    compare/fitcheck-vs-youcam-makeup/index.html: [youcam makeup app, youcam makeup alternative, youcam makeup vs fitcheck, fitcheck vs youcam makeup, apps like youcam makeup, youcam makeup]
+    compare/fitcheck-vs-acloset/index.html: [acloset app, acloset alternative, acloset vs fitcheck, fitcheck vs acloset, apps like acloset, acloset]
+    compare/fitcheck-vs-whering/index.html: [whering app, whering alternative, whering vs fitcheck, fitcheck vs whering, apps like whering, whering]
   # Meta descriptions added ONLY when a hand-built page has none (og:title/og:description/twitter:card are derived).
   static_meta:
     how-it-works.html: "How FitCheck AI works: upload a head-to-toe outfit photo, get an AI style score, and see tips on fit, color match and balance."
@@ -247,9 +250,12 @@ features:
     landing: "/"
     conversion: 95
     mix: 1
-    phrases: [fitcheck, fit check app, fitcheck ai, style ai fit check]
+    phrases: [fitcheck, fit check app, fitcheck ai, style ai fit check, youcam, acloset, whering]
     terms: []
-    seeds: [fitcheck app, fitcheck ai, fit check app]
+    # Competitor app seeds: the /compare/ pages own these searches, so the agent researches volumes but never
+    # writes a competing article for them (see site.page_targets).
+    seeds: [fitcheck app, fitcheck ai, fit check app, youcam makeup app, youcam makeup alternative, acloset app,
+            apps like acloset, whering app, whering alternative]
     cta: {button: "Get FitCheck on Google Play",
           text: "Rate your outfit, makeup, and hair with AI. Free on Android."}
 
