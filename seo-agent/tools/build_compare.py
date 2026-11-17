@@ -1,5 +1,6 @@
-"""Render the app comparison pages (/compare/ and /compare/fitcheck-vs-<app>/) from seo-agent/compare_pages.yaml.
+"""Render the app comparison pages (/compare/, /compare/fitcheck-vs-<app>/, /compare/best-style-apps/).
 
+Data: seo-agent/compare_pages.yaml (pages, FAQs, tables) + seo-agent/compare_extra.yaml (plus points, top-5 matrix).
 Every statement about another app must come from that app's own Google Play listing (source_url) and be re-checked
 before the `checked` date is changed. FitCheck statements must match seo_agent/app_facts.yaml.
 
@@ -34,6 +35,26 @@ def _stem(p: dict) -> str:
     return p["slug"].removeprefix("fitcheck-vs-")
 
 
+def _cell(txt: str, fc: bool = False) -> str:
+    """Table cell with a check / cross / muted 'not mentioned' marker. Text is always kept for screen readers."""
+    t = txt.strip()
+    extra = ' class="fc"' if fc else ""
+    if t.startswith("Not mentioned"):
+        return f'<td{extra}><span class="nm">{e(t)}</span></td>'
+    if re.match(r"No\b", t):
+        return f'<td{extra}><span class="mk n" role="img" aria-label="No">✕</span> {e(re.sub(r"^No[.,]?\s*", "", t))}</td>'
+    if re.match(r"Yes\b", t):
+        rest = re.sub(r"^Yes[.,]?\s*", "", t)
+        return f'<td{extra}><span class="mk y" role="img" aria-label="Yes">✓</span> {e(rest)}</td>'
+    return f"<td{extra}>{e(t)}</td>"
+
+
+def _points(items: list[dict], cls: str) -> str:
+    return (f'<ul class="pp-list {cls}">'
+            + "".join(f'<li><span class="mk y" aria-hidden="true">✓</span><div><strong>{e(i["title"])}</strong><span>{e(i["text"])}</span></div></li>' for i in items)
+            + "</ul>")
+
+
 def _jsonld(graph: list[dict]) -> str:
     return json.dumps({"@context": "https://schema.org", "@graph": graph}, ensure_ascii=False).replace("</", "<\\/")
 
@@ -65,11 +86,13 @@ def _page(cfg, tpl: str, *, url: str, d: dict, crumbs: str, body: str, more: str
 def build() -> list[Path]:
     cfg = load_config()
     data = yaml.safe_load((AGENT / "compare_pages.yaml").read_text(encoding="utf-8"))
+    extra = yaml.safe_load((AGENT / "compare_extra.yaml").read_text(encoding="utf-8"))
     tpl = (cfg.templates_dir / "compare.html").read_text(encoding="utf-8")
     brand = cfg.get("project.brand_on_site", "FitCheck AI")
     base, checked = cfg.base_url, human_date(data["checked"])
     site = {"@type": "WebSite", "url": base + "/", "name": brand}
     pages, out = data["pages"], []
+    fc_plus = extra["fitcheck_plus"]
     features = "".join(f'<li><a href="{e(f["href"])}">{e(f["text"])}</a></li>' for f in data["features"])
     features_nav = f'<nav class="lp-more" aria-label="FitCheck features"><h2>FitCheck features</h2><ul>{features}</ul></nav>'
 
@@ -80,17 +103,21 @@ def build() -> list[Path]:
             f.write_text(text, encoding="utf-8")
             out.append(f)
 
+    t5 = data.get("top5")
+
     # ---- index
     ix, iurl = data["index"], f"{base}/compare/"
+    top = ""
+    if t5:
+        top = (f'<li class="cmp-top"><div class="cmp-vs">{_icon("fitcheck", "FitCheck")}<span aria-hidden="true">vs</span>'
+               + "".join(_icon(_stem(x), x["rival"]) for x in pages)
+               + f'</div><a href="/compare/{e(t5["slug"])}/">Best style apps compared: all 5 in one table</a>'
+               '<p>FitCheck next to YouCam Makeup, Acloset, Whering, Alta and Fits, feature by feature.</p></li>')
     cards = "".join(
         f'<li><div class="cmp-vs">{_icon("fitcheck", "FitCheck")}<span aria-hidden="true">vs</span>{_icon(_stem(p), p["rival"])}</div>'
         f'<a href="/compare/{e(p["slug"])}/">FitCheck vs {e(p["rival"])}</a><p>{e(p["summary"])}</p>'
         f'<p class="small">Best known for: {e(p["known_for"])}</p></li>' for p in pages)
     faq_html, faq_node = _faq(ix["faqs"])
-    t5d = data.get("top5")
-    top = (f'<li class="cmp-top"><div class="cmp-vs">{_icon("fitcheck", "FitCheck")}<span aria-hidden="true">vs</span>'
-           + "".join(_icon(_stem(x), x["rival"]) for x in pages) + f'</div><a href="/compare/{e(t5d["slug"])}/">Best style apps compared: all 5 in one table</a>'
-           '<p>FitCheck next to YouCam Makeup, Acloset, Whering, Alta and Fits, feature by feature.</p></li>') if t5d else ""
     body = (f'<section aria-labelledby="list-h"><h2 id="list-h">{e(ix["list_title"])}</h2><ul class="cmp-cards">{top}{cards}</ul></section>'
             f'<section><h2>{e(ix["method_title"])}</h2>' + "".join(f"<p>{e(x)}</p>" for x in ix["method"])
             + f'<p class="cmp-note">Last checked: {e(checked)}.</p></section>' + faq_html)
@@ -112,14 +139,20 @@ def build() -> list[Path]:
         if not re.fullmatch(r"[a-z0-9-]+", p["slug"]):
             raise ValueError(f"bad compare slug {p['slug']}")
         url, r = f"{iurl}{p['slug']}/", p["rival"]
-        rows = "".join(f'<tr><th scope="row">{e(a)}</th><td>{e(b)}</td><td>{e(c)}</td></tr>' for a, b, c in p["rows"])
-        table = (f'<table class="cmp-table"><thead><tr><th scope="col">Feature</th><th scope="col"><span class="cmp-th">{_icon("fitcheck", "FitCheck", 28, "app-ico-sm")}FitCheck</span></th>'
+        rows = "".join(f'<tr><th scope="row">{e(a)}</th>{_cell(b, True)}{_cell(c)}</tr>' for a, b, c in p["rows"])
+        table = (f'<table class="cmp-table"><thead><tr><th scope="col">Feature</th><th scope="col" class="fc"><span class="cmp-th">{_icon("fitcheck", "FitCheck", 28, "app-ico-sm")}FitCheck</span></th>'
                  f'<th scope="col"><span class="cmp-th">{_icon(_stem(p), r, 28, "app-ico-sm")}{e(r)}</span></th></tr></thead><tbody>{rows}</tbody></table>')
         pick = lambda items: "".join(f"<li><strong>{e(i['title'])}</strong> {e(i['text'])}</li>" for i in items)  # noqa: E731
         faq_html, faq_node = _faq(p["faqs"])
+        rival_plus = extra["plus_rival"][p["slug"]]
+        plus = (
+            f'<section aria-labelledby="pp-h"><h2 id="pp-h">Plus points: FitCheck vs {e(r)}</h2><div class="pp-grid">'
+            f'<div class="pp-card pp-fc"><div class="pp-head">{_icon("fitcheck", "FitCheck", 44)}<div><h3>FitCheck plus points</h3><p>{len(fc_plus)} things it does</p></div></div>{_points(fc_plus, "pp-dark")}</div>'
+            f'<div class="pp-card"><div class="pp-head">{_icon(_stem(p), r, 44)}<div><h3>{e(r)} plus points</h3><p>{len(rival_plus)} things its listing describes</p></div></div>{_points(rival_plus, "")}</div>'
+            f'</div></section>')
         body = (
-            f'<section><h2>The short answer</h2>' + "".join(f"<p>{e(x)}</p>" for x in p["quick"]) + "</section>"
-            f'<section aria-labelledby="table-h"><h2 id="table-h">FitCheck vs {e(r)} at a glance</h2>{table}'
+            f'<section><h2>The short answer</h2>' + "".join(f"<p>{e(x)}</p>" for x in p["quick"]) + "</section>" + plus
+            + f'<section aria-labelledby="table-h"><h2 id="table-h">FitCheck vs {e(r)} at a glance</h2>{table}'
             f'<p class="cmp-note">{e(r)} details are taken from its <a href="{e(p["source_url"])}" target="_blank" rel="noopener nofollow">Google Play listing</a>, '
             f'checked on {e(checked)}. "Not mentioned" means the listing does not describe that feature; it may still exist in the app.</p></section>'
             f'<section><h2>Choose {e(r)} if</h2><ul class="lp-list">{pick(p["pick_rival"])}</ul></section>'
@@ -146,26 +179,44 @@ def build() -> list[Path]:
             icons='<div class="cmp-vs cmp-vs-lg">' + _icon("fitcheck", "FitCheck", 72) + '<span aria-hidden="true">vs</span>' + _icon(_stem(p), r, 72) + "</div>",
             crumbs=f'<a href="/">Home</a> › <a href="/compare/">Compare apps</a> › <span>FitCheck vs {e(r)}</span>'))
 
-    # ---- top-5 overview page (one table, FitCheck vs five apps)
-    t5 = data.get("top5")
+    # ---- top-5 overview page (coverage bars + one matrix, FitCheck vs five apps)
     if t5:
         url = f"{iurl}{t5['slug']}/"
         by = {_stem(x): x for x in pages}
-        apps = [by[k] for k in t5["apps"]]
-        head = ('<th scope="col">Feature</th><th scope="col"><span class="cmp-th">' + _icon("fitcheck", "FitCheck", 28, "app-ico-sm") + "FitCheck</span></th>"
+        apps = [by[k] for k in extra["top5_apps"]]
+        feat_rows = [r for r in extra["top5_rows"] if isinstance(r, list)]
+        total = len(feat_rows)
+        counts = [("FitCheck", "fitcheck", sum(r[1].startswith("Yes") for r in feat_rows), True)] + [
+            (a["rival"], _stem(a), sum(r[2 + k].startswith("Yes") for r in feat_rows), False) for k, a in enumerate(apps)]
+        bars = "".join(
+            f'<li class="{"fc" if fc else ""}"><span class="bar-name">{_icon(stem, name, 36)}<b>{e(name)}</b></span>'
+            f'<span class="bar-track"><span class="bar-fill" style="width:{round(100 * n / total)}%"></span></span>'
+            f'<span class="bar-n">{n}<small>/{total}</small></span></li>'
+            for name, stem, n, fc in sorted(counts, key=lambda c: -c[2]))
+        head = ('<th scope="col">Feature</th><th scope="col" class="fc"><span class="cmp-th">' + _icon("fitcheck", "FitCheck", 28, "app-ico-sm") + "FitCheck</span></th>"
                 + "".join(f'<th scope="col"><span class="cmp-th">{_icon(_stem(a), a["rival"], 28, "app-ico-sm")}{e(a["rival"])}</span></th>' for a in apps))
-        rows = "".join("<tr><th scope=\"row\">" + e(r[0]) + "</th>" + "".join(f"<td>{e(c)}</td>" for c in r[1:]) + "</tr>" for r in t5["rows"])
+        rows = ""
+        for r in extra["top5_rows"]:
+            if isinstance(r, dict):
+                rows += f'<tr class="cat"><th scope="colgroup" colspan="{2 + len(apps)}">{e(r["cat"])}</th></tr>'
+            else:
+                rows += f'<tr><th scope="row">{e(r[0])}</th>{_cell(r[1], True)}' + "".join(_cell(c) for c in r[2:]) + "</tr>"
         srcs = ", ".join(f'<a href="{e(a["source_url"])}" target="_blank" rel="noopener nofollow">{e(a["rival"])}</a>' for a in apps)
         pick = lambda items: "".join(f"<li><strong>{e(i['title'])}</strong> {e(i['text'])}</li>" for i in items)  # noqa: E731
         faq_html, faq_node = _faq(t5["faqs"])
         links = "".join(f'<li><a href="/compare/{e(a["slug"])}/">FitCheck vs {e(a["rival"])}</a></li>' for a in apps)
         related = "".join(f'<li><a href="{e(x["href"])}">{e(x["text"])}</a></li>' for x in t5["related"])
         body = (
-            f'<section aria-labelledby="t5-h"><h2 id="t5-h">FitCheck vs five top style apps at a glance</h2>'
-            f'<table class="cmp-table cmp-wide"><thead><tr>{head}</tr></thead><tbody>{rows}</tbody></table>'
+            f'<section aria-labelledby="cov-h"><h2 id="cov-h">Features described, out of {total}</h2>'
+            f'<ul class="cmp-bars">{bars}</ul>'
+            f'<p class="cmp-note">Counts only the {total} features in the table below, as each app describes itself on Google Play. '
+            f'It is a feature count, not a quality score, and it includes the features where other apps lead.</p></section>'
+            f'<section aria-labelledby="plus-h"><h2 id="plus-h">{len(fc_plus)} FitCheck plus points</h2>'
+            f'<div class="pp-card pp-fc pp-wide">{_points(fc_plus, "pp-dark pp-cols")}</div></section>'
+            f'<section aria-labelledby="t5-h"><h2 id="t5-h">FitCheck vs five top style apps, feature by feature</h2>'
+            f'<div class="cmp-scroll"><table class="cmp-table cmp-wide"><thead><tr>{head}</tr></thead><tbody>{rows}</tbody></table></div>'
             f'<p class="cmp-note">Details about the other apps come from their Google Play listings ({srcs}), checked on {e(checked)}. '
             f'"Not mentioned" means the listing does not describe that feature; it may still exist in the app.</p></section>'
-            f'<section><h2>Where FitCheck leads</h2><ul class="lp-list">{pick(t5["leads"])}</ul></section>'
             f'<section><h2>Where the other apps lead</h2><ul class="lp-list">{pick(t5["others_lead"])}</ul></section>'
             f'<section><h2>Read each comparison</h2><ul>{links}</ul></section>'
             f'<section><h2>How we compared</h2><p>We compared what each app says about itself on Google Play. We did not score, rank or test the other apps, '
@@ -186,7 +237,7 @@ def build() -> list[Path]:
             faq_node]
         write(f"compare/{t5['slug']}/index.html", _page(
             cfg, tpl, url=url, d=t5, slug=t5["slug"], body=body, more=more, graph=graph, icons=icons,
-            crumbs='<a href="/">Home</a> \u203a <a href="/compare/">Compare apps</a> \u203a <span>Best style apps compared</span>'))
+            crumbs='<a href="/">Home</a> › <a href="/compare/">Compare apps</a> › <span>Best style apps compared</span>'))
     return out
 
 

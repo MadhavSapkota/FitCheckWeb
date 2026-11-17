@@ -1,0 +1,87 @@
+# Plus points and the top-5 matrix for the comparison pages (merged by tools/build_compare.py).
+# Same rules as compare_pages.yaml: rival facts only from their Google Play listing; FitCheck facts only from app_facts.yaml.
+
+fitcheck_plus:
+  - {title: "Instant outfit score", text: "Take or upload a full-body photo and get an AI outfit score in seconds."}
+  - {title: "A clear breakdown", text: "See color match, proportion and overall balance, with what works and what to change."}
+  - {title: "Easy fixes", text: "Get tips such as switching shoes, adjusting color contrast or pairing accessories."}
+  - {title: "Live camera check", text: "Check an outfit live with the camera, with color analysis and styling suggestions."}
+  - {title: "Makeup feedback", text: "Get AI feedback on makeup looks, from an everyday glow to full glam."}
+  - {title: "Live makeup try-on", text: "Preview looks such as lipstick on your own face with the live camera."}
+  - {title: "Hairstyle try-on", text: "See AI images of you with a new hairstyle from your photo before you book the cut."}
+  - {title: "Hair and skin analysis", text: "Get live camera overviews of your hair and skin with cosmetic suggestions (not medical advice)."}
+  - {title: "Outfit try-on", text: "See AI-generated images of yourself in different outfits."}
+  - {title: "Style exploration", text: "Explore aesthetics such as Old Money, Y2K, Streetwear, Vintage, Minimalist and Quiet Luxury."}
+  - {title: "Closet and planning", text: "Save top-scoring looks, organize by season or occasion and plan outfits ahead."}
+  - {title: "On-device scoring", text: "Outfit scoring is processed directly on your device."}
+  - {title: "Free to start", text: "Free to download on Android, and no sign-up is needed to start."}
+
+plus_rival:
+  fitcheck-vs-youcam-makeup:
+    - {title: "Face and body retouching", text: "Face shaper, skin smoother, teeth whitener, blemish removal and a body editor."}
+    - {title: "250+ preset hairstyles", text: "Plus a custom try-on from a reference photo and a hair color changer."}
+    - {title: "AI Wardrobe", text: "Try on 100+ outfit styles or upload your own."}
+    - {title: "Makeup filters", text: "Lipstick, foundation, blush and more, on live camera or a photo."}
+    - {title: "AI image and video tools", text: "Create images from text prompts and turn photos into short animated clips."}
+    - {title: "AI Beauty Agent", text: "Talk or type to get beauty advice and apply edits."}
+    - {title: "Premium option", text: "The listing describes ad-free editing and extra palettes with a premium plan."}
+  fitcheck-vs-acloset:
+    - {title: "Whole-wardrobe digitizing", text: "Add clothes by photo or online search, with cleaned-up store-quality images."}
+    - {title: "Daily suggestions", text: "Outfit ideas based on the weather and your schedule."}
+    - {title: "Spending insight", text: "Track purchase dates, costs, most-loved items and cost-per-wear."}
+    - {title: "Outfit calendar", text: "Plan outfits ahead and track what you wear."}
+    - {title: "Personal color and fit analysis", text: "A personalized analysis of your best colors and flattering silhouettes."}
+    - {title: "Community", text: "Browse other users' wardrobes and share style tips."}
+    - {title: "Free tier", text: "All features free for up to 100 items."}
+  fitcheck-vs-whering:
+    - {title: "Huge item database", text: "Add clothes from a database of over 100 million items, retailer sites or your own photos."}
+    - {title: "Dress Me", text: "Shuffle your closet into new outfit combinations."}
+    - {title: "Style statistics", text: "Cost-per-wear, wear rate, color palette and closet longevity insights."}
+    - {title: "Packing lists", text: "Travel packing lists with smart reminders."}
+    - {title: "Social styling", text: "See friends' closets, share outfits and save items from other closets."}
+    - {title: "Wishlists and moodboards", text: "Collect the clothes you want and your style inspiration."}
+    - {title: "Browser extension", text: "A Chrome extension to digitize clothes as you shop."}
+  fitcheck-vs-alta:
+    - {title: "Outfits from your closet", text: "Generate outfits for the weather, your schedule or any event."}
+    - {title: "Easy closet building", text: "Add items by forwarding email receipts, from the Alta database or by photo."}
+    - {title: "Packing lists and lookbooks", text: "Plan trips across multiple cities and climates, and share the list by link."}
+    - {title: "Shopping from closet gaps", text: "See what is missing from your closet, with wishlist sale alerts."}
+    - {title: "Wear data", text: "Most and least worn pieces and cost-per-wear."}
+    - {title: "Avatar try-on", text: "See outfits generated on an avatar that looks like you."}
+    - {title: "Web app", text: "Use Alta on a laptop at altadaily.com."}
+  fitcheck-vs-fits:
+    - {title: "Closet digitizing", text: "Digitize your closet, or log outfits with a selfie."}
+    - {title: "Swipe to build outfits", text: "Create outfits by swiping through your clothes."}
+    - {title: "Mood boards", text: "Collect outfit ideas in mood boards."}
+    - {title: "Tags and filtering", text: "Custom tags and filters to find the right outfit fast."}
+    - {title: "Outfit calendar", text: "Plan ahead or look back on your fits."}
+    - {title: "AI stylist chat", text: "Chat with an AI stylist built around your closet."}
+    - {title: "Shopping guidance", text: "The listing describes guidance on what to shop next based on your preferences."}
+
+top5_apps: [youcam-makeup, acloset, whering, alta, fits]
+top5_rows:
+  # columns: feature, FitCheck, YouCam Makeup, Acloset, Whering, Alta, Fits
+  - {cat: "Feedback on your look"}
+  - ["Instant AI outfit score from a photo", "Yes", "Not mentioned", "Not mentioned", "Not mentioned", "Not mentioned", "Not mentioned"]
+  - ["Color match and balance breakdown", "Yes", "Not mentioned", "Not mentioned", "Not mentioned", "Not mentioned", "Not mentioned"]
+  - ["Live camera outfit check", "Yes", "Not mentioned", "Not mentioned", "Not mentioned", "Not mentioned", "Not mentioned"]
+  - ["Makeup feedback or advice", "Yes", "Yes", "Not mentioned", "Not mentioned", "Not mentioned", "Not mentioned"]
+  - ["Live virtual makeup try-on", "Yes", "Yes", "Not mentioned", "Not mentioned", "Not mentioned", "Not mentioned"]
+  - ["Hairstyle try-on", "Yes", "Yes", "Not mentioned", "Not mentioned", "Not mentioned", "Not mentioned"]
+  - ["Hair analysis and recommendations", "Yes", "Not mentioned", "Not mentioned", "Not mentioned", "Not mentioned", "Not mentioned"]
+  - ["Skin analysis (cosmetic)", "Yes", "Not mentioned", "Not mentioned", "Not mentioned", "Not mentioned", "Not mentioned"]
+  - ["Personal color analysis", "Yes", "Not mentioned", "Yes", "Not mentioned", "Not mentioned", "Not mentioned"]
+  - {cat: "AI try-on and images"}
+  - ["Virtual outfit try-on", "Yes", "Yes", "Not mentioned", "Not mentioned", "Yes", "Not mentioned"]
+  - ["AI fashion image generation", "Yes", "Yes", "Not mentioned", "Not mentioned", "Not mentioned", "Not mentioned"]
+  - {cat: "Closet and planning"}
+  - ["Digital closet", "Yes", "Not mentioned", "Yes", "Yes", "Yes", "Yes"]
+  - ["Outfit planning or calendar", "Yes", "Not mentioned", "Yes", "Yes", "Yes", "Yes"]
+  - ["Cost-per-wear tracking", "No", "Not mentioned", "Yes", "Yes", "Yes", "Not mentioned"]
+  - ["Packing lists", "No", "Not mentioned", "Not mentioned", "Yes", "Yes", "Not mentioned"]
+  - ["Wishlists or shopping ideas", "No", "Not mentioned", "Not mentioned", "Yes", "Yes", "Yes"]
+  - ["Social or community features", "No", "Not mentioned", "Yes", "Yes", "Not mentioned", "Not mentioned"]
+  - {cat: "Editing and access"}
+  - ["Photo retouching and editing", "No", "Yes", "Not mentioned", "Not mentioned", "Not mentioned", "Not mentioned"]
+  - ["On-device outfit scoring", "Yes", "Not mentioned", "Not mentioned", "Not mentioned", "Not mentioned", "Not mentioned"]
+  - ["Free to download on Google Play", "Yes", "Yes", "Yes", "Yes", "Yes", "Yes"]
