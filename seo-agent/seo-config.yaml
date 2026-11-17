@@ -14,13 +14,17 @@ site:
                  "ai-outfit-checker/index.html", "ai-makeup-assistant/index.html", "ai-hairstyle-try-on/index.html",
                  "digital-wardrobe/index.html", "virtual-outfit-try-on/index.html", "ai-skin-analysis/index.html",
                  "compare/index.html", "compare/fitcheck-vs-youcam-makeup/index.html",
-                 "compare/fitcheck-vs-acloset/index.html", "compare/fitcheck-vs-whering/index.html"]
+                 "compare/fitcheck-vs-acloset/index.html", "compare/fitcheck-vs-whering/index.html",
+                 "compare/fitcheck-vs-alta/index.html", "compare/fitcheck-vs-fits/index.html", "compare/best-style-apps/index.html"]
   exclude_from_audit: ["hero.html"]          # component fragment, not a standalone page
   # Tool-intent queries a hand-built page already satisfies (feature landing pages declare theirs in landing_pages.yaml).
   page_targets:
     index.html: [fitcheck, fitcheck app, fitcheck ai, fit check app, fitcheck ai app, style ai fit check]
     compare/fitcheck-vs-youcam-makeup/index.html: [youcam makeup app, youcam makeup alternative, youcam makeup vs fitcheck, fitcheck vs youcam makeup, apps like youcam makeup, youcam makeup]
     compare/fitcheck-vs-acloset/index.html: [acloset app, acloset alternative, acloset vs fitcheck, fitcheck vs acloset, apps like acloset, acloset]
+    compare/best-style-apps/index.html: [best style apps, best outfit apps, best fashion apps, best ai stylist apps, best wardrobe apps]
+    compare/fitcheck-vs-alta/index.html: [alta app, alta daily, alta alternative, fitcheck vs alta, apps like alta]
+    compare/fitcheck-vs-fits/index.html: [fits app, fits outfit planner, fits alternative, fitcheck vs fits, apps like fits]
     compare/fitcheck-vs-whering/index.html: [whering app, whering alternative, whering vs fitcheck, fitcheck vs whering, apps like whering, whering]
   # Meta descriptions added ONLY when a hand-built page has none (og:title/og:description/twitter:card are derived).
   static_meta:

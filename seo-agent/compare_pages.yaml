@@ -17,7 +17,7 @@ features:
 
 index:
   title: "FitCheck vs Other Style Apps: Honest Comparisons"
-  meta: "See how FitCheck compares with YouCam Makeup, Acloset and Whering: what each app is built for, feature by feature, so you can pick the right one."
+  meta: "See how FitCheck compares with YouCam Makeup, Acloset, Whering, Alta and Fits: what each app is built for, feature by feature, so you can pick the right one."
   h1: "FitCheck vs other style apps"
   lede: "Style apps do very different jobs. Some edit photos, some catalog your closet, and FitCheck gives you feedback on the look you are wearing. These side-by-side pages show which one fits what you need."
   list_title: "Pick a comparison"
@@ -182,3 +182,142 @@ pages:
       title: "Find out how your outfit scores"
       text: "Take or upload a full-body outfit photo and get an AI outfit score with tips on color match, fit balance and accessories."
       button: "Try FitCheck"
+
+  # ------------------------------------------------------------------ Alta
+  - slug: fitcheck-vs-alta
+    rival: "Alta"
+    developer: "Alta Daily"
+    source_url: "https://play.google.com/store/apps/details?id=com.alta"
+    known_for: "an AI closet with outfit generation and packing lists"
+    summary: "Alta builds outfits from the clothes you own. FitCheck scores the outfit you are wearing."
+    title: "FitCheck vs Alta: Outfit Feedback or AI Closet?"
+    meta: "FitCheck vs Alta Daily compared: outfit scoring, digital closet, outfit generation, packing lists, try-on and price. See which style app fits how you dress."
+    h1: "FitCheck vs Alta"
+    lede: "Alta Daily is an AI closet app that generates outfits from the clothes you own. FitCheck starts from a photo of the outfit you have on and tells you how well it works. Here is how they differ."
+    quick:
+      - "Choose Alta if you want outfits built from your own closet. Its Google Play listing describes daily suggestions based on the weather and your schedule, outfits for any event, packing lists, cost-per-wear data and a virtual try-on on an avatar."
+      - "Choose FitCheck if you want feedback on a finished look. Take one full-body photo and get an AI outfit score with tips on color match, fit balance and accessories, plus makeup, hair and skin tone feedback. FitCheck does not build a closet from receipts or suggest purchases."
+    rows:
+      - ["Main purpose", "Feedback and scores on the outfit you are wearing", "AI stylist and digital closet that generates outfits from your clothes"]
+      - ["Outfit score", "Yes. Instant AI outfit score from a full-body photo, with a breakdown of color match, proportion and balance", "Not mentioned"]
+      - ["Setup", "One outfit photo", "Add items by forwarding email receipts, from the Alta database, or by photo"]
+      - ["Digital closet", "Yes. Save favorite and top-scoring looks, organize by season or occasion, build a capsule wardrobe", "Yes. Closet with automatic background removal and clothing details"]
+      - ["Outfit suggestions", "Easy ways to improve the outfit you are wearing, such as switching shoes or adjusting color contrast", "Daily suggestions based on the weather and your schedule, and outfits for any event"]
+      - ["Packing lists", "No", "Yes. Packing lists and travel lookbooks from your trip details"]
+      - ["Wear statistics", "Tracks your highest-rated outfits and style evolution", "Yes. Most and least worn pieces and cost-per-wear"]
+      - ["Virtual try-on", "Yes. AI-generated images of you in different outfits from your photo", "Yes. Outfits generated on an avatar that looks like you"]
+      - ["Makeup, hair and skin feedback", "Yes. Makeup feedback and live try-on, hairstyle recommendations and live skin analysis (cosmetic)", "Not mentioned"]
+      - ["Shopping", "No shopping inside the app", "Yes. Recommendations based on closet gaps, plus a wishlist with sale alerts"]
+      - ["Price on Google Play", "Free to download. Contains ads. In-app purchases from $1.99 to $4.99 per item", "Free to download. In-app purchases from $1.99 to $89.99 per item. The listing does not show ads"]
+    pick_rival:
+      - {title: "You want outfits built from your closet.", text: "Alta generates outfits from the items you own, for the weather, your schedule or an event."}
+      - {title: "You travel often.", text: "Its listing describes packing lists and travel lookbooks for multi-city trips."}
+      - {title: "You want shopping ideas.", text: "Alta suggests what is missing from your closet. FitCheck does not offer shopping."}
+    pick_fitcheck:
+      - {title: "You want a verdict on an outfit.", text: "Get an AI score and specific fixes for the look you are wearing right now."}
+      - {title: "You do not want to build a closet first.", text: "One full-body photo is enough. You do not need to add your clothes first."}
+      - {title: "You want more than clothes.", text: "FitCheck also covers makeup, hairstyle and skin tone feedback."}
+    faqs:
+      - {q: "Is FitCheck an alternative to Alta?", a: "It depends on what you need. Alta is built around generating outfits from your own closet. FitCheck is built around scoring and improving the outfit you are wearing."}
+      - {q: "Does Alta rate outfits?", a: "Alta's Google Play listing does not mention an outfit score. It describes outfit generation, closet organization, packing lists and shopping recommendations."}
+      - {q: "Does FitCheck have a digital closet?", a: "Yes. You can save favorite and top-scoring looks, organize clothes by season or occasion, build a capsule wardrobe and plan outfits ahead. It does not track cost-per-wear."}
+      - {q: "Can I use both apps?", a: "Yes. Some people use a closet app to build outfits and FitCheck for a second opinion before they leave."}
+    related:
+      - {href: "/ai-outfit-checker/", text: "FitCheck AI outfit checker"}
+      - {href: "/virtual-outfit-try-on/", text: "FitCheck virtual outfit try-on"}
+      - {href: "/blog/what-should-i-wear-today/", text: "Guide: what should I wear today?"}
+      - {href: "/blog/ai-clothing-try-on-guide/", text: "Guide: AI clothing try-on"}
+    cta:
+      title: "Find out how your outfit scores"
+      text: "Take or upload a full-body outfit photo and get an AI outfit score with tips on color match, fit balance and accessories."
+      button: "Try FitCheck"
+
+  # ------------------------------------------------------------------ Fits
+  - slug: fitcheck-vs-fits
+    rival: "Fits"
+    developer: "L. & J. Henne UG"
+    source_url: "https://play.google.com/store/apps/details?id=de.lhenne.fits"
+    known_for: "an outfit planner and closet with a calendar"
+    summary: "Fits tracks and plans outfits from your closet. FitCheck scores the outfit you are wearing."
+    title: "FitCheck vs Fits: Outfit Scores or Outfit Planner?"
+    meta: "FitCheck vs Fits Outfit Planner & Closet compared: outfit scoring, closet, calendar, AI stylist, makeup and hair feedback and price. See which app suits you."
+    h1: "FitCheck vs Fits"
+    lede: "Fits is an outfit planner and closet app for tracking what you wear. FitCheck starts from a photo of the outfit you have on and tells you how well it works. Here is how they differ."
+    quick:
+      - "Choose Fits if you want to log and plan outfits. Its Google Play listing describes digitizing your closet, creating outfits by swiping through your clothes, mood boards, custom tags, a calendar and an AI stylist chat."
+      - "Choose FitCheck if you want feedback on a finished look. Take one full-body photo and get an AI outfit score with tips on color match, fit balance and accessories, plus makeup, hair and skin tone feedback."
+    rows:
+      - ["Main purpose", "Feedback and scores on the outfit you are wearing", "Outfit planner and closet app for tracking and planning outfits"]
+      - ["Outfit score", "Yes. Instant AI outfit score from a full-body photo, with a breakdown of color match, proportion and balance", "Not mentioned"]
+      - ["Setup", "One outfit photo", "Digitize your closet, or log outfits with a selfie"]
+      - ["Digital closet", "Yes. Save favorite and top-scoring looks, organize by season or occasion, build a capsule wardrobe", "Yes. Closet with custom tags and filtering"]
+      - ["Outfit creation", "Easy ways to improve the outfit you are wearing, such as switching shoes or adjusting color contrast", "Create outfits by swiping through your clothes, and build mood boards"]
+      - ["Outfit calendar", "Yes. Plan daily outfits ahead for work, events and weekends", "Yes. Plan ahead or look back on your outfits"]
+      - ["AI stylist", "AI outfit score, styling tips and AI try-on previews", "Yes. Chat with an AI stylist; AI outfit transformation"]
+      - ["Virtual try-on", "Yes. AI-generated images of you in different outfits from your photo", "Not mentioned in the Google Play listing"]
+      - ["Makeup, hair and skin feedback", "Yes. Makeup feedback and live try-on, hairstyle recommendations and live skin analysis (cosmetic)", "Not mentioned"]
+      - ["Price on Google Play", "Free to download. Contains ads. In-app purchases from $1.99 to $4.99 per item", "Free to download. In-app purchases from $1.99 to $79.99 per item. The listing does not show ads"]
+    pick_rival:
+      - {title: "You want a planner and log.", text: "Fits is built to track outfits, plan them on a calendar and look back on past fits."}
+      - {title: "You like mood boards and tags.", text: "Its listing describes custom tags, filtering and mood boards for organizing outfits."}
+      - {title: "You want to chat with an AI stylist.", text: "Fits lists an AI stylist chat built around your closet."}
+    pick_fitcheck:
+      - {title: "You want a verdict on an outfit.", text: "Get an AI score and specific fixes for the look you are wearing right now."}
+      - {title: "You do not want setup work.", text: "One full-body photo is enough. You do not need to add your clothes first."}
+      - {title: "You want more than clothes.", text: "FitCheck also covers makeup, hairstyle and skin tone feedback, plus AI try-on previews."}
+    faqs:
+      - {q: "Is FitCheck an alternative to Fits?", a: "It depends on what you need. Fits is built for tracking and planning outfits from your closet. FitCheck is built for scoring and improving the outfit you are wearing."}
+      - {q: "Does Fits rate outfits?", a: "Fits' Google Play listing does not mention an outfit score. It describes outfit tracking, a closet, a calendar and an AI stylist chat."}
+      - {q: "Do both apps have an AI stylist?", a: "Both use AI. FitCheck gives an AI outfit score with styling tips, and Fits lists an AI stylist chat built around your closet."}
+      - {q: "Can I use both apps?", a: "Yes. Some people plan outfits in a closet app and use FitCheck for a second opinion before they leave."}
+    related:
+      - {href: "/ai-outfit-checker/", text: "FitCheck AI outfit checker"}
+      - {href: "/digital-wardrobe/", text: "FitCheck digital wardrobe"}
+      - {href: "/blog/does-my-outfit-look-good/", text: "Guide: how to tell if your outfit looks good"}
+      - {href: "/blog/how-to-organize-your-closet/", text: "Guide: how to organize your closet"}
+    cta:
+      title: "Find out how your outfit scores"
+      text: "Take or upload a full-body outfit photo and get an AI outfit score with tips on color match, fit balance and accessories."
+      button: "Try FitCheck"
+
+# ---------------------------------------------------------------------- Top-5 overview page
+top5:
+  slug: best-style-apps
+  title: "Best Style Apps Compared: FitCheck vs 5 Top Apps"
+  meta: "FitCheck vs YouCam Makeup, Acloset, Whering, Alta and Fits in one table: outfit score, makeup, hair, skin, closet, planning and price. See where each app leads."
+  h1: "Best style apps compared"
+  lede: "Five popular style apps next to FitCheck in one table. Each one is strongest at something different, so here is exactly where FitCheck leads and where the others do."
+  apps: [youcam-makeup, acloset, whering, alta, fits]
+  rows:
+    - ["Instant AI outfit score from a photo", "Yes", "Not mentioned", "Not mentioned", "Not mentioned", "Not mentioned", "Not mentioned"]
+    - ["Makeup feedback or live try-on", "Yes", "Yes (try-on)", "Not mentioned", "Not mentioned", "Not mentioned", "Not mentioned"]
+    - ["Hairstyle try-on or recommendations", "Yes", "Yes (try-on)", "Not mentioned", "Not mentioned", "Not mentioned", "Not mentioned"]
+    - ["Skin analysis (cosmetic)", "Yes", "Not mentioned", "Not mentioned", "Not mentioned", "Not mentioned", "Not mentioned"]
+    - ["Virtual outfit try-on", "Yes", "Yes", "Not mentioned", "Not mentioned", "Yes", "Not mentioned"]
+    - ["Digital closet", "Yes", "Not mentioned", "Yes", "Yes", "Yes", "Yes"]
+    - ["Outfit planning or calendar", "Yes", "Not mentioned", "Yes", "Yes", "Yes", "Yes"]
+    - ["Cost-per-wear tracking", "No", "Not mentioned", "Yes", "Yes", "Yes", "Not mentioned"]
+    - ["Packing lists", "No", "Not mentioned", "Not mentioned", "Yes", "Yes", "Not mentioned"]
+    - ["Photo retouching and editing", "No", "Yes", "Not mentioned", "Not mentioned", "Not mentioned", "Not mentioned"]
+  leads:
+    - {title: "Outfit score from a photo.", text: "FitCheck is the only app in this table whose listing describes an instant AI outfit score with a color, proportion and balance breakdown."}
+    - {title: "Outfit, makeup, hair and skin in one app.", text: "No other app here describes all four. YouCam Makeup covers makeup and hair, and the closet apps cover clothes."}
+    - {title: "No setup.", text: "One full-body photo is enough. The closet apps are built around adding your clothes first."}
+  others_lead:
+    - {title: "Closet tracking.", text: "Acloset, Whering, Alta and Fits are built to hold your whole wardrobe. Acloset, Whering and Alta also describe cost-per-wear."}
+    - {title: "Photo editing.", text: "YouCam Makeup retouches and reshapes photos. FitCheck does not edit photos."}
+    - {title: "Travel and shopping.", text: "Alta and Whering describe packing lists, and Alta suggests purchases from your closet gaps. FitCheck has neither."}
+  faqs:
+    - {q: "Which style app is best?", a: "It depends on the job. For an AI score on the outfit you are wearing, plus makeup, hair and skin feedback in one app, FitCheck. For a full wardrobe inventory, a closet app such as Acloset, Whering, Alta or Fits. For photo editing, YouCam Makeup."}
+    - {q: "Why does the table say \"Not mentioned\"?", a: "Details about the other apps come only from their Google Play listings. If a listing does not describe a feature, we write \"Not mentioned\" because the feature may still exist in the app."}
+    - {q: "Is FitCheck better than closet apps?", a: "They do different jobs. Closet apps track what you own. FitCheck scores and improves the outfit you are wearing, and it has a lighter digital closet for saving looks."}
+    - {q: "Can I use more than one app?", a: "Yes. Many people keep a closet inventory in one app and use FitCheck for a second opinion before they go out."}
+  related:
+    - {href: "/ai-outfit-checker/", text: "FitCheck AI outfit checker"}
+    - {href: "/ai-makeup-assistant/", text: "FitCheck AI makeup assistant"}
+    - {href: "/ai-hairstyle-try-on/", text: "FitCheck AI hairstyle try-on"}
+    - {href: "/ai-skin-analysis/", text: "FitCheck AI skin analysis"}
+  cta:
+    title: "See how your outfit scores"
+    text: "Take or upload a full-body outfit photo and get an AI outfit score with tips on color match, fit balance and accessories."
+    button: "Try FitCheck"

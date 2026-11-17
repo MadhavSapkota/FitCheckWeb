@@ -87,7 +87,11 @@ def build() -> list[Path]:
         f'<a href="/compare/{e(p["slug"])}/">FitCheck vs {e(p["rival"])}</a><p>{e(p["summary"])}</p>'
         f'<p class="small">Best known for: {e(p["known_for"])}</p></li>' for p in pages)
     faq_html, faq_node = _faq(ix["faqs"])
-    body = (f'<section aria-labelledby="list-h"><h2 id="list-h">{e(ix["list_title"])}</h2><ul class="cmp-cards">{cards}</ul></section>'
+    t5d = data.get("top5")
+    top = (f'<li class="cmp-top"><div class="cmp-vs">{_icon("fitcheck", "FitCheck")}<span aria-hidden="true">vs</span>'
+           + "".join(_icon(_stem(x), x["rival"]) for x in pages) + f'</div><a href="/compare/{e(t5d["slug"])}/">Best style apps compared: all 5 in one table</a>'
+           '<p>FitCheck next to YouCam Makeup, Acloset, Whering, Alta and Fits, feature by feature.</p></li>') if t5d else ""
+    body = (f'<section aria-labelledby="list-h"><h2 id="list-h">{e(ix["list_title"])}</h2><ul class="cmp-cards">{top}{cards}</ul></section>'
             f'<section><h2>{e(ix["method_title"])}</h2>' + "".join(f"<p>{e(x)}</p>" for x in ix["method"])
             + f'<p class="cmp-note">Last checked: {e(checked)}.</p></section>' + faq_html)
     graph = [
@@ -141,6 +145,48 @@ def build() -> list[Path]:
             cfg, tpl, url=url, d=p, slug=p["slug"], body=body, more=more, graph=graph,
             icons='<div class="cmp-vs cmp-vs-lg">' + _icon("fitcheck", "FitCheck", 72) + '<span aria-hidden="true">vs</span>' + _icon(_stem(p), r, 72) + "</div>",
             crumbs=f'<a href="/">Home</a> › <a href="/compare/">Compare apps</a> › <span>FitCheck vs {e(r)}</span>'))
+
+    # ---- top-5 overview page (one table, FitCheck vs five apps)
+    t5 = data.get("top5")
+    if t5:
+        url = f"{iurl}{t5['slug']}/"
+        by = {_stem(x): x for x in pages}
+        apps = [by[k] for k in t5["apps"]]
+        head = ('<th scope="col">Feature</th><th scope="col"><span class="cmp-th">' + _icon("fitcheck", "FitCheck", 28, "app-ico-sm") + "FitCheck</span></th>"
+                + "".join(f'<th scope="col"><span class="cmp-th">{_icon(_stem(a), a["rival"], 28, "app-ico-sm")}{e(a["rival"])}</span></th>' for a in apps))
+        rows = "".join("<tr><th scope=\"row\">" + e(r[0]) + "</th>" + "".join(f"<td>{e(c)}</td>" for c in r[1:]) + "</tr>" for r in t5["rows"])
+        srcs = ", ".join(f'<a href="{e(a["source_url"])}" target="_blank" rel="noopener nofollow">{e(a["rival"])}</a>' for a in apps)
+        pick = lambda items: "".join(f"<li><strong>{e(i['title'])}</strong> {e(i['text'])}</li>" for i in items)  # noqa: E731
+        faq_html, faq_node = _faq(t5["faqs"])
+        links = "".join(f'<li><a href="/compare/{e(a["slug"])}/">FitCheck vs {e(a["rival"])}</a></li>' for a in apps)
+        related = "".join(f'<li><a href="{e(x["href"])}">{e(x["text"])}</a></li>' for x in t5["related"])
+        body = (
+            f'<section aria-labelledby="t5-h"><h2 id="t5-h">FitCheck vs five top style apps at a glance</h2>'
+            f'<table class="cmp-table cmp-wide"><thead><tr>{head}</tr></thead><tbody>{rows}</tbody></table>'
+            f'<p class="cmp-note">Details about the other apps come from their Google Play listings ({srcs}), checked on {e(checked)}. '
+            f'"Not mentioned" means the listing does not describe that feature; it may still exist in the app.</p></section>'
+            f'<section><h2>Where FitCheck leads</h2><ul class="lp-list">{pick(t5["leads"])}</ul></section>'
+            f'<section><h2>Where the other apps lead</h2><ul class="lp-list">{pick(t5["others_lead"])}</ul></section>'
+            f'<section><h2>Read each comparison</h2><ul>{links}</ul></section>'
+            f'<section><h2>How we compared</h2><p>We compared what each app says about itself on Google Play. We did not score, rank or test the other apps, '
+            f'and features, prices and limits change, so check each listing before you decide.</p>'
+            f'<p>FitCheck is not affiliated with, endorsed by or sponsored by any app compared here. All app names are trademarks of their owners. '
+            f'FitCheck feedback is an AI opinion to use as a second opinion, not a professional or medical assessment.</p></section>' + faq_html)
+        more = (f'<section class="related" aria-labelledby="rel-h"><h2 id="rel-h">Related pages</h2><ul>{related}</ul></section>'
+                f'<nav class="lp-more" aria-label="More comparisons"><h2>More comparisons</h2><ul><li><a href="/compare/">All comparisons</a></li></ul></nav>')
+        icons = ('<div class="cmp-vs cmp-vs-lg">' + _icon("fitcheck", "FitCheck", 72) + '<span aria-hidden="true">vs</span>'
+                 + "".join(_icon(_stem(a), a["rival"], 72) for a in apps) + "</div>")
+        graph = [
+            {"@type": "WebPage", "@id": url, "url": url, "name": t5["title"], "description": t5["meta"], "inLanguage": "en",
+             "isPartOf": site, "dateModified": data["checked"]},
+            {"@type": "BreadcrumbList", "itemListElement": [
+                {"@type": "ListItem", "position": 1, "name": "Home", "item": base + "/"},
+                {"@type": "ListItem", "position": 2, "name": "Compare apps", "item": iurl},
+                {"@type": "ListItem", "position": 3, "name": "Best style apps compared", "item": url}]},
+            faq_node]
+        write(f"compare/{t5['slug']}/index.html", _page(
+            cfg, tpl, url=url, d=t5, slug=t5["slug"], body=body, more=more, graph=graph, icons=icons,
+            crumbs='<a href="/">Home</a> \u203a <a href="/compare/">Compare apps</a> \u203a <span>Best style apps compared</span>'))
     return out
 
 
