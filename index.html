@@ -331,7 +331,7 @@ details[open] summary::after{background:var(--pink);color:#fff}
 
 /* Comparison section */
 /* Homepage app comparisons */
-.cmp-home{position:relative;overflow:hidden;background:radial-gradient(60% 50% at 8% 0%,#dc0a5538 0%,transparent 70%),radial-gradient(50% 45% at 100% 100%,#7b3dff30 0%,transparent 70%),#0e0a10;border:0;color:#fff}
+.cmp-home{position:relative;overflow:hidden;background:radial-gradient(60% 50% at 8% 0%,#dc0a5538 0%,transparent 70%),radial-gradient(50% 45% at 100% 100%,#7b3dff30 0%,transparent 70%),#2c2230;border:0;color:#fff}
 .cmp-home::before{content:"";position:absolute;inset:0;background-image:radial-gradient(#ffffff14 1px,transparent 1px);background-size:26px 26px;-webkit-mask-image:linear-gradient(180deg,#000,transparent 70%);mask-image:linear-gradient(180deg,#000,transparent 70%);pointer-events:none}
 .cmp-home>.wrap{position:relative}
 .cmp-home .sec-head{align-items:flex-end;gap:32px;margin-bottom:48px}
@@ -357,7 +357,7 @@ details[open] summary::after{background:var(--pink);color:#fff}
 .cmpc-icons .app-ico{width:64px;height:64px;border:0;box-shadow:0 10px 24px -6px #000a;transition:transform .3s}
 .cmpc-link:hover .cmpc-icons .app-ico:first-child{transform:rotate(-8deg) translateX(-3px)}
 .cmpc-link:hover .cmpc-icons .app-ico:last-child{transform:rotate(8deg) translateX(3px)}
-.cmpc-vs{position:relative;z-index:1;display:grid;place-items:center;width:30px;height:30px;margin:0 -9px;border-radius:50%;background:var(--pink);border:3px solid #17101a;color:#fff;font:800 10px/1 var(--disp);box-shadow:0 0 18px #dc0a55aa}
+.cmpc-vs{position:relative;z-index:1;display:grid;place-items:center;width:30px;height:30px;margin:0 -9px;border-radius:50%;background:var(--pink);border:3px solid #2c2230;color:#fff;font:800 10px/1 var(--disp);box-shadow:0 0 18px #dc0a55aa}
 .cmpc-link h3{margin:0;font:700 clamp(26px,2.3vw,34px)/1.05 var(--disp);letter-spacing:-.035em;color:#fff}
 .cmpc-title-prefix{display:block;margin-bottom:8px;color:#a99ca4;font:500 13px/1.4 var(--disp);letter-spacing:.04em}
 .cmpc-what{margin:-8px 0 0;color:#c4b8c0;font-size:15px;line-height:1.6;min-height:3.2em}
@@ -395,34 +395,6 @@ details[open] summary::after{background:var(--pink);color:#fff}
 @media(max-width:960px){.cmpc-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.cmpc-cta{grid-column:1/-1}.cmpc-cta h3{max-width:none}.cmp-home .sec-head{align-items:flex-start;flex-direction:column;gap:22px}.cmpc-what{min-height:0}}
 @media(max-width:600px){.cmpc-grid{grid-template-columns:1fr;gap:16px}.cmpc-link{padding:22px;gap:18px;border-radius:24px}.cmp-home .sec-head{margin-bottom:30px}.cmp-home .sec-head h2{font-size:42px}.cmp-home .sec-head p{font-size:16px}.cmp-home .sec-head>.btn{width:100%;justify-content:center}.cmpc-pick{margin-top:2px}.cmpc-row{font-size:15px}.cmpc-go{min-height:44px}.cmpc-category{font-size:10px}.cmpc-link::after{font-size:90px}.cmpc-cta .cmpc-link::after{font-size:220px}.cmpc-cta .cmpc-btn{margin-top:0;width:100%}.cmpc-cta .cmpc-link{gap:22px}}
 @media(prefers-reduced-motion:reduce){.cmp-home .cmpc-link,.cmp-home .cmpc-arrow,.cmp-home .cmpc-btn,.cmp-home .btn,.cmpc-icons .app-ico,.cmpc-link::before{transition:none}.cmp-home .cmpc-link:hover,.cmp-home .cmpc-link:hover .cmpc-arrow,.cmp-home .cmpc-link:hover .cmpc-btn,.cmp-home .sec-head>.btn:hover,.cmpc-link:hover .cmpc-icons .app-ico{transform:none}}
-/* light theme */
-.cmp-home{background:radial-gradient(55% 45% at 6% 0%,#dc0a5514,transparent 70%),radial-gradient(45% 40% at 100% 100%,#ffb3cf2e,transparent 70%),#fbf7f9;color:#201b1e;border-block:1px solid #efe6eb}
-.cmp-home::before{background-image:radial-gradient(#2a1a2218 1px,transparent 1px)}
-.cmp-eyebrow{border-color:#f6d3e0;background:#fff0f5;color:#b80847}
-.cmp-home .sec-head h2{background:linear-gradient(100deg,#201b1e 55%,#dc0a55);-webkit-background-clip:text;background-clip:text}
-.cmp-home .sec-head p{color:#6d6268}
-.cmp-home .sec-head>.btn{background:#201b1e;color:#fff;box-shadow:0 12px 26px -12px #201b1e99}
-.cmp-home .sec-head>.btn:hover{background:var(--pink);color:#fff}
-.cmpc-grid>li:not(.cmpc-cta) .cmpc-link{background:#fff;border-color:#ebe3e8;color:#201b1e;box-shadow:0 1px 2px #30222c08,0 10px 24px -18px #30222c33;-webkit-backdrop-filter:none;backdrop-filter:none}
-.cmpc-grid>li:not(.cmpc-cta) .cmpc-link::before{opacity:.14}
-.cmpc-grid>li:not(.cmpc-cta) .cmpc-link::after{-webkit-text-stroke:1px #2a1a2210}
-.cmpc-grid>li:not(.cmpc-cta) .cmpc-link:hover{box-shadow:0 26px 48px -26px color-mix(in srgb,var(--a) 70%,#000)}
-.cmpc-grid>li:not(.cmpc-cta) .cmpc-link:hover::before{opacity:.3}
-.cmpc-category{color:#4a3a43;background:color-mix(in srgb,var(--a) 22%,#fff);border-color:color-mix(in srgb,var(--a) 45%,#fff)}
-.cmpc-icons .app-ico{border:1px solid #ece4e8;box-shadow:0 8px 18px -8px #30222c55}
-.cmpc-vs{border-color:#fff;background:#201b1e;box-shadow:none}
-.cmpc-grid>li:not(.cmpc-cta) h3{color:#201b1e}
-.cmpc-title-prefix{color:#8a7b82}
-.cmpc-grid>li:not(.cmpc-cta) .cmpc-what{color:#6d6268}
-.cmpc-row{background:#f7f4f6;border-color:#f0e9ed;color:#3f353b}
-.cmpc-row b{color:#85747d}
-.cmpc-row:not(.cmpc-fc) b::before{background:#e9e1e6;color:#85747d}
-.cmpc-fc{background:linear-gradient(135deg,#dc0a55,#f0407c);color:#fff;border:0}
-.cmpc-fc b{color:#ffe0ec}
-.cmpc-go{color:#b80847}
-.cmpc-arrow{border-color:#f3d3e0;background:#fff0f5}
-.cmpc-link:hover .cmpc-arrow{background:var(--pink);border-color:var(--pink);color:#fff}
-.cmp-note{color:#7a6b73}.cmp-note>span{border-color:#cdbec6}
 </style>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"MobileApplication","name":"FitCheck AI Style Assistant","alternateName":"FitCheck: AI Outfit Planner","operatingSystem":"Android","applicationCategory":"LifestyleApplication","description":"AI outfit scores and styling feedback on fit, color, and balance from a photo.","downloadUrl":"https://play.google.com/store/apps/details?id=com.aistyleassistant.app","installUrl":"https://play.google.com/store/apps/details?id=com.aistyleassistant.app"}</script>
 </head>

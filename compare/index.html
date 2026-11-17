@@ -100,7 +100,7 @@ main.landing>section>ul.cmp-cards{max-width:none;grid-template-columns:repeat(3,
 .bar-n{font:700 22px/1 var(--disp);text-align:right}.bar-n small{font-size:13px;color:#777;font-weight:500}
 @media(max-width:600px){.cmp-bars li{grid-template-columns:1fr 70px}.bar-track{grid-column:1/-1;order:3}}
 /* v2 dark landing */
-.cmp .lp-hero{position:relative;overflow:hidden;isolation:isolate;padding:clamp(32px,5vw,72px);border-radius:32px;background:radial-gradient(60% 80% at 0% 0%,#dc0a5555,transparent 70%),radial-gradient(50% 70% at 100% 100%,#7b3dff40,transparent 70%),#0e0a10;color:#fff}
+.cmp .lp-hero{position:relative;overflow:hidden;isolation:isolate;padding:clamp(32px,5vw,72px);border-radius:32px;background:radial-gradient(60% 80% at 0% 0%,#dc0a5555,transparent 70%),radial-gradient(50% 70% at 100% 100%,#7b3dff40,transparent 70%),#2c2230;color:#fff}
 .cmp .lp-hero::before{content:"";position:absolute;inset:0;z-index:-1;background-image:radial-gradient(#ffffff16 1px,transparent 1px);background-size:26px 26px;-webkit-mask-image:linear-gradient(180deg,#000,transparent 80%);mask-image:linear-gradient(180deg,#000,transparent 80%)}
 .cmp .lp-hero h1{max-width:14ch;color:#fff;font-size:clamp(42px,6vw,84px);line-height:.98;letter-spacing:-.045em;background:linear-gradient(100deg,#fff 45%,#ff8fb5);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
 .cmp .lp-hero .lede{max-width:56ch;color:#cbbfc7;font-size:clamp(16px,1.5vw,19px);line-height:1.6}
@@ -108,9 +108,9 @@ main.landing>section>ul.cmp-cards{max-width:none;grid-template-columns:repeat(3,
 .cmp .lp-hero .cta{box-shadow:0 14px 30px -10px #dc0a55cc}
 .cmp .cmp-vs-lg{gap:0;margin-bottom:32px}
 .cmp .cmp-vs-lg .app-ico{width:68px;height:68px;border:0;box-shadow:0 10px 24px -6px #000a}
-.cmp .cmp-vs-lg .app-ico+.app-ico{margin-left:-14px;border:3px solid #17101a}
-.cmp .cmp-vs-lg span{position:relative;z-index:1;display:grid;place-items:center;width:34px;height:34px;margin:0 -8px;border-radius:50%;background:var(--primary);border:3px solid #17101a;color:#fff;font:800 11px/1 var(--disp);text-transform:uppercase;box-shadow:0 0 18px #dc0a55aa}
-main.landing>section[aria-labelledby=list-h]{max-width:none;margin-top:28px;padding:clamp(24px,4vw,48px);border-radius:32px;background:radial-gradient(60% 40% at 100% 0%,#7b3dff30,transparent 70%),#0e0a10}
+.cmp .cmp-vs-lg .app-ico+.app-ico{margin-left:-14px;border:3px solid #2c2230}
+.cmp .cmp-vs-lg span{position:relative;z-index:1;display:grid;place-items:center;width:34px;height:34px;margin:0 -8px;border-radius:50%;background:var(--primary);border:3px solid #2c2230;color:#fff;font:800 11px/1 var(--disp);text-transform:uppercase;box-shadow:0 0 18px #dc0a55aa}
+main.landing>section[aria-labelledby=list-h]{max-width:none;margin-top:28px;padding:clamp(24px,4vw,48px);border-radius:32px;background:radial-gradient(60% 40% at 100% 0%,#7b3dff30,transparent 70%),#2c2230}
 main.landing>section[aria-labelledby=list-h] h2{color:#fff;font-size:clamp(30px,3.4vw,48px);letter-spacing:-.04em;margin:0}
 main.landing>section>ul.cmp-cards{gap:22px;margin-top:32px}
 .cmp-cards li{--a:#dc0a55;position:relative;isolation:isolate;overflow:hidden;gap:16px;padding:28px;border:1px solid #ffffff1c;border-radius:28px;background:linear-gradient(165deg,#ffffff14,#ffffff05);color:#fff;transition:transform .3s,box-shadow .3s,border-color .3s}
@@ -121,7 +121,7 @@ main.landing>section>ul.cmp-cards{gap:22px;margin-top:32px}
 .cmp-cards li:hover::before{opacity:.5;transform:scale(1.25)}
 .cmp-cards .cmp-vs{color:#fff}
 .cmp-cards .cmp-vs .app-ico{width:64px;height:64px;border:0;box-shadow:0 10px 24px -6px #000a;transition:transform .3s}
-.cmp-cards .cmp-vs span{position:relative;z-index:1;display:grid;place-items:center;width:30px;height:30px;margin:0 -9px;border-radius:50%;background:var(--primary);border:3px solid #17101a;color:#fff;font:800 10px/1 var(--disp);letter-spacing:0;box-shadow:0 0 18px #dc0a55aa}
+.cmp-cards .cmp-vs span{position:relative;z-index:1;display:grid;place-items:center;width:30px;height:30px;margin:0 -9px;border-radius:50%;background:var(--primary);border:3px solid #2c2230;color:#fff;font:800 10px/1 var(--disp);letter-spacing:0;box-shadow:0 0 18px #dc0a55aa}
 .cmp-cards li:hover .cmp-vs .app-ico:first-child{transform:rotate(-8deg) translateX(-3px)}.cmp-cards li:hover .cmp-vs .app-ico:last-child{transform:rotate(8deg) translateX(3px)}
 .cmp-cards .cmp-link{color:#fff;font:700 clamp(24px,2.2vw,32px)/1.08 var(--disp);letter-spacing:-.035em}
 .cmp-cards a:hover{color:#fff}
@@ -141,28 +141,6 @@ main.landing>section>ul.cmp-cards{gap:22px;margin-top:32px}
 .cmp-cards li.cmp-top:hover .cmp-go{color:#b80847;transform:translateY(-3px)}
 @media(max-width:600px){.cmp .lp-hero{border-radius:24px}.cmp .cmp-vs-lg .app-ico{width:52px;height:52px}main.landing>section[aria-labelledby=list-h]{border-radius:24px}.cmp-cards li{padding:22px;border-radius:24px}.cmp-cards li::after{font-size:90px}.cmp-cards li.cmp-top::after{font-size:220px}.cmp-cards .cmp-top .cmp-go{width:100%;text-align:center}}
 @media(prefers-reduced-motion:reduce){.cmp-cards li,.cmp-cards .cmp-vs .app-ico,.cmp-cards li::before{transition:none}.cmp-cards li:hover,.cmp-cards li:hover .cmp-vs .app-ico{transform:none}}
-/* light theme */
-.cmp .lp-hero{background:radial-gradient(60% 80% at 0% 0%,#dc0a5522,transparent 70%),radial-gradient(50% 70% at 100% 100%,#ffb3cf40,transparent 70%),#fff;border:1px solid #efe6eb;color:#201b1e}
-.cmp .lp-hero::before{background-image:radial-gradient(#2a1a2216 1px,transparent 1px)}
-.cmp .lp-hero h1{background:linear-gradient(100deg,#201b1e 50%,#dc0a55);-webkit-background-clip:text;background-clip:text}
-.cmp .lp-hero .lede{color:#6d6268}.cmp .lp-hero .small{color:#85747d}
-.cmp .cmp-vs-lg .app-ico{box-shadow:0 8px 18px -8px #30222c55}
-.cmp .cmp-vs-lg .app-ico+.app-ico{border-color:#fff}
-.cmp .cmp-vs-lg span,.cmp-cards .cmp-vs span{border-color:#fff;background:#201b1e;box-shadow:none}
-main.landing>section[aria-labelledby=list-h]{background:radial-gradient(60% 40% at 100% 0%,#ffb3cf33,transparent 70%),#fbf7f9;border:1px solid #efe6eb}
-main.landing>section[aria-labelledby=list-h] h2{color:#201b1e}
-.cmp-cards li:not(.cmp-top){background:#fff;border-color:#ebe3e8;color:#201b1e;box-shadow:0 1px 2px #30222c08,0 10px 24px -18px #30222c33}
-.cmp-cards li:not(.cmp-top)::before{opacity:.14}
-.cmp-cards li:not(.cmp-top)::after{-webkit-text-stroke:1px #2a1a2210}
-.cmp-cards li:not(.cmp-top):hover{box-shadow:0 26px 48px -26px color-mix(in srgb,var(--a) 70%,#000)}
-.cmp-cards li:not(.cmp-top):hover::before{opacity:.3}
-.cmp-cards li:not(.cmp-top) .cmp-vs{color:#201b1e}
-.cmp-cards li:not(.cmp-top) .cmp-vs .app-ico{border:1px solid #ece4e8;box-shadow:0 8px 18px -8px #30222c55}
-.cmp-cards li:not(.cmp-top) .cmp-link,.cmp-cards li:not(.cmp-top) a:hover{color:#201b1e}
-.cmp-cards li:not(.cmp-top) p{color:#6d6268}
-.cmp-cards li:not(.cmp-top) .cmp-chip{color:#4a3a43;background:color-mix(in srgb,var(--a) 22%,#fff);border-color:color-mix(in srgb,var(--a) 45%,#fff)}
-.cmp-cards li:not(.cmp-top) .cmp-go{color:#b80847}
-.cmp-cards li:not(.cmp-top):hover .cmp-go{color:var(--primary)}
 </style>
 <!-- Google Analytics 4 (gtag.js) with Consent Mode v2 -->
   <script>
