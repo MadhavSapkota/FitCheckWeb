@@ -109,14 +109,16 @@ def build() -> list[Path]:
     ix, iurl = data["index"], f"{base}/compare/"
     top = ""
     if t5:
-        top = (f'<li class="cmp-top"><div class="cmp-vs">{_icon("fitcheck", "FitCheck")}<span aria-hidden="true">vs</span>'
-               + "".join(_icon(_stem(x), x["rival"]) for x in pages)
-               + f'</div><a href="/compare/{e(t5["slug"])}/">Best style apps compared: all 5 in one table</a>'
-               '<p>FitCheck next to YouCam Makeup, Acloset, Whering, Alta and Fits, feature by feature.</p></li>')
+        top = ('<li class="cmp-top"><div class="cmp-top-in"><div class="cmp-stack">' + _icon("fitcheck", "FitCheck", 64)
+               + "".join(_icon(_stem(x), x["rival"], 64) for x in pages) + '</div><div>'
+               '<span class="cmp-eyebrow">All 5 at once</span>'
+               f'<a class="cmp-link" href="/compare/{e(t5["slug"])}/">Best style apps compared</a>'
+               '<p>FitCheck next to YouCam Makeup, Acloset, Whering, Alta and Fits, feature by feature.</p></div>'
+               '<span class="cmp-go">See the full table →</span></div></li>')
     cards = "".join(
-        f'<li><div class="cmp-vs">{_icon("fitcheck", "FitCheck")}<span aria-hidden="true">vs</span>{_icon(_stem(p), p["rival"])}</div>'
-        f'<a href="/compare/{e(p["slug"])}/">FitCheck vs {e(p["rival"])}</a><p>{e(p["summary"])}</p>'
-        f'<p class="small">Best known for: {e(p["known_for"])}</p></li>' for p in pages)
+        f'<li><div class="cmp-vs">{_icon("fitcheck", "FitCheck", 60)}<span aria-hidden="true">vs</span>{_icon(_stem(p), p["rival"], 60)}</div>'
+        f'<a class="cmp-link" href="/compare/{e(p["slug"])}/">FitCheck vs {e(p["rival"])}</a><p>{e(p["summary"])}</p>'
+        f'<span class="cmp-chip">Best known for: {e(p["known_for"])}</span><span class="cmp-go">Read the comparison →</span></li>' for p in pages)
     faq_html, faq_node = _faq(ix["faqs"])
     body = (f'<section aria-labelledby="list-h"><h2 id="list-h">{e(ix["list_title"])}</h2><ul class="cmp-cards">{top}{cards}</ul></section>'
             f'<section><h2>{e(ix["method_title"])}</h2>' + "".join(f"<p>{e(x)}</p>" for x in ix["method"])
