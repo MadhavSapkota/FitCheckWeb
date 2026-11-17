@@ -36,6 +36,38 @@ FORBIDDEN = [
 ]
 
 
+# Responsible-use sentences the writer is REQUIRED to include on skin/hair topics. They must never count as claims.
+# Only the referral / negation PHRASE is removed (never the whole sentence), so a claim next to it is still caught.
+SAFE_SENTENCE = re.compile(
+    r"\b(see|consult|visit|ask|talk to|check with|speak (to|with))\s+(a|an|your)?\s*(board-certified\s+)?"
+    r"(dermatologist|doctor|physician|gp|healthcare professional|medical professional)s?(\s+or\s+(a\s+)?(dermatologist|doctor|physician))?"
+    r"|\bnot\s+(a\s+substitute\s+for\s+)?(professional\s+)?(medical advice|a\s+(medical\s+)?diagnosis|medical)"
+    r"|\b(does not|doesn't|do not|don't|cannot|can't|won't|never|is not designed to|isn't designed to)\s+"
+    r"(diagnose|detect|treat|identify|assess)(\s+or\s+(diagnose|detect|treat|identify|assess))?",
+    flags=re.I)
+
+
+def claim_text(text: str) -> str:
+    """Text with disclaimers/referrals removed, so 'see a dermatologist' or 'does not diagnose' never trips a claim rule."""
+    return SAFE_SENTENCE.sub(" ", text)
+
+
+NO_ISSUE = re.compile(r"^\s*(no|none|n/a|nothing)\b", re.I)
+
+
+def real_issues(review: dict[str, Any], key: str) -> list[str]:
+    """Reviewer list entries that are actual problems. Drops 'No ... found' entries; drops self-labelled 'Minor'
+    notes only when the reviewer itself passed the article with a value score >= 8."""
+    lenient = bool(review.get("pass")) and int(review.get("value_score") or 0) >= 8
+    out = []
+    for x in review.get(key) or []:
+        s = str(x)
+        if NO_ISSUE.match(s) or (lenient and re.match(r"^\s*minor\b", s, flags=re.I)):
+            continue
+        out.append(s)
+    return out
+
+
 def shingles(text: str, n: int = 5) -> set[tuple[str, ...]]:
     t = tokens(text)
     return {tuple(t[i:i + n]) for i in range(max(0, len(t) - n + 1))}
@@ -163,8 +195,9 @@ def check(cfg: Config, *, kw: dict[str, Any], intent: str, article: dict[str, An
     if not soup.find("a", attrs={"data-cta": "play-store", "data-placement": "end"}):
         fails.append("missing_app_cta")
     # invented features / fabricated claims (deterministic)
+    claims = claim_text(all_text)
     for pat, label in FORBIDDEN:
-        if re.search(pat, all_text, flags=re.I):
+        if re.search(pat, claims, flags=re.I):
             fails.append(f"forbidden_claim:{label}")
     # LLM editorial review
     if not review.get("pass"):
@@ -174,8 +207,9 @@ def check(cfg: Config, *, kw: dict[str, Any], intent: str, article: dict[str, An
     if int(review.get("value_score") or 0) < 7:
         fails.append(f"low_value_score:{review.get('value_score')}")
     for key in ("factual_issues", "invented_app_features", "unsupported_claims", "spam_policy_issues"):
-        if review.get(key):
-            fails.append(f"{key}:{'; '.join(map(str, review[key]))[:200]}")
+        issues = real_issues(review, key)
+        if issues:
+            fails.append(f"{key}:{'; '.join(issues)[:200]}")
     if review.get("keyword_stuffing"):
         fails.append("review_keyword_stuffing")
     return {"passed": not fails, "failures": fails, "warnings": warns, "word_count": wc,

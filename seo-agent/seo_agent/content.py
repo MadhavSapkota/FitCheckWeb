@@ -169,6 +169,9 @@ any invented statistics/studies/testimonials/product testing; any claim about th
 (or anything in not_offered_do_not_claim); keyword stuffing; Google spam-policy problems (scaled low-value content,
 doorway, misleading); inaccurate styling/beauty advice; unsafe advice; for skin/hair topics any medical diagnosis,
 detection, treatment, or accuracy claim (list these under unsupported_claims).
+List ONLY problems that must be fixed before publishing. Leave a list EMPTY when there is nothing to fix (never write
+"No issues found" inside a list). Put minor stylistic suggestions in notes, not in the lists. Referrals such as "see a
+dermatologist" and "not medical advice" are required responsible-use text, not claims.
 Return JSON: {{"intent_match": bool, "value_score": 1-10, "factual_issues": [str], "invented_app_features": [str],
 "unsupported_claims": [str], "spam_policy_issues": [str], "keyword_stuffing": bool, "pass": bool, "notes": str}}"""
     return _json_call(cfg.get("content.review_model"), system, user)
