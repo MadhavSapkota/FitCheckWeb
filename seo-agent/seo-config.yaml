@@ -12,7 +12,9 @@ site:
   # Hand-built pages listed in the sitemap. The agent never rewrites their layout.
   static_pages: ["index.html", "how-it-works.html", "privacy.html", "terms.html",
                  "ai-outfit-checker/index.html", "ai-makeup-assistant/index.html", "ai-hairstyle-try-on/index.html",
-                 "digital-wardrobe/index.html", "virtual-outfit-try-on/index.html", "ai-skin-analysis/index.html"]
+                 "digital-wardrobe/index.html", "virtual-outfit-try-on/index.html", "ai-skin-analysis/index.html",
+                 "compare/index.html", "compare/fitcheck-vs-youcam-makeup/index.html",
+                 "compare/fitcheck-vs-acloset/index.html", "compare/fitcheck-vs-whering/index.html"]
   exclude_from_audit: ["hero.html"]          # component fragment, not a standalone page
   # Tool-intent queries a hand-built page already satisfies (feature landing pages declare theirs in landing_pages.yaml).
   page_targets:
