@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import json
+import re
 import shutil
 from pathlib import Path
 
@@ -313,10 +314,11 @@ def test_editorial_topics_when_enabled(site, monkeypatch):
     assert kw["latest"]["source"] == "editorial (volume unverified)"
 
 
-def enable_global(site, min_opp=0):
+def enable_global(site, min_opp=0, min_vol=1000):
     p = site / "seo-agent" / "seo-config.yaml"
     txt = p.read_text().replace("global_discovery:\n    enabled: false", "global_discovery:\n    enabled: true")
-    p.write_text(txt.replace("min_ranking_opportunity: 60", f"min_ranking_opportunity: {min_opp}"))
+    txt = txt.replace("min_ranking_opportunity: 60", f"min_ranking_opportunity: {min_opp}")
+    p.write_text(re.sub(r"(global_discovery:.*?minimum_monthly_searches: )\d+", rf"\g<1>{min_vol}", txt, count=1, flags=re.S))  # tests do not depend on the tuned default
 
 
 def set_opportunity(monkeypatch, table, default=80):
