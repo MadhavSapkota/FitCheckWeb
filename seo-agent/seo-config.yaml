@@ -64,6 +64,31 @@ keyword_research:
   language_constant: "languageConstants/1000"   # Google Ads: English
   location: US
   location_code: 2840                           # Google Ads geo target / DataForSEO location (United States)
+  # GLOBAL DISCOVERY: every market below is searched each run, qualifying keywords are pooled and compared, and the
+  # highest-volume eligible one that also passes the normal relevance / duplicate / planner / quality checks is published
+  # (still max 1 article per day). Installs can come from anywhere, so no market is preferred.
+  # Content is English only: queries are English-language (language_constant above) and the planner skips any keyword
+  # whose intent is specific to a country or language our English article cannot genuinely serve.
+  global_discovery:
+    enabled: true
+    minimum_monthly_searches: 1000          # per market, verified by Google Ads Keyword Planner
+    allowed_ads_competition: ["LOW"]        # Google Ads (advertising) competition; NOT organic difficulty
+    english_only: true                      # drop keywords containing non-ASCII letters (other-language queries)
+    markets:
+      - {name: "United States", location: US, location_code: 2840}
+      - {name: "United Kingdom", location: GB, location_code: 2826}
+      - {name: "Canada", location: CA, location_code: 2124}
+      - {name: "Australia", location: AU, location_code: 2036}
+      - {name: "New Zealand", location: NZ, location_code: 2554}
+      - {name: "Ireland", location: IE, location_code: 2372}
+      - {name: "Germany", location: DE, location_code: 2276}
+      - {name: "France", location: FR, location_code: 2250}
+      - {name: "Netherlands", location: NL, location_code: 2528}
+      - {name: "Sweden", location: SE, location_code: 2752}
+      - {name: "Spain", location: ES, location_code: 2724}
+      - {name: "Italy", location: IT, location_code: 2380}
+      - {name: "Israel", location: IL, location_code: 2376}
+      - {name: "India", location: IN, location_code: 2356}
   # Keyword Planner is queried once PER FEATURE (features.*.seeds) so broad "outfit ideas" seeds can no longer
   # crowd out makeup, skin, wardrobe, and try-on ideas. This cap applies to each feature's request group.
   max_ideas_per_run: 150

@@ -95,6 +95,7 @@ def _sys(cfg: Config) -> str:
 def plan(cfg: Config, kw: dict[str, Any], serp: dict[str, Any], site_pages: list[dict[str, Any]], facts: dict) -> dict[str, Any]:
     user = f"""TARGET_KEYWORD: {kw['keyword']}
 METRICS: monthly_searches={kw['volume']}, organic_difficulty={kw['difficulty']}/100, detected_intent={kw.get('intent')}
+TARGET_MARKET: {kw.get('market_name') or 'United States'} (search volume is measured in that country; our content is English only)
 TOP_10_ORGANIC_RESULTS: {json.dumps(serp.get('organic', []), ensure_ascii=False) if serp.get('organic') else 'not available - ' + serp.get('note', '') + ' Do not claim to know what currently ranks.'}
 PEOPLE_ALSO_ASK: {json.dumps(serp.get('questions', []), ensure_ascii=False)}
 EXISTING_PAGES_ON_OUR_SITE: {json.dumps(site_pages, ensure_ascii=False)}
@@ -103,7 +104,8 @@ APP_FACTS: {json.dumps(facts, ensure_ascii=False)}
 Analyse the search intent and the ranking pages. Decide whether we should:
 - "new": write a new article (only if it would add genuinely new value vs. our existing pages),
 - "update": improve an existing page under blog/ instead (give its path), or
-- "skip": the topic does not fit our site/app or we cannot add real value.
+- "skip": the topic does not fit our site/app or we cannot add real value, OR the query only makes sense for TARGET_MARKET in a way an
+  English article cannot genuinely serve (local retailers, local brands, local-language or local-law topics). Never localize by inventing facts.
 Return JSON: {{"intent": "informational|commercial|transactional|navigational", "intent_explanation": str,
 "action": "new|update|skip", "target_page": str|null, "reason": str,
 "reader_questions": [str], "content_gaps": [str],

@@ -189,7 +189,8 @@ def new_article(cfg, state: State, facts: dict, pages, perf, dry: bool, report: 
         report["notes"].append("ANTHROPIC_API_KEY missing - content generation skipped")
         return
     prev = state.data["keywords"].pop(force_keyword, None) if force_keyword else None  # re-test a rejected keyword
-    short = keyword_agent.run(cfg, state, pages, perf, report)
+    global_on = bool(cfg.get("keyword_research.global_discovery.enabled")) and not force_keyword  # re-tests stay single-market
+    short = (keyword_agent.run_global if global_on else keyword_agent.run)(cfg, state, pages, perf, report)
     if force_keyword:
         short = [i for i in short if i["keyword"] == force_keyword] or \
             ([{**prev["latest"], "keyword": force_keyword}] if prev and prev.get("latest") else [])
@@ -209,6 +210,8 @@ def new_article(cfg, state: State, facts: dict, pages, perf, dry: bool, report: 
                                                   "intent", "cluster", "feature", "score", "score_total", "decision",
                                                   "covering_page", "source")} for i in short[:20]]
     candidates = research.order_by_cluster([i for i in short if i["decision"] == "candidate"], articles, cfg)
+    if global_on:  # global mode: highest verified volume first (run_global already sorted); order_by_cluster only adds mix_boost
+        candidates = sorted(candidates, key=lambda i: (-(i.get("volume") or 0), -(i.get("score_total") or 0)))
     if not candidates:
         report["decision"] = ("skip: no keyword met the feature-relevance, score, volume, intent and duplicate checks "
                               "(see 'Keywords by feature' for reasons)")
@@ -230,7 +233,7 @@ def new_article(cfg, state: State, facts: dict, pages, perf, dry: bool, report: 
         plan, serp = strategy_agent.decide(cfg, kw, pages, facts)
         attempt = {"keyword": kw["keyword"], "feature": kw.get("feature"), "volume": kw.get("volume"),
                    "score_total": kw.get("score_total"), "score": kw.get("score"), "mix_boost": kw.get("mix_boost"),
-                   "evidence": kw.get("score_evidence"), "plan_action": plan.get("action"), "plan_reason": plan.get("reason")}
+                   "evidence": kw.get("score_evidence"), "market": kw.get("market_name"), "ads_competition": kw.get("ads_competition"), "plan_action": plan.get("action"), "plan_reason": plan.get("reason")}
         report["attempts"].append(attempt)
         if plan.get("action") != "new":
             state.record_keyword(kw["keyword"], kw, f"planner_{plan.get('action')}: {str(plan.get('reason', ''))[:120]}")
@@ -248,6 +251,9 @@ def new_article(cfg, state: State, facts: dict, pages, perf, dry: bool, report: 
                 [{"href": f"/{cfg.get('site.blog_dir')}/{s}/", "title": a["h1"]} for s, a in articles.items()]
         a = writer_agent.write(cfg, kw, plan, serp, slug, links, facts)
         a["cluster"] = kw["cluster"]
+        if global_on:
+            kw["selection_reason"] = keyword_agent.selection_reason(cfg, kw, len(report.get("global", {}).get("markets", [])))
+            a["market"], a["selection_reason"] = kw.get("market_name"), kw["selection_reason"]
         a["feature"] = kw.get("feature")
         a, gate = draft_until_pass(cfg, kw, plan, slug, a, articles, pages, facts, attempt)
         if not gate["passed"]:
@@ -255,7 +261,10 @@ def new_article(cfg, state: State, facts: dict, pages, perf, dry: bool, report: 
             failed_features.add(kw["cluster"])
             continue
         if dry:
-            published.append(f"[dry-run] would publish /{cfg.get('site.blog_dir')}/{slug}/")
+            if global_on:
+                kw["selection_reason"] = keyword_agent.selection_reason(cfg, kw, len(report.get("global", {}).get("markets", [])))
+            published.append(f"[dry-run] would publish /{cfg.get('site.blog_dir')}/{slug}/ for '{kw['keyword']}'"
+                             + (f". Selected because: {kw['selection_reason']}" if kw.get("selection_reason") else ""))
             clusters_today.add(kw["cluster"])
             continue
         a["quality_gate"] = {k: gate[k] for k in ("word_count", "keyword_density", "warnings")} | \
@@ -265,7 +274,8 @@ def new_article(cfg, state: State, facts: dict, pages, perf, dry: bool, report: 
         state.record_keyword(kw["keyword"], kw, f"published:{slug}")
         published.append(f"published /{cfg.get('site.blog_dir')}/{slug}/ for '{kw['keyword']}' (feature {kw.get('feature')}, "
                          f"score {kw.get('score_total')}) after {a['quality_gate']['revisions']} revision(s)"
-                         + (" + polish" if a["quality_gate"]["polished"] else ""))
+                         + (" + polish" if a["quality_gate"]["polished"] else "")
+                         + (f". Selected because: {kw['selection_reason']}" if kw.get("selection_reason") else ""))
         report["published_urls"] = report.get("published_urls", []) + [publisher.article_url(cfg, slug)]
         report["changes"].append(f"new article blog/{slug}/index.html")
         clusters_today.add(kw["cluster"])
@@ -280,6 +290,16 @@ def write_report(cfg, report: dict, dry: bool) -> None:
         lines += ["## Changes", *[f"- {c}" for c in report["changes"]], ""]
     if report["notes"]:
         lines += ["## Notes", *[f"- {n}" for n in report["notes"]], ""]
+    if report.get("global"):
+        gl = report["global"]
+        lines += ["## Global keyword discovery",
+                  f"Eligible = verified volume >= {gl['min_volume']:,}/month and Google Ads competition in {', '.join(gl['competition'])}. "
+                  f"{gl['eligible_keywords']} eligible keyword(s) pooled; highest volume is tried first.", "",
+                  "| market | ideas | qualifying | eligible | best eligible keyword (volume) | error |", "|---|---|---|---|---|---|"]
+        lines += [f"| {r['name']} | {r['ideas']} | {r['qualifying']} | {r['eligible']} | "
+                  f"{(r['best'][0] + ' (' + format(r['best'][1], ',') + ')') if r['best'] else '-'} | {r['error'] or ''} |" for r in gl["markets"]]
+
+        lines += [""]
     if report.get("site_issues") or report.get("page_issues"):
         lines += ["## Audit findings", *[f"- site: {i}" for i in report.get("site_issues", [])],
                   *[f"- {p}: {', '.join(v)}" for p, v in report.get("page_issues", {}).items()], ""]

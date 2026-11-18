@@ -115,6 +115,8 @@ def run(cfg: Config, state: State, pages: list[Page], perf: dict[str, Any] | Non
     for q, m in gsc.items():
         ideas.setdefault(q, {"keyword": q, "volume": None, "source": "search_console (volume unverified)"}).update(m)
     found = [i for i in ideas.values() if research.relevant(cfg, i["keyword"])]
+    for i in found:
+        i["market"] = cfg.get("keyword_research.location")
     found = research.enrich(cfg, found)
     articles = state.data.get("articles", {})
     for i in found:
@@ -135,6 +137,82 @@ def run(cfg: Config, state: State, pages: list[Page], perf: dict[str, Any] | Non
         "reasons": dict(sorted(reasons.items(), key=lambda kv: -kv[1]))}
     log.info("Keyword agent: %d ideas, %d relevant, %d shortlisted", len(ideas), len(found), len(short))
     return short
+
+
+def run_global(cfg: Config, state: State, pages: list[Page], perf: dict[str, Any] | None, report: dict) -> list[dict[str, Any]]:
+    """Searches every configured market, pools the qualifying keywords and returns them highest verified volume first.
+
+    A candidate is eligible when its Keyword Planner volume is >= global_discovery.minimum_monthly_searches AND its Google
+    Ads competition is in allowed_ads_competition (unknown competition is NOT eligible). The same keyword seen in several
+    markets is kept once, in its highest-volume market. Relevance, intent, duplicate and cooldown checks are the normal
+    ones (applied inside run()). One market failing never stops the others; Budget limits still stop everything."""
+    from ..budget import BudgetExceeded
+    g = cfg.get("keyword_research.global_discovery") or {}
+    kr = cfg.raw["keyword_research"]
+    primary = {k: kr.get(k) for k in ("location", "location_code", "minimum_monthly_searches")}
+    min_vol = int(g.get("minimum_monthly_searches", 1000))
+    allowed = {str(c).upper() for c in g.get("allowed_ads_competition", ["LOW"])}
+    english_only = bool(g.get("english_only", True))
+    pool: dict[str, dict[str, Any]] = {}
+    rows: list[dict[str, Any]] = []
+    last: Exception | None = None
+    ok = 0
+    first_summary = None
+    try:
+        for m in g.get("markets", []):
+            kr.update(location=m["location"], location_code=m["location_code"], minimum_monthly_searches=min_vol)
+            row = {"market": m["location"], "name": m["name"], "ideas": 0, "qualifying": 0, "eligible": 0, "best": None, "error": None}
+            rows.append(row)
+            try:
+                short = run(cfg, state, pages, perf, report)
+            except BudgetExceeded:
+                raise
+            except Exception as e:  # noqa: BLE001 - one market must not stop the others
+                last = e
+                row["error"] = f"{type(e).__name__}: {str(e)[:120]}"
+                log.warning("Global discovery: market %s failed: %s", m["location"], row["error"])
+                continue
+            ok += 1
+            counts = report.get("selection_counts") or {}
+            row["ideas"], row["qualifying"] = counts.get("discovered", 0), len(short)
+            if first_summary is None:
+                first_summary = report.get("feature_summary")
+            for i in short:
+                comp = str(i.get("ads_competition") or "").upper()
+                if (i.get("volume") or 0) < min_vol or comp not in allowed or (english_only and not i["keyword"].isascii()):
+                    continue
+                i["market"], i["market_name"] = m["location"], m["name"]
+                row["eligible"] += 1
+                prev = pool.get(i["keyword"])
+                seen = (prev or {}).get("also_seen", [])
+                seen.append({"market": m["location"], "volume": i["volume"]})
+                if prev is None or i["volume"] > prev["volume"]:
+                    pool[i["keyword"]] = {**i, "also_seen": seen}
+                else:
+                    prev["also_seen"] = seen
+    finally:
+        kr.update(primary)
+    if not ok and last is not None:
+        raise last
+    if first_summary is not None:
+        report["feature_summary"] = first_summary
+    ranked = sorted(pool.values(), key=lambda i: (-(i["volume"] or 0), -(i.get("score_total") or 0)))
+    for i in ranked:
+        row = next(r for r in rows if r["market"] == i["market"])
+        if row["best"] is None or i["volume"] > row["best"][1]:
+            row["best"] = (i["keyword"], i["volume"])
+    report["global"] = {"min_volume": min_vol, "competition": sorted(allowed), "markets": rows,
+                        "eligible_keywords": len(ranked)}
+    log.info("Global discovery: %d markets, %d eligible keywords pooled", len(rows), len(ranked))
+    return ranked
+
+
+def selection_reason(cfg: Config, kw: dict[str, Any], n_markets: int) -> str:
+    also = [f"{s['market']} {s['volume']:,}" for s in kw.get("also_seen", []) if s["market"] != kw.get("market")]
+    return (f"Highest-volume eligible keyword across {n_markets} markets: {kw['volume']:,} searches/month in "
+            f"{kw.get('market_name') or kw.get('market')}, Google Ads competition {kw.get('ads_competition')}, "
+            f"score {kw.get('score_total')}; passed relevance, duplicate, planner and quality checks."
+            + (f" Also seen in: {', '.join(also)}." if also else ""))
 
 
 def feature_summary(cfg: Config, found: list[dict[str, Any]]) -> list[dict[str, Any]]:

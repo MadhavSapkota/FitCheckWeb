@@ -27,7 +27,7 @@ concurrency:
 jobs:
   seo:
     runs-on: ubuntu-latest
-    timeout-minutes: 45
+    timeout-minutes: 90   # global discovery searches ~14 markets
     steps:
       # Check out the LATEST branch head (not the commit that triggered the run), so a run queued behind another
       # (concurrency group) sees that run's published article and the 1-article/day limit holds.

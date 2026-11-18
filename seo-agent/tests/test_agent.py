@@ -54,6 +54,7 @@ def site(tmp_path, monkeypatch):
     (root / "terms.html").write_text(page.format(t="Terms — FitCheck AI", d="Terms of service for the FitCheck AI Android application and website.", b="terms"))
     (root / "robots.txt").write_text("User-agent: *\nAllow: /\n\nSitemap: https://yourdomain.com/sitemap.xml\n")
     cfg_text = (AGENT / "seo-config.yaml").read_text().replace("organic_difficulty_source: none", "organic_difficulty_source: dataforseo")
+    cfg_text = cfg_text.replace("global_discovery:\n    enabled: true", "global_discovery:\n    enabled: false")  # old tests are single-market
     (root / "seo-agent" / "seo-config.yaml").write_text(cfg_text)
     real_load = config_mod.load_config
     monkeypatch.setattr(main, "load_config", lambda *a, **k: real_load(root=root))
@@ -301,7 +302,7 @@ def test_default_verified_only_publishes_nothing_without_data(site, monkeypatch)
 def test_editorial_topics_when_enabled(site, monkeypatch):
     _free_mode(site)
     cfg_p = site / "seo-agent" / "seo-config.yaml"
-    cfg_p.write_text(cfg_p.read_text().replace("enabled: false", "enabled: true"))
+    cfg_p.write_text(cfg_p.read_text().replace("unverified_topics:\n    enabled: false", "unverified_topics:\n    enabled: true"))
     mock_apis(monkeypatch)
     monkeypatch.setattr(research, "discover", lambda cfg, seeds=None: (_ for _ in ()).throw(research.NoProvider("no Ads API")))
     monkeypatch.setattr(content, "suggest_topics", lambda *a, **k: ["how to choose colors that match your outfit", "pizza"])
@@ -310,3 +311,72 @@ def test_editorial_topics_when_enabled(site, monkeypatch):
     kw = st["keywords"]["how to choose colors that match your outfit"]
     assert kw["decision"].startswith("published") and kw["latest"]["volume"] is None
     assert kw["latest"]["source"] == "editorial (volume unverified)"
+
+
+def enable_global(site):
+    p = site / "seo-agent" / "seo-config.yaml"
+    p.write_text(p.read_text().replace("global_discovery:\n    enabled: false", "global_discovery:\n    enabled: true"))
+
+
+def idea(k, vol, comp="LOW"):
+    return {"keyword": k, "volume": vol, "ads_competition": comp, "source": "google_ads_keyword_planner"}
+
+
+def by_market(monkeypatch, table, seen=None):
+    def discover(cfg, seeds=None):
+        code = cfg.get("keyword_research.location_code")
+        if seen is not None:
+            seen.append(code)
+        return table.get(code, [])
+    monkeypatch.setattr(research, "discover", discover)
+
+
+def test_global_picks_highest_volume_eligible_across_markets(site, monkeypatch):
+    mock_apis(monkeypatch)
+    enable_global(site)
+    seen = []
+    by_market(monkeypatch, {
+        2840: [idea("how to match colors in an outfit", 1300)],                       # US: eligible, lower volume
+        2826: [idea("how to match colors in an outfit", 4400), idea("ai outfit checker", 90000, "HIGH")],  # UK: higher volume; HIGH one excluded
+        2276: [idea("outfit ideas for jobs", 2000, "MEDIUM"), idea("what to wear today", 800)],  # DE: wrong competition / too small
+    }, seen)
+    assert main.main(["run"]) == 0
+    assert len(set(seen)) == 14  # compared every market instead of stopping at the first with a result
+    assert len(list((site / "blog").glob("*/index.html"))) == 1  # one article per day
+    st = json.loads((site / "seo-agent" / "data" / "state.json").read_text())
+    assert st["keywords"]["how to match colors in an outfit"]["latest"]["market"] == "GB"  # highest-volume market wins
+    assert st["keywords"]["how to match colors in an outfit"]["latest"]["volume"] == 4400
+    assert "Highest-volume eligible keyword across 14 markets" in st["keywords"]["how to match colors in an outfit"]["latest"]["selection_reason"]
+    rep = (site / "seo-agent" / "data" / "reports" / "2026-11-01.md").read_text()
+    assert "Global keyword discovery" in rep and "United Kingdom" in rep and "Selected because" in rep
+    assert "ai outfit checker" not in rep.split("Selected because")[1].split("\n")[0]
+
+
+def test_global_requires_1000_searches_and_low_competition(site, monkeypatch):
+    mock_apis(monkeypatch)
+    enable_global(site)
+    by_market(monkeypatch, {2840: [idea("how to match colors in an outfit", 999)],
+                            2826: [idea("how to match colors in an outfit", 5000, "MEDIUM")],
+                            2124: [{"keyword": "how to match colors in an outfit", "volume": 5000, "source": "google_ads_keyword_planner"}]})  # unknown competition
+    assert main.main(["run"]) == 0
+    assert not any((site / "blog").glob("*/index.html"))
+
+
+def test_global_one_market_failing_does_not_stop_the_rest(site, monkeypatch):
+    mock_apis(monkeypatch)
+    enable_global(site)
+    def discover(cfg, seeds=None):
+        if cfg.get("keyword_research.location_code") == 2840:
+            raise RuntimeError("boom")
+        return [idea("how to match colors in an outfit", 3000)]
+    monkeypatch.setattr(research, "discover", discover)
+    assert main.main(["run"]) == 0
+    assert (site / "blog" / "how-to-match-colors-in-an-outfit" / "index.html").exists()
+
+
+def test_global_non_english_keyword_is_dropped(site, monkeypatch):
+    mock_apis(monkeypatch)
+    enable_global(site)
+    by_market(monkeypatch, {2276: [idea("wie kombiniere ich farben für outfit", 9000)]})
+    assert main.main(["run"]) == 0
+    assert not any((site / "blog").glob("*/index.html"))

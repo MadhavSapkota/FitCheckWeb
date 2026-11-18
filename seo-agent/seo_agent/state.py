@@ -108,7 +108,7 @@ class State:
 # Everything the agent reads back (re-tests, quality-gate cooldown, offline rescore, reports). Long text evidence is
 # recomputed every run and is kept in the daily report instead.
 LATEST_KEYS = ("keyword", "volume", "source", "ads_competition", "difficulty", "intent", "intent_type", "feature",
-               "score", "score_total", "gsc_impressions_28d", "gsc_position")
+               "score", "score_total", "gsc_impressions_28d", "gsc_position", "market", "selection_reason")
 HISTORY_KEYS = ("volume", "feature", "score_total", "gsc_impressions_28d", "gsc_position")
 MAX_HISTORY = 10
 PRUNE_DAYS = 90
