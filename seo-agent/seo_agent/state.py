@@ -49,9 +49,13 @@ class State:
             used.update(k.lower() for k in a.get("secondary_keywords", []))
         return used
 
-    def rejected_recently(self, kw: str, days: int = 30) -> bool:
+    def planner_rejected_recently(self, kw: str, days: int = 30) -> bool:
+        """The planner already judged this keyword (update an existing page / skip / wrong intent) within `days`."""
+        return self.rejected_recently(kw, days, prefixes=("planner_", "rejected_intent_after_planning"))
+
+    def rejected_recently(self, kw: str, days: int = 30, prefixes: tuple[str, ...] = ("rejected_by_quality_gate",)) -> bool:
         e = self.data["keywords"].get(kw)
-        if not e or not str(e.get("decision", "")).startswith("rejected_by_quality_gate"):
+        if not e or not str(e.get("decision", "")).startswith(prefixes):
             return False
         last = e.get("updated") or (e.get("history") or [{}])[-1].get("date")
         if not last:

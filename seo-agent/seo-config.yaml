@@ -52,7 +52,13 @@ keyword_research:
   unverified_topics:
     enabled: false                 # OFF: verified data sources only (owner's choice)
     min_opportunity_estimate: 40   # needs 5+ words, question format, and app relevance
-  max_candidates_per_run: 4          # each candidate costs 3 Claude calls + 2 per revision
+  max_candidates_per_run: 4          # candidates that reach WRITING (each costs 3 Claude calls + 2 per revision)
+  # Planner calls (1 cheap Claude call each) are capped separately, so keywords the planner rejects as duplicates of existing pages
+  # cannot use up the writing cap. The per-run Claude call limit and the monthly budget (limits:) still apply unchanged.
+  max_planner_calls_per_run: 8
+  # A keyword the planner rejected (update / skip / wrong intent) is not offered again for this many days, so the same
+  # duplicate keywords stop re-entering the shortlist every day. Quality-gate failures keep their own 30-day cooldown.
+  planner_rejection_cooldown_days: 30
   # Duplicate intent: a keyword is skipped when a published article's target/secondary query overlaps this much
   # (token Jaccard). Any feature: cluster_duplicate_overlap. Same feature: same_feature_overlap (stricter).
   cluster_duplicate_overlap: 0.6

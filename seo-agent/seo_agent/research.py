@@ -157,6 +157,8 @@ def shortlist(cfg: Config, ideas: list[dict[str, Any]], pages: list[Page], state
             reason = "rejected_already_targeted"
         elif state.rejected_recently(kw):
             reason = "rejected_recently_failed_quality_gate"
+        elif state.planner_rejected_recently(kw, int(cfg.get("keyword_research.planner_rejection_cooldown_days", 30))):
+            reason = "rejected_recently_by_planner"
         elif cluster_duplicate(cfg, i, state.data.get("articles", {})):
             d = i["duplicate_of"]
             reason = f"duplicate_intent_of_{d['kind']}:{d['slug']}"

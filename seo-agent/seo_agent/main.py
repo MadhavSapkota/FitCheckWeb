@@ -230,9 +230,12 @@ def new_article(cfg, state: State, facts: dict, pages, perf, dry: bool, report: 
                                   "(see 'Keywords by feature' for reasons)")
         return
     published, clusters_today, failed_features = [], set(), set()
-    tried = 0
+    tried, planned = 0, 0   # tried = candidates that reached WRITING; planned = planner calls
     for kw in candidates:
         if tried >= cfg.get("keyword_research.max_candidates_per_run", 3):
+            break
+        if planned >= cfg.get("keyword_research.max_planner_calls_per_run", 8):
+            report["notes"].append(f"Planner-call limit reached ({planned}); remaining candidates were not evaluated")
             break
         if state.published_today() + (len(published) if dry else 0) >= limit:
             break  # dry runs save nothing, so count their would-be publishes toward the daily limit too
@@ -240,7 +243,7 @@ def new_article(cfg, state: State, facts: dict, pages, perf, dry: bool, report: 
             continue  # spread daily articles across clusters
         if kw["cluster"] in failed_features:
             continue  # a same-feature draft already failed this run; try a different feature instead
-        tried += 1
+        planned += 1
         if published:
             pages = crawl(cfg)["pages"]  # include today's earlier article in duplicate checks
         plan, serp = strategy_agent.decide(cfg, kw, pages, facts)
@@ -256,6 +259,7 @@ def new_article(cfg, state: State, facts: dict, pages, perf, dry: bool, report: 
             keyword_agent.set_status(report, kw["keyword"], f"rejected_intent_after_planning:{plan['intent']}")
             state.record_keyword(kw["keyword"], kw, f"rejected_intent_after_planning:{plan['intent']}")
             continue
+        tried += 1  # this candidate will be written (the costly part)
         slug = re.sub(r"[^a-z0-9-]+", "-", (plan.get("slug") or kw["keyword"]).lower()).strip("-")[:70]
         if slug in articles or publisher.article_path(cfg, slug).exists():
             slug = f"{slug}-guide"

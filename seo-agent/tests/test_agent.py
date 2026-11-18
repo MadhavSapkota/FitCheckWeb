@@ -462,3 +462,58 @@ def test_report_lists_country_volume_competition_scores_and_per_country_rejectio
     assert us[[h.strip() for h in head].index("ads_competition_not_allowed")].strip() == "0"
     summary = rep.split("## Selection summary")[1].split("##")[0]
     assert "discovered" in summary  # summary now sums every market
+
+
+FIVE = [("how to match colors in an outfit", 5000), ("ai outfit checker", 4000), ("does my outfit look good", 3000),
+        ("what should i wear today", 2000), ("color matching clothes for women", 1500)]
+
+
+def five_keywords(monkeypatch):
+    mock_apis(monkeypatch)
+    monkeypatch.setattr(research, "discover", lambda cfg, seeds=None: [idea(k, v) for k, v in FIVE])
+    monkeypatch.setattr(dataforseo, "keyword_difficulty", lambda cfg, kws: {k: 10 for k in kws})
+
+
+def count_planner(monkeypatch, new_on_call=None):
+    calls = []
+    def plan(cfg, kw, serp, pages, facts):
+        calls.append(kw["keyword"])
+        action = "new" if new_on_call and len(calls) == new_on_call else "update"
+        return {"intent": "informational", "action": action, "reason": "an existing page covers this",
+                "slug": "how-to-match-colors-in-an-outfit", "secondary_keywords": [], "outline": []}
+    monkeypatch.setattr(content, "plan", plan)
+    return calls
+
+
+def test_planner_rejections_do_not_use_up_the_writing_cap(site, monkeypatch):
+    five_keywords(monkeypatch)
+    calls = count_planner(monkeypatch, new_on_call=5)   # first four are duplicates of existing pages, the fifth is new
+    assert main.main(["run"]) == 0
+    assert len(calls) == 5                               # old behaviour stopped after 4 planner calls and published nothing
+    assert len(list((site / "blog").glob("*/index.html"))) == 1
+
+
+def test_planner_call_ceiling_is_enforced(site, monkeypatch):
+    p = site / "seo-agent" / "seo-config.yaml"
+    p.write_text(p.read_text().replace("max_planner_calls_per_run: 8", "max_planner_calls_per_run: 3"))
+    five_keywords(monkeypatch)
+    calls = count_planner(monkeypatch, new_on_call=5)
+    assert main.main(["run"]) == 0
+    assert len(calls) == 3 and not any((site / "blog").glob("*/index.html"))
+    assert "Planner-call limit reached (3)" in report_text(site)
+
+
+def test_planner_rejected_keyword_is_not_offered_again_for_30_days(site, monkeypatch):
+    five_keywords(monkeypatch)
+    calls = count_planner(monkeypatch)                   # every keyword rejected as a duplicate
+    assert main.main(["run"]) == 0
+    first = len(calls)
+    assert first == 5
+    monkeypatch.setenv("SEO_AGENT_TODAY", "2026-11-05")  # 4 days later: all five are on cooldown, none re-planned
+    assert main.main(["run"]) == 0
+    assert len(calls) == first
+    st = json.loads((site / "seo-agent" / "data" / "state.json").read_text())
+    assert st["keywords"]["ai outfit checker"]["decision"].startswith("rejected_recently_by_planner")
+    monkeypatch.setenv("SEO_AGENT_TODAY", "2026-12-15")  # after the cooldown they are evaluated again
+    assert main.main(["run"]) == 0
+    assert len(calls) > first
