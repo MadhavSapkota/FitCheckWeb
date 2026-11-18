@@ -71,7 +71,7 @@ keyword_research:
   # whose intent is specific to a country or language our English article cannot genuinely serve.
   global_discovery:
     enabled: true
-    minimum_monthly_searches: 1000          # per market, verified by Google Ads Keyword Planner
+    minimum_monthly_searches: 300           # per market, verified by Google Ads Keyword Planner (was 1000; lowered for the dry-run comparison)
     allowed_ads_competition: ["LOW"]        # Google Ads (advertising) competition; NOT organic difficulty
     english_only: true                      # drop keywords containing non-ASCII letters (other-language queries)
     # Only keywords the site can realistically rank for are published: the heuristic ranking-opportunity score (0-100, NOT
