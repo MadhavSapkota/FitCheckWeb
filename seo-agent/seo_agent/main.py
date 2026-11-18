@@ -205,6 +205,7 @@ def new_article(cfg, state: State, facts: dict, pages, perf, dry: bool, report: 
             dup = research.cluster_duplicate(cfg, i, articles)
             if dup:
                 i["decision"] = f"duplicate_in_cluster:{dup}"
+                keyword_agent.set_status(report, i["keyword"], f"duplicate_in_cluster:{dup}: not selected")
                 state.record_keyword(i["keyword"], i, i["decision"])
     report["shortlist"] = [{k: i.get(k) for k in ("keyword", "volume", "difficulty", "opportunity_estimate", "gsc_impressions_28d",
                                                   "intent", "cluster", "feature", "score", "score_total", "decision",
@@ -212,9 +213,21 @@ def new_article(cfg, state: State, facts: dict, pages, perf, dry: bool, report: 
     candidates = research.order_by_cluster([i for i in short if i["decision"] == "candidate"], articles, cfg)
     if global_on:  # global mode: highest verified volume first (run_global already sorted); order_by_cluster only adds mix_boost
         candidates = sorted(candidates, key=lambda i: (-(i.get("volume") or 0), -(i.get("score_total") or 0)))
+    if global_on:
+        for i in short:
+            if i["decision"] != "candidate":
+                keyword_agent.set_status(report, i["keyword"], f"{i['decision']}: not selected")
     if not candidates:
-        report["decision"] = ("skip: no keyword met the feature-relevance, score, volume, intent and duplicate checks "
-                              "(see 'Keywords by feature' for reasons)")
+        gl = report.get("global") or {}
+        blocked = [k for k in gl.get("keywords", []) if str(k["status"]).startswith("below_ranking_opportunity")]
+        if global_on and blocked and not short:
+            b = blocked[0]
+            report["decision"] = (f"skip: {len(blocked)} keyword(s) met the volume and LOW-competition requirements, but none had ranking "
+                                  f"opportunity >= {gl.get('min_ranking_opportunity')}, so no difficult head term was auto-selected "
+                                  f"(best of them: '{b['keyword']}', {b['volume']:,}/month in {b['market']}, opportunity {b['ranking_opportunity']})")
+        else:
+            report["decision"] = ("skip: no keyword met the feature-relevance, score, volume, intent and duplicate checks "
+                                  "(see 'Keywords by feature' for reasons)")
         return
     published, clusters_today, failed_features = [], set(), set()
     tried = 0
@@ -236,9 +249,11 @@ def new_article(cfg, state: State, facts: dict, pages, perf, dry: bool, report: 
                    "evidence": kw.get("score_evidence"), "market": kw.get("market_name"), "ads_competition": kw.get("ads_competition"), "plan_action": plan.get("action"), "plan_reason": plan.get("reason")}
         report["attempts"].append(attempt)
         if plan.get("action") != "new":
+            keyword_agent.set_status(report, kw["keyword"], f"planner_{plan.get('action')}: {str(plan.get('reason', ''))[:110]}")
             state.record_keyword(kw["keyword"], kw, f"planner_{plan.get('action')}: {str(plan.get('reason', ''))[:120]}")
             continue
         if plan["intent"] not in cfg.get("keyword_research.allowed_intents"):
+            keyword_agent.set_status(report, kw["keyword"], f"rejected_intent_after_planning:{plan['intent']}")
             state.record_keyword(kw["keyword"], kw, f"rejected_intent_after_planning:{plan['intent']}")
             continue
         slug = re.sub(r"[^a-z0-9-]+", "-", (plan.get("slug") or kw["keyword"]).lower()).strip("-")[:70]
@@ -257,12 +272,14 @@ def new_article(cfg, state: State, facts: dict, pages, perf, dry: bool, report: 
         a["feature"] = kw.get("feature")
         a, gate = draft_until_pass(cfg, kw, plan, slug, a, articles, pages, facts, attempt)
         if not gate["passed"]:
+            keyword_agent.set_status(report, kw["keyword"], f"rejected_by_quality_gate: {'; '.join(gate['failures'])[:110]}")
             state.record_keyword(kw["keyword"], kw, f"rejected_by_quality_gate: {'; '.join(gate['failures'])[:300]}")
             failed_features.add(kw["cluster"])
             continue
         if dry:
             if global_on:
                 kw["selection_reason"] = keyword_agent.selection_reason(cfg, kw, len(report.get("global", {}).get("markets", [])))
+            keyword_agent.set_status(report, kw["keyword"], "SELECTED - would publish (dry run)")
             published.append(f"[dry-run] would publish /{cfg.get('site.blog_dir')}/{slug}/ for '{kw['keyword']}'"
                              + (f". Selected because: {kw['selection_reason']}" if kw.get("selection_reason") else ""))
             clusters_today.add(kw["cluster"])
@@ -271,6 +288,7 @@ def new_article(cfg, state: State, facts: dict, pages, perf, dry: bool, report: 
             {"revisions": sum(1 for r in attempt["rounds"] if r["round"] not in (0, "polish")),
              "polished": any(r["round"] == "polish" and r["passed"] for r in attempt["rounds"])}
         editor_agent.publish(cfg, a, articles)
+        keyword_agent.set_status(report, kw["keyword"], "SELECTED - published")
         state.record_keyword(kw["keyword"], kw, f"published:{slug}")
         published.append(f"published /{cfg.get('site.blog_dir')}/{slug}/ for '{kw['keyword']}' (feature {kw.get('feature')}, "
                          f"score {kw.get('score_total')}) after {a['quality_gate']['revisions']} revision(s)"
@@ -279,6 +297,9 @@ def new_article(cfg, state: State, facts: dict, pages, perf, dry: bool, report: 
         report["published_urls"] = report.get("published_urls", []) + [publisher.article_url(cfg, slug)]
         report["changes"].append(f"new article blog/{slug}/index.html")
         clusters_today.add(kw["cluster"])
+    for k in (report.get("global") or {}).get("keywords", []):
+        if k["status"] == "queued":
+            k["status"] = "not needed: an article was already selected" if published else "not reached (candidate cap)"
     report["decision"] = "; ".join(published) if published else "skip: no candidate passed planning + quality gate today"
 
 
@@ -293,12 +314,28 @@ def write_report(cfg, report: dict, dry: bool) -> None:
     if report.get("global"):
         gl = report["global"]
         lines += ["## Global keyword discovery",
-                  f"Eligible = verified volume >= {gl['min_volume']:,}/month and Google Ads competition in {', '.join(gl['competition'])}. "
-                  f"{gl['eligible_keywords']} eligible keyword(s) pooled; highest volume is tried first.", "",
-                  "| market | ideas | qualifying | eligible | best eligible keyword (volume) | error |", "|---|---|---|---|---|---|"]
-        lines += [f"| {r['name']} | {r['ideas']} | {r['qualifying']} | {r['eligible']} | "
-                  f"{(r['best'][0] + ' (' + format(r['best'][1], ',') + ')') if r['best'] else '-'} | {r['error'] or ''} |" for r in gl["markets"]]
-
+                  f"Eligible = verified volume >= {gl['min_volume']:,}/month, Google Ads competition in {', '.join(gl['competition'])}. "
+                  f"Preferred = eligible AND ranking opportunity >= {gl['min_ranking_opportunity']} (heuristic, NOT keyword difficulty). "
+                  f"{gl['eligible_keywords']} eligible, {gl['preferred_keywords']} preferred; the highest-volume preferred keyword that passes "
+                  "the planner, duplicate and quality checks is selected. No market is favoured.", "",
+                  "### Per-country counts and rejections (each market's own numbers)"]
+        reasons = sorted({r for mk in gl["markets"] for r in mk["reasons"]},
+                         key=lambda r: -sum(mk["reasons"].get(r, 0) for mk in gl["markets"]))
+        grn = ["ads_competition_not_allowed", "non_english", "ranking_opportunity_below_min"]
+        head = ["market", "ideas", "relevant", "qualifying", "dup. landing", "dup. article", *reasons, *grn, "eligible", "preferred", "error"]
+        lines += ["| " + " | ".join(head) + " |", "|" + "---|" * len(head)]
+        for mk in gl["markets"]:
+            c = mk["counts"]
+            cells = [mk["name"], c.get("discovered", "-"), c.get("relevant", "-"), mk["qualifying"], c.get("dup_landing", "-"),
+                     c.get("dup_article", "-"), *[mk["reasons"].get(r, 0) for r in reasons],
+                     *[mk["global_rejections"][r] for r in grn], mk["eligible"], mk["preferred"], mk["error"] or ""]
+            lines.append("| " + " | ".join(str(x) for x in cells) + " |")
+        lines += ["", "### Eligible keywords, highest volume first",
+                  "| # | keyword | country | monthly searches | Ads competition | relevance | ranking opportunity | conversion | score | also seen in | status |",
+                  "|---|---|---|---|---|---|---|---|---|---|---|"]
+        lines += [f"| {n} | {k['keyword']} | {k['market']} | {k['volume']:,} | {k['competition']} | {k['relevance']} | "
+                  f"{k['ranking_opportunity']} | {k['conversion']} | {k['score']} | {k['also_seen']} | {k['status']} |"
+                  for n, k in enumerate(gl["keywords"], 1)]
         lines += [""]
     if report.get("site_issues") or report.get("page_issues"):
         lines += ["## Audit findings", *[f"- site: {i}" for i in report.get("site_issues", [])],

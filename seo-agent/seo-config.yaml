@@ -74,6 +74,9 @@ keyword_research:
     minimum_monthly_searches: 1000          # per market, verified by Google Ads Keyword Planner
     allowed_ads_competition: ["LOW"]        # Google Ads (advertising) competition; NOT organic difficulty
     english_only: true                      # drop keywords containing non-ASCII letters (other-language queries)
+    # Only keywords the site can realistically rank for are published: the heuristic ranking-opportunity score (0-100, NOT
+    # keyword difficulty) must be >= this. Eligible keywords below it are reported, never auto-selected as "difficult head terms".
+    min_ranking_opportunity: 60
     markets:
       - {name: "United States", location: US, location_code: 2840}
       - {name: "United Kingdom", location: GB, location_code: 2826}

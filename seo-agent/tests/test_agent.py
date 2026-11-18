@@ -313,9 +313,27 @@ def test_editorial_topics_when_enabled(site, monkeypatch):
     assert kw["latest"]["source"] == "editorial (volume unverified)"
 
 
-def enable_global(site):
+def enable_global(site, min_opp=0):
     p = site / "seo-agent" / "seo-config.yaml"
-    p.write_text(p.read_text().replace("global_discovery:\n    enabled: false", "global_discovery:\n    enabled: true"))
+    txt = p.read_text().replace("global_discovery:\n    enabled: false", "global_discovery:\n    enabled: true")
+    p.write_text(txt.replace("min_ranking_opportunity: 60", f"min_ranking_opportunity: {min_opp}"))
+
+
+def set_opportunity(monkeypatch, table, default=80):
+    """Pins each keyword's ranking-opportunity score so selection tests are deterministic."""
+    from seo_agent import scoring
+    orig = scoring.score
+
+    def score(cfg, i, pages, articles):
+        r = orig(cfg, i, pages, articles)
+        if i.get("score"):
+            i["score"]["ranking_opportunity"] = table.get(i["keyword"], default)
+        return r
+    monkeypatch.setattr(scoring, "score", score)
+
+
+def report_text(site):
+    return (site / "seo-agent" / "data" / "reports" / "2026-11-01.md").read_text()
 
 
 def idea(k, vol, comp="LOW"):
@@ -329,6 +347,7 @@ def by_market(monkeypatch, table, seen=None):
             seen.append(code)
         return table.get(code, [])
     monkeypatch.setattr(research, "discover", discover)
+    monkeypatch.setattr(dataforseo, "keyword_difficulty", lambda cfg, kws: {k: 10 for k in kws})
 
 
 def test_global_picks_highest_volume_eligible_across_markets(site, monkeypatch):
@@ -380,3 +399,64 @@ def test_global_non_english_keyword_is_dropped(site, monkeypatch):
     by_market(monkeypatch, {2276: [idea("wie kombiniere ich farben für outfit", 9000)]})
     assert main.main(["run"]) == 0
     assert not any((site / "blog").glob("*/index.html"))
+
+
+def test_head_term_below_ranking_opportunity_is_not_selected_even_with_top_volume(site, monkeypatch):
+    mock_apis(monkeypatch)
+    enable_global(site, min_opp=60)
+    set_opportunity(monkeypatch, {"ai outfit checker": 40, "how to match colors in an outfit": 70})
+    by_market(monkeypatch, {2356: [idea("ai outfit checker", 40000)],                        # India: biggest, but hard head term
+                            2826: [idea("how to match colors in an outfit", 3000)]})        # UK: smaller, realistic
+    assert main.main(["run"]) == 0
+    assert (site / "blog" / "how-to-match-colors-in-an-outfit" / "index.html").exists()
+    rep = report_text(site)
+    assert "below_ranking_opportunity (<60): not selected" in rep           # the head term is reported, with its status
+    assert "SELECTED - published" in rep and "ranking opportunity 70" in rep  # and the reason names the opportunity score
+
+
+def test_nothing_published_and_clearly_reported_when_only_head_terms_qualify(site, monkeypatch):
+    mock_apis(monkeypatch)
+    enable_global(site, min_opp=60)
+    set_opportunity(monkeypatch, {}, default=30)
+    by_market(monkeypatch, {2840: [idea("how to match colors in an outfit", 9000)]})
+    assert main.main(["run"]) == 0
+    assert not any((site / "blog").glob("*/index.html"))
+    rep = report_text(site)
+    assert "none had ranking opportunity >= 60" in rep and "no difficult head term was auto-selected" in rep
+    assert "how to match colors in an outfit" in rep  # still listed so the owner can see it
+
+
+def test_highest_volume_among_preferred_wins(site, monkeypatch):
+    mock_apis(monkeypatch)
+    enable_global(site, min_opp=60)
+    set_opportunity(monkeypatch, {"how to match colors in an outfit": 65, "does my outfit look good": 90, "ai outfit checker": 20})
+    by_market(monkeypatch, {2840: [idea("does my outfit look good", 2000), idea("ai outfit checker", 90000)],
+                            2036: [idea("how to match colors in an outfit", 7000)]})
+    assert main.main(["run"]) == 0
+    st = json.loads((site / "seo-agent" / "data" / "state.json").read_text())
+    assert st["keywords"]["how to match colors in an outfit"]["decision"].startswith("published")
+    assert not st["keywords"]["does my outfit look good"]["decision"].startswith("published")  # lower volume, one article per day
+    assert len(list((site / "blog").glob("*/index.html"))) == 1
+
+
+def test_report_lists_country_volume_competition_scores_and_per_country_rejections(site, monkeypatch):
+    mock_apis(monkeypatch)
+    enable_global(site, min_opp=60)
+    set_opportunity(monkeypatch, {}, default=75)
+    by_market(monkeypatch, {2840: [idea("how to match colors in an outfit", 1500), idea("outfit rating", 50)],
+                            2356: [idea("ai outfit checker", 6200), idea("how to match colors in an outfit", 8000, "HIGH")]})
+    assert main.main(["run"]) == 0
+    rep = report_text(site)
+    assert "| keyword | country | monthly searches | Ads competition | relevance | ranking opportunity | conversion | score |" in rep
+    row = next(l for l in rep.splitlines() if l.startswith("| ") and "ai outfit checker" in l and "India" in l and "6,200" in l)
+    assert "India" in row and "6,200" in row and "LOW" in row and "| 75 |" in row
+    rows = {l.split("|")[1].strip(): l for l in rep.splitlines() if l.startswith("| ") and l.split("|")[1].strip() in ("United States", "India", "Canada")}
+    assert set(rows) == {"United States", "India", "Canada"}  # one complete row per market, none overwritten
+    assert rows["United States"] != rows["India"] != rows["Canada"]
+    head = next(l for l in rep.splitlines() if l.startswith("| market |")).split("|")[1:-1]
+    india = rows["India"].split("|")[1:-1]
+    assert india[[h.strip() for h in head].index("ads_competition_not_allowed")].strip() == "1"  # HIGH-competition idea counted against India only
+    us = rows["United States"].split("|")[1:-1]
+    assert us[[h.strip() for h in head].index("ads_competition_not_allowed")].strip() == "0"
+    summary = rep.split("## Selection summary")[1].split("##")[0]
+    assert "discovered" in summary  # summary now sums every market
