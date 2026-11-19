@@ -9,6 +9,10 @@ on:
         description: "Dry run (no file changes, no commit, no deploy)"
         type: boolean
         default: false
+      discovery_only:
+        description: "Discovery only: query every market and print the keyword report. Publishes/saves/commits nothing, ignores the daily limit"
+        type: boolean
+        default: false
       keyword:
         description: "Re-test one keyword (optional, bypasses the 30-day rejection cooldown)"
         type: string
@@ -69,6 +73,7 @@ jobs:
           FORCE_KEYWORD: ${{ inputs.keyword }}
         working-directory: seo-agent
         run: |
+          if [ "${{ inputs.discovery_only }}" = "true" ]; then python -m seo_agent.main discover; exit $?; fi
           args=""
           if [ "${{ inputs.dry_run }}" = "true" ] || [ "${GITHUB_REF}" != "refs/heads/master" ]; then args="--dry-run"; fi
           if [ -n "$FORCE_KEYWORD" ]; then
@@ -80,13 +85,13 @@ jobs:
       # Publishing only ever happens from master. On any other branch the run is forced to behave like a dry run
       # after the agent step: no commit, no push, no deploy.
       - name: Validate site (build test)
-        if: ${{ inputs.dry_run != true && github.ref == 'refs/heads/master' }}
+        if: ${{ inputs.dry_run != true && inputs.discovery_only != true && github.ref == 'refs/heads/master' }}
         working-directory: seo-agent
         run: python -m seo_agent.main check
 
       - name: Commit and push changes
         id: commit
-        if: ${{ inputs.dry_run != true && github.ref == 'refs/heads/master' }}
+        if: ${{ inputs.dry_run != true && inputs.discovery_only != true && github.ref == 'refs/heads/master' }}
         run: |
           git config user.name "seo-agent[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"

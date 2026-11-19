@@ -585,3 +585,23 @@ def test_each_market_sends_its_own_geo_target_constant_to_google_ads(monkeypatch
         keyword_planner.keyword_ideas(cfg, ["outfit checker"])
     assert [g for g, _ in sent] == [[f"geoTargetConstants/{m['location_code']}"] for m in cfg.get("keyword_research.global_discovery.markets")]
     assert len({g[0] for g, _ in sent}) == 10 and all(lang == "languageConstants/1000" for _, lang in sent)  # 10 distinct geos, English
+
+
+def test_discover_queries_every_market_and_changes_nothing_even_when_daily_limit_is_reached(site, monkeypatch, capsys):
+    mock_apis(monkeypatch)
+    enable_global(site)
+    seen = []
+    by_market(monkeypatch, {2840: [idea("how to match colors in an outfit", 1300)], 2826: [idea("how to match colors in an outfit", 2000)]}, seen)
+    st_path = site / "seo-agent" / "data" / "state.json"
+    st = State(st_path)
+    st.data["articles"]["already-published-today"] = {"published": "2026-11-01", "h1": "x", "title": "x", "keyword": "x", "cluster": "x"}
+    st.save()
+    before = st_path.read_bytes()
+    monkeypatch.setattr(content, "write_article", lambda *a, **k: pytest.fail("discover must not write articles"), raising=False)
+    assert main.main(["discover"]) == 0
+    out = capsys.readouterr().out
+    assert len(set(seen)) == 10 and "DISCOVERY ONLY" in out and "discovery only:" in out
+    assert "US 1,300 (LOW)" in out and "GB 2,000 (LOW)" in out
+    assert st_path.read_bytes() == before                              # state untouched
+    assert not any((site / "blog").glob("*/index.html"))               # nothing published
+    assert not (site / "seo-agent" / "data" / "reports").exists() or not list((site / "seo-agent" / "data" / "reports").glob("2026-11-01.md"))

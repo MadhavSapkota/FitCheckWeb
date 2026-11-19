@@ -2,6 +2,7 @@
 
 Usage:
   python -m seo_agent.main run [--dry-run]     # full daily pipeline
+  python -m seo_agent.main discover            # read-only global keyword discovery report (publishes nothing)
   python -m seo_agent.main check               # site validation only ("build test"); exit 1 on errors
   python -m seo_agent.main rescore             # offline: re-score stored keywords, compare thresholds 40/45/50
   python -m seo_agent.main weekly [--dry-run]  # weekly performance report (also runs automatically once a week)
@@ -471,9 +472,50 @@ def run(dry: bool, force_keyword: str | None = None) -> int:
                     for e in report["errors"]) else 0
 
 
+def discover() -> int:
+    """Discovery-only: queries every configured market and prints the global report. Read-only by design: no article, no Claude
+    call, no state/log/site change, and it ignores the daily-article limit (it never publishes), so it can run any time."""
+    cfg = load_config()
+    setup_logging(None)
+    state = State(cfg.data_dir / "state.json")   # loaded for duplicate/cooldown checks, never saved
+    bud = Budget(cfg, state.data)
+    budget.set_current(bud)
+    report: dict[str, Any] = {"changes": [], "notes": ["DISCOVERY ONLY: Keyword Planner + scoring + duplicate checks; no planner/writer call, nothing published or saved."],
+                              "errors": [], "attempts": []}
+    try:
+        perf = None
+        try:
+            perf = analytics_agent.search_performance(cfg, report)
+        except Exception as e:  # noqa: BLE001
+            report["errors"].append(f"search console: {e}")
+        short = keyword_agent.run_global(cfg, state, crawl(cfg)["pages"], perf, report)
+        for i in short:
+            i["cluster"] = i.get("feature") or research.cluster_of(cfg, i["keyword"])
+        cands = [i for i in short if i["decision"] == "candidate"]
+        for i in short:
+            if i["decision"] != "candidate":
+                keyword_agent.set_status(report, i["keyword"], f"{i['decision']}: not selected")
+        for k in (report.get("global") or {}).get("keywords", []):
+            if k["status"] == "queued":
+                k["status"] = "eligible candidate (discovery only: planner/writer not run)"
+        top = cands[0] if cands else None
+        report["decision"] = (f"discovery only: {len(cands)} candidate(s) would go to the planner; strongest: '{top['keyword']}' "
+                              f"({top['volume']:,}/month in {top.get('market_name')}, Ads competition {top.get('ads_competition')}, score {top.get('score_total')})"
+                              if top else "discovery only: no candidate passed all checks")
+    except Exception as e:  # noqa: BLE001
+        report["errors"].append(f"fatal: {e}")
+        report["errors"].append(traceback.format_exc()[-1500:])
+    finally:
+        budget.set_current(None)
+    report.setdefault("decision", "discovery only: failed")
+    report["usage"] = bud.summary()
+    write_report(cfg, report, True)  # dry=True: prints only
+    return 2 if any(e.startswith("fatal") for e in report["errors"]) else 0
+
+
 def main(argv: list[str] | None = None) -> int:
     ap = argparse.ArgumentParser()
-    ap.add_argument("command", choices=["run", "check", "rescore", "weekly", "verify", "landing"])
+    ap.add_argument("command", choices=["run", "check", "rescore", "weekly", "verify", "landing", "discover"])
     ap.add_argument("--dry-run", action="store_true")
     ap.add_argument("--keyword", help="re-test one keyword (bypasses the 30-day rejection cooldown)")
     ap.add_argument("--wait", type=int, default=600, help="verify: seconds to wait for the deployment")
@@ -514,6 +556,8 @@ def main(argv: list[str] | None = None) -> int:
             print("NOT LIVE", f)
         print("deployment verification:", "FAILED" if fails else "OK")
         return 1 if fails else 0
+    if args.command == "discover":
+        return discover()
     if args.command == "check":
         setup_logging()
         errs = validate_site(load_config())
