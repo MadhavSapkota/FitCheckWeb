@@ -23,8 +23,11 @@ def gsc_query_ideas(cfg: Config, perf: dict[str, Any] | None) -> dict[str, dict[
     return out
 
 
-def seed_groups(cfg: Config, extra: list[str]) -> dict[str, list[str]]:
-    """One Keyword Planner request group per FitCheck feature, so every feature gets its own ideas."""
+def seed_groups(cfg: Config, extra: list[str], fallback: bool = False) -> dict[str, list[str]]:
+    """One Keyword Planner request group per FitCheck feature, so every feature gets its own ideas.
+    fallback=True uses ONLY the additional informational clusters (features.*.fallback_seeds)."""
+    if fallback:
+        return {f"fallback:{fid}": list(f.get("fallback_seeds") or []) for fid, f in scoring.features(cfg).items() if f.get("fallback_seeds")}
     groups = {fid: list(f.get("seeds") or []) for fid, f in scoring.features(cfg).items() if f.get("seeds")}
     general = list(cfg.get("keyword_research.seed_keywords", [])) + extra
     if general:
@@ -86,14 +89,14 @@ def opportunity_estimate(cfg: Config, i: dict[str, Any]) -> tuple[int, list[str]
     return max(0, min(100, score)), why
 
 
-def run(cfg: Config, state: State, pages: list[Page], perf: dict[str, Any] | None, report: dict) -> list[dict[str, Any]]:
+def run(cfg: Config, state: State, pages: list[Page], perf: dict[str, Any] | None, report: dict, fallback: bool = False) -> list[dict[str, Any]]:
     gsc = gsc_query_ideas(cfg, perf)
     seeds = list(cfg.get("keyword_research.seed_keywords", []))
-    gsc_seeds = [q for q, m in sorted(gsc.items(), key=lambda kv: -kv[1]["gsc_impressions_28d"]) if research.relevant(cfg, q)][:20]
+    gsc_seeds = [] if fallback else [q for q, m in sorted(gsc.items(), key=lambda kv: -kv[1]["gsc_impressions_28d"]) if research.relevant(cfg, q)][:20]
     seeds += gsc_seeds
     ideas: dict[str, dict[str, Any]] = {}
     try:
-        for i in discover_all(cfg, seed_groups(cfg, gsc_seeds), report):
+        for i in discover_all(cfg, seed_groups(cfg, gsc_seeds, fallback), report):
             ideas[i["keyword"]] = i
     except research.NoProvider as e:
         editorial = cfg.get("keyword_research.unverified_topics.enabled", False)
@@ -123,6 +126,11 @@ def run(cfg: Config, state: State, pages: list[Page], perf: dict[str, Any] | Non
     for i in found:
         scoring.score(cfg, i, pages, articles)
     short = research.shortlist(cfg, found, pages, state)
+    cb = report.setdefault("competitor_keywords", {})  # competitor-brand queries: reported, routed to compare pages, never written
+    for i in found:
+        if i.get("competitor_brand") and (i.get("volume") or 0) >= cfg.get("keyword_research.minimum_monthly_searches", 100):
+            if (i.get("volume") or 0) > cb.get(i["keyword"], {}).get("volume", 0):
+                cb[i["keyword"]] = {"volume": i["volume"], "market": i.get("market"), "brand": i["competitor_brand"], "page": i.get("compare_page")}
     report["feature_summary"] = feature_summary(cfg, found)
     reasons: dict[str, int] = {}
     for i in found:
@@ -140,7 +148,7 @@ def run(cfg: Config, state: State, pages: list[Page], perf: dict[str, Any] | Non
     return short
 
 
-def run_global(cfg: Config, state: State, pages: list[Page], perf: dict[str, Any] | None, report: dict) -> list[dict[str, Any]]:
+def run_global(cfg: Config, state: State, pages: list[Page], perf: dict[str, Any] | None, report: dict, fallback: bool = False) -> list[dict[str, Any]]:
     """Searches every configured market, pools the qualifying keywords and returns the PREFERRED ones, highest volume first.
 
     Eligible = Keyword Planner volume >= minimum_monthly_searches AND Google Ads competition in allowed_ads_competition
@@ -173,7 +181,7 @@ def run_global(cfg: Config, state: State, pages: list[Page], perf: dict[str, Any
                    "error": None}
             rows.append(row)
             try:
-                short = run(cfg, state, pages, perf, report)
+                short = run(cfg, state, pages, perf, report, fallback)
             except BudgetExceeded:
                 raise
             except Exception as e:  # noqa: BLE001 - one market must not stop the others

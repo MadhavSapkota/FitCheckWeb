@@ -178,7 +178,25 @@ def save_draft(cfg, slug: str, n: int, a: dict, gate: dict, rev: dict) -> None:
     p.write_text(json.dumps({"article": a, "gate": gate, "review": rev}, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
 
 
-def new_article(cfg, state: State, facts: dict, pages, perf, dry: bool, report: dict, force_keyword: str | None = None) -> None:
+def fallback_discovery(cfg, state: State, facts: dict, pages, perf, dry: bool, report: dict, force_keyword: str | None,
+                       global_on: bool, already: bool) -> None:
+    """No article came out of the primary seeds (nothing eligible, or every candidate was rejected by the planner / quality
+    gate): search the additional informational clusters (features.*.fallback_seeds) ONCE, with the same thresholds, duplicate
+    protections, quality gate and one-article-per-day limit. Never runs for manual re-tests or when disabled."""
+    if already or force_keyword or not global_on or not cfg.get("keyword_research.fallback_discovery.enabled", True):
+        return
+    if not any(f.get("fallback_seeds") for f in (cfg.get("features") or {}).values()):
+        return
+    report["notes"].append(f"Fallback discovery: primary seeds produced no article ({str(report.get('decision'))[:140]}); "
+                           "searching additional informational keyword clusters with the same thresholds")
+    report["primary_decision"] = report.get("decision")
+    report["global_primary"] = report.pop("global", None)
+    report["primary_counts"] = report.get("selection_counts")
+    new_article(cfg, state, facts, pages, perf, dry, report, None, fallback=True)
+
+
+def new_article(cfg, state: State, facts: dict, pages, perf, dry: bool, report: dict, force_keyword: str | None = None,
+                fallback: bool = False) -> None:
     limit = cfg.get("publishing.max_new_articles_per_day", 1)
     if state.published_today() >= limit:  # applies to manual re-tests (--keyword) too
         report["notes"].append("Daily new-article limit already reached")
@@ -191,7 +209,7 @@ def new_article(cfg, state: State, facts: dict, pages, perf, dry: bool, report: 
         return
     prev = state.data["keywords"].pop(force_keyword, None) if force_keyword else None  # re-test a rejected keyword
     global_on = bool(cfg.get("keyword_research.global_discovery.enabled")) and not force_keyword  # re-tests stay single-market
-    short = (keyword_agent.run_global if global_on else keyword_agent.run)(cfg, state, pages, perf, report)
+    short = keyword_agent.run_global(cfg, state, pages, perf, report, fallback) if global_on else keyword_agent.run(cfg, state, pages, perf, report)
     if force_keyword:
         short = [i for i in short if i["keyword"] == force_keyword] or \
             ([{**prev["latest"], "keyword": force_keyword}] if prev and prev.get("latest") else [])
@@ -229,6 +247,7 @@ def new_article(cfg, state: State, facts: dict, pages, perf, dry: bool, report: 
         else:
             report["decision"] = ("skip: no keyword met the feature-relevance, score, volume, intent and duplicate checks "
                                   "(see 'Keywords by feature' for reasons)")
+        fallback_discovery(cfg, state, facts, pages, perf, dry, report, force_keyword, global_on, fallback)
         return
     published, clusters_today, failed_features = [], set(), set()
     tried, planned = 0, 0   # tried = candidates that reached WRITING; planned = planner calls
@@ -306,6 +325,8 @@ def new_article(cfg, state: State, facts: dict, pages, perf, dry: bool, report: 
         if k["status"] == "queued":
             k["status"] = "not needed: an article was already selected" if published else "not reached (candidate cap)"
     report["decision"] = "; ".join(published) if published else "skip: no candidate passed planning + quality gate today"
+    if not published:
+        fallback_discovery(cfg, state, facts, pages, perf, dry, report, force_keyword, global_on, fallback)
 
 
 def write_report(cfg, report: dict, dry: bool) -> None:
@@ -316,9 +337,14 @@ def write_report(cfg, report: dict, dry: bool) -> None:
         lines += ["## Changes", *[f"- {c}" for c in report["changes"]], ""]
     if report["notes"]:
         lines += ["## Notes", *[f"- {n}" for n in report["notes"]], ""]
+    blocks = []
+    if report.get("global_primary"):
+        blocks.append(("Global keyword discovery - primary seeds", report["global_primary"]))
     if report.get("global"):
-        gl = report["global"]
-        lines += ["## Global keyword discovery",
+        blocks.append(("Global keyword discovery - FALLBACK clusters (primary seeds produced no article)" if report.get("global_primary")
+                       else "Global keyword discovery", report["global"]))
+    for title, gl in blocks:
+        lines += [f"## {title}",
                   f"Eligible = verified volume >= {gl['min_volume']:,}/month, Google Ads competition in {', '.join(gl['competition'])}. "
                   f"Preferred = eligible AND ranking opportunity >= {gl['min_ranking_opportunity']} (heuristic, NOT keyword difficulty). "
                   f"{gl['eligible_keywords']} eligible, {gl['preferred_keywords']} preferred; the strongest (highest-scoring) preferred keyword that passes "
@@ -343,6 +369,12 @@ def write_report(cfg, report: dict, dry: bool) -> None:
                   f"{k['ranking_opportunity']} | {k['conversion']} | {k['score']} | {k['also_seen']} | {k['status']} |"
                   for n, k in enumerate(gl["keywords"], 1)]
         lines += [""]
+    cbk = report.get("competitor_keywords") or {}
+    if cbk:
+        lines += ["## Competitor-brand keywords (routed to /compare/ pages; never written as blog articles)",
+                  "| keyword | brand | best country volume | compare page |", "|---|---|---|---|",
+                  *[f"| {k} | {v['brand']} | {v['market']} {v['volume']:,} | {v['page'] or 'none yet'} |"
+                    for k, v in sorted(cbk.items(), key=lambda kv: -kv[1]["volume"])[:10]], ""]
     if report.get("site_issues") or report.get("page_issues"):
         lines += ["## Audit findings", *[f"- site: {i}" for i in report.get("site_issues", [])],
                   *[f"- {p}: {', '.join(v)}" for p, v in report.get("page_issues", {}).items()], ""]
@@ -488,16 +520,30 @@ def discover() -> int:
             perf = analytics_agent.search_performance(cfg, report)
         except Exception as e:  # noqa: BLE001
             report["errors"].append(f"search console: {e}")
-        short = keyword_agent.run_global(cfg, state, crawl(cfg)["pages"], perf, report)
-        for i in short:
-            i["cluster"] = i.get("feature") or research.cluster_of(cfg, i["keyword"])
-        cands = [i for i in short if i["decision"] == "candidate"]
-        for i in short:
-            if i["decision"] != "candidate":
-                keyword_agent.set_status(report, i["keyword"], f"{i['decision']}: not selected")
-        for k in (report.get("global") or {}).get("keywords", []):
-            if k["status"] == "queued":
-                k["status"] = "eligible candidate (discovery only: planner/writer not run)"
+        pages = crawl(cfg)["pages"]
+
+        def stage(fb: bool) -> list:
+            short = keyword_agent.run_global(cfg, state, pages, perf, report, fb)
+            for i in short:
+                i["cluster"] = i.get("feature") or research.cluster_of(cfg, i["keyword"])
+            for i in short:  # same near-duplicate-in-cluster check the publishing path applies
+                if i["decision"] == "candidate" and research.cluster_duplicate(cfg, i, state.data["articles"]):
+                    i["decision"] = "duplicate_in_cluster"
+            for i in short:
+                if i["decision"] != "candidate":
+                    keyword_agent.set_status(report, i["keyword"], f"{i['decision']}: not selected")
+            for k in (report.get("global") or {}).get("keywords", []):
+                if k["status"] == "queued":
+                    k["status"] = "eligible candidate (discovery only: planner/writer not run)"
+            return [i for i in short if i["decision"] == "candidate"]
+
+        cands = stage(False)
+        if not cands and cfg.get("keyword_research.fallback_discovery.enabled", True) and any(
+                f.get("fallback_seeds") for f in (cfg.get("features") or {}).values()):
+            report["notes"].append("Fallback discovery: no candidate from the primary seeds; searched the additional informational clusters")
+            report["global_primary"] = report.pop("global", None)
+            report["primary_counts"] = report.get("selection_counts")
+            cands = stage(True)
         top = cands[0] if cands else None
         report["decision"] = (f"discovery only: {len(cands)} candidate(s) would go to the planner; strongest: '{top['keyword']}' "
                               f"({top['volume']:,}/month in {top.get('market_name')}, Ads competition {top.get('ads_competition')}, score {top.get('score_total')})"

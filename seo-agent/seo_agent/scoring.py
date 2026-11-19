@@ -65,6 +65,12 @@ def classify(cfg: Config, kw: str) -> tuple[str | None, int, str]:
     return best
 
 
+def own_brand(cfg: Config, kw: str) -> bool:
+    """True only for queries about FitCheck itself. Competitor brands share the `branded` feature but get no bonus."""
+    return any(_has(kw, str(b)) or str(b).lower() in kw.lower().replace(" ", "")
+               for b in cfg.get("keyword_research.own_brand_terms", ["fitcheck"]))
+
+
 def ranking_opportunity(cfg: Config, i: dict[str, Any], feature: str | None) -> tuple[int, list[str]]:
     t = tokens(i["keyword"])
     n = len(t)
@@ -90,7 +96,7 @@ def ranking_opportunity(cfg: Config, i: dict[str, Any], feature: str | None) -> 
         why.append(f"measured organic KD {kd} (DataForSEO)")
     else:
         why.append("organic difficulty not measured (estimate)")
-    if feature == "branded":
+    if feature == "branded" and own_brand(cfg, i["keyword"]):
         score += 30; why.append("own brand query")
     return max(0, min(100, score)), why
 

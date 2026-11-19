@@ -605,3 +605,110 @@ def test_discover_queries_every_market_and_changes_nothing_even_when_daily_limit
     assert st_path.read_bytes() == before                              # state untouched
     assert not any((site / "blog").glob("*/index.html"))               # nothing published
     assert not (site / "seo-agent" / "data" / "reports").exists() or not list((site / "seo-agent" / "data" / "reports").glob("2026-11-01.md"))
+
+
+# ---------------------------------------------------------------- competitor-brand routing, seeds, fallback discovery
+FALLBACK_SENTINEL = "what colors go together in clothes"   # a seed that only exists in features.outfit-checker.fallback_seeds
+
+
+def seeded(monkeypatch, primary, fallback, seen_seeds=None):
+    """discover() mock: `primary` ideas for primary seeds, `fallback` ideas only when the fallback clusters are searched."""
+    def discover(cfg, seeds=None):
+        if seen_seeds is not None:
+            seen_seeds.append(list(seeds or []))
+        return list(fallback if FALLBACK_SENTINEL in (seeds or []) else primary) if (FALLBACK_SENTINEL in (seeds or []) or "outfit checker" in (seeds or [])) else []
+    monkeypatch.setattr(research, "discover", discover)
+    monkeypatch.setattr(dataforseo, "keyword_difficulty", lambda cfg, kws: {k: 10 for k in kws})
+
+
+def test_competitor_brands_are_caught_in_every_spelling_but_not_by_accident():
+    cfg = config_mod.load_config(root=AGENT.parent)
+    for kw in ["youcam make up app", "application youcam makeup", "youcam makeup", "you cam makeup", "apps like acloset", "whering app",
+               "visia skin analysis", "sephora skin analysis", "fits app outfit planner", "alta daily app"]:
+        assert research.competitor_brand(cfg, kw), kw
+    for kw in ["what color undertones do i have", "where are my outfits", "how to organize your closet", "fitcheck app",
+               "revisiting my wardrobe", "ultra soft fabric outfit ideas", "outfit fits for work", "alta mira outfit ideas"]:
+        assert research.competitor_brand(cfg, kw) is None, kw
+    assert research.compare_page_for(cfg, "youcam") == "compare/fitcheck-vs-youcam-makeup/index.html"
+    assert research.compare_page_for(cfg, "visia") is None   # no compare page for it: reported as 'none yet'
+
+
+def test_own_brand_bonus_applies_to_fitcheck_only_never_to_competitors():
+    cfg = config_mod.load_config(root=AGENT.parent)
+    from seo_agent import scoring
+    def opp(kw, feature):
+        return scoring.ranking_opportunity(cfg, {"keyword": kw, "volume": 1500}, feature)[0]
+    assert opp("fitcheck app", "branded") - opp("fitcheck app", "makeup-try-on") == 30                  # FitCheck's own brand: bonus
+    for rival in ("youcam make up app", "application youcam makeup", "acloset app"):
+        assert opp(rival, "branded") == opp(rival, "makeup-try-on")                                    # competitors: no bonus
+
+
+def test_every_seed_is_unbranded_fits_20_per_request_and_maps_to_a_feature():
+    cfg = config_mod.load_config(root=AGENT.parent)
+    from seo_agent import scoring
+    for fid, f in scoring.features(cfg).items():
+        for key in ("seeds", "fallback_seeds"):
+            ss = f.get(key) or []
+            assert len(ss) <= 20 and len(set(ss)) == len(ss), (fid, key)
+            for s in ss:
+                assert not research.competitor_brand(cfg, s), f"competitor brand in seed '{s}'"
+                if key == "fallback_seeds":   # fallback clusters must map to a feature with enough relevance to pass the normal gate
+                    assert scoring.classify(cfg, s)[1] >= cfg.get("scoring.min_feature_relevance"), f"fallback seed '{s}' would be rejected as irrelevant"
+    assert sum(1 for f in scoring.features(cfg).values() if f.get("fallback_seeds")) >= 6   # several different clusters, not one repeated theme
+
+
+def test_competitor_keyword_is_never_published_and_is_reported_for_compare_pages(site, monkeypatch):
+    mock_apis(monkeypatch)
+    enable_global(site)
+    by_market(monkeypatch, {2840: [idea("youcam make up app", 5000)], 2826: [idea("application youcam makeup", 3000)]})
+    assert main.main(["run"]) == 0
+    assert not any((site / "blog").glob("*/index.html"))
+    rep = report_text(site)
+    assert "Competitor-brand keywords" in rep and "youcam make up app" in rep and "compare/fitcheck-vs-youcam-makeup/index.html" in rep
+    assert "rejected_competitor_brand_compare_page_only" in rep
+
+
+def test_fallback_clusters_are_searched_only_when_primary_yields_nothing_and_full_path_publishes_one(site, monkeypatch):
+    mock_apis(monkeypatch)
+    enable_global(site)
+    seen: list = []
+    seeded(monkeypatch, primary=[idea("youcam make up app", 5000)],            # primary: only a competitor term
+           fallback=[idea("how to match colors in an outfit", 3000)], seen_seeds=seen)
+    assert main.main(["run"]) == 0                                              # planner -> writer -> quality gate -> publish
+    assert any(FALLBACK_SENTINEL in s for s in seen)                            # fallback clusters really were searched
+    assert len(list((site / "blog").glob("*/index.html"))) == 1                 # still exactly one article
+    st = json.loads((site / "seo-agent" / "data" / "state.json").read_text())
+    assert st["keywords"]["how to match colors in an outfit"]["decision"].startswith("published")
+    rep = report_text(site)
+    assert "primary seeds" in rep and "FALLBACK clusters" in rep and "Fallback discovery:" in rep
+
+
+def test_fallback_is_skipped_when_primary_publishes(site, monkeypatch):
+    mock_apis(monkeypatch)
+    enable_global(site)
+    seen: list = []
+    seeded(monkeypatch, primary=[idea("how to match colors in an outfit", 3000)], fallback=[idea("outfit ideas for jobs", 9000)], seen_seeds=seen)
+    assert main.main(["run"]) == 0
+    assert not any(FALLBACK_SENTINEL in s for s in seen)
+    assert len(list((site / "blog").glob("*/index.html"))) == 1
+    assert "FALLBACK" not in report_text(site)
+
+
+def test_fallback_keeps_every_threshold(site, monkeypatch):
+    mock_apis(monkeypatch)
+    enable_global(site)
+    seeded(monkeypatch, primary=[], fallback=[idea("how to match colors in an outfit", 999),            # below the 1,000 floor
+                                              idea("what colors go with beige", 9000, "MEDIUM")])        # not LOW Ads competition
+    assert main.main(["run"]) == 0
+    assert not any((site / "blog").glob("*/index.html"))
+
+
+def test_fallback_never_bypasses_the_daily_limit(site, monkeypatch):
+    mock_apis(monkeypatch)
+    enable_global(site)
+    seen: list = []
+    seeded(monkeypatch, primary=[idea("how to match colors in an outfit", 3000)], fallback=[idea("what colors go with beige", 3000)], seen_seeds=seen)
+    assert main.main(["run"]) == 0 and len(list((site / "blog").glob("*/index.html"))) == 1
+    seen.clear()
+    assert main.main(["run"]) == 0                                              # second run the same day
+    assert len(list((site / "blog").glob("*/index.html"))) == 1 and not seen   # limit reached before any discovery, fallback included

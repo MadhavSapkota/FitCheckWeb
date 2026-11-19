@@ -1,6 +1,7 @@
 """Keyword discovery, filtering, and selection."""
 from __future__ import annotations
 
+import re
 from typing import Any
 
 from . import dataforseo, keyword_planner, scoring
@@ -42,6 +43,27 @@ def relevant(cfg: Config, kw: str) -> bool:
     # skip navigational queries for other brands/apps (heuristic: 'app' + a capitalized brand is unknowable;
     # keep it simple - skip explicit competitor/download patterns)
     return not any(x in low for x in ("login", "sign in", "customer service", "near me", " jobs", "salary"))
+
+
+def competitor_brand(cfg: Config, kw: str) -> str | None:
+    """The competitor / third-party brand a keyword is about, or None. Whole-word (or whole-phrase) match, so spelling
+    variants like 'youcam make up app' are caught while words that merely contain a brand string are not."""
+    low = kw.lower()
+    words = set(re.findall(r"[a-z0-9]+", low))
+    for b in cfg.get("keyword_research.competitor_brands", []) or []:
+        bl = str(b).lower().strip()
+        if (" " in bl and scoring._has(low, bl)) or (" " not in bl and bl in words):
+            return str(b)
+    return None
+
+
+def compare_page_for(cfg: Config, brand: str) -> str | None:
+    """Hand-built compare page that owns this brand's searches (site.page_targets), if one exists."""
+    b = brand.lower().replace(" ", "")
+    for path, qs in (cfg.get("site.page_targets") or {}).items():
+        if path.startswith("compare/") and any(b in str(q).lower().replace(" ", "") for q in qs):
+            return path
+    return None
 
 
 def relevance_score(cfg: Config, kw: str) -> float:
@@ -143,6 +165,11 @@ def shortlist(cfg: Config, ideas: list[dict[str, Any]], pages: list[Page], state
             reason = "rejected_low_volume"
         elif vol is None and i.get("gsc_impressions_28d", 0) < min_gsc and not is_editorial(cfg, i):
             reason = "rejected_volume_unverified_and_little_search_console_evidence"
+        elif competitor_brand(cfg, kw):
+            brand = competitor_brand(cfg, kw)
+            page = compare_page_for(cfg, brand)
+            i["competitor_brand"], i["compare_page"] = brand, page
+            reason = f"rejected_competitor_brand_compare_page_only:{page or 'no compare page yet'}"
         elif measured_difficulty(cfg) and i.get("difficulty") is None:
             reason = "rejected_no_organic_difficulty_data"
         elif measured_difficulty(cfg) and i["difficulty"] > max_kd:

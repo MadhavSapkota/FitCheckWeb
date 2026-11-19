@@ -99,6 +99,17 @@ keyword_research:
   # Keyword Planner is queried once PER FEATURE (features.*.seeds) so broad "outfit ideas" seeds can no longer
   # crowd out makeup, skin, wardrobe, and try-on ideas. This cap applies to each feature's request group.
   max_ideas_per_run: 150
+  # Competitor / third-party BRAND queries are navigational: the owner's hand-built /compare/ pages own them. They are never
+  # written as generic blog articles, whatever their spelling ("youcam make up app" = "youcam makeup app"). Matched as whole
+  # words (or the multi-word phrase), case-insensitive. Add a brand here when a new compare page is built.
+  competitor_brands: [youcam, "you cam", perfect365, "perfect corp", facetune, meitu, modiface, acloset, whering, stylebook,
+                      indyx, cladwell, pureple, "alta app", "alta daily", "fits app", "fits outfit", visia, sephora, "mary kay", ulta]
+  # The ranking-opportunity "own brand" bonus applies ONLY to queries containing one of these (never to competitors).
+  own_brand_terms: [fitcheck, "fit check app", "fitcheck ai"]
+  # When no article candidate survives (nothing eligible, or every candidate is rejected by the planner / quality gate), the
+  # agent searches the additional informational clusters in features.*.fallback_seeds with the SAME thresholds and checks.
+  fallback_discovery:
+    enabled: true
   allowed_intents: ["informational", "commercial"]
   # Extra general seeds (in addition to every feature's seeds below).
   seed_keywords:
@@ -143,7 +154,10 @@ features:
     # queries ("personal stylist near me") are not FitCheck's offer (app_facts: no human stylists).
     terms: [rate, rating, rater, checker, analyzer, color, colour, colors]
     seeds: [outfit checker, rate my outfit, does my outfit look good, what should i wear today, outfit color matching,
-            what colors go together in an outfit, ai stylist, outfit rating app]
+            what colors go together in an outfit, ai stylist, outfit rating app,
+            what colors go with navy blue, what colors go well together in an outfit, how to match colors in clothes]
+    fallback_seeds: [what colors go with olive green, what colors go with burgundy, what colors go with beige, what colors go with grey,
+                     what colors go together in clothes]
     cta: {button: "Check Your Outfit With AI",
           text: "Snap a head-to-toe photo and get an AI style score with tips on fit, color, and balance."}
   makeup-assistant:
@@ -157,7 +171,8 @@ features:
               beauty assistant, makeup tips, makeup look, makeup looks]
     terms: [makeup, beauty, foundation, blush, eyeshadow, eyeliner, contour, concealer, glam, bronzer, highlighter]
     seeds: [what makeup suits my face, makeup for my skin tone, best makeup for my face shape, everyday makeup look,
-            makeup recommendations, ai makeup]
+            makeup recommendations, ai makeup, what makeup suits my face shape]
+    fallback_seeds: [makeup suggestions for my face, makeup tips for beginners, natural makeup look for everyday, makeup for my face shape]
     cta: {button: "Get AI Makeup Feedback",
           text: "Snap a close-up in natural light and get AI beauty feedback on your makeup look."}
   makeup-try-on:
@@ -182,7 +197,8 @@ features:
               hairstyle ideas, haircut ideas, hair color for skin tone, hair colour for skin tone, hair color ideas]
     terms: [hair, hairstyle, hairstyles, haircut, haircuts, bangs, fringe, bob, layers, curls, curly, braids, pixie]
     seeds: [what hairstyle suits me, hairstyles for my face shape, haircut for round face, hair color for my skin tone,
-            haircut ideas]
+            haircut ideas, what haircut suits my face shape, best hairstyles for oval face, haircuts for round faces women]
+    fallback_seeds: [hairstyles for square face, haircuts for long face, haircuts for heart shaped face, haircut ideas for women]
     cta: {button: "Find Hairstyles That Suit You",
           text: "Explore hairstyle, curl, and hair color ideas and see how a look comes together on you."}
   hairstyle-try-on:
@@ -211,7 +227,9 @@ features:
     phrases: [hair analysis, hair analyzer, hair analyser, hair type test, hair type quiz, what is my hair type,
               hair porosity, hair health, hair scanner, hair texture, hair density, hair type]
     terms: [porosity]
-    seeds: [hair analysis, what is my hair type, hair type test, hair porosity test, hair analyzer app]
+    seeds: [hair analysis, what is my hair type, hair type test, hair porosity test, hair analyzer app,
+            how to tell your hair type, what is my hair texture, what is my hair density]
+    fallback_seeds: [how to know your hair porosity, hair porosity chart, hair texture chart, hair type chart]
     cta: {button: "Check Your Hair With AI",
           text: "Get a quick AI look at your hair from your camera, plus style ideas that work with it."}
   skin-analysis:
@@ -224,7 +242,9 @@ features:
               skin type quiz, what is my skin type, what is my skin tone, skin undertone, undertone test, skin check app,
               face analysis, face analyzer, skin app, skin tone test]
     terms: [skin, undertone, undertones, complexion]
-    seeds: [skin analysis, skin type test, what is my skin tone, skin undertone test, skin analyzer app, face analysis app]
+    seeds: [skin analysis, skin type test, what is my skin tone, skin undertone test, skin analyzer app, face analysis app,
+            how to find your skin undertone, what is my skin type, warm vs cool undertones]
+    fallback_seeds: [what is my skin tone chart, skin tone test at home, skin type quiz, skin undertone chart]
     cta: {button: "Try AI Skin Analysis",
           text: "Get an AI overview of your skin from a selfie as a starting point for your beauty routine. Not medical advice."}
   wardrobe:
@@ -237,7 +257,8 @@ features:
               organize your closet, organize my wardrobe, what to wear from my closet, outfit calendar, outfit tracker]
     terms: [wardrobe, closet, capsule]
     seeds: [digital wardrobe app, virtual closet app, wardrobe organizer, capsule wardrobe, outfit planner app,
-            how to organize your closet]
+            how to organize your closet, how to build a capsule wardrobe, what to wear from my closet]
+    fallback_seeds: [how to organize your closet in a small space, capsule wardrobe essentials, capsule wardrobe checklist, wardrobe organizer ideas]
     cta: {button: "Organize Your Wardrobe",
           text: "Save your favorite looks, sort outfits by season or occasion, and plan what to wear ahead."}
   outfit-try-on:
@@ -250,7 +271,8 @@ features:
               dress try on]
     terms: []
     seeds: [virtual try on clothes, try on clothes online, virtual fitting room, try outfits on yourself,
-            virtual dressing room app]
+            virtual dressing room app, how to try on clothes online, can you try on clothes virtually]
+    fallback_seeds: [how does virtual try on work, virtual try on clothes for free, try on clothes with my photo]
     cta: {button: "Try Outfits On Virtually",
           text: "See AI-generated images of yourself in different outfits, made from your own photo."}
   fashion-generator:
@@ -279,6 +301,7 @@ features:
             aesthetic, vintage, minimalist, look, looks]
     seeds: [outfit ideas, fashion trends 2026, old money outfits, streetwear outfit ideas, date night outfit ideas,
             birthday outfit ideas, casual outfit ideas]
+    fallback_seeds: [what to wear to a wedding as a guest, how to style a blazer, how to style wide leg jeans, first date outfit ideas]
     cta: {button: "Check Your Outfit With AI",
           text: "Put the look together, then snap a photo for an AI style score with tips on fit, color, and balance."}
   branded:
@@ -288,10 +311,9 @@ features:
     mix: 1
     phrases: [fitcheck, fit check app, fitcheck ai, style ai fit check, youcam, acloset, whering]
     terms: []
-    # Competitor app seeds: the /compare/ pages own these searches, so the agent researches volumes but never
-    # writes a competing article for them (see site.page_targets).
-    seeds: [fitcheck app, fitcheck ai, fit check app, youcam makeup app, youcam makeup alternative, acloset app,
-            apps like acloset, whering app, whering alternative]
+    # Own-brand seeds only. Competitor-brand queries (YouCam, ACloset, Whering ...) belong to the hand-built /compare/ pages
+    # (site.page_targets) and are never researched or written as blog articles (keyword_research.competitor_brands).
+    seeds: [fitcheck app, fitcheck ai, fit check app]
     cta: {button: "Get FitCheck on Google Play",
           text: "Rate your outfit, makeup, and hair with AI. Free on Android."}
 
