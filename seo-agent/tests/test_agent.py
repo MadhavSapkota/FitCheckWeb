@@ -359,15 +359,15 @@ def test_global_picks_highest_volume_eligible_across_markets(site, monkeypatch):
     by_market(monkeypatch, {
         2840: [idea("how to match colors in an outfit", 1300)],                       # US: eligible, lower volume
         2826: [idea("how to match colors in an outfit", 4400), idea("ai outfit checker", 90000, "HIGH")],  # UK: higher volume; HIGH one excluded
-        2276: [idea("outfit ideas for jobs", 2000, "MEDIUM"), idea("what to wear today", 800)],  # DE: wrong competition / too small
+        2702: [idea("outfit ideas for jobs", 2000, "MEDIUM"), idea("what to wear today", 800)],  # SG: wrong competition / too small
     }, seen)
     assert main.main(["run"]) == 0
-    assert len(set(seen)) == 14  # compared every market instead of stopping at the first with a result
+    assert len(set(seen)) == 10  # compared every market instead of stopping at the first with a result
     assert len(list((site / "blog").glob("*/index.html"))) == 1  # one article per day
     st = json.loads((site / "seo-agent" / "data" / "state.json").read_text())
     assert st["keywords"]["how to match colors in an outfit"]["latest"]["market"] == "GB"  # highest-volume market wins
     assert st["keywords"]["how to match colors in an outfit"]["latest"]["volume"] == 4400
-    assert "Highest-volume eligible keyword across 14 markets" in st["keywords"]["how to match colors in an outfit"]["latest"]["selection_reason"]
+    assert "Strongest eligible keyword across 10 markets" in st["keywords"]["how to match colors in an outfit"]["latest"]["selection_reason"]
     rep = (site / "seo-agent" / "data" / "reports" / "2026-11-01.md").read_text()
     assert "Global keyword discovery" in rep and "United Kingdom" in rep and "Selected because" in rep
     assert "ai outfit checker" not in rep.split("Selected because")[1].split("\n")[0]
@@ -398,7 +398,7 @@ def test_global_one_market_failing_does_not_stop_the_rest(site, monkeypatch):
 def test_global_non_english_keyword_is_dropped(site, monkeypatch):
     mock_apis(monkeypatch)
     enable_global(site)
-    by_market(monkeypatch, {2276: [idea("wie kombiniere ich farben für outfit", 9000)]})
+    by_market(monkeypatch, {2356: [idea("wie kombiniere ich farben für outfit", 9000)]})
     assert main.main(["run"]) == 0
     assert not any((site / "blog").glob("*/index.html"))
 
@@ -428,7 +428,7 @@ def test_nothing_published_and_clearly_reported_when_only_head_terms_qualify(sit
     assert "how to match colors in an outfit" in rep  # still listed so the owner can see it
 
 
-def test_highest_volume_among_preferred_wins(site, monkeypatch):
+def test_strongest_score_among_preferred_wins_not_just_highest_volume(site, monkeypatch):
     mock_apis(monkeypatch)
     enable_global(site, min_opp=60)
     set_opportunity(monkeypatch, {"how to match colors in an outfit": 65, "does my outfit look good": 90, "ai outfit checker": 20})
@@ -436,8 +436,9 @@ def test_highest_volume_among_preferred_wins(site, monkeypatch):
                             2036: [idea("how to match colors in an outfit", 7000)]})
     assert main.main(["run"]) == 0
     st = json.loads((site / "seo-agent" / "data" / "state.json").read_text())
-    assert st["keywords"]["how to match colors in an outfit"]["decision"].startswith("published")
-    assert not st["keywords"]["does my outfit look good"]["decision"].startswith("published")  # lower volume, one article per day
+    assert st["keywords"]["does my outfit look good"]["decision"].startswith("published")  # stronger ranking opportunity beats 3.5x the volume
+    assert not st["keywords"]["how to match colors in an outfit"]["decision"].startswith("published")  # one article per day
+    assert not st["keywords"]["ai outfit checker"]["decision"].startswith("published")  # 90k volume but a hard head term
     assert len(list((site / "blog").glob("*/index.html"))) == 1
 
 
@@ -517,3 +518,70 @@ def test_planner_rejected_keyword_is_not_offered_again_for_30_days(site, monkeyp
     monkeypatch.setenv("SEO_AGENT_TODAY", "2026-12-15")  # after the cooldown they are evaluated again
     assert main.main(["run"]) == 0
     assert len(calls) > first
+
+
+def test_shipped_config_is_english_speaking_markets_with_1000_floor_and_low_competition():
+    from seo_agent import config as config_mod
+    g = config_mod.load_config(root=AGENT.parent).get("keyword_research.global_discovery")
+    assert g["minimum_monthly_searches"] == 1000 and g["allowed_ads_competition"] == ["LOW"]
+    codes = {m["location"]: m["location_code"] for m in g["markets"]}
+    assert {"US", "GB", "CA", "AU", "IN"} <= set(codes) and len(codes) == len(g["markets"])
+    assert not {"DE", "FR", "NL", "SE", "ES", "IT", "IL"} & set(codes)  # non-English markets are not queried with English seeds
+
+
+def test_global_keeps_country_metrics_and_does_not_sum_overlapping_ideas(site, monkeypatch):
+    mock_apis(monkeypatch)
+    enable_global(site)
+    by_market(monkeypatch, {2840: [idea("how to match colors in an outfit", 1300), idea("what to wear today", 1100)],
+                            2826: [idea("how to match colors in an outfit", 2000)],
+                            2356: [idea("how to match colors in an outfit", 5000, "MEDIUM")]})  # MEDIUM in India: not eligible there
+    assert main.main(["run"]) == 0
+    rep = report_text(site)
+    assert "US 1,300 (LOW)" in rep and "GB 2,000 (LOW)" in rep   # per-country volume + Ads competition kept side by side
+    assert "IN 5,000" not in rep                                   # the ineligible India row is not merged in or summed
+    assert "3,300" not in rep and "8,300" not in rep               # volumes of the same keyword are never added together
+    assert "unique keywords across 10 markets" in rep              # 2 distinct keywords seen, not one per (market, keyword) pair
+
+
+def test_global_reports_failed_markets_instead_of_silently_skipping(site, monkeypatch):
+    mock_apis(monkeypatch)
+    enable_global(site)
+    def discover(cfg, seeds=None):
+        if cfg.get("keyword_research.location_code") in (2826, 2356):
+            raise RuntimeError("quota")
+        return [idea("how to match colors in an outfit", 3000)]
+    monkeypatch.setattr(research, "discover", discover)
+    assert main.main(["run"]) == 0
+    assert "WARNING: 2 of 10 markets failed and were NOT searched" in report_text(site)
+
+
+def test_each_market_sends_its_own_geo_target_constant_to_google_ads(monkeypatch):
+    """Drives the real keyword_planner.keyword_ideas() per market with a fake Google Ads client and records the request."""
+    import types
+    from seo_agent import keyword_planner
+    sent = []
+
+    class Req:
+        def __init__(self): self.geo_target_constants, self.language = [], None; self.keyword_seed = types.SimpleNamespace(keywords=[])
+
+    class Svc:
+        def generate_keyword_ideas(self, request):
+            sent.append((list(request.geo_target_constants), request.language))
+            return []
+
+    class Client:
+        enums = types.SimpleNamespace(KeywordPlanNetworkEnum=types.SimpleNamespace(GOOGLE_SEARCH=2))
+        def get_type(self, name): return Req()
+        def get_service(self, name):
+            return types.SimpleNamespace(geo_target_constant_path=lambda c: f"geoTargetConstants/{c}") if name == "GeoTargetConstantService" else Svc()
+
+    import google.ads.googleads.client as gclient
+    monkeypatch.setattr(gclient.GoogleAdsClient, "load_from_dict", staticmethod(lambda conf: Client()))
+    for k in keyword_planner.REQUIRED:
+        monkeypatch.setenv(k, "1")
+    cfg = config_mod.load_config(root=AGENT.parent)
+    for m in cfg.get("keyword_research.global_discovery.markets"):
+        cfg.raw["keyword_research"].update(location=m["location"], location_code=m["location_code"])
+        keyword_planner.keyword_ideas(cfg, ["outfit checker"])
+    assert [g for g, _ in sent] == [[f"geoTargetConstants/{m['location_code']}"] for m in cfg.get("keyword_research.global_discovery.markets")]
+    assert len({g[0] for g, _ in sent}) == 10 and all(lang == "languageConstants/1000" for _, lang in sent)  # 10 distinct geos, English

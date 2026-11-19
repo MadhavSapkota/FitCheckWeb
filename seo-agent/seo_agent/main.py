@@ -211,8 +211,8 @@ def new_article(cfg, state: State, facts: dict, pages, perf, dry: bool, report: 
                                                   "intent", "cluster", "feature", "score", "score_total", "decision",
                                                   "covering_page", "source")} for i in short[:20]]
     candidates = research.order_by_cluster([i for i in short if i["decision"] == "candidate"], articles, cfg)
-    if global_on:  # global mode: highest verified volume first (run_global already sorted); order_by_cluster only adds mix_boost
-        candidates = sorted(candidates, key=lambda i: (-(i.get("volume") or 0), -(i.get("score_total") or 0)))
+    if global_on:  # global mode: strongest score first (run_global already sorted); order_by_cluster only adds mix_boost
+        candidates = sorted(candidates, key=lambda i: (-(i.get("score_total") or 0), -(i.get("volume") or 0)))
     if global_on:
         for i in short:
             if i["decision"] != "candidate":
@@ -320,8 +320,9 @@ def write_report(cfg, report: dict, dry: bool) -> None:
         lines += ["## Global keyword discovery",
                   f"Eligible = verified volume >= {gl['min_volume']:,}/month, Google Ads competition in {', '.join(gl['competition'])}. "
                   f"Preferred = eligible AND ranking opportunity >= {gl['min_ranking_opportunity']} (heuristic, NOT keyword difficulty). "
-                  f"{gl['eligible_keywords']} eligible, {gl['preferred_keywords']} preferred; the highest-volume preferred keyword that passes "
-                  "the planner, duplicate and quality checks is selected. No market is favoured.", "",
+                  f"{gl['eligible_keywords']} eligible, {gl['preferred_keywords']} preferred; the strongest (highest-scoring) preferred keyword that passes "
+                  "the planner, duplicate and quality checks is selected. No market is favoured. Volumes are per country and never summed; "
+                  "'Ads competition' is Google Ads advertising competition, NOT organic SEO difficulty.", "",
                   "### Per-country counts and rejections (each market's own numbers)"]
         reasons = sorted({r for mk in gl["markets"] for r in mk["reasons"]},
                          key=lambda r: -sum(mk["reasons"].get(r, 0) for mk in gl["markets"]))
@@ -334,8 +335,8 @@ def write_report(cfg, report: dict, dry: bool) -> None:
                      c.get("dup_article", "-"), *[mk["reasons"].get(r, 0) for r in reasons],
                      *[mk["global_rejections"][r] for r in grn], mk["eligible"], mk["preferred"], mk["error"] or ""]
             lines.append("| " + " | ".join(str(x) for x in cells) + " |")
-        lines += ["", "### Eligible keywords, highest volume first",
-                  "| # | keyword | country | monthly searches | Ads competition | relevance | ranking opportunity | conversion | score | also seen in | status |",
+        lines += ["", "### Eligible keywords, strongest first",
+                  "| # | keyword | country | monthly searches | Ads competition | relevance | ranking opportunity | conversion | score | also seen in (country volume, Ads competition) | status |",
                   "|---|---|---|---|---|---|---|---|---|---|---|"]
         lines += [f"| {n} | {k['keyword']} | {k['market']} | {k['volume']:,} | {k['competition']} | {k['relevance']} | "
                   f"{k['ranking_opportunity']} | {k['conversion']} | {k['score']} | {k['also_seen']} | {k['status']} |"
@@ -350,7 +351,11 @@ def write_report(cfg, report: dict, dry: bool) -> None:
     if report.get("selection_counts"):
         c = report["selection_counts"]
         lines += ["## Selection summary",
-                  f"- discovered: {c['discovered']} ideas; relevant to a FitCheck feature: {c['relevant']}",
+                  (f"- discovered: {report['global']['unique']['discovered']:,} unique keywords across {report['global']['unique']['markets_ok']} markets; "
+                   f"relevant to a FitCheck feature: {report['global']['unique']['relevant']:,} unique "
+                   f"(per-market pairs: {c['discovered']:,} / {c['relevant']:,}; the same keyword in several countries is counted once in the unique figures)"
+                   if (report.get("global") or {}).get("unique") else
+                   f"- discovered: {c['discovered']} ideas; relevant to a FitCheck feature: {c['relevant']}"),
                   f"- passed scoring requirements (candidates): {c['qualifying']}",
                   f"- rejected as duplicate intent: {c['duplicates']} (landing page: {c['dup_landing']}, existing article: {c['dup_article']})",
                   "- other rejections: " + ", ".join(f"{k} {v}" for k, v in c["reasons"].items()), ""]

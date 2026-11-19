@@ -117,6 +117,7 @@ def run(cfg: Config, state: State, pages: list[Page], perf: dict[str, Any] | Non
     found = [i for i in ideas.values() if research.relevant(cfg, i["keyword"])]
     for i in found:
         i["market"] = cfg.get("keyword_research.location")
+    report["_market_keys"] = (set(ideas), {i["keyword"] for i in found})  # consumed by run_global (unique counts across markets)
     found = research.enrich(cfg, found)
     articles = state.data.get("articles", {})
     for i in found:
@@ -162,6 +163,8 @@ def run_global(cfg: Config, state: State, pages: list[Page], perf: dict[str, Any
     last: Exception | None = None
     ok = 0
     first_summary = None
+    uniq_found: set[str] = set()
+    uniq_relevant: set[str] = set()
     try:
         for m in g.get("markets", []):
             kr.update(location=m["location"], location_code=m["location_code"], minimum_monthly_searches=min_vol)
@@ -179,6 +182,10 @@ def run_global(cfg: Config, state: State, pages: list[Page], perf: dict[str, Any
                 log.warning("Global discovery: market %s failed: %s", m["location"], row["error"])
                 continue
             ok += 1
+            keys = report.pop("_market_keys", None)
+            if keys:
+                uniq_found |= keys[0]
+                uniq_relevant |= keys[1]
             counts = dict(report.get("selection_counts") or {})  # complete per-market counts, kept before the next market overwrites them
             row["counts"] = {k: v for k, v in counts.items() if k != "reasons"}
             row["reasons"] = dict(counts.get("reasons") or {})
@@ -208,7 +215,7 @@ def run_global(cfg: Config, state: State, pages: list[Page], perf: dict[str, Any
                 row["preferred"] += 0 if below else 1
                 prev = pool.get(i["keyword"])
                 seen = (prev or {}).get("also_seen", [])
-                seen.append({"market": m["location"], "volume": i["volume"]})
+                seen.append({"market": m["location"], "volume": i["volume"], "competition": comp})  # country-level metrics are kept, never summed
                 if prev is None or i["volume"] > prev["volume"]:
                     pool[i["keyword"]] = {**i, "also_seen": seen}
                 else:
@@ -220,17 +227,23 @@ def run_global(cfg: Config, state: State, pages: list[Page], perf: dict[str, Any
     if first_summary is not None:
         report["feature_summary"] = first_summary
         report["notes"].append("'Keywords by feature' covers the first market (United States) only; every market's counts are in the global tables.")
-    report["selection_counts"] = totals  # sums over all markets (not just the last one)
-    everything = sorted(pool.values(), key=lambda i: (-(i["volume"] or 0), -(i.get("score_total") or 0)))
+    report["selection_counts"] = totals  # per-market pairs summed: the SAME keyword in 10 markets counts 10 times (see "unique" below)
+    failed = [r for r in rows if r["error"]]
+    if failed:
+        report["notes"].append(f"WARNING: {len(failed)} of {len(rows)} markets failed and were NOT searched: "
+                               + ", ".join(f"{r['name']} ({r['error']})" for r in failed))
+    # strongest first: the five-component score already weighs demand, ranking opportunity, relevance, conversion and usefulness
+    everything = sorted(pool.values(), key=lambda i: (-(i.get("score_total") or 0), -(i["volume"] or 0)))
     ranked = [i for i in everything if not i["below_opportunity"]]
     sc = lambda i, k: (i.get("score") or {}).get(k)  # noqa: E731
     report["global"] = {
         "min_volume": min_vol, "competition": sorted(allowed), "min_ranking_opportunity": min_opp, "markets": rows,
         "eligible_keywords": len(everything), "preferred_keywords": len(ranked),
+        "unique": {"discovered": len(uniq_found), "relevant": len(uniq_relevant), "markets_ok": ok, "markets_failed": len(failed)},
         "keywords": [{"keyword": i["keyword"], "market": i["market_name"], "volume": i["volume"], "competition": i.get("ads_competition"),
                       "relevance": sc(i, "feature_relevance"), "ranking_opportunity": sc(i, "ranking_opportunity"),
                       "conversion": sc(i, "conversion_potential"), "score": i.get("score_total"),
-                      "also_seen": ", ".join(f"{s['market']} {s['volume']:,}" for s in i["also_seen"]),
+                      "also_seen": ", ".join(f"{s['market']} {s['volume']:,} ({s.get('competition') or '?'})" for s in i["also_seen"]),
                       "status": (f"below_ranking_opportunity (<{min_opp}): not selected" if i["below_opportunity"] else "queued")}
                      for i in everything]}
     log.info("Global discovery: %d markets, %d eligible keywords (%d preferred, ranking opportunity >= %s)",
@@ -245,12 +258,12 @@ def set_status(report: dict, keyword: str, status: str) -> None:
 
 
 def selection_reason(cfg: Config, kw: dict[str, Any], n_markets: int) -> str:
-    also = [f"{s['market']} {s['volume']:,}" for s in kw.get("also_seen", []) if s["market"] != kw.get("market")]
-    return (f"Highest-volume eligible keyword across {n_markets} markets: {kw['volume']:,} searches/month in "
+    also = [f"{s['market']} {s['volume']:,} ({s.get('competition') or '?'})" for s in kw.get("also_seen", []) if s["market"] != kw.get("market")]
+    return (f"Strongest eligible keyword across {n_markets} markets: {kw['volume']:,} searches/month in "
             f"{kw.get('market_name') or kw.get('market')}, Google Ads competition {kw.get('ads_competition')}, "
             f"ranking opportunity {(kw.get('score') or {}).get('ranking_opportunity')} (>= {cfg.get('keyword_research.global_discovery.min_ranking_opportunity')} required), "
             f"relevance {(kw.get('score') or {}).get('feature_relevance')}, score {kw.get('score_total')}; "
-            "the highest-volume keyword meeting the ranking-opportunity threshold that passed relevance, duplicate, planner and quality checks."
+            "the highest-scoring keyword (demand, ranking opportunity, relevance, conversion, usefulness) that met the volume, LOW Ads-competition and ranking-opportunity requirements and passed relevance, duplicate, planner and quality checks. Volumes are per country, never summed; Ads competition is advertising competition, not organic SEO difficulty."
             + (f" Also seen in: {', '.join(also)}." if also else ""))
 
 
