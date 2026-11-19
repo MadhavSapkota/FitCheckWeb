@@ -2904,6 +2904,13 @@
       "claude_calls": 5,
       "decision": "published /blog/what-color-undertones-do-i-have/ for 'what color undertones do i have' (feature skin-analysis, score 74.6) after 1 revision(s). Selected because: Highest-volume eligible keyword across 14 markets: 1,600 searches/month in United States, Google Ads competition LOW, ranking opportunity 80 (>= 60 required), relevance 70, score 74.6; the highest-volume keyword meeting the ranking-opportunity threshold that passed relevance, duplicate, planner and quality checks.",
       "errors": 0
+    },
+    {
+      "at": "2026-11-19T00:07:21+00:00",
+      "changes": 0,
+      "claude_calls": 0,
+      "decision": "skip: daily article limit already reached today",
+      "errors": 0
     }
   ],
   "usage": {

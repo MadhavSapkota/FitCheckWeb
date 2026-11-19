@@ -210,3 +210,4 @@
 2026-11-18 11:36:45,124 INFO seo_agent: Shortlisted 20 qualifying keywords (of 1562 ideas)
 2026-11-18 11:36:45,127 INFO seo_agent: Keyword agent: 1931 ideas, 1562 relevant, 20 shortlisted
 2026-11-18 11:36:45,129 INFO seo_agent: Global discovery: 14 markets, 29 eligible keywords (6 preferred, ranking opportunity >= 60)
+2026-11-19 00:07:20,476 INFO seo_agent: Search Console: 28d clicks=0 impressions=34
