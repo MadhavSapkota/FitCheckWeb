@@ -13,6 +13,10 @@ on:
         description: "Discovery only: query every market and print the keyword report. Publishes/saves/commits nothing, ignores the daily limit"
         type: boolean
         default: false
+      fallback_test:
+        description: "With discovery_only: search ONLY the fallback keyword clusters (verification)"
+        type: boolean
+        default: false
       keyword:
         description: "Re-test one keyword (optional, bypasses the 30-day rejection cooldown)"
         type: string
@@ -73,7 +77,7 @@ jobs:
           FORCE_KEYWORD: ${{ inputs.keyword }}
         working-directory: seo-agent
         run: |
-          if [ "${{ inputs.discovery_only }}" = "true" ]; then python -m seo_agent.main discover; exit $?; fi
+          if [ "${{ inputs.discovery_only }}" = "true" ]; then if [ "${{ inputs.fallback_test }}" = "true" ]; then python -m seo_agent.main discover --fallback; else python -m seo_agent.main discover; fi; exit $?; fi
           args=""
           if [ "${{ inputs.dry_run }}" = "true" ] || [ "${GITHUB_REF}" != "refs/heads/master" ]; then args="--dry-run"; fi
           if [ -n "$FORCE_KEYWORD" ]; then

@@ -504,7 +504,7 @@ def run(dry: bool, force_keyword: str | None = None) -> int:
                     for e in report["errors"]) else 0
 
 
-def discover() -> int:
+def discover(fallback_only: bool = False) -> int:
     """Discovery-only: queries every configured market and prints the global report. Read-only by design: no article, no Claude
     call, no state/log/site change, and it ignores the daily-article limit (it never publishes), so it can run any time."""
     cfg = load_config()
@@ -537,8 +537,12 @@ def discover() -> int:
                     k["status"] = "eligible candidate (discovery only: planner/writer not run)"
             return [i for i in short if i["decision"] == "candidate"]
 
-        cands = stage(False)
-        if not cands and cfg.get("keyword_research.fallback_discovery.enabled", True) and any(
+        if fallback_only:  # verification mode: search ONLY the fallback clusters, exactly as production does after an empty primary pass
+            report["notes"].append("FALLBACK-ONLY verification: the primary seeds were skipped on purpose")
+            cands = stage(True)
+        else:
+            cands = stage(False)
+        if not fallback_only and not cands and cfg.get("keyword_research.fallback_discovery.enabled", True) and any(
                 f.get("fallback_seeds") for f in (cfg.get("features") or {}).values()):
             report["notes"].append("Fallback discovery: no candidate from the primary seeds; searched the additional informational clusters")
             report["global_primary"] = report.pop("global", None)
@@ -563,6 +567,7 @@ def main(argv: list[str] | None = None) -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("command", choices=["run", "check", "rescore", "weekly", "verify", "landing", "discover"])
     ap.add_argument("--dry-run", action="store_true")
+    ap.add_argument("--fallback", action="store_true", help="discover: search only the fallback clusters (verification)")
     ap.add_argument("--keyword", help="re-test one keyword (bypasses the 30-day rejection cooldown)")
     ap.add_argument("--wait", type=int, default=600, help="verify: seconds to wait for the deployment")
     ap.add_argument("--out", help="rescore: also write the report to this file")
@@ -603,7 +608,7 @@ def main(argv: list[str] | None = None) -> int:
         print("deployment verification:", "FAILED" if fails else "OK")
         return 1 if fails else 0
     if args.command == "discover":
-        return discover()
+        return discover(args.fallback)
     if args.command == "check":
         setup_logging()
         errs = validate_site(load_config())

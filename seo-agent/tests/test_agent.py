@@ -712,3 +712,15 @@ def test_fallback_never_bypasses_the_daily_limit(site, monkeypatch):
     seen.clear()
     assert main.main(["run"]) == 0                                              # second run the same day
     assert len(list((site / "blog").glob("*/index.html"))) == 1 and not seen   # limit reached before any discovery, fallback included
+
+
+def test_discover_fallback_flag_searches_only_the_fallback_clusters(site, monkeypatch, capsys):
+    mock_apis(monkeypatch)
+    enable_global(site)
+    seen: list = []
+    seeded(monkeypatch, primary=[idea("how to match colors in an outfit", 3000)], fallback=[idea("what colors go with beige", 2500)], seen_seeds=seen)
+    assert main.main(["discover", "--fallback"]) == 0
+    out = capsys.readouterr().out
+    assert any(FALLBACK_SENTINEL in ss for ss in seen)                      # the fallback clusters were queried
+    assert not any("outfit checker" in ss for ss in seen)                   # primary seeds were never queried
+    assert "FALLBACK-ONLY" in out and "what colors go with beige" in out
