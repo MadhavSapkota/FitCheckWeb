@@ -108,3 +108,33 @@ def test_no_smtp_code_remains():
     import inspect
     src = inspect.getsource(pm)
     assert "smtplib" not in src and "SMTP" not in src
+
+
+def test_loop_runs_until_day_is_final_and_stops_outside_window(monkeypatch):
+    import argparse
+    calls = []
+    monkeypatch.setattr(pm.time_mod, "sleep", lambda s: calls.append(s))
+    seq = iter([(False, 0), (False, 0), (True, 0)])
+    monkeypatch.setattr(pm, "evaluate_once", lambda a, repo, now: next(seq))
+    t = datetime(2026, 11, 19, 19, 0, tzinfo=CT)
+    monkeypatch.setattr(pm, "datetime", type("D", (datetime,), {"now": classmethod(lambda c, tz=None: t.astimezone(tz) if tz else t)}))
+    a = argparse.Namespace(now=None, loop=True, poll_seconds=180)
+    assert pm.cmd_watchdog(a) == 0 and calls == [180, 180]        # polled twice, stopped once final
+
+
+def test_loop_exits_immediately_in_the_morning(monkeypatch):
+    import argparse
+    monkeypatch.setattr(pm.time_mod, "sleep", lambda s: (_ for _ in ()).throw(AssertionError("must not sleep")))
+    monkeypatch.setattr(pm, "evaluate_once", lambda a, repo, now: (False, 0))
+    t = datetime(2026, 11, 19, 9, 0, tzinfo=CT)
+    monkeypatch.setattr(pm, "datetime", type("D", (datetime,), {"now": classmethod(lambda c, tz=None: t.astimezone(tz) if tz else t)}))
+    assert pm.cmd_watchdog(argparse.Namespace(now=None, loop=True, poll_seconds=180)) == 0
+
+
+def test_loop_stops_after_cutoff(monkeypatch):
+    import argparse
+    monkeypatch.setattr(pm.time_mod, "sleep", lambda s: (_ for _ in ()).throw(AssertionError("must not sleep")))
+    monkeypatch.setattr(pm, "evaluate_once", lambda a, repo, now: (False, 1))
+    t = datetime(2026, 11, 19, 22, 55, tzinfo=CT)
+    monkeypatch.setattr(pm, "datetime", type("D", (datetime,), {"now": classmethod(lambda c, tz=None: t.astimezone(tz) if tz else t)}))
+    assert pm.cmd_watchdog(argparse.Namespace(now=None, loop=True, poll_seconds=180)) == 1

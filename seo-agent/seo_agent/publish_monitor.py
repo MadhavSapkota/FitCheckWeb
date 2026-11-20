@@ -16,6 +16,7 @@ import os
 import re
 import subprocess
 import sys
+import time as time_mod
 import urllib.request
 from datetime import date, datetime, time, timedelta, timezone
 from pathlib import Path
@@ -246,19 +247,27 @@ def close_resolved(repo: str, history: list[dict], dry: bool) -> None:
                 print(f"closed #{i['number']}")
 
 
-def cmd_watchdog(a: argparse.Namespace) -> int:
-    repo = os.environ.get("GITHUB_REPOSITORY", "MadhavSapkota/FitCheckWeb")
-    now = datetime.fromisoformat(a.now) if a.now else datetime.now(timezone.utc)
-    history = load_history()
+def load_history_remote(repo: str) -> list[dict]:
+    """Latest committed history from master (the daily run pushes it while a long-lived watchdog loop is running)."""
+    try:
+        return json.loads(gh("api", f"repos/{repo}/contents/seo-agent/data/publish-history.json", "-H", "Accept: application/vnd.github.raw"))
+    except Exception as e:  # noqa: BLE001 - fall back to the checked-out copy
+        print(f"remote history unavailable ({e}); using local copy")
+        return load_history()
+
+
+def evaluate_once(a: argparse.Namespace, repo: str, now: datetime) -> tuple[bool, int]:
+    """One watchdog pass. Returns (today_is_final, exit_code); final = published, or the day's alert has been raised."""
+    history = load_history() if (a.fixture_runs or a.no_remote) else load_history_remote(repo)
     today = chicago(now).date()
-    rc = 0
+    rc, final = 0, False
     for day in (today - timedelta(days=1), today):
         runs = fetch_runs(repo, day) if not a.fixture_runs else json.loads(Path(a.fixture_runs).read_text())
         for r in runs:
             if isinstance(r["created"], str):
                 r["created"] = datetime.fromisoformat(r["created"])
         d = decide(day, now, history, runs)
-        print(f"{day}: {d['action']} - {d['reason']}")
+        print(f"{chicago(now):%H:%M} {day}: {d['action']} - {d['reason']}", flush=True)
         pub = next((h for h in history if h["date"] == str(day) and h["outcome"] == "published"), None)
         if d["action"] == "ok" and pub and pub.get("url") and not a.no_network and not url_live(pub["url"]):
             raise_alert(repo, day, f"article recorded as published but {pub['url']} is not live (HTTP 200 + canonical check failed)", a.dry_run)
@@ -271,8 +280,31 @@ def cmd_watchdog(a: argparse.Namespace) -> int:
         elif d["action"] == "alert":
             raise_alert(repo, day, d["reason"], a.dry_run)
             rc = 1
+        if day == today and d["action"] in ("ok", "alert"):
+            final = True
     close_resolved(repo, history, a.dry_run)
-    return rc
+    return final, rc
+
+
+LOOP_START, LOOP_END = time(17, 30), time(22, 50)   # Chicago wall time the long-lived loop supervises
+
+
+def cmd_watchdog(a: argparse.Namespace) -> int:
+    """Single pass, or with --loop a poll every --poll-seconds until the day is final or 22:50 Chicago. The loop is started by
+    the 6 PM daily-seo run itself (and by cron-job.org / GitHub cron when available), so retries at 20:00 and 22:00 do NOT
+    depend on GitHub's unreliable scheduler. It exits immediately outside the evening window."""
+    repo = os.environ.get("GITHUB_REPOSITORY", "MadhavSapkota/FitCheckWeb")
+    if a.now:
+        return evaluate_once(a, repo, datetime.fromisoformat(a.now))[1]
+    rc = 0
+    while True:
+        now = datetime.now(timezone.utc)
+        final, r = evaluate_once(a, repo, now)
+        rc = rc or r
+        t = chicago(now).time()
+        if not a.loop or final or t >= LOOP_END or t < LOOP_START:
+            return rc
+        time_mod.sleep(a.poll_seconds)
 
 
 def backfill(state: dict) -> list[dict]:
@@ -307,6 +339,9 @@ def main(argv: list[str] | None = None) -> int:
     ap.add_argument("--now", help="watchdog: ISO timestamp with offset to evaluate (testing)")
     ap.add_argument("--fixture-runs", help="watchdog: JSON file of runs instead of the GitHub API (testing)")
     ap.add_argument("--no-network", action="store_true")
+    ap.add_argument("--no-remote", action="store_true", help="watchdog: read history from the local checkout (testing)")
+    ap.add_argument("--loop", action="store_true", help="watchdog: keep polling until the day is final or 22:50 Chicago")
+    ap.add_argument("--poll-seconds", type=int, default=180)
     ap.add_argument("--emit", help="record: write this run's record (JSON) to this path")
     ap.add_argument("--apply", help="record: add the record in this JSON file to the committed history")
     a = ap.parse_args(argv)

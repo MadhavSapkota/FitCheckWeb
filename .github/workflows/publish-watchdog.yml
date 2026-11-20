@@ -8,8 +8,12 @@ name: Publish watchdog
 #  - an article recorded as published is not live at its URL                                -> alert
 # Retries are dispatches of the normal daily-seo.yml, which has its own 1-article/day limit, concurrency group and
 # post-rebase re-check, so a retry can never create a duplicate article.
-# GitHub cron is UTC-only and can be late, so it fires hourly at :35 across both UTC hours that can be 18:30-22:35 Chicago
-# (CST and CDT); the Python logic uses Chicago wall time, so daylight saving needs no change.
+# GitHub's cron is NOT reliable for this repo (Nov 19: a scheduled run started 9.5 hours late; scheduled runs were absent
+# for days), so critical retries never depend on it. Three independent starters; all are safe to overlap:
+#   1. the 6 PM daily-seo run starts this workflow in LOOP mode (polls every 3 min until 22:50 Chicago)  <- primary
+#   2. an optional second cron-job.org job (POST workflow_dispatch with loop=true, dry_run=false at ~18:25 Chicago)
+#   3. GitHub cron below, best effort only
+# The Python logic uses Chicago wall time, so daylight saving needs no change. Concurrency lets only one loop run.
 
 on:
   schedule:
@@ -20,6 +24,10 @@ on:
         description: "Print decisions only: dispatch nothing, alert nothing"
         type: boolean
         default: true
+      loop:
+        description: "Keep polling every 3 minutes until the day is resolved or 22:50 Chicago"
+        type: boolean
+        default: false
 
 permissions:
   contents: read
@@ -33,7 +41,7 @@ concurrency:
 jobs:
   watchdog:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 330
     steps:
       - uses: actions/checkout@v4
         with:
@@ -46,4 +54,5 @@ jobs:
         run: |
           args=""
           if [ "${{ github.event_name }}" = "workflow_dispatch" ] && [ "${{ inputs.dry_run }}" = "true" ]; then args="--dry-run"; fi
+          if [ "${{ github.event_name }}" = "schedule" ] || [ "${{ inputs.loop }}" = "true" ]; then args="$args --loop"; fi
           python -m seo_agent.publish_monitor watchdog $args

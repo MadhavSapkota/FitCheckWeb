@@ -40,6 +40,15 @@ jobs:
           ref: ${{ github.ref_name }}
           fetch-depth: 0
 
+      # Start the watchdog loop (retries at 20:00/22:00 + issue alerts). Independent of GitHub's unreliable cron: it is started
+      # by this run itself. Best effort: a failure here must never block publishing.
+      - name: Start watchdog loop
+        if: ${{ inputs.dry_run != true && inputs.discovery_only != true && github.ref == 'refs/heads/master' }}
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run publish-watchdog.yml --ref master -f loop=true -f dry_run=false
+
       # The 1-article/day limit counts days in Chicago time, so it stays correct across daylight saving changes.
       - name: Set local date
         run: echo "SEO_AGENT_TODAY=$(TZ=America/Chicago date +%F)" >> "$GITHUB_ENV"
