@@ -404,5 +404,19 @@
   "url": null,
   "commit": null,
   "deploy": "n/a"
+ },
+ {
+  "date": "2026-11-19",
+  "recorded_at": "2026-11-20T04:49:51+00:00",
+  "run_id": "44674464921",
+  "run_url": "https://github.com/MadhavSapkota/FitCheckWeb/actions/runs/44674464921",
+  "outcome": "published",
+  "decision": "published /blog/hair-styles-for-curly-hair/ for 'hair styles for curly hair' (feature hairstyle-recommendations, score 68.8) after 1 revision(s) + polish. Selected because: Strongest eligible keyword across 10 markets: 1,600 searches/month in United Kingdom, Google Ads competition LOW, stage 1: ranking opportunity 65 (>= 60 required), relevance 70, score 68.8; the highest-scoring keyword (demand, ",
+  "keyword": "hair styles for curly hair",
+  "title": "Hair Styles for Curly Hair: Cuts & Ideas by Length",
+  "slug": "hair-styles-for-curly-hair",
+  "url": "https://fitcheck-fashion.com/blog/hair-styles-for-curly-hair/",
+  "commit": "38fa943a031c6f7629909a72ac17589ec524fa0f",
+  "deploy": "live"
  }
 ]
