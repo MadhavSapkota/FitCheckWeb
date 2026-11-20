@@ -95,3 +95,16 @@ def test_record_is_idempotent_per_run():
 
 def test_failed_job_is_classified_failed():
     assert pm.classify("published /blog/x/", job_ok=False) == "failed"
+
+
+def test_alert_closes_only_when_published_on_or_after_its_day():
+    t = "[publish-alert] 2026-11-19: no blog article published"
+    assert not pm.resolvable(t, {"2026-11-18"})          # an earlier day's article must not close today's alert
+    assert pm.resolvable(t, {"2026-11-19"}) and pm.resolvable(t, {"2026-11-20"})
+    assert not pm.resolvable("some other issue", {"2026-11-20"})
+
+
+def test_no_smtp_code_remains():
+    import inspect
+    src = inspect.getsource(pm)
+    assert "smtplib" not in src and "SMTP" not in src

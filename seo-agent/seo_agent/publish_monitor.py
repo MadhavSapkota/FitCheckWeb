@@ -3,7 +3,6 @@
 Commands (python -m seo_agent.publish_monitor <command>):
   record    append this run's outcome to data/publish-history.json (+ PUBLISH-HISTORY.md). Idempotent per run id.
   watchdog  decide, for the current Chicago day, whether to do nothing / dispatch a retry / alert. Never publishes itself.
-  alert     open (once per day) a GitHub issue and, if SMTP secrets exist, send an email.
 
 Safety: this module never writes an article. Retries are workflow dispatches of the normal daily-seo workflow, which keeps
 its own protections (concurrency group, 1-article/day limit counted in Chicago time, re-check after rebase), so a retry can
@@ -15,12 +14,10 @@ import argparse
 import json
 import os
 import re
-import smtplib
 import subprocess
 import sys
 import urllib.request
 from datetime import date, datetime, time, timedelta, timezone
-from email.message import EmailMessage
 from pathlib import Path
 from zoneinfo import ZoneInfo
 
@@ -189,54 +186,64 @@ def url_live(url: str) -> bool:
         return False
 
 
-def send_email(subject: str, body: str) -> str:
-    host, user, pw, to = (os.environ.get(k, "") for k in ("SMTP_HOST", "SMTP_USER", "SMTP_PASSWORD", "ALERT_EMAIL_TO"))
-    if not (host and user and pw and to):
-        return "email skipped: SMTP_HOST/SMTP_USER/SMTP_PASSWORD/ALERT_EMAIL_TO secrets not set"
-    msg = EmailMessage()
-    msg["Subject"], msg["From"], msg["To"] = subject, os.environ.get("SMTP_FROM") or user, to
-    msg.set_content(body)
-    port = int(os.environ.get("SMTP_PORT") or 465)
-    try:
-        if port == 465:
-            with smtplib.SMTP_SSL(host, port, timeout=30) as s:
-                s.login(user, pw)
-                s.send_message(msg)
-        else:
-            with smtplib.SMTP(host, port, timeout=30) as s:
-                s.starttls()
-                s.login(user, pw)
-                s.send_message(msg)
-        return "email sent"
-    except Exception as e:  # noqa: BLE001 - the GitHub issue (which GitHub also emails) is the primary channel
-        return f"email FAILED: {type(e).__name__}: {e}"
+ALERT_TITLE = "[publish-alert] {day}: no blog article published"
+ALERT_RE = re.compile(r"^\[publish-alert\] (\d{4}-\d{2}-\d{2}):")
+
+
+def alert_issues(repo: str, state: str) -> list[dict]:
+    """Alert issues via the REST API (consistent immediately; `gh issue list --search` uses a lagging search index)."""
+    # No label filter: filtering by title in Python avoids any dependence on label/search indexing.
+    rows = json.loads(gh("api", f"repos/{repo}/issues?state={state}&sort=created&direction=desc&per_page=100") or "[]")
+    return [i for i in rows if "pull_request" not in i and ALERT_RE.match(i["title"])]
 
 
 def raise_alert(repo: str, day: date, reason: str, dry: bool) -> None:
-    title = f"[publish-alert] {day}: no blog article published"
+    """GitHub Issues are the only notification channel (GitHub emails/pushes the owner). One issue per Chicago day: created
+    once, then updated with a comment only when the reason changes, never repeated hourly."""
+    title = ALERT_TITLE.format(day=day)
     body = (f"**{reason}**\n\nDate (Chicago): {day}\nHistory: `seo-agent/data/PUBLISH-HISTORY.md`\n"
             f"Runs: https://github.com/{repo}/actions/workflows/{WORKFLOW}\n\n"
             "Fix the cause (for example an expired Google Ads token, exhausted Claude credit, or no eligible keyword), then run "
-            "the *Daily SEO agent* workflow manually. The issue closes itself after the next article is published.")
+            "the *Daily SEO agent* workflow manually. This issue closes itself after the next article is published.")
     if dry:
-        print(f"[dry-run] would open issue '{title}': {reason}")
+        print(f"[dry-run] would open/update issue '{title}': {reason}")
         return
-    found = gh("issue", "list", "-R", repo, "--state", "all", "--search", f'"{title}" in:title', "--json", "number", "--jq", ".[0].number").strip()
-    if found:
-        print(f"alert already raised (issue #{found}); not repeating")
+    found = [i for i in alert_issues(repo, "all") if i["title"] == title]
+    if not found:
+        gh("label", "create", "publish-alert", "-R", repo, "--color", "d93f0b", "--force", check=False)
+        gh("issue", "create", "-R", repo, "--title", title, "--body", body, "--label", "publish-alert")
+        print("issue opened")
         return
-    gh("label", "create", "publish-alert", "-R", repo, "--color", "d93f0b", "--force", check=False)
-    gh("issue", "create", "-R", repo, "--title", title, "--body", body, "--label", "publish-alert")
-    print("issue opened;", send_email(title, body))
+    i = found[0]
+    if i["state"] != "open":
+        print(f"alert for {day} was already raised and closed (#{i['number']}); not reopening")
+        return
+    comments = json.loads(gh("api", f"repos/{repo}/issues/{i['number']}/comments?per_page=100") or "[]")
+    if reason in (i["body"] or "") or any(reason in c.get("body", "") for c in comments):
+        print(f"alert already raised (#{i['number']}); same reason, not repeating")
+        return
+    gh("issue", "comment", str(i["number"]), "-R", repo, "--body", f"Update: **{reason}**")
+    print(f"issue #{i['number']} updated")
+
+
+def resolvable(title: str, published_days: set[str]) -> bool:
+    """An alert for day D is resolved by an article published on D or later (never by an earlier day's article)."""
+    m = ALERT_RE.match(title)
+    return bool(m) and any(d >= m.group(1) for d in published_days)
 
 
 def close_resolved(repo: str, history: list[dict], dry: bool) -> None:
     pub = {h["date"]: h for h in history if h["outcome"] == "published"}
-    if not pub or dry:
+    if not pub:
         return
-    latest = max(pub.values(), key=lambda h: h["date"])
-    for n in gh("issue", "list", "-R", repo, "--label", "publish-alert", "--state", "open", "--json", "number", "--jq", ".[].number", check=False).split():
-        gh("issue", "close", n, "-R", repo, "-c", f"Resolved: published {latest['url']} on {latest['date']}.", check=False)
+    for i in alert_issues(repo, "open"):
+        if resolvable(i["title"], set(pub)):
+            by = pub[max(d for d in pub if d >= ALERT_RE.match(i["title"]).group(1))]
+            if dry:
+                print(f"[dry-run] would close #{i['number']} (resolved by {by['url']})")
+            else:
+                gh("issue", "close", str(i["number"]), "-R", repo, "-c", f"Resolved automatically: published {by['url']} on {by['date']}.", check=False)
+                print(f"closed #{i['number']}")
 
 
 def cmd_watchdog(a: argparse.Namespace) -> int:
