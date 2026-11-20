@@ -200,6 +200,13 @@ def new_article(cfg, state: State, facts: dict, pages, perf, dry: bool, report: 
         report["notes"].append(f"Manual re-test of keyword '{force_keyword}'")
     for i in short:
         i["cluster"] = i.get("feature") or research.cluster_of(cfg, i["keyword"])
+    brands = [str(b).lower() for b in cfg.get("keyword_research.global_discovery.competitor_brands", [])]
+    for i in short:  # competitor brands belong on /compare/ pages: enforced for every mode, including manual --keyword re-tests
+        b = keyword_agent.competitor_brand(brands, i["keyword"])
+        if b and i["decision"] == "candidate":
+            i["decision"] = f"competitor_brand:{b}"
+            keyword_agent.set_status(report, i["keyword"], f"competitor_brand ('{b}'): reserved for the /compare/ pages, not selected")
+            state.record_keyword(i["keyword"], i, i["decision"])
     articles = state.data["articles"]
     for i in short:  # topic clusters: no second article on a near-identical query in the same cluster
         if i["decision"] == "candidate":  # duplicate-intent check applies to manual re-tests too
@@ -213,24 +220,27 @@ def new_article(cfg, state: State, facts: dict, pages, perf, dry: bool, report: 
                                                   "covering_page", "source")} for i in short[:20]]
     candidates = research.order_by_cluster([i for i in short if i["decision"] == "candidate"], articles, cfg)
     if global_on:  # global mode: strongest score first (run_global already sorted); order_by_cluster only adds mix_boost
-        candidates = sorted(candidates, key=lambda i: (-(i.get("score_total") or 0), -(i.get("volume") or 0)))
+        # stage 1 (opportunity >= 60) always before stage 2 (fallback >= 40); strongest score first inside each stage
+        candidates = sorted(candidates, key=lambda i: (i.get("tier") or 1, -(i.get("score_total") or 0), -(i.get("volume") or 0)))
     if global_on:
         for i in short:
             if i["decision"] != "candidate":
                 keyword_agent.set_status(report, i["keyword"], f"{i['decision']}: not selected")
     if not candidates:
         gl = report.get("global") or {}
-        blocked = [k for k in gl.get("keywords", []) if str(k["status"]).startswith("below_ranking_opportunity")]
+        blocked = [k for k in gl.get("keywords", []) if not k.get("tier")]
         if global_on and blocked and not short:
             b = blocked[0]
-            report["decision"] = (f"skip: {len(blocked)} keyword(s) met the volume and LOW-competition requirements, but none had ranking "
-                                  f"opportunity >= {gl.get('min_ranking_opportunity')}, so no difficult head term was auto-selected "
-                                  f"(best of them: '{b['keyword']}', {b['volume']:,}/month in {b['market']}, opportunity {b['ranking_opportunity']})")
+            low = gl.get("fallback_min_ranking_opportunity") or gl.get("min_ranking_opportunity")
+            report["decision"] = (f"skip: {len(blocked)} keyword(s) met the volume and LOW-competition requirements, but none could be selected: "
+                                  f"none reached ranking opportunity >= {low} with the fallback requirements, or they are competitor brands, so no "
+                                  f"difficult head term was auto-selected (best of them: '{b['keyword']}', {b['volume']:,}/month in {b['market']}, "
+                                  f"opportunity {b['ranking_opportunity']}; {b['status']})")
         else:
             report["decision"] = ("skip: no keyword met the feature-relevance, score, volume, intent and duplicate checks "
                                   "(see 'Keywords by feature' for reasons)")
         return
-    published, clusters_today, failed_features = [], set(), set()
+    published, clusters_today, failed_features, stage1_published = [], set(), set(), []
     tried, planned = 0, 0   # tried = candidates that reached WRITING; planned = planner calls
     for kw in candidates:
         if tried >= cfg.get("keyword_research.max_candidates_per_run", 3):
@@ -242,7 +252,11 @@ def new_article(cfg, state: State, facts: dict, pages, perf, dry: bool, report: 
             break  # dry runs save nothing, so count their would-be publishes toward the daily limit too
         if kw["cluster"] in clusters_today:
             continue  # spread daily articles across clusters
-        if kw["cluster"] in failed_features:
+        if kw.get("tier") == 2 and stage1_published:
+            break  # fallback keywords are only used when no stage-1 keyword was published
+        if kw["cluster"] in failed_features and kw.get("tier") != 1:
+            # a failed same-feature draft redirects later keywords to other features, but never lets a stage-2 fallback jump
+            # ahead of an untried stage-1 keyword (stage 1 is tried in full first; the candidate cap still bounds the run)
             continue  # a same-feature draft already failed this run; try a different feature instead
         planned += 1
         if published:
@@ -288,6 +302,8 @@ def new_article(cfg, state: State, facts: dict, pages, perf, dry: bool, report: 
             published.append(f"[dry-run] would publish /{cfg.get('site.blog_dir')}/{slug}/ for '{kw['keyword']}'"
                              + (f". Selected because: {kw['selection_reason']}" if kw.get("selection_reason") else ""))
             clusters_today.add(kw["cluster"])
+            if kw.get("tier") == 1:
+                stage1_published.append(kw["keyword"])
             continue
         a["quality_gate"] = {k: gate[k] for k in ("word_count", "keyword_density", "warnings")} | \
             {"revisions": sum(1 for r in attempt["rounds"] if r["round"] not in (0, "polish")),
@@ -302,6 +318,8 @@ def new_article(cfg, state: State, facts: dict, pages, perf, dry: bool, report: 
         report["published_urls"] = report.get("published_urls", []) + [publisher.article_url(cfg, slug)]
         report["changes"].append(f"new article blog/{slug}/index.html")
         clusters_today.add(kw["cluster"])
+        if kw.get("tier") == 1:
+            stage1_published.append(kw["keyword"])
     for k in (report.get("global") or {}).get("keywords", []):
         if k["status"] == "queued":
             k["status"] = "not needed: an article was already selected" if published else "not reached (candidate cap)"
@@ -320,26 +338,35 @@ def write_report(cfg, report: dict, dry: bool) -> None:
         gl = report["global"]
         lines += ["## Global keyword discovery",
                   f"Eligible = verified volume >= {gl['min_volume']:,}/month, Google Ads competition in {', '.join(gl['competition'])}. "
-                  f"Preferred = eligible AND ranking opportunity >= {gl['min_ranking_opportunity']} (heuristic, NOT keyword difficulty). "
-                  f"{gl['eligible_keywords']} eligible, {gl['preferred_keywords']} preferred; the strongest (highest-scoring) preferred keyword that passes "
-                  "the planner, duplicate and quality checks is selected. No market is favoured. Volumes are per country and never summed; "
+                  f"TWO-STAGE selection: stage 1 = ranking opportunity >= {gl['min_ranking_opportunity']}; stage 2 (fallback, only after every stage-1 keyword "
+                  f"was tried) = opportunity >= {gl.get('fallback_min_ranking_opportunity')} AND long-tail AND strong feature relevance AND clear intent. "
+                  "Ranking opportunity is a heuristic, NOT keyword difficulty. Competitor-brand queries are never selected (the /compare/ pages own them). "
+                  f"{gl['eligible_keywords']} eligible (volume + Ads competition), {gl['preferred_keywords']} stage 1, {gl.get('fallback_keywords', 0)} stage 2; "
+                  "the strongest (highest-scoring) keyword that passes the planner, duplicate and quality checks is selected, stage 1 first. "
+                  "No market is favoured: each is judged on its own numbers. Volumes are per country and never summed; "
                   "'Ads competition' is Google Ads advertising competition, NOT organic SEO difficulty.", "",
                   "### Per-country counts and rejections (each market's own numbers)"]
         reasons = sorted({r for mk in gl["markets"] for r in mk["reasons"]},
                          key=lambda r: -sum(mk["reasons"].get(r, 0) for mk in gl["markets"]))
-        grn = ["ads_competition_not_allowed", "non_english", "ranking_opportunity_below_min"]
-        head = ["market", "ideas", "relevant", "qualifying", "dup. landing", "dup. article", *reasons, *grn, "eligible", "preferred", "error"]
+        grn = ["ads_competition_not_allowed", "non_english", "competitor_brand", "ranking_opportunity_below_min", "fallback_requirements_not_met"]
+        head = ["market", "ideas", "relevant", "qualifying", "dup. landing", "dup. article", *reasons, *grn, "eligible", "stage 1", "stage 2", "error"]
         lines += ["| " + " | ".join(head) + " |", "|" + "---|" * len(head)]
         for mk in gl["markets"]:
             c = mk["counts"]
             cells = [mk["name"], c.get("discovered", "-"), c.get("relevant", "-"), mk["qualifying"], c.get("dup_landing", "-"),
                      c.get("dup_article", "-"), *[mk["reasons"].get(r, 0) for r in reasons],
-                     *[mk["global_rejections"][r] for r in grn], mk["eligible"], mk["preferred"], mk["error"] or ""]
+                     *[mk["global_rejections"].get(r, 0) for r in grn], mk["eligible"], mk["preferred"], mk.get("fallback", 0), mk["error"] or ""]
             lines.append("| " + " | ".join(str(x) for x in cells) + " |")
-        lines += ["", "### Eligible keywords, strongest first",
-                  "| # | keyword | country | monthly searches | Ads competition | relevance | ranking opportunity | conversion | score | also seen in (country volume, Ads competition) | status |",
-                  "|---|---|---|---|---|---|---|---|---|---|---|"]
-        lines += [f"| {n} | {k['keyword']} | {k['market']} | {k['volume']:,} | {k['competition']} | {k['relevance']} | "
+        lines += ["", "### Top 10 eligible keywords: scores and why each passed or failed",
+                  "| # | keyword | country | searches/mo | stage | score | relevance | opportunity | checks | outcome |",
+                  "|---|---|---|---|---|---|---|---|---|---|"]
+        lines += [f"| {n} | {k['keyword']} | {k['market']} | {k['volume']:,} | {k.get('tier') or '-'} | {k['score']} | {k['relevance']} | "
+                  f"{k['ranking_opportunity']} | {'; '.join(k.get('checks') or [])} | {k['status']} |"
+                  for n, k in enumerate(gl["keywords"][:10], 1)]
+        lines += ["", "### All eligible keywords, strongest first",
+                  "| # | keyword | country | monthly searches | Ads competition | stage | relevance | ranking opportunity | conversion | score | also seen in (country volume, Ads competition) | status |",
+                  "|---|---|---|---|---|---|---|---|---|---|---|---|"]
+        lines += [f"| {n} | {k['keyword']} | {k['market']} | {k['volume']:,} | {k['competition']} | {k.get('tier') or '-'} | {k['relevance']} | "
                   f"{k['ranking_opportunity']} | {k['conversion']} | {k['score']} | {k['also_seen']} | {k['status']} |"
                   for n, k in enumerate(gl["keywords"], 1)]
         lines += [""]

@@ -52,6 +52,16 @@ def intent_type(kw: str) -> str:
     return "tool" if set(t) & TOOL_WORDS else "informational"
 
 
+CLEAR_INTENT_WORDS = INFO_WORDS | TOOL_WORDS | {"for", "to", "best", "near", "suits", "suit", "match", "matches", "looks", "wear"}
+
+
+def clear_intent(kw: str) -> bool:
+    """Heuristic: the query states what the searcher wants (a question, a how-to / ideas / tool word, or a 'for <situation>' form).
+    A bare noun phrase ("curly hair") is ambiguous. The Claude planner still makes the final intent call."""
+    t = tokens(kw)
+    return bool(t) and (t[0] in QUESTION or bool(set(t) & CLEAR_INTENT_WORDS))
+
+
 def signature(kw: str) -> frozenset[str]:
     out = set()
     for w in tokens(kw):

@@ -314,10 +314,12 @@ def test_editorial_topics_when_enabled(site, monkeypatch):
     assert kw["latest"]["source"] == "editorial (volume unverified)"
 
 
-def enable_global(site, min_opp=0, min_vol=1000):
+def enable_global(site, min_opp=0, min_vol=1000, fallback=None):
+    """fallback=None: stage 2 is set equal to stage 1 (old single-threshold behaviour); fallback=40 turns the fallback band on."""
     p = site / "seo-agent" / "seo-config.yaml"
     txt = p.read_text().replace("global_discovery:\n    enabled: false", "global_discovery:\n    enabled: true")
-    txt = txt.replace("min_ranking_opportunity: 60", f"min_ranking_opportunity: {min_opp}")
+    txt = txt.replace("fallback_min_ranking_opportunity: 40", f"fallback_min_ranking_opportunity: {min_opp if fallback is None else fallback}")
+    txt = txt.replace("min_ranking_opportunity: 60  ", f"min_ranking_opportunity: {min_opp}  ", 1)
     p.write_text(re.sub(r"(global_discovery:.*?minimum_monthly_searches: )\d+", rf"\g<1>{min_vol}", txt, count=1, flags=re.S))  # tests do not depend on the tuned default
 
 
@@ -424,7 +426,7 @@ def test_nothing_published_and_clearly_reported_when_only_head_terms_qualify(sit
     assert main.main(["run"]) == 0
     assert not any((site / "blog").glob("*/index.html"))
     rep = report_text(site)
-    assert "none had ranking opportunity >= 60" in rep and "no difficult head term was auto-selected" in rep
+    assert "none reached ranking opportunity >= 60" in rep and "no difficult head term was auto-selected" in rep
     assert "how to match colors in an outfit" in rep  # still listed so the owner can see it
 
 
@@ -450,7 +452,7 @@ def test_report_lists_country_volume_competition_scores_and_per_country_rejectio
                             2356: [idea("ai outfit checker", 6200), idea("how to match colors in an outfit", 8000, "HIGH")]})
     assert main.main(["run"]) == 0
     rep = report_text(site)
-    assert "| keyword | country | monthly searches | Ads competition | relevance | ranking opportunity | conversion | score |" in rep
+    assert "| keyword | country | monthly searches | Ads competition | stage | relevance | ranking opportunity | conversion | score |" in rep
     row = next(l for l in rep.splitlines() if l.startswith("| ") and "ai outfit checker" in l and "India" in l and "6,200" in l)
     assert "India" in row and "6,200" in row and "LOW" in row and "| 75 |" in row
     rows = {l.split("|")[1].strip(): l for l in rep.splitlines() if l.startswith("| ") and l.split("|")[1].strip() in ("United States", "India", "Canada")}
@@ -605,3 +607,102 @@ def test_discover_queries_every_market_and_changes_nothing_even_when_daily_limit
     assert st_path.read_bytes() == before                              # state untouched
     assert not any((site / "blog").glob("*/index.html"))               # nothing published
     assert not (site / "seo-agent" / "data" / "reports").exists() or not list((site / "seo-agent" / "data" / "reports").glob("2026-11-01.md"))
+
+
+def test_fallback_stage_used_when_no_stage1_keyword(site, monkeypatch):
+    mock_apis(monkeypatch)
+    enable_global(site, min_opp=60, fallback=40)
+    set_opportunity(monkeypatch, {"how to match colors in an outfit": 45})
+    by_market(monkeypatch, {2840: [idea("how to match colors in an outfit", 3000)]})
+    assert main.main(["run"]) == 0
+    assert (site / "blog" / "how-to-match-colors-in-an-outfit" / "index.html").exists()
+    st = json.loads((site / "seo-agent" / "data" / "state.json").read_text())
+    assert "stage 2 FALLBACK" in st["keywords"]["how to match colors in an outfit"]["latest"]["selection_reason"]
+
+
+def test_stage1_beats_a_higher_scoring_stage2_keyword(site, monkeypatch):
+    mock_apis(monkeypatch)
+    enable_global(site, min_opp=60, fallback=40)
+    set_opportunity(monkeypatch, {"does my outfit look good": 62, "how to match colors in an outfit": 59})
+    by_market(monkeypatch, {2840: [idea("how to match colors in an outfit", 90000 // 10)], 2826: [idea("does my outfit look good", 1100)]})
+    assert main.main(["run"]) == 0
+    st = json.loads((site / "seo-agent" / "data" / "state.json").read_text())
+    assert st["keywords"]["does my outfit look good"]["decision"].startswith("published")
+    assert not st["keywords"]["how to match colors in an outfit"]["decision"].startswith("published")
+
+
+def test_fallback_requires_long_tail_and_clear_intent(site, monkeypatch):
+    mock_apis(monkeypatch)
+    enable_global(site, min_opp=60, fallback=40)
+    set_opportunity(monkeypatch, {"outfit checker": 50})            # 2 words: fine for stage 1 only
+    by_market(monkeypatch, {2840: [idea("outfit checker", 5000)]})
+    assert main.main(["run"]) == 0
+    assert not any((site / "blog").glob("*/index.html"))
+    assert "fallback_requirements_not_met (long-tail (2 words, need 3+)" in report_text(site)
+
+
+def test_competitor_brand_is_never_selected_but_still_listed(site, monkeypatch):
+    mock_apis(monkeypatch)
+    enable_global(site, min_opp=60, fallback=40)
+    set_opportunity(monkeypatch, {"youcam makeup tutorial for beginners": 95, "how to match colors in an outfit": 65})
+    by_market(monkeypatch, {2840: [idea("youcam makeup tutorial for beginners", 9000), idea("how to match colors in an outfit", 2000)]})
+    assert main.main(["run"]) == 0
+    st = json.loads((site / "seo-agent" / "data" / "state.json").read_text())
+    assert st["keywords"]["how to match colors in an outfit"]["decision"].startswith("published")
+    assert "youcam makeup tutorial for beginners" not in st["keywords"] or not st["keywords"]["youcam makeup tutorial for beginners"]["decision"].startswith("published")
+    rep = report_text(site)
+    assert "competitor_brand ('youcam'): reserved for the /compare/ pages" in rep
+
+
+def test_competitor_matching_is_whole_word():
+    from seo_agent.agents.keyword_agent import competitor_brand
+    brands = ["youcam", "alta app", "fits app"]
+    assert competitor_brand(brands, "best youcam alternative") == "youcam"
+    assert competitor_brand(brands, "alta app review") == "alta app"
+    assert competitor_brand(brands, "which colors suit altar pieces") is None
+    assert competitor_brand(brands, "what fits app sizes") == "fits app"
+    assert competitor_brand(brands, "what clothes fits my body type") is None
+
+
+def test_report_has_top10_with_pass_fail_reasons(site, monkeypatch):
+    mock_apis(monkeypatch)
+    enable_global(site, min_opp=60, fallback=40)
+    set_opportunity(monkeypatch, {"how to match colors in an outfit": 70})
+    by_market(monkeypatch, {2840: [idea("how to match colors in an outfit", 3000)]})
+    assert main.main(["run"]) == 0
+    rep = report_text(site)
+    assert "Top 10 eligible keywords: scores and why each passed or failed" in rep
+    assert "ranking opportunity 70 >= 60 (stage 1): ok" in rep and "not a competitor brand: ok" in rep
+
+
+def test_shipped_config_has_two_stage_thresholds_and_competitor_list():
+    g = config_mod.load_config(root=AGENT.parent).get("keyword_research.global_discovery")
+    assert g["min_ranking_opportunity"] == 60 and g["fallback_min_ranking_opportunity"] == 40
+    assert g["minimum_monthly_searches"] >= 1000 and g["allowed_ads_competition"] == ["LOW"]
+    assert {"youcam", "acloset", "whering"} <= set(g["competitor_brands"])
+
+
+def test_competitor_matching_handles_possessives_and_punctuation():
+    from seo_agent.agents.keyword_agent import competitor_brand
+    assert competitor_brand(["youcam"], "how to use youcam's virtual makeup try on") == "youcam"
+    assert competitor_brand(["perfect corp"], "what is perfect-corp makeup") == "perfect corp"
+
+
+def test_manual_keyword_retest_cannot_publish_a_competitor_brand(site, monkeypatch):
+    mock_apis(monkeypatch)
+    by_market(monkeypatch, {2840: [idea("youcam makeup tutorial for beginners", 9000)]})
+    assert main.main(["run", "--keyword", "youcam makeup tutorial for beginners"]) == 0
+    assert not any((site / "blog").glob("*/index.html"))
+
+
+def test_stage2_not_tried_after_a_stage1_article_is_published(site, monkeypatch):
+    mock_apis(monkeypatch)
+    enable_global(site, min_opp=60, fallback=40)
+    p = site / "seo-agent" / "seo-config.yaml"
+    p.write_text(re.sub(r"max_new_articles_per_day: \d+", "max_new_articles_per_day: 2", p.read_text()))
+    set_opportunity(monkeypatch, {"how to match colors in an outfit": 70, "what makeup suits my face shape": 45})
+    by_market(monkeypatch, {2840: [idea("how to match colors in an outfit", 3000), idea("what makeup suits my face shape", 3000)]})
+    assert main.main(["run"]) == 0
+    st = json.loads((site / "seo-agent" / "data" / "state.json").read_text())
+    assert st["keywords"]["how to match colors in an outfit"]["decision"].startswith("published")
+    assert not st["keywords"]["what makeup suits my face shape"]["decision"].startswith("published")

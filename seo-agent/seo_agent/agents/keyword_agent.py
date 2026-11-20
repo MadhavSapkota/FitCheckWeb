@@ -1,9 +1,10 @@
 """Keyword Research Agent: discovery from free/low-cost sources + labeled opportunity estimate."""
 from __future__ import annotations
 
+import re
 from typing import Any
 
-from .. import research, scoring
+from .. import intent, research, scoring
 from ..audit import Page, tokens
 from ..config import Config, load_app_facts
 from ..log import log
@@ -140,6 +141,56 @@ def run(cfg: Config, state: State, pages: list[Page], perf: dict[str, Any] | Non
     return short
 
 
+def competitor_brand(brands: list[str], kw: str) -> str | None:
+    """The competitor brand named in the keyword (whole-word / whole-phrase match), else None."""
+    norm = lambda t: " " + " ".join(re.findall(r"[a-z0-9]+", t.lower())) + " "  # noqa: E731 - "youcam's" -> " youcam s "
+    padded = norm(kw)
+    return next((b for b in brands if norm(b) in padded), None)
+
+
+def gate(cfg: Config, g: dict[str, Any], i: dict[str, Any], comp: str) -> dict[str, Any]:
+    """Two-stage selection gate for one keyword in one market (volume, Ads competition and language were already checked).
+
+    Returns {tier, reason, checks}: tier 1 = ranking opportunity >= min_ranking_opportunity; tier 2 (fallback) = opportunity >=
+    fallback_min_ranking_opportunity AND long-tail AND strong feature relevance AND clear intent; tier None = not selectable, with
+    `reason`. Competitor brands are never selectable (the /compare/ pages own them). `checks` is the human-readable pass/fail list."""
+    s = i.get("score") or {}
+    opp, rel = s.get("ranking_opportunity"), s.get("feature_relevance")
+    kw, v = i["keyword"], i.get("volume") or 0
+    min_opp, fb_opp = g.get("min_ranking_opportunity"), g.get("fallback_min_ranking_opportunity")
+    min_rel = g.get("min_feature_relevance", cfg.get("scoring.min_feature_relevance", 50))
+    words = len(tokens(kw))
+    checks = [f"volume {v:,} >= {int(g.get('minimum_monthly_searches', 1000)):,}: ok", f"Ads competition {comp}: ok"]
+    brand = competitor_brand([str(b).lower() for b in g.get("competitor_brands", [])], kw)
+    if brand:
+        checks.append(f"competitor brand '{brand}': FAIL")
+        return {"tier": None, "reason": f"competitor_brand ('{brand}'): reserved for the /compare/ pages, not selected", "checks": checks}
+    checks.append("not a competitor brand: ok")
+    if rel is None or rel < min_rel:
+        checks.append(f"feature relevance {rel} < {min_rel}: FAIL")
+        return {"tier": None, "reason": f"low_feature_relevance ({rel} < {min_rel}): not selected", "checks": checks}
+    checks.append(f"feature relevance {rel} >= {min_rel}: ok")
+    if min_opp is None or (opp is not None and opp >= min_opp):
+        checks.append(f"ranking opportunity {opp} >= {min_opp} (stage 1): ok")
+        return {"tier": 1, "reason": None, "checks": checks}
+    if fb_opp is None or opp is None or opp < fb_opp:
+        low = fb_opp if fb_opp is not None else min_opp
+        checks.append(f"ranking opportunity {opp} < {low}: FAIL")
+        return {"tier": None, "reason": f"below_ranking_opportunity (<{low}): not selected", "checks": checks}
+    checks.append(f"ranking opportunity {opp} in fallback band {fb_opp}-{min_opp}: needs long-tail + strong relevance + clear intent")
+    need, fails = [], []
+    min_w, fb_rel = int(g.get("fallback_min_words", 3)), g.get("fallback_min_feature_relevance", 70)
+    for ok, label in ((words >= min_w, f"long-tail ({words} words, need {min_w}+)"),
+                      (rel >= fb_rel, f"strong feature relevance ({rel}, need {fb_rel}+)"),
+                      (intent.clear_intent(kw), "clear search intent")):
+        checks.append(f"{label}: {'ok' if ok else 'FAIL'}")
+        if not ok:
+            fails.append(label)
+    if fails:
+        return {"tier": None, "reason": f"fallback_requirements_not_met ({'; '.join(fails)}): not selected", "checks": checks}
+    return {"tier": 2, "reason": None, "checks": checks}
+
+
 def run_global(cfg: Config, state: State, pages: list[Page], perf: dict[str, Any] | None, report: dict) -> list[dict[str, Any]]:
     """Searches every configured market, pools the qualifying keywords and returns the PREFERRED ones, highest volume first.
 
@@ -155,6 +206,8 @@ def run_global(cfg: Config, state: State, pages: list[Page], perf: dict[str, Any
     primary = {k: kr.get(k) for k in ("location", "location_code", "minimum_monthly_searches")}
     min_vol = int(g.get("minimum_monthly_searches", 1000))
     min_opp = g.get("min_ranking_opportunity")
+    fb_opp = g.get("fallback_min_ranking_opportunity")
+    g = {**g, "minimum_monthly_searches": min_vol}
     allowed = {str(c).upper() for c in g.get("allowed_ads_competition", ["LOW"])}
     english_only = bool(g.get("english_only", True))
     pool: dict[str, dict[str, Any]] = {}
@@ -169,7 +222,9 @@ def run_global(cfg: Config, state: State, pages: list[Page], perf: dict[str, Any
         for m in g.get("markets", []):
             kr.update(location=m["location"], location_code=m["location_code"], minimum_monthly_searches=min_vol)
             row = {"market": m["location"], "name": m["name"], "counts": {}, "reasons": {}, "qualifying": 0, "eligible": 0,
-                   "preferred": 0, "global_rejections": {"ads_competition_not_allowed": 0, "non_english": 0, "ranking_opportunity_below_min": 0},
+                   "preferred": 0, "fallback": 0,
+                   "global_rejections": {"ads_competition_not_allowed": 0, "non_english": 0, "competitor_brand": 0,
+                                         "ranking_opportunity_below_min": 0, "fallback_requirements_not_met": 0},
                    "error": None}
             rows.append(row)
             try:
@@ -206,17 +261,21 @@ def run_global(cfg: Config, state: State, pages: list[Page], perf: dict[str, Any
                 if english_only and not i["keyword"].isascii():
                     row["global_rejections"]["non_english"] += 1
                     continue
-                opp = (i.get("score") or {}).get("ranking_opportunity")
-                below = min_opp is not None and (opp is None or opp < min_opp)
-                if below:
-                    row["global_rejections"]["ranking_opportunity_below_min"] += 1
-                i["market"], i["market_name"], i["below_opportunity"] = m["location"], m["name"], below
+                gt = gate(cfg, g, i, comp)  # each market is judged on its own numbers
+                if gt["tier"] is None:
+                    key = gt["reason"].split(" ")[0].split("(")[0]
+                    row["global_rejections"][{"competitor_brand": "competitor_brand",
+                                              "fallback_requirements_not_met": "fallback_requirements_not_met"}.get(key, "ranking_opportunity_below_min")] += 1
+                i["market"], i["market_name"] = m["location"], m["name"]
+                i["tier"], i["reject_reason"], i["gate_checks"] = gt["tier"], gt["reason"], gt["checks"]
                 row["eligible"] += 1
-                row["preferred"] += 0 if below else 1
+                row["preferred"] += 1 if gt["tier"] == 1 else 0
+                row["fallback"] += 1 if gt["tier"] == 2 else 0
                 prev = pool.get(i["keyword"])
                 seen = (prev or {}).get("also_seen", [])
                 seen.append({"market": m["location"], "volume": i["volume"], "competition": comp})  # country-level metrics are kept, never summed
-                if prev is None or i["volume"] > prev["volume"]:
+                rank = lambda x: (x["tier"] or 9, -(x.get("score_total") or 0), -(x["volume"] or 0))  # noqa: E731 - best market for this keyword
+                if prev is None or rank(i) < rank(prev):
                     pool[i["keyword"]] = {**i, "also_seen": seen}
                 else:
                     prev["also_seen"] = seen
@@ -234,20 +293,24 @@ def run_global(cfg: Config, state: State, pages: list[Page], perf: dict[str, Any
                                + ", ".join(f"{r['name']} ({r['error']})" for r in failed))
     # strongest first: the five-component score already weighs demand, ranking opportunity, relevance, conversion and usefulness
     everything = sorted(pool.values(), key=lambda i: (-(i.get("score_total") or 0), -(i["volume"] or 0)))
-    ranked = [i for i in everything if not i["below_opportunity"]]
+    # two stages: every tier-1 keyword is tried (strongest first) before any tier-2 fallback keyword
+    ranked = sorted((i for i in everything if i["tier"]), key=lambda i: (i["tier"], -(i.get("score_total") or 0), -(i["volume"] or 0)))
+    n_pref, n_fb = sum(1 for i in ranked if i["tier"] == 1), sum(1 for i in ranked if i["tier"] == 2)
     sc = lambda i, k: (i.get("score") or {}).get(k)  # noqa: E731
     report["global"] = {
-        "min_volume": min_vol, "competition": sorted(allowed), "min_ranking_opportunity": min_opp, "markets": rows,
-        "eligible_keywords": len(everything), "preferred_keywords": len(ranked),
+        "min_volume": min_vol, "competition": sorted(allowed), "min_ranking_opportunity": min_opp,
+        "fallback_min_ranking_opportunity": fb_opp, "markets": rows,
+        "eligible_keywords": len(everything), "preferred_keywords": n_pref, "fallback_keywords": n_fb,
         "unique": {"discovered": len(uniq_found), "relevant": len(uniq_relevant), "markets_ok": ok, "markets_failed": len(failed)},
         "keywords": [{"keyword": i["keyword"], "market": i["market_name"], "volume": i["volume"], "competition": i.get("ads_competition"),
                       "relevance": sc(i, "feature_relevance"), "ranking_opportunity": sc(i, "ranking_opportunity"),
                       "conversion": sc(i, "conversion_potential"), "score": i.get("score_total"),
                       "also_seen": ", ".join(f"{s['market']} {s['volume']:,} ({s.get('competition') or '?'})" for s in i["also_seen"]),
-                      "status": (f"below_ranking_opportunity (<{min_opp}): not selected" if i["below_opportunity"] else "queued")}
+                      "tier": i["tier"], "checks": i["gate_checks"], "words": len(tokens(i["keyword"])),
+                      "status": i["reject_reason"] or "queued"}
                      for i in everything]}
-    log.info("Global discovery: %d markets, %d eligible keywords (%d preferred, ranking opportunity >= %s)",
-             len(rows), len(everything), len(ranked), min_opp)
+    log.info("Global discovery: %d markets, %d eligible keywords (%d stage-1 with opportunity >= %s, %d stage-2 fallback with >= %s)",
+             len(rows), len(everything), n_pref, min_opp, n_fb, fb_opp)
     return ranked
 
 
@@ -258,12 +321,20 @@ def set_status(report: dict, keyword: str, status: str) -> None:
 
 
 def selection_reason(cfg: Config, kw: dict[str, Any], n_markets: int) -> str:
+    g = cfg.get("keyword_research.global_discovery") or {}
+    sc = kw.get("score") or {}
     also = [f"{s['market']} {s['volume']:,} ({s.get('competition') or '?'})" for s in kw.get("also_seen", []) if s["market"] != kw.get("market")]
+    if kw.get("tier", 1) == 1:
+        stage = f"stage 1: ranking opportunity {sc.get('ranking_opportunity')} (>= {g.get('min_ranking_opportunity')} required)"
+    else:
+        stage = (f"stage 2 FALLBACK: ranking opportunity {sc.get('ranking_opportunity')} (>= {g.get('fallback_min_ranking_opportunity')} plus long-tail, "
+                 f"strong relevance and clear intent required), used because no stage-1 keyword (>= {g.get('min_ranking_opportunity')}) passed the planner, duplicate and quality checks")
     return (f"Strongest eligible keyword across {n_markets} markets: {kw['volume']:,} searches/month in "
-            f"{kw.get('market_name') or kw.get('market')}, Google Ads competition {kw.get('ads_competition')}, "
-            f"ranking opportunity {(kw.get('score') or {}).get('ranking_opportunity')} (>= {cfg.get('keyword_research.global_discovery.min_ranking_opportunity')} required), "
-            f"relevance {(kw.get('score') or {}).get('feature_relevance')}, score {kw.get('score_total')}; "
-            "the highest-scoring keyword (demand, ranking opportunity, relevance, conversion, usefulness) that met the volume, LOW Ads-competition and ranking-opportunity requirements and passed relevance, duplicate, planner and quality checks. Volumes are per country, never summed; Ads competition is advertising competition, not organic SEO difficulty."
+            f"{kw.get('market_name') or kw.get('market')}, Google Ads competition {kw.get('ads_competition')}, {stage}, "
+            f"relevance {sc.get('feature_relevance')}, score {kw.get('score_total')}; "
+            "the highest-scoring keyword (demand, ranking opportunity, relevance, conversion, usefulness) that met the volume, LOW Ads-competition, "
+            "relevance, non-competitor-brand and ranking-opportunity requirements and passed relevance, duplicate, planner and quality checks. "
+            "Volumes are per country, never summed; Ads competition is advertising competition, not organic SEO difficulty."
             + (f" Also seen in: {', '.join(also)}." if also else ""))
 
 

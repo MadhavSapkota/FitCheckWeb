@@ -82,7 +82,17 @@ keyword_research:
     english_only: true                      # drop keywords containing non-ASCII letters (other-language queries)
     # Only keywords the site can realistically rank for are published: the heuristic ranking-opportunity score (0-100, NOT
     # keyword difficulty) must be >= this. Eligible keywords below it are reported, never auto-selected as "difficult head terms".
-    min_ranking_opportunity: 60
+    min_ranking_opportunity: 60             # STAGE 1: tried first, strongest score first
+    # STAGE 2 (fallback): candidates are only taken from here AFTER every stage-1 keyword has been tried (planner/duplicate/quality
+    # checks included). Stricter in other ways to compensate for the lower opportunity bar: long-tail, strong feature relevance,
+    # clear search intent. Ads competition LOW never counts as organic ease; see ranking_opportunity (length, volume, KD, Search Console).
+    fallback_min_ranking_opportunity: 40
+    fallback_min_words: 3                   # long-tail only (stage 2)
+    fallback_min_feature_relevance: 70      # strong feature match only (stage 2); stage 1 uses scoring.min_feature_relevance
+    # Competitor / third-party brand queries belong on the hand-built /compare/ pages (site.page_targets), never in a blog post.
+    # Matched as whole words/phrases. Short words are listed with their app context ('alta app') to avoid blocking normal English.
+    competitor_brands: [youcam, "you cam", "perfect corp", acloset, whering, "alta app", "alta daily", "alta alternative",
+                        "fits app", "fits outfit", visia, stylebook, cladwell, pureple, "smart closet", "stylish app"]
     # English-speaking markets only: the article is English, so volume for English queries in France/Germany/etc. is not
     # demand our readers represent. Each market is queried separately with its own geo target; volumes are never summed.
     markets:
