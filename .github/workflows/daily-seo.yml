@@ -124,9 +124,36 @@ jobs:
       # Confirms today's new/updated article URLs are live (HTTP 200 + correct canonical) after the Pages deploy.
       # Bounded polling with backoff (max 15 min). This checks deployment only; it never claims Google indexing.
       - name: Verify deployment
+        id: verify
         if: ${{ steps.commit.outputs.changed == 'true' }}
         working-directory: seo-agent
         run: python -m seo_agent.main verify --wait 900
+
+      # Permanent publishing history: one row per run (published / skipped + reason / failed), always recorded, so a
+      # "green" run that published nothing is visible. Built from this run's state, then applied on a clean copy of
+      # origin/master so a failed run can never push half-finished files.
+      - name: Record publishing history
+        if: ${{ always() && inputs.dry_run != true && inputs.discovery_only != true && github.ref == 'refs/heads/master' }}
+        env:
+          AGENT_OUTCOME: ${{ steps.agent.outcome }}
+          COMMIT_OUTCOME: ${{ steps.commit.outcome }}
+          VERIFY_OUTCOME: ${{ steps.verify.outcome }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          git config user.name "seo-agent[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          export ARTICLE_COMMIT="$(git rev-parse HEAD)"
+          (cd seo-agent && python -m seo_agent.publish_monitor record --emit "$RUNNER_TEMP/record.json")
+          for i in 1 2 3; do
+            git fetch origin master
+            git reset --hard origin/master
+            (cd seo-agent && python -m seo_agent.publish_monitor record --apply "$RUNNER_TEMP/record.json")
+            git add seo-agent/data/publish-history.json seo-agent/data/PUBLISH-HISTORY.md
+            git commit -m "Publishing history: $(date -u +%F) run ${GITHUB_RUN_ID}" || exit 0
+            git push origin HEAD:master && exit 0
+            sleep 5
+          done
+          echo "::error::could not push publishing history"; exit 1
 
       - name: Upload report and logs
         if: always()

@@ -1,0 +1,55 @@
+name: Publish watchdog
+
+# Safety net for the daily 6 PM blog publish. It never writes an article itself.
+#  - primary scheduler (cron-job.org -> daily-seo.yml) did not start a run by 18:30 Chicago  -> start one
+#  - the run failed, or finished green but published nothing                               -> retry at 20:00 and 22:00 Chicago
+#  - still nothing after the retries, or the owner must act (expired token, no credit)     -> open ONE issue per day (GitHub emails
+#    the owner) and send an email if the SMTP_* secrets exist
+#  - an article recorded as published is not live at its URL                                -> alert
+# Retries are dispatches of the normal daily-seo.yml, which has its own 1-article/day limit, concurrency group and
+# post-rebase re-check, so a retry can never create a duplicate article.
+# GitHub cron is UTC-only and can be late, so it fires hourly at :35 across both UTC hours that can be 18:30-22:35 Chicago
+# (CST and CDT); the Python logic uses Chicago wall time, so daylight saving needs no change.
+
+on:
+  schedule:
+    - cron: "35 23,0,1,2,3,4 * * *"
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "Print decisions only: dispatch nothing, alert nothing"
+        type: boolean
+        default: true
+
+permissions:
+  contents: read
+  actions: write
+  issues: write
+
+concurrency:
+  group: publish-watchdog
+  cancel-in-progress: false
+
+jobs:
+  watchdog:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: master
+      - name: Evaluate today's publish
+        working-directory: seo-agent
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+          SMTP_HOST: ${{ secrets.SMTP_HOST }}
+          SMTP_PORT: ${{ secrets.SMTP_PORT }}
+          SMTP_USER: ${{ secrets.SMTP_USER }}
+          SMTP_PASSWORD: ${{ secrets.SMTP_PASSWORD }}
+          SMTP_FROM: ${{ secrets.SMTP_FROM }}
+          ALERT_EMAIL_TO: ${{ secrets.ALERT_EMAIL_TO }}
+        run: |
+          args=""
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ] && [ "${{ inputs.dry_run }}" = "true" ]; then args="--dry-run"; fi
+          python -m seo_agent.publish_monitor watchdog $args
