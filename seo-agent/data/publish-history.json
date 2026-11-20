@@ -390,5 +390,19 @@
   "url": null,
   "commit": null,
   "deploy": "n/a"
+ },
+ {
+  "date": "2026-11-19",
+  "recorded_at": "2026-11-20T04:26:35+00:00",
+  "run_id": "44674368124",
+  "run_url": "https://github.com/MadhavSapkota/FitCheckWeb/actions/runs/44674368124",
+  "outcome": "failed",
+  "decision": "skip: no candidate passed planning + quality gate today",
+  "keyword": null,
+  "title": null,
+  "slug": null,
+  "url": null,
+  "commit": null,
+  "deploy": "n/a"
  }
 ]
