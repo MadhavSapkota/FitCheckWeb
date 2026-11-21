@@ -418,5 +418,19 @@
   "url": "https://fitcheck-fashion.com/blog/hair-styles-for-curly-hair/",
   "commit": "38fa943a031c6f7629909a72ac17589ec524fa0f",
   "deploy": "live"
+ },
+ {
+  "date": "2026-11-20",
+  "recorded_at": "2026-11-21T00:24:26+00:00",
+  "run_id": "44840812558",
+  "run_url": "https://github.com/MadhavSapkota/FitCheckWeb/actions/runs/44840812558",
+  "outcome": "published",
+  "decision": "published /blog/haircut-for-round-face-men/ for 'haircut for round face men' (feature hairstyle-recommendations, score 74.2) after 1 revision(s) + polish. Selected because: Strongest eligible keyword across 10 markets: 9,900 searches/month in Philippines, Google Ads competition LOW, stage 2 FALLBACK: ranking opportunity 55 (>= 40 plus long-tail, strong relevance and clear intent required), used be",
+  "keyword": "haircut for round face men",
+  "title": "Haircut for Round Face Men: Best Styles and What to Ask",
+  "slug": "haircut-for-round-face-men",
+  "url": "https://fitcheck-fashion.com/blog/haircut-for-round-face-men/",
+  "commit": "bd1cf78960ea92d067a5c0d6fa0f9ffb097a42dc",
+  "deploy": "live"
  }
 ]
