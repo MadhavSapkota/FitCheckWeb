@@ -432,5 +432,19 @@
   "url": "https://fitcheck-fashion.com/blog/haircut-for-round-face-men/",
   "commit": "bd1cf78960ea92d067a5c0d6fa0f9ffb097a42dc",
   "deploy": "live"
+ },
+ {
+  "date": "2026-11-21",
+  "recorded_at": "2026-11-22T00:19:48+00:00",
+  "run_id": "44964476602",
+  "run_url": "https://github.com/MadhavSapkota/FitCheckWeb/actions/runs/44964476602",
+  "outcome": "skipped_no_candidate",
+  "decision": "skip: no candidate passed planning + quality gate today",
+  "keyword": null,
+  "title": null,
+  "slug": null,
+  "url": null,
+  "commit": null,
+  "deploy": "n/a"
  }
 ]
