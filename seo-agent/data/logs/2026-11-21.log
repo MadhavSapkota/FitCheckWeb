@@ -150,3 +150,155 @@
 2026-11-22 00:15:44,933 INFO seo_agent: Shortlisted 1 qualifying keywords (of 1571 ideas)
 2026-11-22 00:15:44,934 INFO seo_agent: Keyword agent: 1930 ideas, 1571 relevant, 1 shortlisted
 2026-11-22 00:15:44,936 INFO seo_agent: Global discovery: 10 markets, 9 eligible keywords (0 stage-1 with opportunity >= 60, 1 stage-2 fallback with >= 40)
+2026-11-22 02:11:02,370 INFO seo_agent: Search Console: 28d clicks=0 impressions=44
+2026-11-22 02:11:04,949 INFO seo_agent: Google Ads Keyword Planner returned 150 ideas
+2026-11-22 02:11:05,927 INFO seo_agent: Google Ads Keyword Planner returned 150 ideas
+2026-11-22 02:11:08,116 INFO seo_agent: Google Ads Keyword Planner returned 150 ideas
+2026-11-22 02:11:11,100 INFO seo_agent: Google Ads Keyword Planner returned 150 ideas
+2026-11-22 02:11:12,141 INFO seo_agent: Google Ads Keyword Planner returned 150 ideas
+2026-11-22 02:11:13,222 INFO seo_agent: Google Ads Keyword Planner returned 150 ideas
+2026-11-22 02:11:14,594 INFO seo_agent: Google Ads Keyword Planner returned 150 ideas
+2026-11-22 02:11:17,173 INFO seo_agent: Google Ads Keyword Planner returned 150 ideas
+2026-11-22 02:11:17,883 INFO seo_agent: Google Ads Keyword Planner returned 150 ideas
+2026-11-22 02:11:18,548 INFO seo_agent: Google Ads Keyword Planner returned 150 ideas
+2026-11-22 02:11:21,242 INFO seo_agent: Google Ads Keyword Planner returned 150 ideas
+2026-11-22 02:11:22,022 INFO seo_agent: Google Ads Keyword Planner returned 150 ideas
+2026-11-22 02:11:24,013 INFO seo_agent: Google Ads Keyword Planner returned 150 ideas
+2026-11-22 02:12:22,304 INFO seo_agent: Shortlisted 10 qualifying keywords (of 1537 ideas)
+2026-11-22 02:12:22,307 INFO seo_agent: Keyword agent: 1930 ideas, 1537 relevant, 10 shortlisted
+2026-11-22 02:12:23,545 INFO seo_agent: Google Ads Keyword Planner returned 150 ideas
+2026-11-22 02:12:24,446 INFO seo_agent: Google Ads Keyword Planner returned 150 ideas
+2026-11-22 02:12:26,522 INFO seo_agent: Google Ads Keyword Planner returned 150 ideas
+2026-11-22 02:12:30,293 INFO seo_agent: Google Ads Keyword Planner returned 150 ideas
+2026-11-22 02:12:31,386 INFO seo_agent: Google Ads Keyword Planner returned 150 ideas
+2026-11-22 02:12:32,407 INFO seo_agent: Google Ads Keyword Planner returned 150 ideas
+2026-11-22 02:12:33,506 INFO seo_agent: Google Ads Keyword Planner returned 150 ideas
+2026-11-22 02:12:37,027 INFO seo_agent: Google Ads Keyword Planner returned 150 ideas
+2026-11-22 02:12:37,843 INFO seo_agent: Google Ads Keyword Planner returned 150 ideas
+2026-11-22 02:12:38,558 INFO seo_agent: Google Ads Keyword Planner returned 150 ideas
+2026-11-22 02:12:40,978 INFO seo_agent: Google Ads Keyword Planner returned 150 ideas
+2026-11-22 02:12:41,718 INFO seo_agent: Google Ads Keyword Planner returned 150 ideas
+2026-11-22 02:12:43,335 INFO seo_agent: Google Ads Keyword Planner returned 150 ideas
+2026-11-22 02:13:39,751 INFO seo_agent: Shortlisted 2 qualifying keywords (of 1559 ideas)
+2026-11-22 02:13:39,754 INFO seo_agent: Keyword agent: 1930 ideas, 1559 relevant, 2 shortlisted
+2026-11-22 02:13:40,999 INFO seo_agent: Google Ads Keyword Planner returned 150 ideas
+2026-11-22 02:13:41,719 INFO seo_agent: Google Ads Keyword Planner returned 150 ideas
+2026-11-22 02:13:43,836 INFO seo_agent: Google Ads Keyword Planner returned 150 ideas
+2026-11-22 02:13:47,489 INFO seo_agent: Google Ads Keyword Planner returned 150 ideas
+2026-11-22 02:13:48,561 INFO seo_agent: Google Ads Keyword Planner returned 150 ideas
+2026-11-22 02:13:49,573 INFO seo_agent: Google Ads Keyword Planner returned 150 ideas
+2026-11-22 02:13:50,501 INFO seo_agent: Google Ads Keyword Planner returned 150 ideas
+2026-11-22 02:13:52,786 INFO seo_agent: Google Ads Keyword Planner returned 150 ideas
+2026-11-22 02:13:53,446 INFO seo_agent: Google Ads Keyword Planner returned 150 ideas
+2026-11-22 02:13:54,058 INFO seo_agent: Google Ads Keyword Planner returned 150 ideas
+2026-11-22 02:13:56,435 INFO seo_agent: Google Ads Keyword Planner returned 150 ideas
+2026-11-22 02:13:57,267 INFO seo_agent: Google Ads Keyword Planner returned 150 ideas
+2026-11-22 02:13:59,334 INFO seo_agent: Google Ads Keyword Planner returned 150 ideas
+2026-11-22 02:14:58,867 INFO seo_agent: Shortlisted 0 qualifying keywords (of 1536 ideas)
+2026-11-22 02:14:58,870 INFO seo_agent: Keyword agent: 1930 ideas, 1536 relevant, 0 shortlisted
+2026-11-22 02:15:00,268 INFO seo_agent: Google Ads Keyword Planner returned 150 ideas
+2026-11-22 02:15:01,012 INFO seo_agent: Google Ads Keyword Planner returned 150 ideas
+2026-11-22 02:15:02,943 INFO seo_agent: Google Ads Keyword Planner returned 150 ideas
+2026-11-22 02:15:05,972 INFO seo_agent: Google Ads Keyword Planner returned 150 ideas
+2026-11-22 02:15:07,194 INFO seo_agent: Google Ads Keyword Planner returned 150 ideas
+2026-11-22 02:15:08,210 INFO seo_agent: Google Ads Keyword Planner returned 150 ideas
+2026-11-22 02:15:09,305 INFO seo_agent: Google Ads Keyword Planner returned 150 ideas
+2026-11-22 02:15:11,910 INFO seo_agent: Google Ads Keyword Planner returned 150 ideas
+2026-11-22 02:15:12,578 INFO seo_agent: Google Ads Keyword Planner returned 150 ideas
+2026-11-22 02:15:13,202 INFO seo_agent: Google Ads Keyword Planner returned 150 ideas
+2026-11-22 02:15:15,645 INFO seo_agent: Google Ads Keyword Planner returned 150 ideas
+2026-11-22 02:15:16,392 INFO seo_agent: Google Ads Keyword Planner returned 150 ideas
+2026-11-22 02:15:18,298 INFO seo_agent: Google Ads Keyword Planner returned 150 ideas
+2026-11-22 02:16:13,696 INFO seo_agent: Shortlisted 0 qualifying keywords (of 1562 ideas)
+2026-11-22 02:16:13,699 INFO seo_agent: Keyword agent: 1930 ideas, 1562 relevant, 0 shortlisted
+2026-11-22 02:16:14,993 INFO seo_agent: Google Ads Keyword Planner returned 150 ideas
+2026-11-22 02:16:15,972 INFO seo_agent: Google Ads Keyword Planner returned 150 ideas
+2026-11-22 02:16:18,218 INFO seo_agent: Google Ads Keyword Planner returned 150 ideas
+2026-11-22 02:16:21,350 INFO seo_agent: Google Ads Keyword Planner returned 150 ideas
+2026-11-22 02:16:22,357 INFO seo_agent: Google Ads Keyword Planner returned 150 ideas
+2026-11-22 02:16:23,542 INFO seo_agent: Google Ads Keyword Planner returned 150 ideas
+2026-11-22 02:16:24,586 INFO seo_agent: Google Ads Keyword Planner returned 150 ideas
+2026-11-22 02:16:26,851 INFO seo_agent: Google Ads Keyword Planner returned 150 ideas
+2026-11-22 02:16:27,528 INFO seo_agent: Google Ads Keyword Planner returned 150 ideas
+2026-11-22 02:16:28,226 INFO seo_agent: Google Ads Keyword Planner returned 150 ideas
+2026-11-22 02:16:31,082 INFO seo_agent: Google Ads Keyword Planner returned 150 ideas
+2026-11-22 02:16:31,749 INFO seo_agent: Google Ads Keyword Planner returned 150 ideas
+2026-11-22 02:16:34,082 INFO seo_agent: Google Ads Keyword Planner returned 150 ideas
+2026-11-22 02:17:31,164 INFO seo_agent: Shortlisted 0 qualifying keywords (of 1557 ideas)
+2026-11-22 02:17:31,167 INFO seo_agent: Keyword agent: 1930 ideas, 1557 relevant, 0 shortlisted
+2026-11-22 02:17:32,190 INFO seo_agent: Google Ads Keyword Planner returned 150 ideas
+2026-11-22 02:17:32,956 INFO seo_agent: Google Ads Keyword Planner returned 150 ideas
+2026-11-22 02:17:35,313 INFO seo_agent: Google Ads Keyword Planner returned 150 ideas
+2026-11-22 02:17:38,450 INFO seo_agent: Google Ads Keyword Planner returned 150 ideas
+2026-11-22 02:17:39,643 INFO seo_agent: Google Ads Keyword Planner returned 150 ideas
+2026-11-22 02:17:40,584 INFO seo_agent: Google Ads Keyword Planner returned 150 ideas
+2026-11-22 02:17:41,709 INFO seo_agent: Google Ads Keyword Planner returned 150 ideas
+2026-11-22 02:17:44,612 INFO seo_agent: Google Ads Keyword Planner returned 150 ideas
+2026-11-22 02:17:45,318 INFO seo_agent: Google Ads Keyword Planner returned 150 ideas
+2026-11-22 02:17:45,993 INFO seo_agent: Google Ads Keyword Planner returned 150 ideas
+2026-11-22 02:17:48,328 INFO seo_agent: Google Ads Keyword Planner returned 150 ideas
+2026-11-22 02:17:49,189 INFO seo_agent: Google Ads Keyword Planner returned 150 ideas
+2026-11-22 02:17:50,720 INFO seo_agent: Google Ads Keyword Planner returned 150 ideas
+2026-11-22 02:18:45,731 INFO seo_agent: Shortlisted 0 qualifying keywords (of 1555 ideas)
+2026-11-22 02:18:45,734 INFO seo_agent: Keyword agent: 1930 ideas, 1555 relevant, 0 shortlisted
+2026-11-22 02:18:46,792 INFO seo_agent: Google Ads Keyword Planner returned 150 ideas
+2026-11-22 02:18:47,541 INFO seo_agent: Google Ads Keyword Planner returned 150 ideas
+2026-11-22 02:18:49,270 INFO seo_agent: Google Ads Keyword Planner returned 150 ideas
+2026-11-22 02:18:51,868 INFO seo_agent: Google Ads Keyword Planner returned 150 ideas
+2026-11-22 02:18:53,079 INFO seo_agent: Google Ads Keyword Planner returned 150 ideas
+2026-11-22 02:18:54,054 INFO seo_agent: Google Ads Keyword Planner returned 150 ideas
+2026-11-22 02:18:55,014 INFO seo_agent: Google Ads Keyword Planner returned 150 ideas
+2026-11-22 02:18:57,407 INFO seo_agent: Google Ads Keyword Planner returned 150 ideas
+2026-11-22 02:18:58,153 INFO seo_agent: Google Ads Keyword Planner returned 150 ideas
+2026-11-22 02:18:58,725 INFO seo_agent: Google Ads Keyword Planner returned 150 ideas
+2026-11-22 02:19:01,520 INFO seo_agent: Google Ads Keyword Planner returned 150 ideas
+2026-11-22 02:19:02,396 INFO seo_agent: Google Ads Keyword Planner returned 150 ideas
+2026-11-22 02:19:04,063 INFO seo_agent: Google Ads Keyword Planner returned 150 ideas
+2026-11-22 02:20:04,978 INFO seo_agent: Shortlisted 4 qualifying keywords (of 1563 ideas)
+2026-11-22 02:20:04,981 INFO seo_agent: Keyword agent: 1932 ideas, 1563 relevant, 4 shortlisted
+2026-11-22 02:20:05,883 INFO seo_agent: Google Ads Keyword Planner returned 150 ideas
+2026-11-22 02:20:06,621 INFO seo_agent: Google Ads Keyword Planner returned 150 ideas
+2026-11-22 02:20:08,958 INFO seo_agent: Google Ads Keyword Planner returned 150 ideas
+2026-11-22 02:20:12,241 INFO seo_agent: Google Ads Keyword Planner returned 150 ideas
+2026-11-22 02:20:13,432 INFO seo_agent: Google Ads Keyword Planner returned 150 ideas
+2026-11-22 02:20:14,454 INFO seo_agent: Google Ads Keyword Planner returned 150 ideas
+2026-11-22 02:20:15,611 INFO seo_agent: Google Ads Keyword Planner returned 150 ideas
+2026-11-22 02:20:18,039 INFO seo_agent: Google Ads Keyword Planner returned 150 ideas
+2026-11-22 02:20:18,706 INFO seo_agent: Google Ads Keyword Planner returned 150 ideas
+2026-11-22 02:20:19,396 INFO seo_agent: Google Ads Keyword Planner returned 150 ideas
+2026-11-22 02:20:22,073 INFO seo_agent: Google Ads Keyword Planner returned 150 ideas
+2026-11-22 02:20:22,867 INFO seo_agent: Google Ads Keyword Planner returned 150 ideas
+2026-11-22 02:20:24,677 INFO seo_agent: Google Ads Keyword Planner returned 150 ideas
+2026-11-22 02:21:19,753 INFO seo_agent: Shortlisted 0 qualifying keywords (of 1556 ideas)
+2026-11-22 02:21:19,756 INFO seo_agent: Keyword agent: 1930 ideas, 1556 relevant, 0 shortlisted
+2026-11-22 02:21:21,065 INFO seo_agent: Google Ads Keyword Planner returned 150 ideas
+2026-11-22 02:21:21,824 INFO seo_agent: Google Ads Keyword Planner returned 150 ideas
+2026-11-22 02:21:23,982 INFO seo_agent: Google Ads Keyword Planner returned 150 ideas
+2026-11-22 02:21:27,334 INFO seo_agent: Google Ads Keyword Planner returned 150 ideas
+2026-11-22 02:21:28,697 INFO seo_agent: Google Ads Keyword Planner returned 150 ideas
+2026-11-22 02:21:29,719 INFO seo_agent: Google Ads Keyword Planner returned 150 ideas
+2026-11-22 02:21:30,799 INFO seo_agent: Google Ads Keyword Planner returned 150 ideas
+2026-11-22 02:21:33,982 INFO seo_agent: Google Ads Keyword Planner returned 150 ideas
+2026-11-22 02:21:34,693 INFO seo_agent: Google Ads Keyword Planner returned 150 ideas
+2026-11-22 02:21:35,406 INFO seo_agent: Google Ads Keyword Planner returned 150 ideas
+2026-11-22 02:21:38,678 INFO seo_agent: Google Ads Keyword Planner returned 150 ideas
+2026-11-22 02:21:39,482 INFO seo_agent: Google Ads Keyword Planner returned 150 ideas
+2026-11-22 02:21:41,392 INFO seo_agent: Google Ads Keyword Planner returned 150 ideas
+2026-11-22 02:22:41,330 INFO seo_agent: Shortlisted 0 qualifying keywords (of 1553 ideas)
+2026-11-22 02:22:41,333 INFO seo_agent: Keyword agent: 1930 ideas, 1553 relevant, 0 shortlisted
+2026-11-22 02:22:42,563 INFO seo_agent: Google Ads Keyword Planner returned 150 ideas
+2026-11-22 02:22:43,318 INFO seo_agent: Google Ads Keyword Planner returned 150 ideas
+2026-11-22 02:22:45,153 INFO seo_agent: Google Ads Keyword Planner returned 150 ideas
+2026-11-22 02:22:48,398 INFO seo_agent: Google Ads Keyword Planner returned 150 ideas
+2026-11-22 02:22:49,519 INFO seo_agent: Google Ads Keyword Planner returned 150 ideas
+2026-11-22 02:22:50,639 INFO seo_agent: Google Ads Keyword Planner returned 150 ideas
+2026-11-22 02:22:51,751 INFO seo_agent: Google Ads Keyword Planner returned 150 ideas
+2026-11-22 02:22:54,676 INFO seo_agent: Google Ads Keyword Planner returned 150 ideas
+2026-11-22 02:22:55,401 INFO seo_agent: Google Ads Keyword Planner returned 150 ideas
+2026-11-22 02:22:55,961 INFO seo_agent: Google Ads Keyword Planner returned 150 ideas
+2026-11-22 02:22:58,715 INFO seo_agent: Google Ads Keyword Planner returned 150 ideas
+2026-11-22 02:22:59,499 INFO seo_agent: Google Ads Keyword Planner returned 150 ideas
+2026-11-22 02:23:01,021 INFO seo_agent: Google Ads Keyword Planner returned 150 ideas
+2026-11-22 02:23:56,947 INFO seo_agent: Shortlisted 1 qualifying keywords (of 1571 ideas)
+2026-11-22 02:23:56,950 INFO seo_agent: Keyword agent: 1930 ideas, 1571 relevant, 1 shortlisted
+2026-11-22 02:23:56,953 INFO seo_agent: Global discovery: 10 markets, 8 eligible keywords (0 stage-1 with opportunity >= 60, 0 stage-2 fallback with >= 40)
