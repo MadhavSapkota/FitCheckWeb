@@ -130,7 +130,8 @@ def build() -> list[Path]:
             {"@type": "ListItem", "position": 1, "name": "Home", "item": base + "/"},
             {"@type": "ListItem", "position": 2, "name": "Compare apps", "item": iurl}]},
         {"@type": "ItemList", "itemListElement": [
-            {"@type": "ListItem", "position": k + 1, "name": f"FitCheck vs {p['rival']}", "url": f"{iurl}{p['slug']}/"} for k, p in enumerate(pages)]},
+            {"@type": "ListItem", "position": k + 1, "name": f"FitCheck vs {p['rival']}", "url": f"{iurl}{p['slug']}/"} for k, p in enumerate(pages)]
+         + [{"@type": "ListItem", "position": len(pages) + 1, "name": "Best style apps compared", "url": f"{iurl}best-style-apps/"}]},
         faq_node]
     hero_icons = ('<div class="cmp-vs cmp-vs-lg">' + _icon("fitcheck", "FitCheck", 72) + '<span aria-hidden="true">vs</span>'
                   + "".join(_icon(_stem(p), p["rival"], 72) for p in pages) + "</div>")
