@@ -31,7 +31,11 @@ features:
 privacy:
   # Owner-approved wording (2026-11-05). Use it ONLY about outfit scoring / fit check, and keep privacy mentions short.
   - "Outfit scoring: Your photos are processed directly on your device."
-  # Do not describe where AI image features (hairstyle try-on, outfit try-on, AI fashion images) process photos.
+  # Verified in the Android source (2026-11-24): the outfit score is calculated on the device (ML Kit/MediaPipe + a rule engine), but
+  # Premium style diagnostics, beauty/hair reports, hairstyle previews, AI try-on and AI fashion images send the chosen photo to third-party
+  # AI services (Google Gemini API and image-generation providers). When privacy is mentioned beyond outfit scoring, use ONLY this wording:
+  - "A few optional AI features (hairstyle previews, AI try-on images, Premium style diagnostics) send the photo you choose to a third-party AI service to generate the result."
+  # Never say "your photos never leave your phone" or "all processing is on-device".
   # Storage, retention, deletion and encryption of photos are NOT yet confirmed by the owner (2026-11-05):
   # never state where photos or saved looks are stored, how long they are kept, or that they are deleted/encrypted.
 photo_tips:
