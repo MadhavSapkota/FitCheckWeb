@@ -78,9 +78,9 @@ def render_article(cfg: Config, a: dict[str, Any], related: list[dict[str, str]]
         ) + "</section>"
     words = len(tokens(re.sub(r"<[^>]+>", " ", body)))
     graph: list[dict[str, Any]] = [
-        {"@type": "Article", "headline": a["title"], "description": a["meta_description"],
+        {"@type": "Article", "image": [cfg.base_url + "/assets/social-card.jpg"], "headline": a["title"], "description": a["meta_description"],
          "datePublished": a["published"], "dateModified": a["modified"], "mainEntityOfPage": url, "inLanguage": cfg.get("keyword_research.language"),
-         "author": {"@type": "Organization", "name": brand, "url": cfg.base_url + "/"},
+         "author": {"@type": "Person", "name": "Madhav Sapkota", "url": cfg.base_url + "/"},
          "publisher": {"@type": "Organization", "name": brand, "url": cfg.base_url + "/",
                        "logo": {"@type": "ImageObject", "url": cfg.base_url + "/assets/app-icon.png"}}},
         {"@type": "BreadcrumbList", "itemListElement": [

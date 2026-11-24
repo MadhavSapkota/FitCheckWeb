@@ -74,12 +74,13 @@ def render(cfg: Config, p: dict[str, Any], articles: dict[str, Any]) -> str:
     other_html = "".join(f'<li><a href="/{e(o["slug"])}/">{e(o["nav"])}</a></li>' for o in others)
     graph: list[dict[str, Any]] = [
         {"@type": "WebPage", "@id": url, "url": url, "name": p["title"], "description": p["meta"],
-         "inLanguage": cfg.get("keyword_research.language", "en"), "isPartOf": {"@type": "WebSite", "url": cfg.base_url + "/", "name": brand},
-         "primaryImageOfPage": cfg.base_url + p["images"][0]["src"] if p.get("images") else None},
+         "inLanguage": cfg.get("keyword_research.language", "en"), "isPartOf": {"@type": "WebSite", "@id": cfg.base_url + "/#website", "url": cfg.base_url + "/", "name": brand},
+         "mainEntity": {"@id": cfg.base_url + "/#app"},
+         "primaryImageOfPage": {"@type": "ImageObject", "url": cfg.base_url + p["images"][0]["src"]} if p.get("images") else None},
         {"@type": "BreadcrumbList", "itemListElement": [
             {"@type": "ListItem", "position": 1, "name": "Home", "item": cfg.base_url + "/"},
             {"@type": "ListItem", "position": 2, "name": p["nav"], "item": url}]},
-        {"@type": "MobileApplication", "name": _app_name(cfg, brand), "operatingSystem": "ANDROID",
+        {"@type": "MobileApplication", "@id": cfg.base_url + "/#app", "name": _app_name(cfg, brand), "operatingSystem": "Android",
          "applicationCategory": "LifestyleApplication", "url": app,
          "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}},
     ]

@@ -2,3 +2,6 @@
 # Keep the SEO automation (code, data, logs) out of the published website.
 exclude:
   - seo-agent
+  - fitcheck-upload.zip
+  - PHOTO-CREDITS.md
+  - PRIVACY-SOURCES.md
