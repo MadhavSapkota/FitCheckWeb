@@ -24,7 +24,12 @@ FORBIDDEN = [
     (r"\b(size|measurement)s? recommendation", "claims size recommendations"),
     (r"\bAR\b|\baugmented reality\b", "claims AR technology"),
     (r"\b(live|real-time)\b[^.]{0,30}\b(clothes|clothing|outfit) try-?on\b", "claims live clothing try-on (outfit try-on is AI images)"),
-    (r"\b(diagnos|dermatolog)", "medical/skin diagnosis claim"),
+    # A profession or historical attribution is not a claim that our app diagnoses skin.
+    # Keep blocking diagnosis promises and claims of dermatologist credentials/endorsement.
+    (r"\bdiagnos|\b(?:your|personal|ai|virtual|digital|automated)\s+dermatologist\b"
+     r"|\b(?:app|fitcheck)\b[^.!?]{0,40}\b(?:a|your)\s+dermatologist\b"
+     r"|\bdermatolog(?:ist)?[- ](?:approved|tested|grade|backed|recommended)\b",
+     "medical/skin diagnosis claim"),
     # skin & hair: no medical, treatment, or accuracy claims
     (r"\b(cure[sd]?|treat(s|ed|ing)?|heal(s|ed|ing)?|fix(es)?)\b[^.]{0,25}\b(acne|eczema|rosacea|psoriasis|dermatitis|hair loss|alopecia|dandruff|infection)",
      "medical treatment claim"),

@@ -178,7 +178,29 @@ def save_draft(cfg, slug: str, n: int, a: dict, gate: dict, rev: dict) -> None:
     p.write_text(json.dumps({"article": a, "gate": gate, "review": rev}, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
 
 
-def new_article(cfg, state: State, facts: dict, pages, perf, dry: bool, report: dict, force_keyword: str | None = None) -> None:
+def fallback_discovery(cfg, state, facts, pages, perf, dry, report, force_keyword, already) -> None:
+    """Try additional verified topics once, retaining the run's writing/planning and API spending limits."""
+    if already or force_keyword or not cfg.get("keyword_research.global_discovery.enabled"):
+        return
+    if not cfg.get("keyword_research.fallback_discovery.enabled", False):
+        return
+    if state.published_today() >= cfg.get("publishing.max_new_articles_per_day", 1):
+        return
+    if not any(f.get("fallback_seeds") for f in (cfg.get("features") or {}).values()):
+        return
+    attempts = report["attempts"]
+    if len(attempts) >= cfg.get("keyword_research.max_planner_calls_per_run", 8) or \
+            sum(bool(a.get("writing_started")) for a in attempts) >= cfg.get("keyword_research.max_candidates_per_run", 3):
+        return
+    report["notes"].append(f"Primary discovery produced no article ({report.get('decision')}); "
+                           "searching additional topics with the same volume, relevance and quality requirements")
+    report["primary_decision"] = report.get("decision")
+    report["global_primary"] = report.pop("global", None)
+    new_article(cfg, state, facts, pages, perf, dry, report, fallback=True)
+
+
+def new_article(cfg, state: State, facts: dict, pages, perf, dry: bool, report: dict, force_keyword: str | None = None,
+                fallback: bool = False) -> None:
     limit = cfg.get("publishing.max_new_articles_per_day", 1)
     if state.published_today() >= limit:  # applies to manual re-tests (--keyword) too
         report["notes"].append("Daily new-article limit already reached")
@@ -191,7 +213,8 @@ def new_article(cfg, state: State, facts: dict, pages, perf, dry: bool, report: 
         return
     prev = state.data["keywords"].pop(force_keyword, None) if force_keyword else None  # re-test a rejected keyword
     global_on = bool(cfg.get("keyword_research.global_discovery.enabled")) and not force_keyword  # re-tests stay single-market
-    short = (keyword_agent.run_global if global_on else keyword_agent.run)(cfg, state, pages, perf, report)
+    discover = keyword_agent.run_global if global_on else keyword_agent.run
+    short = discover(cfg, state, pages, perf, report, fallback=True) if fallback else discover(cfg, state, pages, perf, report)
     if force_keyword:
         short = [i for i in short if i["keyword"] == force_keyword] or \
             ([{**prev["latest"], "keyword": force_keyword}] if prev and prev.get("latest") else [])
@@ -239,9 +262,12 @@ def new_article(cfg, state: State, facts: dict, pages, perf, dry: bool, report: 
         else:
             report["decision"] = ("skip: no keyword met the feature-relevance, score, volume, intent and duplicate checks "
                                   "(see 'Keywords by feature' for reasons)")
+        fallback_discovery(cfg, state, facts, pages, perf, dry, report, force_keyword, fallback)
         return
     published, clusters_today, failed_features, stage1_published = [], set(), set(), []
-    tried, planned = 0, 0   # tried = candidates that reached WRITING; planned = planner calls
+    # Primary and fallback searches share these caps; retrying with new seeds must not double spending.
+    tried = sum(bool(a.get("writing_started")) for a in report["attempts"])
+    planned = len(report["attempts"])
     for kw in candidates:
         if tried >= cfg.get("keyword_research.max_candidates_per_run", 3):
             break
@@ -275,6 +301,7 @@ def new_article(cfg, state: State, facts: dict, pages, perf, dry: bool, report: 
             state.record_keyword(kw["keyword"], kw, f"rejected_intent_after_planning:{plan['intent']}")
             continue
         tried += 1  # this candidate will be written (the costly part)
+        attempt["writing_started"] = True
         slug = re.sub(r"[^a-z0-9-]+", "-", (plan.get("slug") or kw["keyword"]).lower()).strip("-")[:70]
         if slug in articles or publisher.article_path(cfg, slug).exists():
             slug = f"{slug}-guide"
@@ -324,6 +351,8 @@ def new_article(cfg, state: State, facts: dict, pages, perf, dry: bool, report: 
         if k["status"] == "queued":
             k["status"] = "not needed: an article was already selected" if published else "not reached (candidate cap)"
     report["decision"] = "; ".join(published) if published else "skip: no candidate passed planning + quality gate today"
+    if not published:
+        fallback_discovery(cfg, state, facts, pages, perf, dry, report, force_keyword, fallback)
 
 
 def write_report(cfg, report: dict, dry: bool) -> None:

@@ -109,6 +109,9 @@ keyword_research:
   # Keyword Planner is queried once PER FEATURE (features.*.seeds) so broad "outfit ideas" seeds can no longer
   # crowd out makeup, skin, wardrobe, and try-on ideas. This cap applies to each feature's request group.
   max_ideas_per_run: 150
+  # Additional seed groups run only after the primary search produces no article.
+  fallback_discovery:
+    enabled: true
   allowed_intents: ["informational", "commercial"]
   # Extra general seeds (in addition to every feature's seeds below).
   seed_keywords:
@@ -154,6 +157,7 @@ features:
     terms: [rate, rating, rater, checker, analyzer, color, colour, colors]
     seeds: [outfit checker, rate my outfit, does my outfit look good, what should i wear today, outfit color matching,
             what colors go together in an outfit, ai stylist, outfit rating app]
+    fallback_seeds: ["what colors go with olive green", "what colors go with burgundy", "what colors go with beige", "what colors go with grey", "what colors go together in clothes"]
     cta: {button: "Check Your Outfit With AI",
           text: "Snap a head-to-toe photo and get an AI style score with tips on fit, color, and balance."}
   makeup-assistant:
@@ -168,6 +172,7 @@ features:
     terms: [makeup, beauty, foundation, blush, eyeshadow, eyeliner, contour, concealer, glam, bronzer, highlighter]
     seeds: [what makeup suits my face, makeup for my skin tone, best makeup for my face shape, everyday makeup look,
             makeup recommendations, ai makeup]
+    fallback_seeds: ["makeup suggestions for my face", "makeup tips for beginners", "natural makeup look for everyday", "makeup for my face shape"]
     cta: {button: "Get AI Makeup Feedback",
           text: "Snap a close-up in natural light and get AI beauty feedback on your makeup look."}
   makeup-try-on:
@@ -193,6 +198,7 @@ features:
     terms: [hair, hairstyle, hairstyles, haircut, haircuts, bangs, fringe, bob, layers, curls, curly, braids, pixie]
     seeds: [what hairstyle suits me, hairstyles for my face shape, haircut for round face, hair color for my skin tone,
             haircut ideas]
+    fallback_seeds: ["hairstyles for square face", "haircuts for long face", "haircuts for heart shaped face", "haircut ideas for women"]
     cta: {button: "Find Hairstyles That Suit You",
           text: "Explore hairstyle, curl, and hair color ideas and see how a look comes together on you."}
   hairstyle-try-on:
@@ -222,6 +228,7 @@ features:
               hair porosity, hair health, hair scanner, hair texture, hair density, hair type]
     terms: [porosity]
     seeds: [hair analysis, what is my hair type, hair type test, hair porosity test, hair analyzer app]
+    fallback_seeds: ["how to know your hair porosity", "hair porosity chart", "hair texture chart", "hair type chart"]
     cta: {button: "Check Your Hair With AI",
           text: "Get a quick AI look at your hair from your camera, plus style ideas that work with it."}
   skin-analysis:
@@ -235,6 +242,7 @@ features:
               face analysis, face analyzer, skin app, skin tone test]
     terms: [skin, undertone, undertones, complexion]
     seeds: [skin analysis, skin type test, what is my skin tone, skin undertone test, skin analyzer app, face analysis app]
+    fallback_seeds: ["what is my skin tone chart", "skin tone test at home", "skin type quiz", "skin undertone chart"]
     cta: {button: "Try AI Skin Analysis",
           text: "Get an AI overview of your skin from a selfie as a starting point for your beauty routine. Not medical advice."}
   wardrobe:
@@ -248,6 +256,7 @@ features:
     terms: [wardrobe, closet, capsule]
     seeds: [digital wardrobe app, virtual closet app, wardrobe organizer, capsule wardrobe, outfit planner app,
             how to organize your closet]
+    fallback_seeds: ["how to organize your closet in a small space", "capsule wardrobe essentials", "capsule wardrobe checklist", "wardrobe organizer ideas"]
     cta: {button: "Organize Your Wardrobe",
           text: "Save your favorite looks, sort outfits by season or occasion, and plan what to wear ahead."}
   outfit-try-on:
@@ -261,6 +270,7 @@ features:
     terms: []
     seeds: [virtual try on clothes, try on clothes online, virtual fitting room, try outfits on yourself,
             virtual dressing room app]
+    fallback_seeds: ["how does virtual try on work", "virtual try on clothes for free", "try on clothes with my photo"]
     cta: {button: "Try Outfits On Virtually",
           text: "See AI-generated images of yourself in different outfits, made from your own photo."}
   fashion-generator:
@@ -289,6 +299,7 @@ features:
             aesthetic, vintage, minimalist, look, looks]
     seeds: [outfit ideas, fashion trends 2026, old money outfits, streetwear outfit ideas, date night outfit ideas,
             birthday outfit ideas, casual outfit ideas]
+    fallback_seeds: ["what to wear to a wedding as a guest", "how to style a blazer", "how to style wide leg jeans", "first date outfit ideas"]
     cta: {button: "Check Your Outfit With AI",
           text: "Put the look together, then snap a photo for an AI style score with tips on fit, color, and balance."}
   branded:

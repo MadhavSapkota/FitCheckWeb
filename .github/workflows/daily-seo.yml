@@ -1,8 +1,10 @@
 name: Daily SEO agent
 
 on:
-  # Started every day at exactly 6:00 PM America/Chicago by an external scheduler (cron-job.org) via workflow_dispatch.
-  # GitHub's own cron is not used: it often fires hours late and cannot follow daylight saving time.
+  # cron-job.org can still dispatch the primary 6 PM Chicago run. GitHub supplies
+  # independent hourly backup attempts between 18:17 and 22:17 Chicago (both DST offsets).
+  schedule:
+    - cron: "17 23,0,1,2,3,4 * * *"
   workflow_dispatch:
     inputs:
       dry_run:
@@ -29,7 +31,28 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
+  schedule:
+    runs-on: ubuntu-latest
+    outputs:
+      due: ${{ steps.time.outputs.due }}
+    steps:
+      - name: Select Chicago publishing hours
+        id: time
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+        run: |
+          due=true
+          if [ "$EVENT_NAME" = "schedule" ]; then
+            case "$(TZ=America/Chicago date +%H)" in
+              18|19|20|21|22) ;;
+              *) due=false ;;
+            esac
+          fi
+          echo "due=$due" >> "$GITHUB_OUTPUT"
+
   seo:
+    needs: schedule
+    if: ${{ needs.schedule.outputs.due == 'true' }}
     runs-on: ubuntu-latest
     timeout-minutes: 90   # global discovery searches ~14 markets
     steps:
@@ -175,3 +198,20 @@ jobs:
             seo-agent/data/drafts/
           if-no-files-found: ignore
           retention-days: 30
+
+      # A successful process is not a successful daily publish. Run this after
+      # history/report persistence so rejected topics survive into the next retry.
+      - name: Require today's article
+        if: ${{ success() && inputs.dry_run != true && inputs.discovery_only != true && github.ref == 'refs/heads/master' }}
+        working-directory: seo-agent
+        run: |
+          python - <<'PY'
+          from seo_agent.config import load_config
+          from seo_agent.state import State, today
+          state = State(load_config().data_dir / "state.json")
+          if not state.published_today():
+              reason = (state.data.get("runs") or [{}])[-1].get("decision", "no article recorded")
+              print(f"::error::No article published for {today()}: {reason}")
+              raise SystemExit(1)
+          print(f"Daily article recorded for {today()}")
+          PY

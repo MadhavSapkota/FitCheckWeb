@@ -36,7 +36,9 @@ only adds a missing canonical / `og:url` tag to their `<head>` and fixes `sitema
   format, verified volume band, relevance, and Search Console ranking evidence. Minimum: 50.
 - Ads "competition" is never used as organic difficulty. Google Trends is not used because there is no official API.
 - Optional paid upgrade: `organic_difficulty_source: dataforseo` adds measured difficulty (KD <= 25) and live top-10 SERPs.
-- Nothing qualifies → nothing is published that day.
+- If the primary search produces no article, the agent searches the additional `features.*.fallback_seeds` once.
+  Verified volume, competition, relevance, duplicate and quality requirements still apply. Both searches share the
+  planner/writing caps and monthly API budget. If nothing passes, the daily workflow reports a failure with the skip reason.
 
 ## Quality gate (any failure blocks publishing; reason saved in `data/state.json`)
 Thresholds, intent, 900+ words, one H1, 3+ H2s, title/meta length, canonical + og:url, keyword density <= 2.5%,
@@ -87,7 +89,9 @@ If `master` is branch-protected, allow GitHub Actions to push.
 3. Read the report. It shows keyword candidates with their evidence, the plan decision, and any quality-gate failures.
 4. Run again without dry run. Check the **seo-report** artifact, the new commit on `master`, and that
    "Deploy Jekyll with GitHub Pages" started and succeeded. Open `https://fitcheck-fashion.com/blog/`.
-5. From then on it runs daily at 06:17 UTC. Submit `https://fitcheck-fashion.com/sitemap.xml` once in Search Console.
+5. The primary external scheduler dispatches it at 18:00 America/Chicago. Independent GitHub backup attempts run
+   hourly between 18:17 and 22:17 Chicago, with a wall-clock guard for daylight saving time. GitHub may delay scheduled
+   runs; the watchdog remains enabled. Every run checks the Chicago day and permits at most one new article. Submit `https://fitcheck-fashion.com/sitemap.xml` once in Search Console.
    This helps discovery but does not guarantee indexing.
 
 ## Local commands

@@ -24,9 +24,12 @@ def gsc_query_ideas(cfg: Config, perf: dict[str, Any] | None) -> dict[str, dict[
     return out
 
 
-def seed_groups(cfg: Config, extra: list[str]) -> dict[str, list[str]]:
+def seed_groups(cfg: Config, extra: list[str], fallback: bool = False) -> dict[str, list[str]]:
     """One Keyword Planner request group per FitCheck feature, so every feature gets its own ideas."""
-    groups = {fid: list(f.get("seeds") or []) for fid, f in scoring.features(cfg).items() if f.get("seeds")}
+    key = "fallback_seeds" if fallback else "seeds"
+    groups = {fid: list(f.get(key) or []) for fid, f in scoring.features(cfg).items() if f.get(key)}
+    if fallback:
+        return groups
     general = list(cfg.get("keyword_research.seed_keywords", [])) + extra
     if general:
         groups["general"] = general
@@ -87,14 +90,15 @@ def opportunity_estimate(cfg: Config, i: dict[str, Any]) -> tuple[int, list[str]
     return max(0, min(100, score)), why
 
 
-def run(cfg: Config, state: State, pages: list[Page], perf: dict[str, Any] | None, report: dict) -> list[dict[str, Any]]:
+def run(cfg: Config, state: State, pages: list[Page], perf: dict[str, Any] | None, report: dict,
+        fallback: bool = False) -> list[dict[str, Any]]:
     gsc = gsc_query_ideas(cfg, perf)
     seeds = list(cfg.get("keyword_research.seed_keywords", []))
     gsc_seeds = [q for q, m in sorted(gsc.items(), key=lambda kv: -kv[1]["gsc_impressions_28d"]) if research.relevant(cfg, q)][:20]
     seeds += gsc_seeds
     ideas: dict[str, dict[str, Any]] = {}
     try:
-        for i in discover_all(cfg, seed_groups(cfg, gsc_seeds), report):
+        for i in discover_all(cfg, seed_groups(cfg, gsc_seeds, fallback), report):
             ideas[i["keyword"]] = i
     except research.NoProvider as e:
         editorial = cfg.get("keyword_research.unverified_topics.enabled", False)
@@ -191,7 +195,8 @@ def gate(cfg: Config, g: dict[str, Any], i: dict[str, Any], comp: str) -> dict[s
     return {"tier": 2, "reason": None, "checks": checks}
 
 
-def run_global(cfg: Config, state: State, pages: list[Page], perf: dict[str, Any] | None, report: dict) -> list[dict[str, Any]]:
+def run_global(cfg: Config, state: State, pages: list[Page], perf: dict[str, Any] | None, report: dict,
+               fallback: bool = False) -> list[dict[str, Any]]:
     """Searches every configured market, pools the qualifying keywords and returns the PREFERRED ones, highest volume first.
 
     Eligible = Keyword Planner volume >= minimum_monthly_searches AND Google Ads competition in allowed_ads_competition
@@ -228,7 +233,7 @@ def run_global(cfg: Config, state: State, pages: list[Page], perf: dict[str, Any
                    "error": None}
             rows.append(row)
             try:
-                short = run(cfg, state, pages, perf, report)
+                short = run(cfg, state, pages, perf, report, fallback) if fallback else run(cfg, state, pages, perf, report)
             except BudgetExceeded:
                 raise
             except Exception as e:  # noqa: BLE001 - one market must not stop the others
