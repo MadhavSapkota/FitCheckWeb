@@ -127,8 +127,10 @@ APP_FACTS: {json.dumps(facts, ensure_ascii=False)}
 Requirements:
 - {cfg.get('content.min_words')}-{min(cfg.get('content.max_words'), 1800)} words in body_html.
 - body_html uses only <h2>, <h3>, <p>, <ul>, <ol>, <li>, <strong>, <em>, <a href>, <table>, <thead>, <tbody>, <tr>, <th>, <td>. No <h1>.
-- Start with a 2-3 sentence intro that answers the query directly. At least 4 <h2> sections following the plan.
+- Start with a direct answer of 40-60 words to the TARGET_KEYWORD query that makes sense on its own (a reader or an AI answer engine should be able to quote it without any other context). At least 4 <h2> sections following the plan.
+- Write most <h2> headings as the natural question a reader would ask (e.g. "How do I find my undertone?"), and open each section with a 1-2 sentence answer before the detail.
 - Include concrete, practical examples (e.g. specific color pairings, outfit formulas, proportions).
+- Do not state statistics, studies, percentages, or expert quotes, and do not name sources you cannot verify. Prefer plain, checkable guidance; where a claim is a rule of thumb, say so.
 - Mention the app at most twice, naturally, only where it helps (e.g. getting feedback on fit/color/balance). Do not link to external sites.
 - faqs: 3-5 real questions searchers ask, each answered in 2-4 sentences. Do not repeat body text verbatim.
   Put them ONLY in the faqs field: no FAQ heading or FAQ section inside body_html (the page renders it).

@@ -46,13 +46,15 @@ def site(tmp_path, monkeypatch):
     (root / "assets" / "fonts").mkdir(parents=True)
     for f in ("favicon.svg", "apple-touch-icon.png", "app-icon.png"):
         (root / "assets" / f).write_text("x")
-    for f in ("inter-regular.woff", "inter-semibold.woff"):
+    for f in ("inter-regular.woff2", "inter-semibold.woff2"):
         (root / "assets" / "fonts" / f).write_text("x")
-    page = '<!doctype html><html><head><title>{t}</title><meta name="description" content="{d}"></head><body><h1>{t}</h1><p>{b}</p><a href="privacy.html">p</a></body></html>'
+    page = '<!doctype html><html><head><title>{t}</title><meta name="description" content="{d}"></head><body><h1>{t}</h1><p>{b}</p><a href="/privacy.html">p</a></body></html>'
     (root / "index.html").write_text(page.format(t="FitCheck AI — Your AI stylist", d="Snap a photo and get an AI style score with tips on fit, color and balance.", b="AI outfit feedback"))
     (root / "how-it-works.html").write_text(page.format(t="How it works — FitCheck AI", d="How the FitCheck AI app scores your outfit in three simple steps today.", b="steps"))
     (root / "privacy.html").write_text(page.format(t="Privacy Policy — FitCheck AI", d="How FitCheck AI handles your data. Photos are processed on your device.", b="privacy"))
     (root / "terms.html").write_text(page.format(t="Terms — FitCheck AI", d="Terms of service for the FitCheck AI Android application and website.", b="terms"))
+    (root / "about").mkdir()
+    (root / "about" / "index.html").write_text(page.format(t="About FitCheck AI", d="About the FitCheck AI Android app and what it does and does not do for your style.", b="about"))
     (root / "robots.txt").write_text("User-agent: *\nAllow: /\n\nSitemap: https://yourdomain.com/sitemap.xml\n")
     cfg_text = (AGENT / "seo-config.yaml").read_text().replace("organic_difficulty_source: none", "organic_difficulty_source: dataforseo")
     cfg_text = cfg_text.replace("global_discovery:\n    enabled: true", "global_discovery:\n    enabled: false")  # old tests are single-market

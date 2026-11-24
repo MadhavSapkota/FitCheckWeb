@@ -41,11 +41,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="light">
 <meta name="theme-color" content="#000000">
-<title>FitCheck AI Outfit Checker: Rate My Outfit, Makeup &amp; Hair</title>
-<meta name="description" content="FitCheck is a free AI outfit checker: snap a photo, rate your fit and get a style score with tips on color, fit and balance for outfits, makeup and hair. Free on Android.">
+<title>FitCheck: AI Fashion Stylist for Outfits, Makeup &amp; Hair</title>
+<meta name="description" content="FitCheck is a free Android app: snap a photo for an AI style score and friendly tips on color, fit and balance, plus makeup and hair ideas.">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="FitCheck AI">
-<meta property="og:title" content="FitCheck AI Outfit Checker — rate your fit, makeup & hair">
+<meta property="og:title" content="FitCheck: AI Fashion Stylist for Outfits, Makeup &amp; Hair">
 <meta property="og:description" content="An AI style score and friendly tips on fit, color, and balance. Free on Android.">
 <meta property="og:image" content="https://fitcheck-fashion.com/assets/social-card.jpg">
 <meta property="og:image:type" content="image/jpeg">
@@ -53,12 +53,12 @@
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="FitCheck AI - AI style score for outfits, makeup and hair">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="FitCheck AI — Your AI stylist for outfits, makeup &amp; hair">
+<meta name="twitter:title" content="FitCheck: AI Fashion Stylist for Outfits, Makeup &amp; Hair">
 <meta name="twitter:description" content="An AI style score and friendly tips on fit, color, and balance. Free on Android.">
 <meta name="twitter:image" content="https://fitcheck-fashion.com/assets/social-card.jpg">
 <link rel="icon" type="image/png" href="/assets/favicon-32.png">
-<link rel="preload" as="image" type="image/webp" href="/assets/responsive/hero-background-woman-720.webp" imagesrcset="/assets/responsive/hero-background-woman-360.webp 360w, /assets/responsive/hero-background-woman-720.webp 720w, /assets/hero-background-woman.webp 941w" imagesizes="(max-width:720px) 50vw, 400px" fetchpriority="high"><link rel="canonical" href="https://fitcheck-fashion.com/"><meta property="og:url" content="https://fitcheck-fashion.com/"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap">
-<style>@font-face{font-family:Inter;src:url('/assets/fonts/inter-regular.woff') format('woff');font-style:normal;font-weight:400;font-display:swap}@font-face{font-family:Inter;src:url('/assets/fonts/inter-semibold.woff') format('woff');font-style:normal;font-weight:600;font-display:swap}
+<link rel="preload" as="image" type="image/webp" href="/assets/responsive/hero-background-woman-720.webp" imagesrcset="/assets/responsive/hero-background-woman-360.webp 360w, /assets/responsive/hero-background-woman-540.webp 540w, /assets/responsive/hero-background-woman-720.webp 720w, /assets/hero-background-woman.webp 941w" imagesizes="(max-width:720px) 50vw, 400px" fetchpriority="high"><link rel="canonical" href="https://fitcheck-fashion.com/"><meta property="og:url" content="https://fitcheck-fashion.com/">
+<link rel="preload" href="/assets/fonts/outfit-latin.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="/assets/fonts/inter-regular.woff2" as="font" type="font/woff2" crossorigin><style>@font-face{font-family:Inter;src:url('/assets/fonts/inter-regular.woff2') format('woff2');font-style:normal;font-weight:400;font-display:swap}@font-face{font-family:Inter;src:url('/assets/fonts/inter-semibold.woff2') format('woff2');font-style:normal;font-weight:600;font-display:swap}@font-face{font-family:Outfit;src:url('/assets/fonts/outfit-latin.woff2') format('woff2');font-style:normal;font-weight:400 700;font-display:swap}
 :root{--ink:#000;--paper:#fff;--grey:#f4f4f4;--line:#e5e5e5;--mute:#5c5c5c;--sale:#d4002a;--disp:'Archivo',Inter,system-ui,sans-serif;--w:1440px}
 *,*::before,*::after{box-sizing:border-box}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
@@ -224,7 +224,7 @@ h1,h2,h3{font-stretch:100%;text-transform:none;letter-spacing:-.015em;line-heigh
 .brand{font-family:var(--disp);font-stretch:100%;font-weight:600;font-size:25px;letter-spacing:-.01em;text-transform:none}
 .btn{min-height:50px;padding:0 28px;border:2px solid var(--pink);border-radius:999px;background:var(--pink);color:#fff;font:600 15px/1 var(--disp);letter-spacing:0;text-transform:none}
 .btn:hover{background:var(--pink-dark);border-color:var(--pink-dark);color:#fff}
-.btn-sm{min-height:40px;padding:0 18px;font-size:14px}
+.btn-sm{min-height:44px;padding:0 18px;font-size:14px}
 .btn-light{background:var(--pink);border-color:var(--pink);color:#fff}
 .btn-light:hover{background:var(--pink-dark);color:#fff}
 .btn-line{background:transparent;border-color:#000;color:#000}
@@ -244,6 +244,11 @@ h1,h2,h3{font-stretch:100%;text-transform:none;letter-spacing:-.015em;line-heigh
 .hero-actions{justify-content:flex-start}
 .hero .btn-line{border-color:#fff}
 .hero .btn-line:hover{background:#fff;border-color:#fff;color:#000}
+.hero-badge{display:inline-flex;line-height:0;margin:-12px -6px -12px -12px}.hero-badge img{display:block;height:76px;width:auto}
+.hero-platform{margin-top:12px;font:500 14px/1.4 Inter,system-ui,sans-serif;opacity:.82}
+.hero .hero-shot.hero-shot-app{background:#f4f4f4}.hero .hero-shot.hero-shot-app img{position:static;width:100%;height:100%;max-width:100%;left:auto;top:auto;object-fit:contain}
+.hero-chip{position:absolute;left:10px;bottom:10px;z-index:2;padding:6px 10px;border-radius:999px;background:rgba(0,0,0,.72);color:#fff;font:600 11px/1 Inter,system-ui,sans-serif;letter-spacing:.03em}
+@media (max-width:640px){.hero-badge img{height:68px}.hero-actions{align-items:center}}
 .ticker{border-top:1px solid #222;border-bottom:1px solid #222}
 .ticker div{font-family:var(--disp);font-stretch:100%;letter-spacing:0;text-transform:none}
 .ticker span::after{color:var(--pink)}
@@ -404,7 +409,7 @@ details[open] summary::after{background:var(--pink);color:#fff}
 @media(max-width:600px){.cmpc-grid{grid-template-columns:1fr;gap:16px}.cmpc-link{padding:22px;gap:18px;border-radius:24px}.cmp-home .sec-head{margin-bottom:30px}.cmp-home .sec-head h2{font-size:42px}.cmp-home .sec-head p{font-size:16px}.cmp-home .sec-head>.btn{width:100%;justify-content:center}.cmpc-pick{margin-top:2px}.cmpc-row{font-size:15px}.cmpc-go{min-height:44px}.cmpc-category{font-size:10px}.cmpc-link::after{font-size:90px}.cmpc-cta .cmpc-link::after{font-size:220px}.cmpc-cta .cmpc-btn{margin-top:0;width:100%}.cmpc-cta .cmpc-link{gap:22px}}
 @media(prefers-reduced-motion:reduce){.cmp-home .cmpc-link,.cmp-home .cmpc-arrow,.cmp-home .cmpc-btn,.cmp-home .btn,.cmpc-icons .app-ico,.cmpc-link::before{transition:none}.cmp-home .cmpc-link:hover,.cmp-home .cmpc-link:hover .cmpc-arrow,.cmp-home .cmpc-link:hover .cmpc-btn,.cmp-home .sec-head>.btn:hover,.cmpc-link:hover .cmpc-icons .app-ico{transform:none}}
 </style>
-<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://fitcheck-fashion.com/#org","name":"FitCheck AI","url":"https://fitcheck-fashion.com/","logo":{"@type":"ImageObject","url":"https://fitcheck-fashion.com/assets/app-icon.png"}},{"@type":"WebSite","@id":"https://fitcheck-fashion.com/#website","url":"https://fitcheck-fashion.com/","name":"FitCheck AI","inLanguage":"en","publisher":{"@id":"https://fitcheck-fashion.com/#org"}},{"@type":"MobileApplication","@id":"https://fitcheck-fashion.com/#app","name":"FitCheck: AI Fashion Stylist","alternateName":["FitCheck AI Style Assistant","FitCheck: AI Outfit Planner"],"url":"https://fitcheck-fashion.com/","operatingSystem":"Android","applicationCategory":"LifestyleApplication","description":"AI outfit scores and styling feedback on fit, color, and balance from a photo.","image":"https://fitcheck-fashion.com/assets/app-icon.png","downloadUrl":"https://play.google.com/store/apps/details?id=com.aistyleassistant.app","installUrl":"https://play.google.com/store/apps/details?id=com.aistyleassistant.app","publisher":{"@id":"https://fitcheck-fashion.com/#org"},"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"screenshot":[{"@type":"ImageObject","url":"https://fitcheck-fashion.com/assets/screenshots/outfit-fit-score.webp","caption":"FitCheck app screen showing an outfit try-on with a Fit Score of 92"},{"@type":"ImageObject","url":"https://fitcheck-fashion.com/assets/screenshots/outfit-check.webp","caption":"FitCheck app screen rating an outfit 92 out of 100 for color, fit and occasion, with suggestions to add a slim tan belt and tan sandals"},{"@type":"ImageObject","url":"https://fitcheck-fashion.com/assets/screenshots/ai-avatar-try-on.webp","caption":"FitCheck app screen trying a jacket, trousers, bag and shoes on an AI avatar"},{"@type":"ImageObject","url":"https://fitcheck-fashion.com/assets/screenshots/complete-the-look.webp","caption":"FitCheck app screen suggesting complete outfits for weekend, cozy and off-duty looks"},{"@type":"ImageObject","url":"https://fitcheck-fashion.com/assets/screenshots/trending-try-on.webp","caption":"FitCheck app screen trying trending pieces such as a one-shoulder top and pleated trousers"},{"@type":"ImageObject","url":"https://fitcheck-fashion.com/assets/screenshots/hairstyle-try-on.webp","caption":"FitCheck app screen trying pixie, layers, bob and waves hairstyles on a photo"},{"@type":"ImageObject","url":"https://fitcheck-fashion.com/assets/screenshots/live-makeup-tips.webp","caption":"FitCheck app live camera screen giving makeup tips for face shape, skin tone and lip color"},{"@type":"ImageObject","url":"https://fitcheck-fashion.com/assets/screenshots/skin-hair-analysis.webp","caption":"FitCheck app live camera screen scoring skin at 88 and hair at 91 with a care tip"}]}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://fitcheck-fashion.com/#org","name":"FitCheck AI","url":"https://fitcheck-fashion.com/","logo":{"@type":"ImageObject","url":"https://fitcheck-fashion.com/assets/app-icon.png"},"sameAs":["https://play.google.com/store/apps/details?id=com.aistyleassistant.app"]},{"@type":"WebSite","@id":"https://fitcheck-fashion.com/#website","url":"https://fitcheck-fashion.com/","name":"FitCheck AI","inLanguage":"en","publisher":{"@id":"https://fitcheck-fashion.com/#org"}},{"@type":"MobileApplication","@id":"https://fitcheck-fashion.com/#app","name":"FitCheck: AI Fashion Stylist","alternateName":["FitCheck AI Style Assistant","FitCheck: AI Outfit Planner"],"url":"https://fitcheck-fashion.com/","operatingSystem":"Android","applicationCategory":"LifestyleApplication","description":"AI outfit scores and styling feedback on fit, color, and balance from a photo.","image":"https://fitcheck-fashion.com/assets/app-icon.png","downloadUrl":"https://play.google.com/store/apps/details?id=com.aistyleassistant.app","installUrl":"https://play.google.com/store/apps/details?id=com.aistyleassistant.app","publisher":{"@id":"https://fitcheck-fashion.com/#org"},"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"screenshot":[{"@type":"ImageObject","url":"https://fitcheck-fashion.com/assets/screenshots/outfit-fit-score.webp","caption":"FitCheck app screen showing an outfit try-on with a Fit Score of 92"},{"@type":"ImageObject","url":"https://fitcheck-fashion.com/assets/screenshots/outfit-check.webp","caption":"FitCheck app screen rating an outfit 92 out of 100 for color, fit and occasion, with suggestions to add a slim tan belt and tan sandals"},{"@type":"ImageObject","url":"https://fitcheck-fashion.com/assets/screenshots/ai-avatar-try-on.webp","caption":"FitCheck app screen trying a jacket, trousers, bag and shoes on an AI avatar"},{"@type":"ImageObject","url":"https://fitcheck-fashion.com/assets/screenshots/complete-the-look.webp","caption":"FitCheck app screen suggesting complete outfits for weekend, cozy and off-duty looks"},{"@type":"ImageObject","url":"https://fitcheck-fashion.com/assets/screenshots/trending-try-on.webp","caption":"FitCheck app screen trying trending pieces such as a one-shoulder top and pleated trousers"},{"@type":"ImageObject","url":"https://fitcheck-fashion.com/assets/screenshots/hairstyle-try-on.webp","caption":"FitCheck app screen trying pixie, layers, bob and waves hairstyles on a photo"},{"@type":"ImageObject","url":"https://fitcheck-fashion.com/assets/screenshots/live-makeup-tips.webp","caption":"FitCheck app live camera screen giving makeup tips for face shape, skin tone and lip color"},{"@type":"ImageObject","url":"https://fitcheck-fashion.com/assets/screenshots/skin-hair-analysis.webp","caption":"FitCheck app live camera screen scoring skin at 88 and hair at 91 with a care tip"}]}]}</script>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -416,12 +421,12 @@ details[open] summary::after{background:var(--pink);color:#fff}
 </div></header>
 <main id="main">
 <section class="hero" aria-labelledby="hero-title">
-  <div class="hero-shot hero-shot-a"><img src="/assets/hero-background-woman.webp" srcset="/assets/responsive/hero-background-woman-360.webp 360w, /assets/responsive/hero-background-woman-720.webp 720w, /assets/hero-background-woman.webp 941w" sizes="(max-width:720px) 50vw, 400px" width="941" height="1672" alt="A woman wearing a black top and skirt with a tan shoulder bag on a city street" fetchpriority="high"></div><div class="hero-shot hero-shot-b"><img src="/assets/hero-background-man.webp" srcset="/assets/responsive/hero-background-man-360.webp 360w, /assets/responsive/hero-background-man-720.webp 720w, /assets/hero-background-man.webp 939w" sizes="(max-width:720px) 50vw, 400px" width="939" height="1674" alt="A man wearing a white T-shirt and beige trousers outdoors" ></div>
+  <div class="hero-shot hero-shot-a"><img src="/assets/hero-background-woman.webp" srcset="/assets/responsive/hero-background-woman-360.webp 360w, /assets/responsive/hero-background-woman-540.webp 540w, /assets/responsive/hero-background-woman-720.webp 720w, /assets/hero-background-woman.webp 941w" sizes="(max-width:720px) 50vw, 400px" width="941" height="1672" alt="A woman wearing a black top and skirt with a tan shoulder bag on a city street" fetchpriority="high"></div><div class="hero-shot hero-shot-b hero-shot-app"><img src="/assets/screenshots/outfit-fit-score.webp" width="333" height="592" alt="FitCheck app screen showing an example Fit Score of 92 with outfit pieces to try on" decoding="async"><span class="hero-chip">Example score screen</span></div>
   <div class="hero-copy">
     <p class="hero-kicker">Your AI stylist</p>
     <h1 id="hero-title">Rate your fit.</h1>
     <p class="hero-sub">Take a photo. Get a style score with notes on fit, color and balance in seconds.</p>
-    <div class="hero-actions"><a class="btn btn-light" href="https://play.google.com/store/apps/details?id=com.aistyleassistant.app" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 3.5v17a.5.5 0 0 0 .76.43l14-8.5a.5.5 0 0 0 0-.86l-14-8.5A.5.5 0 0 0 5 3.5Z"/></svg><span>Get it on Google Play</span></a><a class="btn btn-line" href="#how-it-works">How it works</a></div>
+    <div class="hero-actions"><a class="hero-badge" href="https://play.google.com/store/apps/details?id=com.aistyleassistant.app" target="_blank" rel="noopener noreferrer" aria-label="Get FitCheck on Google Play"><img src="/assets/google-play-badge.png" width="646" height="250" alt="Get it on Google Play"></a><a class="btn btn-line" href="#how-it-works">How it works</a></div><p class="hero-platform">Free on Android &middot; iPhone version coming soon</p>
   </div>
 </section>
 <div class="ticker" aria-hidden="true"><div><span>Rate your outfit</span><span>Makeup feedback</span><span>Hair inspiration</span><span>Private by design</span><span>Free on Android</span><span>Rate your outfit</span><span>Makeup feedback</span><span>Hair inspiration</span><span>Private by design</span><span>Free on Android</span></div></div>
@@ -442,18 +447,6 @@ details[open] summary::after{background:var(--pink);color:#fff}
     <li class="step"><span class="step-num">02</span><h3>Get your score</h3><p>See how your look rates on fit, color and balance, with simple notes on what to try.</p></li>
     <li class="step"><span class="step-num">03</span><h3>Save the look</h3><p>Keep your favorite outfits in a closet that lives on your phone.</p></li>
   </ol>
-</div></section>
-
-<section class="section" id="app-screens" aria-labelledby="screens-title" style="padding-top:0"><div class="wrap"><style>
-#app-screens .sec-head h2,#app-screens .sec-head p{text-wrap:balance}
-.shots{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin:0;padding:0;list-style:none}
-.shots li{margin:0}
-.shots img{display:block;width:100%;height:auto;aspect-ratio:333/592;object-fit:contain;border-radius:20px;border:1px solid var(--line);background:var(--grey);box-shadow:0 10px 28px rgba(0,0,0,.07)}
-@media (max-width:1000px){.shots{grid-template-columns:repeat(2,1fr);gap:14px}}
-@media (max-width:600px){.shots{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;padding:0 20px 12px;margin:0 -20px;scrollbar-width:none}.shots::-webkit-scrollbar{display:none}.shots li{flex:0 0 68%;scroll-snap-align:center}}
-</style>
-  <div class="sec-head"><div><h2 id="screens-title">See FitCheck in the app</h2><p>Outfit scores, try-on, makeup and hair tips from the Android app.</p></div></div>
-  <ul class="shots"><li><img src="/assets/screenshots/outfit-fit-score.webp" width="333" height="592" alt="FitCheck app screen showing an outfit try-on with a Fit Score of 92" loading="lazy" decoding="async"></li><li><img src="/assets/screenshots/outfit-check.webp" width="333" height="592" alt="FitCheck app screen rating an outfit 92 out of 100 for color, fit and occasion, with suggestions to add a slim tan belt and tan sandals" loading="lazy" decoding="async"></li><li><img src="/assets/screenshots/ai-avatar-try-on.webp" width="333" height="592" alt="FitCheck app screen trying a jacket, trousers, bag and shoes on an AI avatar" loading="lazy" decoding="async"></li><li><img src="/assets/screenshots/complete-the-look.webp" width="333" height="592" alt="FitCheck app screen suggesting complete outfits for weekend, cozy and off-duty looks" loading="lazy" decoding="async"></li><li><img src="/assets/screenshots/trending-try-on.webp" width="333" height="592" alt="FitCheck app screen trying trending pieces such as a one-shoulder top and pleated trousers" loading="lazy" decoding="async"></li><li><img src="/assets/screenshots/hairstyle-try-on.webp" width="273" height="592" alt="FitCheck app screen trying pixie, layers, bob and waves hairstyles on a photo" loading="lazy" decoding="async"></li><li><img src="/assets/screenshots/live-makeup-tips.webp" width="333" height="592" alt="FitCheck app live camera screen giving makeup tips for face shape, skin tone and lip color" loading="lazy" decoding="async"></li><li><img src="/assets/screenshots/skin-hair-analysis.webp" width="333" height="592" alt="FitCheck app live camera screen scoring skin at 88 and hair at 91 with a care tip" loading="lazy" decoding="async"></li></ul>
 </div></section>
 
 <section class="section" id="fit-collection" aria-labelledby="collection-title"><div class="wrap">
@@ -478,11 +471,11 @@ details[open] summary::after{background:var(--pink);color:#fff}
 </div></section>
 
 <section class="privacy" id="privacy" aria-labelledby="privacy-title"><div class="wrap privacy-grid">
-  <div><h2 id="privacy-title">Your photos, your control.</h2><p class="privacy-lead">Your photos are processed directly on your device.</p><a class="link-u" href="privacy.html">Read the privacy policy</a></div>
+  <div><h2 id="privacy-title">Your photos, your control.</h2><p class="privacy-lead">The outfit score is calculated on your device. A few optional AI features send the photo you pick to an AI service.</p><a class="link-u" href="privacy.html">Read the privacy policy</a></div>
   <ul class="privacy-points">
     <li>On-device scoring<span>Outfit scores are calculated on your phone</span></li>
     <li>Local closet<span>Saved looks stay on your device</span></li>
-    <li>Not stored by us<span>We don't keep or reuse your photos</span></li>
+    <li>Optional AI features<span>Hairstyle previews, try-on and Premium diagnostics use a third-party AI service</span></li>
   </ul>
 </div></section>
 
@@ -502,8 +495,9 @@ details[open] summary::after{background:var(--pink);color:#fff}
 <section class="section" id="faq" aria-labelledby="faq-title"><div class="wrap faq-grid">
   <div><h2 id="faq-title">FAQ</h2><p class="sub">Still have questions? <a href="mailto:sapkotamadhav500@gmail.com">Contact support</a></p></div>
   <div class="faq-list">
+    <details><summary>What is FitCheck?</summary><div class="faq-answer"><p>FitCheck (listed on Google Play as FitCheck: AI Fashion Stylist) is a free Android app. Take or upload a photo and it gives an outfit score with tips on color, fit and balance, and it also offers makeup, hair and skin ideas and a digital closet for saved looks.</p></div></details>
     <details><summary>Is FitCheck free?</summary><div class="faq-answer"><p>Yes. FitCheck is free to download on Android. See Google Play for current details and device compatibility.</p></div></details>
-    <details><summary>What happens to my photos?</summary><div class="faq-answer"><p>Your photos are processed directly on your device. Firebase use is covered separately in our <a href="privacy.html">Privacy Policy</a>.</p></div></details>
+    <details><summary>What happens to my photos?</summary><div class="faq-answer"><p>The outfit score is calculated on your device. A few optional AI features, such as hairstyle previews, AI try-on images and Premium style diagnostics, send the photo you choose to a third-party AI service to generate the result. Firebase and advertising are covered separately. Read the full <a href="privacy.html">Privacy Policy</a>.</p></div></details>
     <details><summary>How does the score work?</summary><div class="faq-answer"><p>FitCheck reads your photo and gives a style score with notes on fit, color coordination and overall balance. Treat it as a second opinion, not a rulebook.</p></div></details>
     <details><summary>What photo should I use?</summary><div class="faq-answer"><p>A clear, well-lit photo of your full outfit, shoes included. For makeup and hair, face natural light. Keep the background simple and skip color filters.</p></div></details>
     <details><summary>How does FitCheck compare with YouCam Makeup, Acloset and Whering?</summary><div class="faq-answer"><p>They do different jobs. YouCam Makeup edits and retouches photos, Acloset and Whering organize the clothes you own, and FitCheck scores the outfit you are wearing and gives makeup and hair feedback. Read the side-by-side pages: <a href="compare/fitcheck-vs-youcam-makeup/">FitCheck vs YouCam Makeup</a>, <a href="compare/fitcheck-vs-acloset/">FitCheck vs Acloset</a> and <a href="compare/fitcheck-vs-whering/">FitCheck vs Whering</a>.</p></div></details>
@@ -528,7 +522,7 @@ details[open] summary::after{background:var(--pink);color:#fff}
   <div class="foot">
     <div><a class="brand" href="#top" aria-label="FitCheck AI home"><img src="/assets/inline/img-4d7ab57f5a.webp" width="30" height="30" alt="" loading="lazy">FitCheck</a><p class="foot-copy">AI style ratings for outfits, makeup and hair.</p></div>
     <nav class="foot-col" aria-label="Explore"><h3>Explore</h3><a href="#how-it-works">How it works</a><a href="#fit-collection">Outfits</a><a href="#makeup-assistant">Makeup</a><a href="#hairstyle-looks">Hair</a><a href="blog/">Blog</a><a href="compare/">Compare apps</a></nav>
-    <nav class="foot-col" aria-label="Company"><h3>Help</h3><a href="#faq">FAQ</a><a href="mailto:sapkotamadhav500@gmail.com">Contact</a><a href="privacy.html">Privacy Policy</a><a href="terms.html">Terms of Service</a></nav>
+    <nav class="foot-col" aria-label="Company"><h3>Help</h3><a href="#faq">FAQ</a><a href="/about/">About</a><a href="mailto:sapkotamadhav500@gmail.com">Contact</a><a href="privacy.html">Privacy Policy</a><a href="terms.html">Terms of Service</a></nav>
   </div>
   <div class="legal"><p>&copy; <span id="year">2026</span> FitCheck AI Style Assistant</p><p>Available on Google Play</p></div>
 </div></footer>

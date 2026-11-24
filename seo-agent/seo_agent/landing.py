@@ -80,8 +80,15 @@ def render(cfg: Config, p: dict[str, Any], articles: dict[str, Any]) -> str:
         {"@type": "BreadcrumbList", "itemListElement": [
             {"@type": "ListItem", "position": 1, "name": "Home", "item": cfg.base_url + "/"},
             {"@type": "ListItem", "position": 2, "name": p["nav"], "item": url}]},
+        {"@type": "Organization", "@id": cfg.base_url + "/#org", "name": brand, "url": cfg.base_url + "/",
+         "logo": {"@type": "ImageObject", "url": cfg.base_url + "/assets/app-icon.png"}, "sameAs": [app]},
         {"@type": "MobileApplication", "@id": cfg.base_url + "/#app", "name": _app_name(cfg, brand), "operatingSystem": "Android",
-         "applicationCategory": "LifestyleApplication", "url": app,
+         "applicationCategory": "LifestyleApplication", "url": cfg.base_url + "/",
+         "description": "AI outfit scores and styling feedback on fit, color, and balance from a photo.",
+         "image": cfg.base_url + "/assets/app-icon.png", "downloadUrl": app, "installUrl": app,
+         "publisher": {"@id": cfg.base_url + "/#org"},
+         "screenshot": [{"@type": "ImageObject", "url": cfg.base_url + f"/assets/screenshots/{n}.webp"}
+                        for n in ("outfit-fit-score", "outfit-check", "ai-avatar-try-on")],
          "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}},
     ]
     graph[0] = {k: v for k, v in graph[0].items() if v is not None}

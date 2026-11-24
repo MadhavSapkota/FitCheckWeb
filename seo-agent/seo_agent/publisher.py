@@ -79,10 +79,11 @@ def render_article(cfg: Config, a: dict[str, Any], related: list[dict[str, str]]
     words = len(tokens(re.sub(r"<[^>]+>", " ", body)))
     graph: list[dict[str, Any]] = [
         {"@type": "Article", "image": [cfg.base_url + "/assets/social-card.jpg"], "headline": a["title"], "description": a["meta_description"],
-         "datePublished": a["published"], "dateModified": a["modified"], "mainEntityOfPage": url, "inLanguage": cfg.get("keyword_research.language"),
-         "author": {"@type": "Person", "name": "Madhav Sapkota", "url": cfg.base_url + "/"},
-         "publisher": {"@type": "Organization", "name": brand, "url": cfg.base_url + "/",
-                       "logo": {"@type": "ImageObject", "url": cfg.base_url + "/assets/app-icon.png"}}},
+         "datePublished": a["published"], "dateModified": a["modified"], "mainEntityOfPage": {"@type": "WebPage", "@id": url}, "inLanguage": cfg.get("keyword_research.language"),
+         "author": {"@type": "Organization", "name": "FitCheck Team", "url": cfg.base_url + "/about/"},
+         "publisher": {"@type": "Organization", "@id": cfg.base_url + "/#org", "name": brand, "url": cfg.base_url + "/",
+                       "logo": {"@type": "ImageObject", "url": cfg.base_url + "/assets/app-icon.png"},
+                       "sameAs": [cfg.app_url]}},
         {"@type": "BreadcrumbList", "itemListElement": [
             {"@type": "ListItem", "position": 1, "name": "Home", "item": cfg.base_url + "/"},
             {"@type": "ListItem", "position": 2, "name": "Style guides", "item": f"{cfg.base_url}/{cfg.get('site.blog_dir')}/"},
@@ -97,7 +98,7 @@ def render_article(cfg: Config, a: dict[str, Any], related: list[dict[str, str]]
     return _fill(tpl, {
         "lang": cfg.get("keyword_research.language", "en"), "title": e(a["title"]), "description": e(a["meta_description"]),
         "canonical": url, "brand": e(brand), "published": a["published"], "modified": a["modified"],
-        "modified_human": human_date(a["modified"]), "jsonld": jsonld, "app_url": e(cfg.app_url), "h1": e(a["h1"]),
+        "modified_human": human_date(a["modified"]), "published_human": human_date(a["published"]), "jsonld": jsonld, "app_url": e(cfg.app_url), "h1": e(a["h1"]),
         "reading_minutes": str(max(1, math.ceil(words / 225))), "body": body, "faq_html": faq_html,
         "cta_text": e(a.get("cta_text") or "Snap a photo and get an AI style score with tips on fit, color, and balance."),
         "related_html": related_html(related),
@@ -187,12 +188,23 @@ def write_blog_index(cfg: Config, articles: dict[str, Any]) -> Path:
         f'<li><a href="/{cfg.get("site.blog_dir")}/{a["slug"]}/">{html.escape(a["h1"])}</a><p>{html.escape(a.get("summary") or a["meta_description"])}</p></li>'
         for a in items) or "<li><p>New guides are on the way.</p></li>"
     tpl = (cfg.templates_dir / "blog-index.html").read_text(encoding="utf-8")
+    base, bdir = cfg.base_url, cfg.get("site.blog_dir")
+    graph = [
+        {"@type": "CollectionPage", "@id": f"{base}/{bdir}/", "url": f"{base}/{bdir}/", "name": "Style guides: outfits, color, makeup and hair",
+         "inLanguage": cfg.get("keyword_research.language", "en"), "isPartOf": {"@id": base + "/#website"},
+         "mainEntity": {"@type": "ItemList", "itemListElement": [
+             {"@type": "ListItem", "position": i + 1, "url": f"{base}/{bdir}/{a['slug']}/", "name": a["h1"]} for i, a in enumerate(items)]}},
+        {"@type": "BreadcrumbList", "itemListElement": [
+            {"@type": "ListItem", "position": 1, "name": "Home", "item": base + "/"},
+            {"@type": "ListItem", "position": 2, "name": "Style guides", "item": f"{base}/{bdir}/"}]},
+    ]
+    jsonld = json.dumps({"@context": "https://schema.org", "@graph": graph}, ensure_ascii=False).replace("</", "<\\/")
     out = cfg.blog_dir / "index.html"
     out.parent.mkdir(parents=True, exist_ok=True)
     out.write_text(_fill(tpl, {"lang": cfg.get("keyword_research.language", "en"),
                                "brand": html.escape(cfg.get("project.brand_on_site")),
                                "canonical": f"{cfg.base_url}/{cfg.get('site.blog_dir')}/",
-                               "app_url": html.escape(cfg.app_url), "items": li, "analytics": analytics_snippet(cfg)}), encoding="utf-8")
+                               "app_url": html.escape(cfg.app_url), "items": li, "analytics": analytics_snippet(cfg), "jsonld": jsonld}), encoding="utf-8")
     return out
 
 
@@ -201,7 +213,7 @@ def write_sitemap(cfg: Config, articles: dict[str, Any]) -> Path:
     rows = []
     for f in cfg.get("site.static_pages", []):
         if (cfg.site_root / f).exists():
-            rows.append((url_for(cfg, f), None))
+            rows.append((url_for(cfg, f), (cfg.get("site.static_lastmod") or {}).get(f)))
     rows.append((f"{cfg.base_url}/{cfg.get('site.blog_dir')}/", max((a["modified"] for a in articles.values()), default=None)))
     for a in sorted(articles.values(), key=lambda a: a["published"]):
         rows.append((article_url(cfg, a["slug"]), a["modified"]))

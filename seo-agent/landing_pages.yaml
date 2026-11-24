@@ -57,7 +57,7 @@ pages:
       - {title: "A quick second opinion.", text: "Get an instant fit check instead of second-guessing in the mirror."}
       - {title: "Specific, practical tips.", text: "Feedback points to concrete changes like shoes, color contrast, or fit balance."}
       - {title: "Plan ahead.", text: "Save top-scoring looks and plan daily outfits for work, parties, workouts, weekends, and date nights."}
-      - {title: "Private by design.", text: "Your photos are processed directly on your device."}
+      - {title: "Score on your device.", text: "The outfit score is calculated on your device. Optional AI features send the photo you choose to an AI service (see the privacy policy)."}
     limits_title: "Good to know"
     limits:
       - "The score is an AI opinion and a starting point, not an objective verdict. Your taste and comfort come first."

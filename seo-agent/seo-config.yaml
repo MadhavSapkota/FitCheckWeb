@@ -15,8 +15,28 @@ site:
                  "digital-wardrobe/index.html", "virtual-outfit-try-on/index.html", "ai-skin-analysis/index.html",
                  "compare/index.html", "compare/fitcheck-vs-youcam-makeup/index.html",
                  "compare/fitcheck-vs-acloset/index.html", "compare/fitcheck-vs-whering/index.html",
-                 "compare/fitcheck-vs-alta/index.html", "compare/fitcheck-vs-fits/index.html", "compare/best-style-apps/index.html"]
-  exclude_from_audit: ["hero.html"]          # component fragment, not a standalone page
+                 "compare/fitcheck-vs-alta/index.html", "compare/fitcheck-vs-fits/index.html", "compare/best-style-apps/index.html", "about/index.html"]
+  # Date of the last meaningful CONTENT change per static page (not template or style tweaks). Update when you edit a page's content.
+  static_lastmod:
+    "index.html": "2026-11-24"
+    "how-it-works.html": "2026-11-24"
+    "about/index.html": "2026-11-24"
+    "privacy.html": "2026-11-24"
+    "terms.html": "2026-11-01"
+    "ai-outfit-checker/index.html": "2026-11-24"
+    "ai-makeup-assistant/index.html": "2026-11-09"
+    "ai-hairstyle-try-on/index.html": "2026-11-21"
+    "ai-skin-analysis/index.html": "2026-11-18"
+    "digital-wardrobe/index.html": "2026-11-08"
+    "virtual-outfit-try-on/index.html": "2026-11-14"
+    "compare/index.html": "2026-11-24"
+    "compare/fitcheck-vs-youcam-makeup/index.html": "2026-11-24"
+    "compare/fitcheck-vs-acloset/index.html": "2026-11-24"
+    "compare/fitcheck-vs-whering/index.html": "2026-11-24"
+    "compare/fitcheck-vs-alta/index.html": "2026-11-24"
+    "compare/fitcheck-vs-fits/index.html": "2026-11-24"
+    "compare/best-style-apps/index.html": "2026-11-24"
+  exclude_from_audit: []
   # Tool-intent queries a hand-built page already satisfies (feature landing pages declare theirs in landing_pages.yaml).
   page_targets:
     index.html: [fitcheck, fitcheck app, fitcheck ai, fit check app, fitcheck ai app, style ai fit check]

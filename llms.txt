@@ -1,22 +1,24 @@
 # FitCheck AI
 
-> FitCheck AI is a free Android app that rates outfits, makeup and hairstyles from a photo, giving a style score with tips on fit, color and balance. Outfit scoring runs on your device and photos are not stored by FitCheck.
+> FitCheck AI is a free Android app that gives friendly AI feedback on outfits, makeup and hair from a photo: an outfit score with notes on color, fit and balance. Outfit scoring is processed directly on your device; a few optional AI features (hairstyle previews, AI try-on, Premium diagnostics) send the chosen photo to a third-party AI service. An iPhone version is coming soon.
 
 ## Key pages
 - [Home](https://fitcheck-fashion.com/): What FitCheck does and where to download it
-- [How it works](https://fitcheck-fashion.com/how-it-works.html): Upload a photo, get a score and tips
-- [AI outfit checker](https://fitcheck-fashion.com/ai-outfit-checker/)
-- [AI makeup assistant](https://fitcheck-fashion.com/ai-makeup-assistant/)
-- [AI hairstyle try-on](https://fitcheck-fashion.com/ai-hairstyle-try-on/)
-- [AI skin analysis](https://fitcheck-fashion.com/ai-skin-analysis/)
-- [Digital wardrobe](https://fitcheck-fashion.com/digital-wardrobe/)
-- [Virtual outfit try-on](https://fitcheck-fashion.com/virtual-outfit-try-on/)
-- [App comparisons](https://fitcheck-fashion.com/compare/)
-- [Blog: style, hair, makeup and skin guides](https://fitcheck-fashion.com/blog/)
+- [How it works](https://fitcheck-fashion.com/how-it-works.html): The three steps, what the score looks at, limits and photo tips
+- [About FitCheck](https://fitcheck-fashion.com/about/): What the app is for, what it does and does not do
+- [AI outfit checker](https://fitcheck-fashion.com/ai-outfit-checker/): Rate an outfit from a photo
+- [AI makeup assistant](https://fitcheck-fashion.com/ai-makeup-assistant/): Live camera makeup guidance
+- [AI hairstyle try-on](https://fitcheck-fashion.com/ai-hairstyle-try-on/): Hairstyle and hair color ideas on your own photo
+- [AI skin analysis](https://fitcheck-fashion.com/ai-skin-analysis/): Cosmetic skin overview from the camera
+- [Digital wardrobe](https://fitcheck-fashion.com/digital-wardrobe/): Save and organize favorite looks
+- [Virtual outfit try-on](https://fitcheck-fashion.com/virtual-outfit-try-on/): AI previews of you in different outfits
+- [App comparisons](https://fitcheck-fashion.com/compare/): How FitCheck compares with other style apps
+- [Best style apps compared](https://fitcheck-fashion.com/compare/best-style-apps/): Side-by-side comparison of five style and wardrobe apps, based on their Google Play listings
+- [Style guides](https://fitcheck-fashion.com/blog/): Practical outfit, color, makeup and hair guides
 
 ## Policies
-- [Privacy policy](https://fitcheck-fashion.com/privacy.html)
-- [Terms](https://fitcheck-fashion.com/terms.html)
+- [Privacy policy](https://fitcheck-fashion.com/privacy.html): How photos, saved looks and Firebase are handled
+- [Terms of service](https://fitcheck-fashion.com/terms.html): Acceptable use
 
 ## Get the app
-- [Google Play](https://play.google.com/store/apps/details?id=com.aistyleassistant.app)
+- [Google Play](https://play.google.com/store/apps/details?id=com.aistyleassistant.app): Free on Android

@@ -198,11 +198,12 @@ def test_unverified_photo_storage_claims_blocked():
 
 def test_privacy_wording_is_consistent_and_scoped(cfg):
     text = (cfg.agent_dir / "landing_pages.yaml").read_text()
-    assert text.count("Your photos are processed directly on your device.") == 1  # outfit checker only
+    assert text.count("The outfit score is calculated on your device.") == 1  # outfit checker only
+    assert "Your photos are processed directly on your device." not in text  # unscoped claim removed (Premium/AI features upload photos)
     assert "online processing" not in text
     import yaml
     pages = {p["slug"]: yaml.safe_dump(p) for p in yaml.safe_load(text)["pages"]}
-    assert "processed directly on your device" in pages["ai-outfit-checker"]
+    assert "calculated on your device" in pages["ai-outfit-checker"]
     for slug in ("ai-hairstyle-try-on", "virtual-outfit-try-on"):  # AI image features: no on-device claim
         assert "on your device" not in pages[slug]
 

@@ -90,7 +90,8 @@ def build() -> list[Path]:
     tpl = (cfg.templates_dir / "compare.html").read_text(encoding="utf-8")
     brand = cfg.get("project.brand_on_site", "FitCheck AI")
     base, checked = cfg.base_url, human_date(data["checked"])
-    site = {"@type": "WebSite", "url": base + "/", "name": brand}
+    site = {"@type": "WebSite", "@id": base + "/#website", "url": base + "/", "name": brand}
+    team = {"@type": "Organization", "name": "FitCheck Team", "url": base + "/about/"}
     pages, out = data["pages"], []
     fc_plus = extra["fitcheck_plus"]
     features = "".join(f'<li><a href="{e(f["href"])}">{e(f["text"])}</a></li>' for f in data["features"])
@@ -170,7 +171,7 @@ def build() -> list[Path]:
                 f'<nav class="lp-more" aria-label="More comparisons"><h2>More comparisons</h2><ul>{others}<li><a href="/compare/">All comparisons</a></li></ul></nav>')
         graph = [
             {"@type": "WebPage", "@id": url, "url": url, "name": p["title"], "description": p["meta"], "inLanguage": "en",
-             "isPartOf": site, "dateModified": data["checked"]},
+             "isPartOf": site, "author": team, "dateModified": data["checked"]},
             {"@type": "BreadcrumbList", "itemListElement": [
                 {"@type": "ListItem", "position": 1, "name": "Home", "item": base + "/"},
                 {"@type": "ListItem", "position": 2, "name": "Compare apps", "item": iurl},
@@ -231,7 +232,7 @@ def build() -> list[Path]:
                  + "".join(_icon(_stem(a), a["rival"], 72) for a in apps) + "</div>")
         graph = [
             {"@type": "WebPage", "@id": url, "url": url, "name": t5["title"], "description": t5["meta"], "inLanguage": "en",
-             "isPartOf": site, "dateModified": data["checked"]},
+             "isPartOf": site, "author": team, "dateModified": data["checked"]},
             {"@type": "BreadcrumbList", "itemListElement": [
                 {"@type": "ListItem", "position": 1, "name": "Home", "item": base + "/"},
                 {"@type": "ListItem", "position": 2, "name": "Compare apps", "item": iurl},
