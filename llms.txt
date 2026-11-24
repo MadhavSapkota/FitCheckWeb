@@ -16,6 +16,24 @@
 - [Best style apps compared](https://fitcheck-fashion.com/compare/best-style-apps/): Side-by-side comparison of five style and wardrobe apps, based on their Google Play listings
 - [Style guides](https://fitcheck-fashion.com/blog/): Practical outfit, color, makeup and hair guides
 
+## Style guides
+- [What Colors Go With Burgundy? Outfit Pairings That Work](https://fitcheck-fashion.com/blog/what-colors-go-with-burgundy/): Find out which neutrals, accent colors, shoes and metals go with burgundy, with outfit formulas for women and men and the combinations to avoid.
+- [Haircut for Round Face Men: Best Styles, What to Avoid and What to Ask Your Barber](https://fitcheck-fashion.com/blog/haircut-for-round-face-men/): A practical guide to the best haircuts for men with round faces, from fades and quiffs to beards and a barber-ready brief.
+- [Hair Styles for Curly Hair: Cuts and Ideas for Every Length](https://fitcheck-fashion.com/blog/hair-styles-for-curly-hair/): A practical guide to curly hairstyles by length, occasion and routine, with tips for briefing your hairdresser and previewing a cut first.
+- [What Color Undertones Do I Have? 5 Simple Tests to Find Out](https://fitcheck-fashion.com/blog/what-color-undertones-do-i-have/): Learn how to find out whether you have cool, warm, neutral or olive undertones with five at-home tests, plus which clothing, jewelry and makeup colors to try first.
+- [Color Matching Clothes for Ladies: A Simple Guide to Outfits That Work](https://fitcheck-fashion.com/blog/color-matching-clothes-for-women/): A practical guide to color matching women's outfits, covering neutrals, color wheel basics, a simple 60-30-10 formula, prints, accessories and fixes for outfits that feel off.
+- [How to Test Hair Porosity at Home (and What to Do With the Result)](https://fitcheck-fashion.com/blog/how-to-test-hair-porosity/): Learn three simple at-home methods to test hair porosity, how to read the results honestly, and how to use them to choose products and a hairstyle.
+- [AI Clothing Try-On: How to See Yourself in an Outfit Before You Commit](https://fitcheck-fashion.com/blog/ai-clothing-try-on-guide/): Learn what AI clothing try-on can and can't show, how to get a realistic preview from your own photo, and how to turn it into real outfit decisions.
+- [Makeup Virtual Try-On: How to Preview a Look That Actually Helps](https://fitcheck-fashion.com/blog/makeup-virtual-try-on-guide/): A practical guide to makeup virtual try-ons: how they work, how to set up for a realistic preview, and how to turn a look into real makeup.
+- [What Haircut Will Look Good on Me? A 5-Step Way to Choose](https://fitcheck-fashion.com/blog/what-haircut-looks-good-on-me/): A five-step guide to choosing a haircut that suits your hair type, face, features and routine, with a way to preview your shortlist before you cut.
+- [How to Tell if Your Outfit Looks Good](https://fitcheck-fashion.com/blog/does-my-outfit-look-good/): A practical guide to judging your own outfit, with a mirror and photo test, a 7-point checklist, a symptom-and-fix table and occasion tips.
+- [What Is My Hair Type? A 5-Question Quiz to Find Out](https://fitcheck-fashion.com/blog/what-is-my-hair-type-quiz/): Take a five-question quiz to find your hair pattern, strand thickness and density, then learn which cuts and styles tend to suit your hair.
+- [What Makeup Suits My Face? A 6-Question Self-Guided Quiz](https://fitcheck-fashion.com/blog/what-makeup-suits-my-face/): A self-guided six-question quiz that turns your undertone, contrast, face shape, eyes, lips, and finish preference into a simple makeup profile you can test at home.
+- [How to Organize Your Closet: A 6-Step Method That Lasts](https://fitcheck-fashion.com/blog/how-to-organize-your-closet/): A practical six-step method for decluttering, grouping, storing and maintaining your closet, plus ideas for turning what you keep into outfits.
+- [What Should I Wear Today? A Quick 5-Step Way to Decide](https://fitcheck-fashion.com/blog/what-should-i-wear-today/): A quick 5-step method, weather and occasion guidance and reusable outfit formulas to help you decide what to wear today.
+- [What Is My Skin Tone? How to Find Your Depth and Undertone](https://fitcheck-fashion.com/blog/what-is-my-skin-tone/): A practical guide to finding your skin tone depth and undertone at home, with simple checks and ways to use your result for clothes, makeup and hair color.
+- [How to Try Hairstyles on Your Face Before You Commit to a Cut](https://fitcheck-fashion.com/blog/try-hairstyles-on-your-face/): A practical guide to previewing a haircut on your own photo, judging the result honestly, and turning it into a clear brief for your hairdresser.
+
 ## Policies
 - [Privacy policy](https://fitcheck-fashion.com/privacy.html): How photos, saved looks and Firebase are handled
 - [Terms of service](https://fitcheck-fashion.com/terms.html): Acceptable use

@@ -95,7 +95,8 @@ def render(cfg: Config, p: dict[str, Any], articles: dict[str, Any]) -> str:
     if faqs:
         graph.append({"@type": "FAQPage", "mainEntity": [
             {"@type": "Question", "name": f["q"], "acceptedAnswer": {"@type": "Answer", "text": f["a"]}} for f in faqs]})
-    jsonld = json.dumps({"@context": "https://schema.org", "@graph": graph}, ensure_ascii=False).replace("</", "<\\/")
+    from .publisher import ensure_entities
+    jsonld = json.dumps({"@context": "https://schema.org", "@graph": ensure_entities(graph, cfg)}, ensure_ascii=False).replace("</", "<\\/")
     tpl = (cfg.templates_dir / "landing.html").read_text(encoding="utf-8")
     og_image = cfg.base_url + (p["images"][0]["src"] if p.get("images") else "/assets/social-card.png")
     return _fill(tpl, {

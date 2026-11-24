@@ -422,3 +422,27 @@ def test_rescore_report_runs_offline(cfg):
     assert "| 40 |" in text and "| 45 |" in text and "| 50 |" in text
     for fid in cfg.get("features"):
         assert f"(`{fid}`)" in text
+
+
+def test_entities_are_defined_once_and_llms_lists_guides(cfg, tmp_path):
+    from seo_agent import publisher
+    base = cfg.base_url
+    g = publisher.ensure_entities([{"@type": "WebPage", "@id": base + "/x/"}], cfg)
+    ids = [n.get("@id") for n in g]
+    assert ids.count(base + "/#org") == 1 and ids.count(base + "/#website") == 1
+    assert publisher.ensure_entities(g, cfg) == g  # idempotent: never duplicates entities
+    org = next(n for n in g if n["@id"] == base + "/#org")
+    assert org["sameAs"] == [cfg.app_url]  # only the verified Play listing; no invented profiles
+
+    class C:  # minimal cfg stand-in rooted in a temp dir
+        base_url = base
+        site_root = tmp_path
+        def get(self, k, d=None):
+            return {"site.blog_dir": "blog"}.get(k, d)
+    (tmp_path / "llms.txt").write_text("# T\n\n## Key pages\n- [Home](x): y\n\n## Policies\n- [Privacy](x): z\n")
+    arts = {"a": {"slug": "a", "h1": "Guide A", "summary": "About A.", "meta_description": "m", "published": "2026-11-01"}}
+    publisher.write_llms_txt(C(), arts)
+    publisher.write_llms_txt(C(), arts)  # twice: the block is replaced, not duplicated
+    text = (tmp_path / "llms.txt").read_text()
+    assert text.count("## Style guides") == 1 and "[Guide A](" + base + "/blog/a/): About A." in text
+    assert text.index("## Style guides") < text.index("## Policies")

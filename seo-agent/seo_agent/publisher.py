@@ -60,6 +60,23 @@ def related_html(items: list[dict[str, str]]) -> str:
     return f'<section class="related" aria-labelledby="related-h"><h2 id="related-h">Related style guides</h2><ul>{lis}</ul></section>'
 
 
+def entity_nodes(cfg: Config) -> list[dict[str, Any]]:
+    """Canonical Organization and WebSite nodes. Every page's JSON-LD defines both, so @id references resolve on the page."""
+    base = cfg.base_url
+    brand = cfg.get("project.brand_on_site", "FitCheck AI")
+    return [
+        {"@type": "Organization", "@id": base + "/#org", "name": brand, "url": base + "/",
+         "logo": {"@type": "ImageObject", "url": base + "/assets/app-icon.png"}, "sameAs": [cfg.app_url]},
+        {"@type": "WebSite", "@id": base + "/#website", "url": base + "/", "name": brand,
+         "inLanguage": cfg.get("keyword_research.language", "en"), "publisher": {"@id": base + "/#org"}},
+    ]
+
+
+def ensure_entities(graph: list[dict[str, Any]], cfg: Config) -> list[dict[str, Any]]:
+    have = {n.get("@id") for n in graph if isinstance(n, dict)}
+    return graph + [n for n in entity_nodes(cfg) if n["@id"] not in have]
+
+
 def render_article(cfg: Config, a: dict[str, Any], related: list[dict[str, str]]) -> str:
     url = article_url(cfg, a["slug"])
     brand = cfg.get("project.brand_on_site", "FitCheck AI")
@@ -78,12 +95,12 @@ def render_article(cfg: Config, a: dict[str, Any], related: list[dict[str, str]]
         ) + "</section>"
     words = len(tokens(re.sub(r"<[^>]+>", " ", body)))
     graph: list[dict[str, Any]] = [
-        {"@type": "Article", "image": [cfg.base_url + "/assets/social-card.jpg"], "headline": a["title"], "description": a["meta_description"],
+        {"@type": "Article", "@id": url + "#article", "isPartOf": {"@id": cfg.base_url + "/#website"},
+         "image": [cfg.base_url + "/assets/social-card.jpg"], "headline": a["title"], "description": a["meta_description"],
          "datePublished": a["published"], "dateModified": a["modified"], "mainEntityOfPage": {"@type": "WebPage", "@id": url}, "inLanguage": cfg.get("keyword_research.language"),
-         "author": {"@type": "Organization", "name": "FitCheck Team", "url": cfg.base_url + "/about/"},
-         "publisher": {"@type": "Organization", "@id": cfg.base_url + "/#org", "name": brand, "url": cfg.base_url + "/",
-                       "logo": {"@type": "ImageObject", "url": cfg.base_url + "/assets/app-icon.png"},
-                       "sameAs": [cfg.app_url]}},
+         "author": {"@type": "Organization", "name": "FitCheck Team", "url": cfg.base_url + "/about/",
+                    "parentOrganization": {"@id": cfg.base_url + "/#org"}},
+         "publisher": {"@id": cfg.base_url + "/#org"}},
         {"@type": "BreadcrumbList", "itemListElement": [
             {"@type": "ListItem", "position": 1, "name": "Home", "item": cfg.base_url + "/"},
             {"@type": "ListItem", "position": 2, "name": "Style guides", "item": f"{cfg.base_url}/{cfg.get('site.blog_dir')}/"},
@@ -92,7 +109,7 @@ def render_article(cfg: Config, a: dict[str, Any], related: list[dict[str, str]]
     if faqs:
         graph.append({"@type": "FAQPage", "mainEntity": [
             {"@type": "Question", "name": f["question"], "acceptedAnswer": {"@type": "Answer", "text": f["answer"]}} for f in faqs]})
-    jsonld = json.dumps({"@context": "https://schema.org", "@graph": graph}, ensure_ascii=False).replace("</", "<\\/")
+    jsonld = json.dumps({"@context": "https://schema.org", "@graph": ensure_entities(graph, cfg)}, ensure_ascii=False).replace("</", "<\\/")
     tpl = (cfg.templates_dir / "article.html").read_text(encoding="utf-8")
     e = html.escape
     return _fill(tpl, {
@@ -198,7 +215,7 @@ def write_blog_index(cfg: Config, articles: dict[str, Any]) -> Path:
             {"@type": "ListItem", "position": 1, "name": "Home", "item": base + "/"},
             {"@type": "ListItem", "position": 2, "name": "Style guides", "item": f"{base}/{bdir}/"}]},
     ]
-    jsonld = json.dumps({"@context": "https://schema.org", "@graph": graph}, ensure_ascii=False).replace("</", "<\\/")
+    jsonld = json.dumps({"@context": "https://schema.org", "@graph": ensure_entities(graph, cfg)}, ensure_ascii=False).replace("</", "<\\/")
     out = cfg.blog_dir / "index.html"
     out.parent.mkdir(parents=True, exist_ok=True)
     out.write_text(_fill(tpl, {"lang": cfg.get("keyword_research.language", "en"),
@@ -206,6 +223,25 @@ def write_blog_index(cfg: Config, articles: dict[str, Any]) -> Path:
                                "canonical": f"{cfg.base_url}/{cfg.get('site.blog_dir')}/",
                                "app_url": html.escape(cfg.app_url), "items": li, "analytics": analytics_snippet(cfg), "jsonld": jsonld}), encoding="utf-8")
     return out
+
+
+def write_llms_txt(cfg: Config, articles: dict[str, Any]) -> Path | None:
+    """Keeps the '## Style guides' list in llms.txt in sync with the published articles (one line per guide)."""
+    path = cfg.site_root / "llms.txt"
+    if not path.exists():
+        return None
+    base, bdir = cfg.base_url, cfg.get("site.blog_dir")
+    lines = ["## Style guides"]
+    for a in sorted(articles.values(), key=lambda a: a["published"], reverse=True):
+        desc = re.sub(r"\s+", " ", (a.get("summary") or a["meta_description"]).strip())
+        lines.append(f"- [{a['h1']}]({base}/{bdir}/{a['slug']}/): {desc}")
+    block = "\n".join(lines) + "\n\n"
+    text = path.read_text(encoding="utf-8")
+    text = re.sub(r"## Style guides\n(?:- .*\n)*\n?", "", text)  # drop the previous generated block
+    marker = "## Policies"
+    text = text.replace(marker, block + marker, 1) if marker in text else text.rstrip("\n") + "\n\n" + block
+    path.write_text(text, encoding="utf-8")
+    return path
 
 
 def write_sitemap(cfg: Config, articles: dict[str, Any]) -> Path:

@@ -20,7 +20,7 @@ AGENT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(AGENT))
 
 from seo_agent.config import load_config  # noqa: E402
-from seo_agent.publisher import _fill, analytics_snippet, human_date  # noqa: E402
+from seo_agent.publisher import _fill, analytics_snippet, ensure_entities, human_date  # noqa: E402
 
 e = html.escape
 
@@ -77,7 +77,7 @@ def _page(cfg, tpl: str, *, url: str, d: dict, crumbs: str, body: str, more: str
     return _fill(tpl, {
         "lang": cfg.get("keyword_research.language", "en"), "title": e(d["title"]), "description": e(d["meta"]),
         "canonical": url, "brand": e(brand), "og_image": e(cfg.base_url + "/assets/social-card.png"),
-        "jsonld": _jsonld(graph), "app_url": e(app), "analytics": analytics_snippet(cfg), "crumbs": crumbs,
+        "jsonld": _jsonld(ensure_entities(graph, cfg)), "app_url": e(app), "analytics": analytics_snippet(cfg), "crumbs": crumbs,
         "h1": e(d["h1"]), "icons": icons, "lede": e(d["lede"]), "hero_cta": cta("hero"), "body": body, "more": more,
         "cta_title": e(d["cta"]["title"]), "cta_text": e(d["cta"]["text"]), "end_cta": cta("end"),
     })
