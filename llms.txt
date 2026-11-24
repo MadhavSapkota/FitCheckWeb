@@ -1,0 +1,22 @@
+# FitCheck AI
+
+> FitCheck AI is a free Android app that rates outfits, makeup and hairstyles from a photo, giving a style score with tips on fit, color and balance. Outfit scoring runs on your device and photos are not stored by FitCheck.
+
+## Key pages
+- [Home](https://fitcheck-fashion.com/): What FitCheck does and where to download it
+- [How it works](https://fitcheck-fashion.com/how-it-works.html): Upload a photo, get a score and tips
+- [AI outfit checker](https://fitcheck-fashion.com/ai-outfit-checker/)
+- [AI makeup assistant](https://fitcheck-fashion.com/ai-makeup-assistant/)
+- [AI hairstyle try-on](https://fitcheck-fashion.com/ai-hairstyle-try-on/)
+- [AI skin analysis](https://fitcheck-fashion.com/ai-skin-analysis/)
+- [Digital wardrobe](https://fitcheck-fashion.com/digital-wardrobe/)
+- [Virtual outfit try-on](https://fitcheck-fashion.com/virtual-outfit-try-on/)
+- [App comparisons](https://fitcheck-fashion.com/compare/)
+- [Blog: style, hair, makeup and skin guides](https://fitcheck-fashion.com/blog/)
+
+## Policies
+- [Privacy policy](https://fitcheck-fashion.com/privacy.html)
+- [Terms](https://fitcheck-fashion.com/terms.html)
+
+## Get the app
+- [Google Play](https://play.google.com/store/apps/details?id=com.aistyleassistant.app)
