@@ -58,7 +58,7 @@
 <meta name="twitter:image" content="https://fitcheck-fashion.com/assets/social-card.jpg">
 <link rel="icon" type="image/png" href="/assets/favicon-32.png">
 <link rel="preload" as="image" type="image/webp" href="/assets/responsive/hero-background-woman-720.webp" imagesrcset="/assets/responsive/hero-background-woman-360.webp 360w, /assets/responsive/hero-background-woman-540.webp 540w, /assets/responsive/hero-background-woman-720.webp 720w, /assets/hero-background-woman.webp 941w" imagesizes="(max-width:720px) 50vw, 400px" fetchpriority="high"><link rel="canonical" href="https://fitcheck-fashion.com/"><meta property="og:url" content="https://fitcheck-fashion.com/">
-<link rel="preload" href="/assets/fonts/outfit-latin.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="/assets/fonts/inter-regular.woff2" as="font" type="font/woff2" crossorigin><style>@font-face{font-family:Inter;src:url('/assets/fonts/inter-regular.woff2') format('woff2');font-style:normal;font-weight:400;font-display:swap}@font-face{font-family:Inter;src:url('/assets/fonts/inter-semibold.woff2') format('woff2');font-style:normal;font-weight:600;font-display:swap}@font-face{font-family:Outfit;src:url('/assets/fonts/outfit-latin.woff2') format('woff2');font-style:normal;font-weight:400 700;font-display:swap}
+<link rel="preload" href="/assets/fonts/outfit-latin.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="/assets/fonts/inter-regular.woff2" as="font" type="font/woff2" crossorigin><style>#fit-collection,#makeup-assistant,#hairstyle-looks,#privacy,#compare,#faq,#about-fitcheck{content-visibility:auto;contain-intrinsic-size:auto 900px}@font-face{font-family:Inter;src:url('/assets/fonts/inter-regular.woff2') format('woff2');font-style:normal;font-weight:400;font-display:swap}@font-face{font-family:Inter;src:url('/assets/fonts/inter-semibold.woff2') format('woff2');font-style:normal;font-weight:600;font-display:swap}@font-face{font-family:Outfit;src:url('/assets/fonts/outfit-latin.woff2') format('woff2');font-style:normal;font-weight:400 700;font-display:swap}
 :root{--ink:#000;--paper:#fff;--grey:#f4f4f4;--line:#e5e5e5;--mute:#5c5c5c;--sale:#d4002a;--disp:'Archivo',Inter,system-ui,sans-serif;--w:1440px}
 *,*::before,*::after{box-sizing:border-box}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
@@ -532,12 +532,21 @@ details[open] summary::after{background:var(--pink);color:#fff}
 <script>
 (() => {
   const bar = document.querySelector('#mobile-bar'), hero = document.querySelector('.hero'), fin = document.querySelector('.final');
-  const onScroll = () => {
-    const show = hero.getBoundingClientRect().bottom < 0 && fin.getBoundingClientRect().top > innerHeight;
+  const pos = { heroGone: false, finBelow: true };
+  const update = () => {
+    const show = pos.heroGone && pos.finBelow;
     bar.classList.toggle('show', show); bar.setAttribute('aria-hidden', String(!show));
     bar.querySelector('a').tabIndex = show ? 0 : -1;
   };
-  addEventListener('scroll', onScroll, { passive: true }); onScroll();
+  update();
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.target === hero) pos.heroGone = !e.isIntersecting && e.boundingClientRect.bottom < 0;
+      else pos.finBelow = !e.isIntersecting && e.boundingClientRect.top > 0;
+    });
+    update();
+  });
+  io.observe(hero); io.observe(fin);
   const group = document.querySelector('.filters'), filters = [...group.querySelectorAll('[data-filter]')];
   const looks = [...document.querySelectorAll('#look-grid [data-category]')];
   const count = document.querySelector('.count'), more = document.querySelector('#show-more');
