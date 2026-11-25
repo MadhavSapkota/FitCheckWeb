@@ -13,7 +13,7 @@ fitcheck_plus:
   - {title: "Outfit try-on", text: "See AI-generated images of yourself in different outfits."}
   - {title: "Style exploration", text: "Explore aesthetics such as Old Money, Y2K, Streetwear, Vintage, Minimalist and Quiet Luxury."}
   - {title: "Closet and planning", text: "Save top-scoring looks, organize by season or occasion and plan outfits ahead."}
-  - {title: "On-device scoring", text: "Outfit scoring is processed directly on your device."}
+  - {title: "On-device scoring", text: "Outfit scoring is processed directly on your device. A few optional AI features send the photo you choose to a third-party AI service."}
   - {title: "Free to start", text: "Free to download on Android, and no sign-up is needed to start."}
 
 plus_rival:
