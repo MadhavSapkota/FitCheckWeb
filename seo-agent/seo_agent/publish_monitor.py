@@ -29,13 +29,14 @@ HISTORY_MD = DATA / "PUBLISH-HISTORY.md"
 STATE = DATA / "state.json"
 BASE_URL = "https://fitcheck-fashion.com"
 WORKFLOW = "daily-seo.yml"
+PAGES_WORKFLOW = "jekyll-gh-pages.yml"
 
 PRIMARY = time(18, 0)                       # cron-job.org fires the daily run at 18:00 Chicago
 GRACE = timedelta(minutes=30)               # primary has until 18:30 before the watchdog considers it missed
 RETRY_AT = (time(20, 0), time(22, 0))       # retry #1 / #2 for "no candidate passed" or failed runs
 MAX_ATTEMPTS = 1 + len(RETRY_AT)
 # Skips that retrying cannot fix: the owner must act (still retried once at 20:00 in case it was transient).
-ATTENTION = re.compile(r"No keyword volume provider|Keyword Planner unavailable|spending limit|ANTHROPIC_API_KEY|fatal", re.I)
+ATTENTION = re.compile(r"No keyword volume provider|Keyword Planner unavailable|spending limit|ANTHROPIC_API_KEY|fatal|blocked:|usage limit", re.I)
 
 
 # --------------------------------------------------------------------------------------------------------------------
@@ -43,6 +44,8 @@ ATTENTION = re.compile(r"No keyword volume provider|Keyword Planner unavailable|
 # --------------------------------------------------------------------------------------------------------------------
 def classify(decision: str, job_ok: bool) -> str:
     d = (decision or "").lower()
+    if d.startswith("blocked:"):
+        return "blocked_api"
     if not job_ok:
         return "failed"
     if d.startswith("published"):
@@ -63,6 +66,8 @@ def build_record(state: dict, *, day: str, run_id: str, run_url: str, job_ok: bo
     runs = state.get("runs") or []
     decision = runs[-1]["decision"] if runs else ""
     outcome = classify(decision, job_ok)
+    if outcome == "failed" and decision.lower().startswith("published"):
+        decision = f"publish step failed (article saved as a pending artifact for the next retry): {decision}"
     rec = {"date": day, "recorded_at": (now or datetime.now(timezone.utc)).isoformat(timespec="seconds"),
            "run_id": str(run_id), "run_url": run_url, "outcome": outcome, "decision": decision[:400],
            "keyword": None, "title": None, "slug": None, "url": None, "commit": None, "deploy": "n/a"}
@@ -98,6 +103,7 @@ def cmd_record(a: argparse.Namespace) -> int:
     state.json; the workflow then resets to origin/master and --apply adds that record to the committed history."""
     if a.apply:
         rec = json.loads(Path(a.apply).read_text(encoding="utf-8"))
+        merge_usage(rec.pop("usage", {}))
         hist = add_record(load_history(), rec)
         HISTORY.write_text(json.dumps(hist, indent=1, ensure_ascii=False) + "\n", encoding="utf-8")
         HISTORY_MD.write_text(render_md(hist), encoding="utf-8")
@@ -108,6 +114,7 @@ def cmd_record(a: argparse.Namespace) -> int:
                        run_url=os.environ.get("RUN_URL", ""), job_ok=os.environ.get("AGENT_OUTCOME") == "success"
                        and os.environ.get("COMMIT_OUTCOME", "success") in ("success", "skipped"),
                        verify_outcome=os.environ.get("VERIFY_OUTCOME", ""), commit_sha=os.environ.get("ARTICLE_COMMIT", ""))
+    rec["usage"] = state.get("usage") or {}
     Path(a.emit).write_text(json.dumps(rec, ensure_ascii=False), encoding="utf-8")
     print("emitted:", json.dumps(rec, ensure_ascii=False))
     return 0
@@ -154,14 +161,22 @@ def decide(day: date, now: datetime, history: list[dict], runs: list[dict]) -> d
     if attempts >= MAX_ATTEMPTS or not is_today or t >= RETRY_AT[-1]:
         return {"action": "alert", "reason": f"no article published for {day} after {attempts} attempt(s): {why}"}
     attn = bool(ATTENTION.search(why))
-    return {"action": "alert" if attn else "none", "reason": why if attn else f"waiting for retry window ({why[:120]})"}
+    # An early "owner must act" alert is not final: the scheduled retries still run (the owner may fix it the same evening).
+    return {"action": "alert" if attn else "none", "reason": why if attn else f"waiting for retry window ({why[:120]})",
+            "final": False}
 
 
 # --------------------------------------------------------------------------------------------------------------------
 # GitHub / network helpers
 # --------------------------------------------------------------------------------------------------------------------
 def gh(*args: str, check: bool = True) -> str:
-    p = subprocess.run(["gh", *args], capture_output=True, text=True)
+    # Reads and workflow dispatches are retried on temporary failures (a duplicate dispatch is stopped by the run's gate).
+    retryable = args[:2] in (("run", "list"), ("workflow", "run")) or (args[:1] == ("api",))
+    for attempt in range(4):
+        p = subprocess.run(["gh", *args], capture_output=True, text=True)
+        if not p.returncode or not retryable or attempt == 3:
+            break
+        time_mod.sleep(3 * 3 ** attempt)
     if check and p.returncode:
         raise RuntimeError(f"gh {' '.join(args[:3])} failed: {p.stderr.strip()[:300]}")
     return p.stdout
@@ -177,6 +192,23 @@ def fetch_runs(repo: str, day: date) -> list[dict]:
         if created >= since and created < since + timedelta(hours=24) and r["event"] in ("workflow_dispatch", "schedule"):
             out.append({"created": created, "status": r["status"], "conclusion": r["conclusion"], "id": r["databaseId"]})
     return sorted(out, key=lambda r: r["created"])
+
+
+def real_attempts(runs: list[dict], history: list[dict]) -> list[dict]:
+    """Drops runs that did no publishing work. A run that executed the agent always records a history row, so a finished
+    "successful" run without one was skipped by the schedule gate (or was a dry run) and must not use up a retry."""
+    recorded = {str(h.get("run_id")) for h in history}
+    return [r for r in runs if r["status"] != "completed" or r.get("conclusion") not in ("success", "skipped")
+            or "id" not in r or str(r["id"]) in recorded]
+
+
+def with_state_publications(history: list[dict], state: dict) -> list[dict]:
+    """state.json on master is authoritative: an article in it counts as published even if its history row was lost."""
+    have = {h["date"] for h in history if h["outcome"] == "published"}
+    extra = [{"date": a["published"], "outcome": "published", "decision": f"published /blog/{s}/",
+              "url": f"{BASE_URL}/blog/{s}/", "run_id": f"state-{s}", "recorded_at": a["published"]}
+             for s, a in (state.get("articles") or {}).items() if a.get("published") and a["published"] not in have]
+    return history + extra
 
 
 def url_live(url: str) -> bool:
@@ -256,9 +288,22 @@ def load_history_remote(repo: str) -> list[dict]:
         return load_history()
 
 
+def load_state_remote(repo: str) -> dict:
+    try:
+        return json.loads(gh("api", f"repos/{repo}/contents/seo-agent/data/state.json", "-H", "Accept: application/vnd.github.raw"))
+    except Exception as e:  # noqa: BLE001
+        print(f"remote state unavailable ({e}); using local copy")
+        return json.loads(STATE.read_text(encoding="utf-8")) if STATE.exists() else {}
+
+
+_redeployed: set[str] = set()
+
+
 def evaluate_once(a: argparse.Namespace, repo: str, now: datetime) -> tuple[bool, int]:
     """One watchdog pass. Returns (today_is_final, exit_code); final = published, or the day's alert has been raised."""
     history = load_history() if (a.fixture_runs or a.no_remote) else load_history_remote(repo)
+    if not (a.fixture_runs or a.no_remote):
+        history = with_state_publications(history, load_state_remote(repo))
     today = chicago(now).date()
     rc, final = 0, False
     for day in (today - timedelta(days=1), today):
@@ -266,10 +311,16 @@ def evaluate_once(a: argparse.Namespace, repo: str, now: datetime) -> tuple[bool
         for r in runs:
             if isinstance(r["created"], str):
                 r["created"] = datetime.fromisoformat(r["created"])
-        d = decide(day, now, history, runs)
+        d = decide(day, now, history, real_attempts(runs, history))
         print(f"{chicago(now):%H:%M} {day}: {d['action']} - {d['reason']}", flush=True)
         pub = next((h for h in history if h["date"] == str(day) and h["outcome"] == "published"), None)
-        if d["action"] == "ok" and pub and pub.get("url") and not a.no_network and not url_live(pub["url"]):
+        down = d["action"] == "ok" and pub and pub.get("url") and not a.no_network and not url_live(pub["url"])
+        if down and not a.dry_run and a.loop and pub["url"] not in _redeployed:
+            _redeployed.add(pub["url"])
+            print(f"{pub['url']} is not live: redeploying the site (no article generation)")
+            gh("workflow", "run", PAGES_WORKFLOW, "-R", repo, "--ref", "master")
+            continue  # check again on the next poll before alerting
+        if down:
             raise_alert(repo, day, f"article recorded as published but {pub['url']} is not live (HTTP 200 + canonical check failed)", a.dry_run)
             rc = 1
         elif d["action"] == "dispatch" and day == today:
@@ -280,7 +331,7 @@ def evaluate_once(a: argparse.Namespace, repo: str, now: datetime) -> tuple[bool
         elif d["action"] == "alert":
             raise_alert(repo, day, d["reason"], a.dry_run)
             rc = 1
-        if day == today and d["action"] in ("ok", "alert"):
+        if day == today and d["action"] in ("ok", "alert") and d.get("final", True):
             final = True
     close_resolved(repo, history, a.dry_run)
     return final, rc
@@ -299,12 +350,62 @@ def cmd_watchdog(a: argparse.Namespace) -> int:
     rc = 0
     while True:
         now = datetime.now(timezone.utc)
-        final, r = evaluate_once(a, repo, now)
-        rc = rc or r
+        try:
+            final, r = evaluate_once(a, repo, now)
+            rc = rc or r
+        except Exception as e:  # noqa: BLE001 - a temporary GitHub/network error must not end the evening's supervision
+            if not a.loop:
+                raise
+            print(f"watchdog check failed, will try again: {e}", flush=True)
+            final = False
         t = chicago(now).time()
         if not a.loop or final or t >= LOOP_END or t < LOOP_START:
             return rc
         time_mod.sleep(a.poll_seconds)
+
+
+def gate(state: dict, history: list[dict], *, event: str, now: datetime, runs) -> tuple[bool, str]:
+    """Should this daily run spend API credit? `runs` is a callable returning today's other runs (only used for cron)."""
+    day = chicago(now).date()
+    history = with_state_publications(history, state)
+    if any(h["date"] == str(day) and h["outcome"] == "published" for h in history):
+        return False, f"an article is already published for {day}"
+    if event != "schedule":
+        return True, "dispatched run and no article published yet"
+    d = decide(day, now, history, real_attempts(runs(), history))
+    return d["action"] == "dispatch", f"backup schedule: {d['reason']}"
+
+
+def cmd_gate(a: argparse.Namespace) -> int:
+    repo, me = os.environ["GITHUB_REPOSITORY"], os.environ.get("GITHUB_RUN_ID", "")
+    now = datetime.now(timezone.utc)
+    state = json.loads(STATE.read_text(encoding="utf-8")) if STATE.exists() else {}
+    try:
+        due, why = gate(state, load_history(), event=os.environ.get("EVENT_NAME", ""), now=now,
+                        runs=lambda: [r for r in fetch_runs(repo, chicago(now).date()) if str(r["id"]) != me])
+    except Exception as e:  # noqa: BLE001 - an unverifiable backup run stays idle; the watchdog handles retries
+        due, why = False, f"could not check earlier runs: {e}"
+    print(f"gate: {'run' if due else 'skip'} - {why}")
+    if os.environ.get("GITHUB_OUTPUT"):
+        with open(os.environ["GITHUB_OUTPUT"], "a", encoding="utf-8") as fh:
+            fh.write(f"due={'true' if due else 'false'}\n")
+    return 0
+
+
+def merge_usage(usage: dict) -> None:
+    """Keeps the monthly spend estimate (budget cap) accurate even when a run's other output was not committed."""
+    if not usage or not STATE.exists():
+        return
+    from .state import dumps
+    data = json.loads(STATE.read_text(encoding="utf-8"))
+    changed = False
+    for month, u in usage.items():
+        m = data.setdefault("usage", {}).setdefault(month, {})
+        for k, v in u.items():
+            if v > m.get(k, 0):
+                m[k], changed = v, True
+    if changed:
+        STATE.write_text(dumps(data), encoding="utf-8")
 
 
 def backfill(state: dict) -> list[dict]:
@@ -334,7 +435,7 @@ def cmd_backfill(a: argparse.Namespace) -> int:
 
 def main(argv: list[str] | None = None) -> int:
     ap = argparse.ArgumentParser()
-    ap.add_argument("command", choices=["record", "watchdog", "backfill"])
+    ap.add_argument("command", choices=["record", "watchdog", "backfill", "gate"])
     ap.add_argument("--dry-run", action="store_true", help="watchdog: print decisions, dispatch/alert nothing")
     ap.add_argument("--now", help="watchdog: ISO timestamp with offset to evaluate (testing)")
     ap.add_argument("--fixture-runs", help="watchdog: JSON file of runs instead of the GitHub API (testing)")
@@ -345,7 +446,7 @@ def main(argv: list[str] | None = None) -> int:
     ap.add_argument("--emit", help="record: write this run's record (JSON) to this path")
     ap.add_argument("--apply", help="record: add the record in this JSON file to the committed history")
     a = ap.parse_args(argv)
-    return {"record": cmd_record, "watchdog": cmd_watchdog, "backfill": cmd_backfill}[a.command](a)
+    return {"record": cmd_record, "watchdog": cmd_watchdog, "backfill": cmd_backfill, "gate": cmd_gate}[a.command](a)
 
 
 if __name__ == "__main__":

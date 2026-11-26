@@ -102,3 +102,12 @@ cd seo-agent
 ../.venv-seo/bin/python -m seo_agent.main check         # site validation (the "build")
 ../.venv-seo/bin/python -m seo_agent.main run --dry-run # report only, writes nothing
 ```
+
+## Publishing reliability
+
+- A cron backup run spends nothing unless a retry window (20:00 / 22:00 Chicago) is due and no article exists for the day.
+- A finished article is uploaded as a `pending-article-*` artifact before anything is committed. The next run publishes it
+  (within 7 days) without any Claude or keyword call.
+- `seo_agent.git_publish` commits only agent-generated files. A new kind of generated file must be added to `is_expected`
+  there; otherwise it is reported as a warning and left uncommitted.
+- An Anthropic usage-limit, credit or key error ends the run with a `blocked:` decision that quotes the API message.

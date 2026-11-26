@@ -18,12 +18,12 @@ import sys
 import traceback
 from typing import Any
 
-from . import budget, content, publisher, quality, reports, research
+from . import budget, content, publisher, quality, recovery, reports, research
 from .agents import analytics_agent, editor_agent, keyword_agent, strategy_agent, writer_agent
 from .budget import Budget, BudgetExceeded
 from .audit import broken_links, crawl
 from .config import load_app_facts, load_config
-from .log import setup_logging
+from .log import log, setup_logging
 from .state import State, today
 
 
@@ -161,9 +161,10 @@ def draft_until_pass(cfg, kw, plan, slug, a, articles, pages, facts, attempt) ->
             save_draft(cfg, slug, len(rounds) - 1, b, gate2, rev2)
             if gate2["passed"]:
                 a, gate, rev = b, gate2, rev2
-        except BudgetExceeded:
-            pass  # keep the passing draft
+        except Exception as e:  # noqa: BLE001 - an optional polish must never lose an already-passing draft
+            log.warning("polish skipped: %s", e)
     attempt["rounds"], attempt["quality_gate"], attempt["review_notes"] = rounds, gate, rev.get("notes")
+    attempt["_review"] = rev
     a.pop("revision_changes", None)
     return a, gate
 
@@ -317,6 +318,7 @@ def new_article(cfg, state: State, facts: dict, pages, perf, dry: bool, report: 
             a["market"], a["selection_reason"] = kw.get("market_name"), kw["selection_reason"]
         a["feature"] = kw.get("feature")
         a, gate = draft_until_pass(cfg, kw, plan, slug, a, articles, pages, facts, attempt)
+        review = attempt.pop("_review", {})
         if not gate["passed"]:
             keyword_agent.set_status(report, kw["keyword"], f"rejected_by_quality_gate: {'; '.join(gate['failures'])[:110]}")
             state.record_keyword(kw["keyword"], kw, f"rejected_by_quality_gate: {'; '.join(gate['failures'])[:300]}")
@@ -335,6 +337,7 @@ def new_article(cfg, state: State, facts: dict, pages, perf, dry: bool, report: 
         a["quality_gate"] = {k: gate[k] for k in ("word_count", "keyword_density", "warnings")} | \
             {"revisions": sum(1 for r in attempt["rounds"] if r["round"] not in (0, "polish")),
              "polished": any(r["round"] == "polish" and r["passed"] for r in attempt["rounds"])}
+        recovery.save_pending(cfg, a, kw, review)  # saved first: a later failure must not cost a second generation
         editor_agent.publish(cfg, a, articles)
         keyword_agent.set_status(report, kw["keyword"], "SELECTED - published")
         state.record_keyword(kw["keyword"], kw, f"published:{slug}")
@@ -490,8 +493,10 @@ def run(dry: bool, force_keyword: str | None = None) -> int:
         except Exception as e:  # noqa: BLE001 - feedback loop must not block the run
             report["errors"].append(f"search console: {e}")
         try:
-            improve_existing(cfg, state, facts, opps, dry, report)
-            new_article(cfg, state, facts, crawl(cfg)["pages"], perf, dry, report, force_keyword)
+            # A finished article from a failed run is published first: no keyword discovery, no Claude call.
+            if dry or force_keyword or not recovery.publish_pending(cfg, state, report):
+                improve_existing(cfg, state, facts, opps, dry, report)
+                new_article(cfg, state, facts, crawl(cfg)["pages"], perf, dry, report, force_keyword)
             if perf:
                 analytics_agent.article_performance(cfg, perf, state.data["articles"], report)
             if reports.weekly_due(cfg):
@@ -509,6 +514,10 @@ def run(dry: bool, force_keyword: str | None = None) -> int:
             report["decision"] = f"skip: {e}"
         except BudgetExceeded as e:
             report["decision"] = f"skip: spending limit - {e}"
+        except content.ApiBlocked as e:
+            report["decision"] = f"blocked: {e}"
+            report["errors"].append(f"api_blocked: {e}")
+            print(f"::error::{e}", flush=True)
         if not dry:
             editor_agent.finalize(cfg, state.data["articles"], report)
             report["errors"] += validate_site(cfg)
@@ -524,6 +533,8 @@ def run(dry: bool, force_keyword: str | None = None) -> int:
                        "claude_calls": bud.calls_this_run})
         state.save()
     write_report(cfg, report, dry)
+    if str(report["decision"]).startswith("blocked:"):
+        return 3
     return 2 if any(e.startswith("fatal") or ": broken internal links" in e or "invalid" in e or "expected one <h1>" in e
                     for e in report["errors"]) else 0
 

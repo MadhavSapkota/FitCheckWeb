@@ -207,17 +207,28 @@ def verify(cfg: Config, state: State, wait: int = 600, paths: list[str] | None =
         log.info("verify: no new or updated URLs today")
         return []
     pending = {u: "not checked" for u in urls}
+    # A new article must also be listed in the sitemap, the blog index (internal link) and llms.txt.
+    listings = []
+    for s, a in state.data.get("articles", {}).items():
+        u = f"{cfg.base_url}/{blog}/{s}/"
+        if not paths and a.get("published") == today():
+            listings += [(f"{cfg.base_url}/sitemap.xml", f"<loc>{u}</loc>"), (f"{cfg.base_url}/{blog}/", f'href="/{blog}/{s}/"')]
+            if (cfg.site_root / "llms.txt").exists():
+                listings.append((f"{cfg.base_url}/llms.txt", f"({u})"))
+    for page, needle in listings:
+        pending[f"{page} lists {needle}"] = "not checked"
     deadline = time.time() + wait
     delay = 15
     while pending and time.time() < deadline:
         for u in list(pending):
+            target, _, needle = u.partition(" lists ")
             try:
-                r = requests.get(u, timeout=20, headers={"User-Agent": "fitcheck-seo-agent-deploy-check"})
-                if r.status_code == 200 and f'rel="canonical" href="{u}"' in r.text:
+                r = requests.get(target, timeout=20, headers={"User-Agent": "fitcheck-seo-agent-deploy-check"})
+                if r.status_code == 200 and (needle or f'rel="canonical" href="{u}"') in r.text:
                     log.info("verify: live %s", u)
                     pending.pop(u)
                 else:
-                    pending[u] = f"HTTP {r.status_code}" + ("" if r.status_code != 200 else " (canonical not found yet)")
+                    pending[u] = f"HTTP {r.status_code}" + ("" if r.status_code != 200 else " (expected content not found yet)")
             except requests.RequestException as e:
                 pending[u] = type(e).__name__
         if pending:

@@ -46,6 +46,25 @@ def _client():
     return anthropic.Anthropic(api_key=env("ANTHROPIC_API_KEY"), max_retries=3, timeout=300)
 
 
+class ApiBlocked(RuntimeError):
+    """The Anthropic account cannot serve requests (usage limit, no credit, bad key). Retrying cannot help; the owner must act."""
+
+
+BLOCKED_MARKERS = ("usage limit", "credit balance", "billing", "spend limit")
+
+
+def blocked_reason(e: BaseException) -> str | None:
+    status = getattr(e, "status_code", None)
+    body = getattr(e, "body", None)
+    err = body.get("error") if isinstance(body, dict) else None
+    msg = str((err or {}).get("message") or e)[:300]
+    if status in (401, 403):
+        return f"Anthropic API rejected the key (HTTP {status}): {msg}"
+    if status in (400, 402, 429) and any(m in msg.lower() for m in BLOCKED_MARKERS):
+        return f"Anthropic API usage limit or credit problem (HTTP {status}): {msg}"
+    return None
+
+
 def available() -> bool:
     return bool(env("ANTHROPIC_API_KEY"))
 
@@ -63,7 +82,7 @@ def _extract_json(text: str) -> dict[str, Any]:
 def _retry_json(e: BaseException) -> bool:
     """Retry transient API errors and malformed/truncated JSON; never auth, permission, 400, or budget errors."""
     from .http import is_transient
-    if isinstance(e, BudgetExceeded):
+    if isinstance(e, (BudgetExceeded, ApiBlocked)):
         return False
     return is_transient(e) or isinstance(e, (ValueError, json.JSONDecodeError))
 
@@ -74,12 +93,18 @@ def _json_call(model: str, system: str, user: str, max_tokens: int = 16000) -> d
     b = budget.current()
     if b:
         b.check()  # raises BudgetExceeded -> run stops generating, nothing published
-    resp = _client().messages.create(
-        model=model,
-        max_tokens=max_tokens,
-        system=system + "\nRespond with a single JSON object only, no prose and no code fences.",
-        messages=[{"role": "user", "content": user}],
-    )
+    try:
+        resp = _client().messages.create(
+            model=model,
+            max_tokens=max_tokens,
+            system=system + "\nRespond with a single JSON object only, no prose and no code fences.",
+            messages=[{"role": "user", "content": user}],
+        )
+    except Exception as e:  # noqa: BLE001
+        reason = blocked_reason(e)
+        if reason:
+            raise ApiBlocked(reason) from e
+        raise
     if b:
         b.charge(resp.usage.input_tokens, resp.usage.output_tokens)
     if resp.stop_reason == "max_tokens":

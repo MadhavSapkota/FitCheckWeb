@@ -1,4 +1,7 @@
 .venv-seo/
 __pycache__/
 .pytest_cache/
+.env
+.env.*
+*.tmp
 *.pyc

@@ -34,7 +34,7 @@ jobs:
   schedule:
     runs-on: ubuntu-latest
     outputs:
-      due: ${{ steps.time.outputs.due }}
+      due: ${{ steps.gate.outputs.due }}
     steps:
       - name: Select Chicago publishing hours
         id: time
@@ -49,6 +49,26 @@ jobs:
             esac
           fi
           echo "due=$due" >> "$GITHUB_OUTPUT"
+
+      - uses: actions/checkout@v4
+        if: ${{ steps.time.outputs.due == 'true' }}
+        with:
+          ref: ${{ github.ref_name }}
+
+      # Spend nothing when today's article already exists, or when a cron backup falls outside a retry window.
+      - name: Check whether publishing is needed
+        id: gate
+        env:
+          GH_TOKEN: ${{ github.token }}
+          EVENT_NAME: ${{ github.event_name }}
+          TIME_DUE: ${{ steps.time.outputs.due }}
+          READ_ONLY: ${{ inputs.dry_run == true || inputs.discovery_only == true || github.ref != 'refs/heads/master' }}
+        run: |
+          if [ "$TIME_DUE" != "true" ] || [ "$READ_ONLY" = "true" ]; then
+            echo "due=$TIME_DUE" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          cd seo-agent && python3 -m seo_agent.publish_monitor gate
 
   seo:
     needs: schedule
@@ -89,6 +109,21 @@ jobs:
         working-directory: seo-agent
         run: python -m pytest -q tests
 
+      # Set only after the tests, so test articles can never end up in the recovery folders.
+      - name: Set recovery folders
+        run: |
+          echo "SEO_PENDING_DIR=$RUNNER_TEMP/pending" >> "$GITHUB_ENV"
+          echo "SEO_RECOVER_DIR=$RUNNER_TEMP/recover" >> "$GITHUB_ENV"
+
+      # Finished articles from failed runs are published before anything new is generated.
+      - name: Recover unpublished articles
+        if: ${{ inputs.dry_run != true && inputs.discovery_only != true && github.ref == 'refs/heads/master' }}
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ github.token }}
+        working-directory: seo-agent
+        run: python -m seo_agent.recovery fetch
+
       - name: Run SEO agent
         id: agent
         env:
@@ -114,6 +149,28 @@ jobs:
             python -m seo_agent.main run $args
           fi
 
+      # Saved BEFORE publishing, so nothing that goes wrong afterwards can lose a paid-for article.
+      - name: Save finished article for recovery
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: pending-article-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/pending/
+          if-no-files-found: ignore
+          retention-days: 30
+
+      - name: Upload report and logs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: seo-report-${{ github.run_id }}-${{ github.run_attempt }}
+          path: |
+            seo-agent/data/reports/
+            seo-agent/data/logs/
+            seo-agent/data/drafts/
+          if-no-files-found: ignore
+          retention-days: 30
+
       # Publishing only ever happens from master. On any other branch the run is forced to behave like a dry run
       # after the agent step: no commit, no push, no deploy.
       - name: Validate site (build test)
@@ -121,29 +178,23 @@ jobs:
         working-directory: seo-agent
         run: python -m seo_agent.main check
 
+      # Stages only agent-generated files, keeps the tree clean, rebases with retries, never publishes twice a day.
       - name: Commit and push changes
         id: commit
         if: ${{ inputs.dry_run != true && inputs.discovery_only != true && github.ref == 'refs/heads/master' }}
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          DATAFORSEO_PASSWORD: ${{ secrets.DATAFORSEO_PASSWORD }}
+          GOOGLE_ADS_DEVELOPER_TOKEN: ${{ secrets.GOOGLE_ADS_DEVELOPER_TOKEN }}
+          GOOGLE_ADS_CLIENT_ID: ${{ secrets.GOOGLE_ADS_CLIENT_ID }}
+          GOOGLE_ADS_CLIENT_SECRET: ${{ secrets.GOOGLE_ADS_CLIENT_SECRET }}
+          GOOGLE_ADS_REFRESH_TOKEN: ${{ secrets.GOOGLE_ADS_REFRESH_TOKEN }}
+          GSC_SERVICE_ACCOUNT_JSON: ${{ secrets.GSC_SERVICE_ACCOUNT_JSON }}
+        working-directory: seo-agent
         run: |
           git config user.name "seo-agent[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          # Stage ONLY paths the agent owns or may safely edit.
-          git add blog sitemap.xml robots.txt llms.txt seo-agent/data index.html how-it-works.html privacy.html terms.html
-          # Feature landing pages: only staged when they already exist in the repo (owner-approved, committed by hand).
-          for d in ai-outfit-checker ai-makeup-assistant ai-hairstyle-try-on digital-wardrobe virtual-outfit-try-on ai-skin-analysis; do
-            if git ls-files --error-unmatch "$d/index.html" >/dev/null 2>&1; then git add "$d/index.html"; fi
-          done
-          if git diff --cached --quiet; then
-            echo "No changes today."
-            echo "changed=false" >> "$GITHUB_OUTPUT"
-            exit 0
-          fi
-          git commit -m "SEO agent: daily update $(date -u +%F)"
-          git pull --rebase origin "${GITHUB_REF_NAME}"
-          # Re-validate AFTER merging the latest remote state: fails (no push) if this would make 2 articles today.
-          (cd seo-agent && python -m seo_agent.main check)
-          git push origin "HEAD:${GITHUB_REF_NAME}"
-          echo "changed=true" >> "$GITHUB_OUTPUT"
+          python -m seo_agent.git_publish
 
       # Pushes made with GITHUB_TOKEN do not trigger other workflows, so start the
       # existing GitHub Pages deployment explicitly.
@@ -151,15 +202,26 @@ jobs:
         if: ${{ steps.commit.outputs.changed == 'true' }}
         env:
           GH_TOKEN: ${{ github.token }}
-        run: gh workflow run jekyll-gh-pages.yml --ref "${GITHUB_REF_NAME}"
+        run: |
+          for i in 1 2 3 4; do
+            gh workflow run jekyll-gh-pages.yml --ref "${GITHUB_REF_NAME}" && exit 0
+            sleep $((i * 10))
+          done
+          echo "::error::could not start the Pages deployment"; exit 1
 
-      # Confirms today's new/updated article URLs are live (HTTP 200 + correct canonical) after the Pages deploy.
-      # Bounded polling with backoff (max 15 min). This checks deployment only; it never claims Google indexing.
+      # Confirms today's article is live (HTTP 200 + canonical) and listed in the sitemap, blog index and llms.txt.
+      # Bounded polling; one redeploy if the first check fails. Checks deployment only, never Google indexing.
       - name: Verify deployment
         id: verify
         if: ${{ steps.commit.outputs.changed == 'true' }}
+        env:
+          GH_TOKEN: ${{ github.token }}
         working-directory: seo-agent
-        run: python -m seo_agent.main verify --wait 900
+        run: |
+          python -m seo_agent.main verify --wait 600 && exit 0
+          echo "::warning::verification failed; redeploying once"
+          gh workflow run jekyll-gh-pages.yml --ref "${GITHUB_REF_NAME}"
+          python -m seo_agent.main verify --wait 600
 
       # Permanent publishing history: one row per run (published / skipped + reason / failed), always recorded, so a
       # "green" run that published nothing is visible. Built from this run's state, then applied on a clean copy of
@@ -176,28 +238,20 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           export ARTICLE_COMMIT="$(git rev-parse HEAD)"
           (cd seo-agent && python -m seo_agent.publish_monitor record --emit "$RUNNER_TEMP/record.json")
-          for i in 1 2 3; do
-            git fetch origin master
-            git reset --hard origin/master
-            (cd seo-agent && python -m seo_agent.publish_monitor record --apply "$RUNNER_TEMP/record.json")
-            git add seo-agent/data/publish-history.json seo-agent/data/PUBLISH-HISTORY.md
-            git commit -m "Publishing history: $(date -u +%F) run ${GITHUB_RUN_ID}" || exit 0
-            git push origin HEAD:master && exit 0
-            sleep 5
+          # A separate worktree: the run's own files are never reset or overwritten.
+          hist="$RUNNER_TEMP/history"
+          for i in 1 2 3 4 5; do
+            if git fetch origin master; then
+              [ -d "$hist" ] || git worktree add --detach "$hist" origin/master
+              git -C "$hist" reset --hard origin/master
+              (cd "$hist/seo-agent" && python -m seo_agent.publish_monitor record --apply "$RUNNER_TEMP/record.json")
+              git -C "$hist" add seo-agent/data/publish-history.json seo-agent/data/PUBLISH-HISTORY.md seo-agent/data/state.json
+              git -C "$hist" commit -m "Publishing history: ${SEO_AGENT_TODAY} run ${GITHUB_RUN_ID}" || exit 0
+              git -C "$hist" push origin HEAD:master && exit 0
+            fi
+            sleep $((i * i * 3))
           done
           echo "::error::could not push publishing history"; exit 1
-
-      - name: Upload report and logs
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: seo-report-${{ github.run_id }}
-          path: |
-            seo-agent/data/reports/
-            seo-agent/data/logs/
-            seo-agent/data/drafts/
-          if-no-files-found: ignore
-          retention-days: 30
 
       # A successful process is not a successful daily publish. Run this after
       # history/report persistence so rejected topics survive into the next retry.
