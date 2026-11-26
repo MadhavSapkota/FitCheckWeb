@@ -586,5 +586,19 @@
   "url": null,
   "commit": null,
   "deploy": "n/a"
+ },
+ {
+  "date": "2026-11-25",
+  "recorded_at": "2026-11-26T02:31:54+00:00",
+  "run_id": "45740637728",
+  "run_url": "https://github.com/MadhavSapkota/FitCheckWeb/actions/runs/45740637728",
+  "outcome": "published",
+  "decision": "published /blog/fitzpatrick-skin-type-test/ for 'fitzpatrick skin type test' (feature skin-analysis, score 73.2) after 1 revision(s) + polish. Selected because: Strongest eligible keyword across 10 markets: 1,600 searches/month in United States, Google Ads competition LOW, stage 2 FALLBACK: ranking opportunity 50 (>= 40 plus long-tail, strong relevance and clear intent required), used because no s",
+  "keyword": "fitzpatrick skin type test",
+  "title": "Fitzpatrick Skin Type Test: Informal Self-Quiz (I–VI)",
+  "slug": "fitzpatrick-skin-type-test",
+  "url": "https://fitcheck-fashion.com/blog/fitzpatrick-skin-type-test/",
+  "commit": "e92f2d5e465a7822147dfd42e9b4d5622319b012",
+  "deploy": "live"
  }
 ]
