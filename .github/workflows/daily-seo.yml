@@ -128,7 +128,7 @@ jobs:
           git config user.name "seo-agent[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           # Stage ONLY paths the agent owns or may safely edit.
-          git add blog sitemap.xml robots.txt seo-agent/data index.html how-it-works.html privacy.html terms.html
+          git add blog sitemap.xml robots.txt llms.txt seo-agent/data index.html how-it-works.html privacy.html terms.html
           # Feature landing pages: only staged when they already exist in the repo (owner-approved, committed by hand).
           for d in ai-outfit-checker ai-makeup-assistant ai-hairstyle-try-on digital-wardrobe virtual-outfit-try-on ai-skin-analysis; do
             if git ls-files --error-unmatch "$d/index.html" >/dev/null 2>&1; then git add "$d/index.html"; fi
