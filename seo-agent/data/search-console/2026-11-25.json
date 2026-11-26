@@ -1,0 +1,283 @@
+{
+  "end_date": "2026-11-23",
+  "totals_7d": {
+    "clicks": 0,
+    "impressions": 107,
+    "ctr": 0.0
+  },
+  "totals_28d": {
+    "clicks": 0,
+    "impressions": 141,
+    "ctr": 0.0
+  },
+  "top_queries_28d": [
+    {
+      "query": "fit check",
+      "clicks": 0,
+      "impressions": 32,
+      "ctr": 0,
+      "position": 37.375
+    },
+    {
+      "query": "fitcheck",
+      "clicks": 0,
+      "impressions": 29,
+      "ctr": 0,
+      "position": 17.137931034482758
+    },
+    {
+      "query": "fit check look",
+      "clicks": 0,
+      "impressions": 10,
+      "ctr": 0,
+      "position": 8.3
+    },
+    {
+      "query": "fit ceck",
+      "clicks": 0,
+      "impressions": 2,
+      "ctr": 0,
+      "position": 69.5
+    },
+    {
+      "query": "virtual makeup",
+      "clicks": 0,
+      "impressions": 2,
+      "ctr": 0,
+      "position": 59
+    },
+    {
+      "query": "what hairstyle suits me",
+      "clicks": 0,
+      "impressions": 2,
+      "ctr": 0,
+      "position": 95.5
+    },
+    {
+      "query": "what outfit should i wear today based on the weather",
+      "clicks": 0,
+      "impressions": 2,
+      "ctr": 0,
+      "position": 50.5
+    },
+    {
+      "query": "what type of haircut is best for me",
+      "clicks": 0,
+      "impressions": 2,
+      "ctr": 0,
+      "position": 73.5
+    },
+    {
+      "query": "ai makeup",
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 60
+    },
+    {
+      "query": "ai undertone detector",
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 96
+    },
+    {
+      "query": "fit chec",
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 9
+    },
+    {
+      "query": "fit check ai",
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 56
+    },
+    {
+      "query": "fit look check",
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 1
+    },
+    {
+      "query": "fitcheck look",
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 9
+    },
+    {
+      "query": "fitcheckbyavi",
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 7
+    },
+    {
+      "query": "fitchecks",
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 75
+    },
+    {
+      "query": "fits check",
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 4
+    },
+    {
+      "query": "fitt check",
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 5
+    },
+    {
+      "query": "hair style for curly hair",
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 63
+    },
+    {
+      "query": "makeup virtual makeover",
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 83
+    },
+    {
+      "query": "should i wear a jacket today",
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 30
+    },
+    {
+      "query": "virtual makeup try on",
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 79
+    },
+    {
+      "query": "virtual outfit try on",
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 66
+    },
+    {
+      "query": "what haircut for me",
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 80
+    },
+    {
+      "query": "what haircut is right for me",
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 84
+    }
+  ],
+  "top_pages_28d": [
+    {
+      "page": "https://fitcheck-fashion.com/",
+      "clicks": 0,
+      "impressions": 99,
+      "ctr": 0,
+      "position": 20.88888888888889
+    },
+    {
+      "page": "https://fitcheck-fashion.com/how-it-works.html",
+      "clicks": 0,
+      "impressions": 10,
+      "ctr": 0,
+      "position": 23.1
+    },
+    {
+      "page": "https://fitcheck-fashion.com/blog/what-haircut-looks-good-on-me/",
+      "clicks": 0,
+      "impressions": 6,
+      "ctr": 0,
+      "position": 83.66666666666667
+    },
+    {
+      "page": "https://fitcheck-fashion.com/privacy.html",
+      "clicks": 0,
+      "impressions": 5,
+      "ctr": 0,
+      "position": 14.2
+    },
+    {
+      "page": "https://fitcheck-fashion.com/blog/makeup-virtual-try-on-guide/",
+      "clicks": 0,
+      "impressions": 4,
+      "ctr": 0,
+      "position": 70
+    },
+    {
+      "page": "https://fitcheck-fashion.com/blog/what-should-i-wear-today/",
+      "clicks": 0,
+      "impressions": 4,
+      "ctr": 0,
+      "position": 37
+    },
+    {
+      "page": "https://fitcheck-fashion.com/compare/fitcheck-vs-fits/",
+      "clicks": 0,
+      "impressions": 4,
+      "ctr": 0,
+      "position": 7
+    },
+    {
+      "page": "https://fitcheck-fashion.com/ai-makeup-assistant/",
+      "clicks": 0,
+      "impressions": 2,
+      "ctr": 0,
+      "position": 40.5
+    },
+    {
+      "page": "https://fitcheck-fashion.com/ai-skin-analysis/",
+      "clicks": 0,
+      "impressions": 2,
+      "ctr": 0,
+      "position": 52.5
+    },
+    {
+      "page": "https://fitcheck-fashion.com/blog/try-hairstyles-on-your-face/",
+      "clicks": 0,
+      "impressions": 2,
+      "ctr": 0,
+      "position": 10
+    },
+    {
+      "page": "https://fitcheck-fashion.com/blog/does-my-outfit-look-good/",
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 9
+    },
+    {
+      "page": "https://fitcheck-fashion.com/blog/hair-styles-for-curly-hair/",
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 63
+    },
+    {
+      "page": "https://fitcheck-fashion.com/virtual-outfit-try-on/",
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 66
+    }
+  ]
+}
