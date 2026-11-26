@@ -572,5 +572,19 @@
   "url": null,
   "commit": null,
   "deploy": "n/a"
+ },
+ {
+  "date": "2026-11-25",
+  "recorded_at": "2026-11-26T00:38:40+00:00",
+  "run_id": "45725525739",
+  "run_url": "https://github.com/MadhavSapkota/FitCheckWeb/actions/runs/45725525739",
+  "outcome": "failed",
+  "decision": "published /blog/haircuts-for-heart-shaped-face/ for 'haircuts for heart shaped face' (feature hairstyle-recommendations, score 67.6) after 1 revision(s) + polish. Selected because: Strongest eligible keyword across 10 markets: 2,900 searches/month in India, Google Ads competition LOW, stage 1: ranking opportunity 65 (>= 60 required), relevance 70, score 67.6; the highest-scoring keyword (demand, r",
+  "keyword": null,
+  "title": null,
+  "slug": null,
+  "url": null,
+  "commit": null,
+  "deploy": "n/a"
  }
 ]
