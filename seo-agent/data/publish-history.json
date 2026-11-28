@@ -614,5 +614,19 @@
   "url": "https://fitcheck-fashion.com/blog/haircuts-for-heart-shaped-face/",
   "commit": "92076169b7105181b3651080e6f83927a9d4d6ab",
   "deploy": "live"
+ },
+ {
+  "date": "2026-11-27",
+  "recorded_at": "2026-11-28T00:36:50+00:00",
+  "run_id": "46085516873",
+  "run_url": "https://github.com/MadhavSapkota/FitCheckWeb/actions/runs/46085516873",
+  "outcome": "published",
+  "decision": "published /blog/what-colors-go-with-grey/ for 'grey looks good with what color' (feature trends, score 60.2) after 1 revision(s) + polish. Selected because: Strongest eligible keyword across 10 markets: 1,000 searches/month in United States, Google Ads competition LOW, stage 1: ranking opportunity 65 (>= 60 required), relevance 65, score 60.2; the highest-scoring keyword (demand, ranking opportuni",
+  "keyword": "grey looks good with what color",
+  "title": "What Colors Go With Grey? Easy Outfit Pairings",
+  "slug": "what-colors-go-with-grey",
+  "url": "https://fitcheck-fashion.com/blog/what-colors-go-with-grey/",
+  "commit": "8c0c66de2e4d2aa0485e365e913c2f3e55c8c064",
+  "deploy": "live"
  }
 ]
