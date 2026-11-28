@@ -1,0 +1,346 @@
+{
+  "end_date": "2026-11-25",
+  "totals_7d": {
+    "clicks": 1,
+    "impressions": 335,
+    "ctr": 0.0029850746268656717
+  },
+  "totals_28d": {
+    "clicks": 1,
+    "impressions": 373,
+    "ctr": 0.002680965147453083
+  },
+  "top_queries_28d": [
+    {
+      "query": "fit check",
+      "clicks": 0,
+      "impressions": 39,
+      "ctr": 0,
+      "position": 34.743589743589745
+    },
+    {
+      "query": "fitcheck",
+      "clicks": 0,
+      "impressions": 30,
+      "ctr": 0,
+      "position": 16.7
+    },
+    {
+      "query": "color matching clothes for ladies",
+      "clicks": 0,
+      "impressions": 14,
+      "ctr": 0,
+      "position": 9.857142857142858
+    },
+    {
+      "query": "fit check look",
+      "clicks": 0,
+      "impressions": 14,
+      "ctr": 0,
+      "position": 7.071428571428571
+    },
+    {
+      "query": "virtual makeup try on",
+      "clicks": 0,
+      "impressions": 9,
+      "ctr": 0,
+      "position": 75.55555555555556
+    },
+    {
+      "query": "what hairstyle suits me",
+      "clicks": 0,
+      "impressions": 9,
+      "ctr": 0,
+      "position": 68.22222222222223
+    },
+    {
+      "query": "makeup virtual try on",
+      "clicks": 0,
+      "impressions": 8,
+      "ctr": 0,
+      "position": 35.625
+    },
+    {
+      "query": "virtual try on makeup",
+      "clicks": 0,
+      "impressions": 8,
+      "ctr": 0,
+      "position": 43
+    },
+    {
+      "query": "make up virtual try on",
+      "clicks": 0,
+      "impressions": 6,
+      "ctr": 0,
+      "position": 48.333333333333336
+    },
+    {
+      "query": "best haircut for round face men",
+      "clicks": 1,
+      "impressions": 5,
+      "ctr": 0.2,
+      "position": 39
+    },
+    {
+      "query": "foundation virtual try on",
+      "clicks": 0,
+      "impressions": 5,
+      "ctr": 0,
+      "position": 61
+    },
+    {
+      "query": "hair porosity test",
+      "clicks": 0,
+      "impressions": 5,
+      "ctr": 0,
+      "position": 92
+    },
+    {
+      "query": "fitcheckbyavi",
+      "clicks": 0,
+      "impressions": 4,
+      "ctr": 0,
+      "position": 8.75
+    },
+    {
+      "query": "is this fit good",
+      "clicks": 0,
+      "impressions": 4,
+      "ctr": 0,
+      "position": 6.25
+    },
+    {
+      "query": "should i wear a dress today",
+      "clicks": 0,
+      "impressions": 4,
+      "ctr": 0,
+      "position": 28.25
+    },
+    {
+      "query": "virtual lipstick try on",
+      "clicks": 0,
+      "impressions": 4,
+      "ctr": 0,
+      "position": 71.5
+    },
+    {
+      "query": "what is the best makeup look for me quiz",
+      "clicks": 0,
+      "impressions": 4,
+      "ctr": 0,
+      "position": 91.25
+    },
+    {
+      "query": "ai undertone detector",
+      "clicks": 0,
+      "impressions": 3,
+      "ctr": 0,
+      "position": 93.66666666666667
+    },
+    {
+      "query": "best hair cut suitable for me",
+      "clicks": 0,
+      "impressions": 3,
+      "ctr": 0,
+      "position": 76
+    },
+    {
+      "query": "how to decide on a new haircut",
+      "clicks": 0,
+      "impressions": 3,
+      "ctr": 0,
+      "position": 65.66666666666667
+    },
+    {
+      "query": "styles for curly hair",
+      "clicks": 0,
+      "impressions": 3,
+      "ctr": 0,
+      "position": 62.666666666666664
+    },
+    {
+      "query": "try on makeup virtually",
+      "clicks": 0,
+      "impressions": 3,
+      "ctr": 0,
+      "position": 42.666666666666664
+    },
+    {
+      "query": "virtual foundation try on",
+      "clicks": 0,
+      "impressions": 3,
+      "ctr": 0,
+      "position": 55.666666666666664
+    },
+    {
+      "query": "virtual outfit try on",
+      "clicks": 0,
+      "impressions": 3,
+      "ctr": 0,
+      "position": 65
+    },
+    {
+      "query": "what should i wear today based on the weather",
+      "clicks": 0,
+      "impressions": 3,
+      "ctr": 0,
+      "position": 44.333333333333336
+    }
+  ],
+  "top_pages_28d": [
+    {
+      "page": "https://fitcheck-fashion.com/",
+      "clicks": 0,
+      "impressions": 120,
+      "ctr": 0,
+      "position": 19.183333333333334
+    },
+    {
+      "page": "https://fitcheck-fashion.com/blog/makeup-virtual-try-on-guide/",
+      "clicks": 0,
+      "impressions": 58,
+      "ctr": 0,
+      "position": 51.258620689655174
+    },
+    {
+      "page": "https://fitcheck-fashion.com/blog/what-haircut-looks-good-on-me/",
+      "clicks": 0,
+      "impressions": 52,
+      "ctr": 0,
+      "position": 75.61538461538461
+    },
+    {
+      "page": "https://fitcheck-fashion.com/blog/hair-styles-for-curly-hair/",
+      "clicks": 0,
+      "impressions": 22,
+      "ctr": 0,
+      "position": 53.31818181818182
+    },
+    {
+      "page": "https://fitcheck-fashion.com/blog/color-matching-clothes-for-women/",
+      "clicks": 0,
+      "impressions": 19,
+      "ctr": 0,
+      "position": 9.368421052631579
+    },
+    {
+      "page": "https://fitcheck-fashion.com/blog/what-should-i-wear-today/",
+      "clicks": 0,
+      "impressions": 19,
+      "ctr": 0,
+      "position": 32.578947368421055
+    },
+    {
+      "page": "https://fitcheck-fashion.com/blog/does-my-outfit-look-good/",
+      "clicks": 0,
+      "impressions": 14,
+      "ctr": 0,
+      "position": 14.428571428571429
+    },
+    {
+      "page": "https://fitcheck-fashion.com/blog/haircut-for-round-face-men/",
+      "clicks": 1,
+      "impressions": 10,
+      "ctr": 0.1,
+      "position": 48.3
+    },
+    {
+      "page": "https://fitcheck-fashion.com/compare/fitcheck-vs-fits/",
+      "clicks": 0,
+      "impressions": 10,
+      "ctr": 0,
+      "position": 6.6
+    },
+    {
+      "page": "https://fitcheck-fashion.com/how-it-works.html",
+      "clicks": 0,
+      "impressions": 10,
+      "ctr": 0,
+      "position": 23.1
+    },
+    {
+      "page": "https://fitcheck-fashion.com/blog/how-to-test-hair-porosity/",
+      "clicks": 0,
+      "impressions": 6,
+      "ctr": 0,
+      "position": 92.16666666666667
+    },
+    {
+      "page": "https://fitcheck-fashion.com/blog/what-makeup-suits-my-face/",
+      "clicks": 0,
+      "impressions": 6,
+      "ctr": 0,
+      "position": 76.33333333333333
+    },
+    {
+      "page": "https://fitcheck-fashion.com/ai-skin-analysis/",
+      "clicks": 0,
+      "impressions": 5,
+      "ctr": 0,
+      "position": 58.4
+    },
+    {
+      "page": "https://fitcheck-fashion.com/privacy.html",
+      "clicks": 0,
+      "impressions": 5,
+      "ctr": 0,
+      "position": 14.2
+    },
+    {
+      "page": "https://fitcheck-fashion.com/ai-makeup-assistant/",
+      "clicks": 0,
+      "impressions": 4,
+      "ctr": 0,
+      "position": 51.5
+    },
+    {
+      "page": "https://fitcheck-fashion.com/virtual-outfit-try-on/",
+      "clicks": 0,
+      "impressions": 4,
+      "ctr": 0,
+      "position": 65
+    },
+    {
+      "page": "https://fitcheck-fashion.com/ai-hairstyle-try-on/",
+      "clicks": 0,
+      "impressions": 2,
+      "ctr": 0,
+      "position": 74
+    },
+    {
+      "page": "https://fitcheck-fashion.com/ai-outfit-checker/",
+      "clicks": 0,
+      "impressions": 2,
+      "ctr": 0,
+      "position": 8
+    },
+    {
+      "page": "https://fitcheck-fashion.com/blog/try-hairstyles-on-your-face/",
+      "clicks": 0,
+      "impressions": 2,
+      "ctr": 0,
+      "position": 10
+    },
+    {
+      "page": "https://fitcheck-fashion.com/blog/how-to-organize-your-closet/",
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 10
+    },
+    {
+      "page": "https://fitcheck-fashion.com/blog/what-color-undertones-do-i-have/",
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 82
+    },
+    {
+      "page": "https://fitcheck-fashion.com/terms.html",
+      "clicks": 0,
+      "impressions": 1,
+      "ctr": 0,
+      "position": 11
+    }
+  ]
+}
